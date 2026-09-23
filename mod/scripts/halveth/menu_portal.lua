@@ -13,10 +13,15 @@ local elements = {}
 local resource, lastWidth, lastHeight
 local revealed = false
 local errorReported = false
+local revealClassic
 
 local function clear()
-    for _,element in ipairs(elements) do element:destroy() end
+    local previous=elements
     elements = {}
+    for _,element in ipairs(previous) do
+        local ok,err=pcall(function() element:destroy() end)
+        if not ok then print('HALVETH_MENU_CLEAR_ERROR '..tostring(err)) end
+    end
 end
 
 local function add(layout)
@@ -30,12 +35,16 @@ local function label(text, x, y, width, height, textSize, color, action)
             autoSize=false, text=text, textSize=textSize, textColor=color}}
     if action then layout.events={mouseClick=async:callback(function()
         print('HALVETH_MENU_CLICK '..text)
-        action()
+        local ok,err=pcall(action)
+        if not ok then
+            print('HALVETH_MENU_ACTION_ERROR '..tostring(err))
+            revealClassic()
+        end
     end)} end
     add(layout)
 end
 
-local function revealClassic()
+revealClassic=function()
     clear()
     revealed = true
     print('HALVETH_MENU_CLASSIC_REVEALED')
@@ -43,11 +52,15 @@ end
 
 local function continueGame()
     local newestDir, newestSlot, newestTime
-    for directory,saves in pairs(menu.getAllSaves()) do
-        for slot,info in pairs(saves) do
-            local time = tonumber(info.creationTime) or 0
-            if not newestTime or time > newestTime then
-                newestDir, newestSlot, newestTime = directory, slot, time
+    for directory,saves in pairs(menu.getAllSaves() or {}) do
+        if type(saves)=='table' then
+            for slot,info in pairs(saves) do
+                local time = type(info)=='table' and tonumber(info.creationTime) or 0
+                if time and (not newestTime or time>newestTime
+                    or (time==newestTime and tostring(directory)..'/'..tostring(slot)
+                        > tostring(newestDir)..'/'..tostring(newestSlot))) then
+                    newestDir, newestSlot, newestTime = directory, slot, time
+                end
             end
         end
     end

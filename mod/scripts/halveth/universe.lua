@@ -163,10 +163,11 @@ local function updateMenuBar()
         and not (I.HALVETHPaths and I.HALVETHPaths.isOpen())
         and not (I.HALVETHFieldcraft and I.HALVETHFieldcraft.isOpen())
         and not (I.HALVETHWorldlife and I.HALVETHWorldlife.isOpen())
+        and not (I.HALVETHHeart and I.HALVETHHeart.isOpen())
         and not (I.HALVETHPerspective and I.HALVETHPerspective.isOpen())
     if show and not menuBar then
         local barWidth=math.min(1290,ui.screenSize().x-24)
-        local slot=math.floor((barWidth-20)/8)
+        local slot=math.floor((barWidth-20)/9)
         menuBar=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
             props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),size=util.vector2(barWidth,36)},
             content=ui.content{
@@ -174,10 +175,11 @@ local function updateMenuBar()
                 button('[Wissen]',10+slot,6,slot-4,function()I.HALVETHKnowledge.open()end),
                 button('[Gespraech]',10+slot*2,6,slot-4,function()I.HALVETH.open()end),
                 button('[Pfade]',10+slot*3,6,slot-4,function()I.HALVETHPaths.open()end),
-                button('[Sammeln]',10+slot*4,6,slot-4,function()I.HALVETHFieldcraft.open()end),
-                button('[Weltleben]',10+slot*5,6,slot-4,function()I.HALVETHWorldlife.open()end),
-                button('[Licht]',10+slot*6,6,slot-4,function()I.HALVETHVisuals.cycle()end),
-                button('[Sicht]',10+slot*7,6,slot-4,function()I.HALVETHPerspective.open()end)}}
+                button('[Herzbrief]',10+slot*4,6,slot-4,function()I.HALVETHHeart.open()end),
+                button('[Sammeln]',10+slot*5,6,slot-4,function()I.HALVETHFieldcraft.open()end),
+                button('[Weltleben]',10+slot*6,6,slot-4,function()I.HALVETHWorldlife.open()end),
+                button('[Licht]',10+slot*7,6,slot-4,function()I.HALVETHVisuals.cycle()end),
+                button('[Sicht]',10+slot*8,6,slot-4,function()I.HALVETHPerspective.open()end)}}
     elseif not show and menuBar then menuBar:destroy();menuBar=nil end
 end
 open=function(requestedTab)

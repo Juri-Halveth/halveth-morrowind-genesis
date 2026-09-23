@@ -132,7 +132,8 @@ local function request(data)
     local player = data.player
     if not player or not player:isValid() or not types.Player.objectIsInstance(player) then return end
     if type(data.requestId) ~= 'string' or #data.requestId > 160 then return end
-    if data.request ~= 'library' and data.request ~= 'spells' and data.request ~= 'both' and data.request ~= 'inspect' then
+    if data.request ~= 'library' and data.request ~= 'spells' and data.request ~= 'both'
+        and data.request ~= 'love' and data.request ~= 'inspect' then
         reply(player, data.requestId, false, 'Unbekannter Inhaltswunsch.', data.request)
         return
     end
@@ -153,11 +154,13 @@ local function request(data)
                 if inventory:countOf(record.id) == 0 then world.createObject(record.id, 1):moveInto(inventory) end
             end
         end
-        if data.request == 'spells' or data.request == 'both' then
+        if data.request == 'spells' or data.request == 'both' or data.request == 'love' then
             local learned = types.Actor.spells(player)
             for _, spell in ipairs(Catalog.spells) do
-                local record = ensureSpell(spell)
-                if not learned[record.id] then learned:add(record.id) end
+                if data.request ~= 'love' or spell.key == 'love' then
+                    local record = ensureSpell(spell)
+                    if not learned[record.id] then learned:add(record.id) end
+                end
             end
         end
     end)
@@ -171,8 +174,15 @@ local function update()
             pending[id] = nil
             if item.player:isValid() then
                 local current = inspect(item.player)
-                local booksOK = item.request == 'spells' or current.inventoryBooks >= #Catalog.books
-                local spellsOK = item.request == 'library' or current.knownSpells == #Catalog.spells
+                local booksOK = item.request ~= 'library' and item.request ~= 'both'
+                    or current.inventoryBooks >= #Catalog.books
+                local spellsOK = item.request == 'library' or
+                    (item.request == 'love' and (function()
+                        for _, spell in ipairs(current.spells) do
+                            if spell.key == 'love' and spell.known then return true end
+                        end
+                        return false
+                    end)()) or current.knownSpells == #Catalog.spells
                 local success = not item.error and booksOK and spellsOK
                 local message
                 if not success then
@@ -181,6 +191,8 @@ local function update()
                     message = 'Sechs eigene Buecher liegen im Inventar. Oeffne sie im normalen Morrowind-Buchfenster.'
                 elseif item.request == 'spells' then
                     message = 'LOVE, SPARK und AEGIS stehen im normalen Zaubermenue. Auswaehlen und wie gewohnt zaubern.'
+                elseif item.request == 'love' then
+                    message = 'LOVE - Heilschein steht jetzt im normalen Zaubermenue. Auswaehlen und wie gewohnt zaubern.'
                 else
                     message = 'Sechs Buecher im Inventar; LOVE, SPARK und AEGIS im Zaubermenue.'
                 end

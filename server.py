@@ -265,6 +265,7 @@ class Companion:
                 'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
                 'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
                 'spiel.viewpoint ist eine Momentaufnahme der Kameraprojektion, keine gepruefte Sichtlinie oder NPC-Erinnerung. '
+                'spiel.origin ist eine vom Spieler gewaehlte neue HALVETH-Ursprungsspur. Sie belegt weder eine bereits erschienene Gegenfigur noch eine Beziehung oder originale Morrowind-Lore. '
                 'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '

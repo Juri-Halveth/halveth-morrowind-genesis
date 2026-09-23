@@ -36,6 +36,26 @@ class SourcePackageTests(unittest.TestCase):
             'installer/love-astrolabe-icon-0.8.png',
             'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga',
             'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds',
+            'assets/RebornBitterCoast/tx_bc_muck-source.png',
+            'mod/Textures/tx_bc_muck.dds',
+            'assets/RebornBitterCoast/tx_bc_rock_01-source.png',
+            'mod/Textures/tx_bc_rock_01.dds',
+            'assets/RebornBitterCoast/tx_bc_grass-source.png',
+            'mod/Textures/tx_bc_grass.dds',
+            'assets/RebornWorld/tx_ai_dirtroad_01-source.png',
+            'mod/Textures/tx_ai_dirtroad_01.dds',
+            'assets/RebornWorld/tx_land_darkgravel-source.png',
+            'mod/Textures/tx_land_darkgravel.dds',
+            'assets/RebornWorld/tx_rm_redrock_01-source.png',
+            'mod/Textures/tx_rm_redrock_01.dds',
+            'assets/RebornWorld/tx_rm_rock_02-source.png',
+            'mod/Textures/tx_rm_rock_02.dds',
+            'assets/RebornWorld/tx_ac_dirt_01-source.png',
+            'mod/Textures/tx_ac_dirt_01.dds',
+            'assets/RebornWorld/tx_rm_grayrock_01-source.png',
+            'mod/Textures/tx_rm_grayrock_01.dds',
+            'assets/RebornWorld/tx_ma_crackedearth-source.png',
+            'mod/Textures/tx_ma_crackedearth.dds',
         }
         unexpected = {
             'mod/Textures/halveth/other-banner.png',
@@ -171,13 +191,13 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '1.0.1')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-1.0.1-public-source.zip')
+        self.assertEqual(release.VERSION, '1.0.4')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-1.0.4-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
-        self.assertIn('Only the 6 exact owned art asset paths and the one original shader source path', note)
+        self.assertIn('Only the 26 exact owned art asset paths and the one original shader source path', note)
         self.assertIn('portal main menu inside OpenMW', note)
         self.assertIn('six original native books', note)
         self.assertIn('three native spells', note)
@@ -196,7 +216,7 @@ class PublicValidationTests(unittest.TestCase):
     def test_current_public_tree_has_bound_assets_and_licenses(self):
         files=release.collect_files()
         result=release.validate_files(files)
-        self.assertEqual(result['assetCount'],6)
+        self.assertEqual(result['assetCount'],26)
         self.assertNotIn('BUILD-RESULT.json',files)
 
     def test_changed_asset_bytes_fail_provenance_check(self):

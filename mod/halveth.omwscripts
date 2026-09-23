@@ -3,6 +3,8 @@ GLOBAL: scripts/halveth/global.lua
 GLOBAL: scripts/halveth/content.lua
 GLOBAL: scripts/halveth/actor_life_global.lua
 PLAYER: scripts/halveth/player.lua
+PLAYER: scripts/halveth/origin.lua
+PLAYER: scripts/halveth/heart.lua
 PLAYER: scripts/halveth/knowledge.lua
 PLAYER: scripts/halveth/universe.lua
 PLAYER: scripts/halveth/paths.lua

@@ -4,6 +4,7 @@ local types = require('openmw.types')
 local C = require('scripts.halveth.common')
 
 local sessions, pending = {}, {}
+local originPlayer, originPending, originFrames = nil, false, 0
 local function newWorldId()
     return string.format('world-%d-%d-%d',os.time(),math.random(100000,999999),math.random(100000,999999))
 end
@@ -86,6 +87,13 @@ local function apply(data)
     pending[#pending+1]={player=player,session=s,receipt=receipt,frames=0}
 end
 local function update()
+    if originPending and originPlayer and originPlayer:isValid() then
+        originFrames=originFrames+1
+        if originFrames>=5 then
+            originPlayer:sendEvent('HALVETH_OriginNewGame',{})
+            originPending=false
+        end
+    end
     for i=#pending,1,-1 do
         local p=pending[i]
         p.frames=p.frames+1
@@ -115,11 +123,17 @@ local function update()
 end
 return {
     engineHandlers={onUpdate=update,
-        onSave=function() return {version=1,worldId=worldId} end,
+        onSave=function() return {version=2,worldId=worldId,originPending=originPending} end,
         onLoad=function(data)
             sessions={};pending={}
+            originPlayer=nil;originFrames=0
+            originPending=type(data)=='table' and data.version==2 and data.originPending==true or false
             worldId=(data and C.validId(data.worldId)) and data.worldId or newWorldId()
         end,
-        onNewGame=function() sessions={};pending={};worldId=newWorldId() end},
+        onNewGame=function()
+            sessions={};pending={};worldId=newWorldId()
+            originPending=true;originFrames=0
+        end,
+        onPlayerAdded=function(player) originPlayer=player end},
     eventHandlers={HALVETH_Register=register, HALVETH_Action=apply},
 }
