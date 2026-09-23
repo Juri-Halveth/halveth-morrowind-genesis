@@ -14,10 +14,19 @@ local armed,completed,choice=false,false,nil
 local name,counterpart=nil,nil
 local window,addedMode=nil,false
 local lastAttempt=0
+local openFailures,sceneUnavailable=0,false
 
 local function close()
-    if window then window:destroy();window=nil end
-    if addedMode then I.UI.removeMode('Interface');addedMode=false end
+    local previous=window;window=nil
+    if previous then
+        local ok,err=pcall(function() previous:destroy() end)
+        if not ok then print('HALVETH_ORIGIN_CLOSE_ERROR '..tostring(err)) end
+    end
+    if addedMode then
+        addedMode=false
+        local ok,err=pcall(I.UI.removeMode,'Interface')
+        if not ok then print('HALVETH_ORIGIN_MODE_ERROR '..tostring(err)) end
+    end
 end
 
 local function state()
@@ -29,7 +38,8 @@ local function select(id)
     if not CHOICES[id] or completed or not armed then return false end
     choice=id;completed=true;armed=false
     close()
-    ui.showMessage('Pulsar-Erwachen: '..CHOICES[id]..' ist deine erste HALVETH-Spur. F8 kennt diesen Anfang.')
+    local ok,err=pcall(ui.showMessage,'Pulsar-Erwachen: '..CHOICES[id]..' ist deine erste HALVETH-Spur. F8 kennt diesen Anfang.')
+    if not ok then print('HALVETH_ORIGIN_MESSAGE_ERROR '..tostring(err)) end
     print('HALVETH_ORIGIN_SELECTED '..id)
     return true
 end
@@ -71,7 +81,7 @@ local function open()
 end
 
 local function frame()
-    if not armed or completed or window or not self.cell or not self.cell.isExterior then return end
+    if not armed or completed or window or sceneUnavailable or not self.cell or not self.cell.isExterior then return end
     if core.getRealTime()-lastAttempt<0.5 then return end
     lastAttempt=core.getRealTime()
     local ok,record=pcall(types.NPC.record,self)
@@ -80,11 +90,22 @@ local function frame()
     counterpart=record.isMale and 'woman' or 'man'
     if I.UI.getMode() then return end
     local drawn,err=pcall(open)
-    if not drawn then print('HALVETH_ORIGIN_UI_ERROR '..tostring(err)) end
+    if not drawn then
+        close()
+        openFailures=openFailures+1
+        print('HALVETH_ORIGIN_UI_ERROR '..tostring(err))
+        if openFailures>=3 then
+            sceneUnavailable=true
+            print('HALVETH_ORIGIN_UI_DEFERRED Vanilla gameplay remains available; retry on next load')
+        end
+    else
+        openFailures=0
+    end
 end
 
 local function load(data)
     close();armed=false;completed=false;choice=nil;name=nil;counterpart=nil
+    openFailures=0;sceneUnavailable=false
     if type(data)~='table' or data.version~=1 then return end
     completed=data.completed==true
     armed=data.armed==true and not completed
