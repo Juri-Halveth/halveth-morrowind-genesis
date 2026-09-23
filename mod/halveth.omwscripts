@@ -1,0 +1,2 @@
+GLOBAL: scripts/halveth/global.lua
+PLAYER: scripts/halveth/player.lua

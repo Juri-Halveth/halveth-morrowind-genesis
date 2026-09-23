@@ -1,0 +1,40 @@
+.atelier-panel{padding:38px;background:radial-gradient(ellipse at 20% 0,#7343311d,transparent 60%),#172019}
+.atelier-hero{display:grid;grid-template-columns:minmax(190px,330px) 1fr;gap:64px;align-items:center;max-width:1050px;margin:0 auto 45px}
+.atelier-art-frame{margin:0;background:#121715;border:1px solid #8e7959;box-shadow:0 20px 55px #0005;padding:9px}
+.atelier-art-frame img{display:block;width:100%;height:auto;max-height:630px;object-fit:contain}
+.atelier-art-frame figcaption{font-family:var(--mono);font-size:8px;color:var(--gold);letter-spacing:2px;text-align:center;padding:15px 4px 6px}
+.atelier-lead h3{font-family:var(--serif);font-size:46px;line-height:1.12;font-weight:400;margin:18px 0 22px;letter-spacing:-1.5px}
+.atelier-lead h3 em{color:#d39787;font-weight:400}
+.atelier-deck{font-size:14px;color:#bec6b4;line-height:1.9;max-width:520px}
+.atelier-step{display:flex;gap:20px;margin-top:27px}
+.atelier-step>span{font-family:var(--mono);color:#b58e69;font-size:11px;padding-top:5px}
+.atelier-step h4{font-family:var(--serif);font-size:22px;font-weight:400;margin:0 0 8px;color:#dcd4b9}
+.atelier-step p{font-size:12px;line-height:1.9;color:var(--muted);max-width:480px}
+.atelier-production,.atelier-tools,.atelier-library{border-top:1px solid var(--line);padding-top:33px;margin-top:35px}
+.atelier-panel section>h3,.atelier-production h3{font-family:var(--serif);font-size:30px;font-weight:400;margin:10px 0 18px}
+.atelier-brief-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;margin-top:26px}
+.atelier-panel label{display:block;font-size:11px;color:#c9c5aa;margin-bottom:10px}
+.atelier-panel select,.atelier-panel textarea{color:#d9d9c5;background:#111b14;border:1px solid #516147;border-radius:3px;padding:12px;width:100%;font:inherit;font-size:12px;line-height:1.8}
+.atelier-panel select{margin-bottom:9px}
+.atelier-panel textarea{font-family:var(--mono);font-size:11px;resize:vertical;min-height:270px}
+.atelier-brief-layout h4{font-size:12px;color:#d4c4a0;margin:22px 0 10px}
+.atelier-brief-layout ul{font-size:11px;line-height:1.9;color:var(--muted);padding-left:18px}
+.atelier-brief-layout li{margin:7px 0}
+.atelier-copy-row{display:flex;align-items:center;gap:15px;margin-top:13px;flex-wrap:wrap}
+.atelier-copy-row button{min-height:42px;font-size:12px}
+.atelier-providers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.atelier-provider{background:#20271d;border:1px solid #414e35;padding:23px;display:flex;flex-direction:column}
+.atelier-provider h4{font-family:var(--serif);font-weight:400;font-size:25px;color:#dad0b7;margin:15px 0 12px}
+.atelier-provider .eyebrow{font-size:7px;line-height:1.7;letter-spacing:1px}
+.atelier-provider>p:not(.eyebrow){font-size:11px;line-height:1.85;color:#b4c0a5}
+.atelier-provider .atelier-formats{margin-top:14px;font-family:var(--mono);font-size:9px!important;color:#d4b88c!important}
+.atelier-provider .atelier-access{margin:15px 0;border-top:1px solid #45503a;padding-top:13px;font-size:10px!important}
+.atelier-link{font-size:11px;color:#d1b88c;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.atelier-provider>.atelier-link{margin-top:auto;padding-top:8px}
+.atelier-knowledge{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin-top:21px}
+.atelier-source{padding:19px 0;border-top:1px solid #3d4935}
+.atelier-source summary{cursor:pointer;font-size:12px;color:#d3d2b8;line-height:1.8}
+.atelier-source p{font-size:11px;line-height:1.9;color:var(--muted);margin:15px 0}
+.tabs{flex-wrap:wrap}.message-source li{margin:7px 0}
+@media(max-width:1000px){.atelier-hero{gap:35px;grid-template-columns:240px 1fr}.atelier-lead h3{font-size:37px}.atelier-providers{grid-template-columns:repeat(2,minmax(0,1fr))}.atelier-step{margin-top:19px}.atelier-step p{font-size:11px}}
+@media(max-width:700px){.atelier-panel{padding:23px}.atelier-hero{grid-template-columns:1fr;gap:30px}.atelier-art-frame{width:220px;justify-self:center}.atelier-lead h3{font-size:36px}.atelier-brief-layout,.atelier-providers,.atelier-knowledge{grid-template-columns:1fr}.atelier-brief-layout{gap:23px}.atelier-provider{padding:22px}.atelier-panel section>h3{font-size:27px}.atelier-deck{font-size:13px}}

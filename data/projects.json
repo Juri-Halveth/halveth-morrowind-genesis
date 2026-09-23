@@ -1,0 +1,72 @@
+[
+  {
+    "id": "conversation",
+    "title": "Freie Gespräche mit lokalem Sprachmodell",
+    "status": "Erledigt"
+  },
+  {
+    "id": "memory",
+    "title": "Figuren-Gedächtnis und lokale Lore-Bibliothek",
+    "status": "Erledigt"
+  },
+  {
+    "id": "game",
+    "title": "OpenMW-Spielbrücke, F8 und Spielwerkzeuge",
+    "status": "Erledigt"
+  },
+  {
+    "id": "graphics",
+    "title": "Separate Original-, Beauty- und Cinematic-Profile",
+    "status": "Erledigt"
+  },
+  {
+    "id": "glitch",
+    "title": "Bestehende Quest-/Wirtschaftslogik erhalten; historischen Gold-Glitch gesondert prüfen",
+    "status": "Neu"
+  },
+  {
+    "id": "voices",
+    "title": "Lokale Mikrofoneingabe und individuelle NPC-Stimmen",
+    "status": "Neu"
+  },
+  {
+    "id": "peace",
+    "title": "Verzweigte friedliche Questlösungen mit Zustandsprüfung",
+    "status": "Neu"
+  },
+  {
+    "id": "worlds",
+    "title": "Neue Orte, Tiere und eigene Geschichten als Inhaltspakete",
+    "status": "Neu"
+  },
+  {
+    "id": "textures",
+    "title": "Optionale Grafikpakete auswählen und lokal installieren",
+    "status": "Neu"
+  },
+  {
+    "id": "release",
+    "title": "Öffentliches Quellpaket mit MIT-Code und CC0-Bild; GitHub-Veröffentlichung vorbereiten",
+    "status": "In Arbeit"
+  },
+  {
+    "id": "scarlet-banner",
+    "title": "Eigenes Scarlet-/LOVE-Motiv im F8-Dialog und als Wandbehang",
+    "status": "Erledigt"
+  },
+  {
+    "id": "project-knowledge",
+    "title": "Acht frische GitHub-Designquellen in passenden KI-Gesprächen",
+    "status": "Erledigt"
+  },
+  {
+    "id": "generation-atelier",
+    "title": "Atelier mit drei Produktionsbriefs und fünf geprüften Werkzeugwegen",
+    "status": "Erledigt"
+  },
+  {
+    "id": "external-assets",
+    "title": "Weitere 3D-Modelle und Filmszenen über konkrete Anbieterzugänge erzeugen",
+    "status": "Neu"
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "schema": "halveth.generated-asset/1",
+  "assetId": "scarlet-love-banner-v1",
+  "createdAt": "2026-09-23",
+  "generator": "Codex built-in imagegen",
+  "origin": "Original image generated for this user-directed Morrowind mod; no reference images supplied",
+  "generationBrief": "Flat portrait 1:2 tapestry: dark woven fabric, original gold portal, scarlet heart formed by vines, moth-like wings, alien fungal vines, embroidered border; no text or franchise emblems",
+  "briefKind": "Normalized production brief, not a verbatim tool transcript",
+  "requestedDimensions": [
+    1024,
+    2048
+  ],
+  "actualDimensions": [
+    887,
+    1774
+  ],
+  "pixelConversion": "FFmpeg PNG to TGA and raw BGRA; DDS header added without resizing or editing pixels",
+  "decodedRgbaSha256": "11ce51acc789112eadb4a31c4444f22b6839b269c2772a1dc5a8f289248e0f0b",
+  "pngDdsPixelEquality": "PASS via independent FFmpeg decodes to RGBA SHA256",
+  "files": [
+    {
+      "path": "mod/Textures/halveth/scarlet-love-banner.png",
+      "bytes": 3418821,
+      "sha256": "eb80cd9ea3f038651ee7d74c7fc1d0478d44ba4a93465efd70027c8b4979ed0c"
+    },
+    {
+      "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga",
+      "bytes": 4720658,
+      "sha256": "f23e9aa8655d2509bf613c498ed2e1211c5cd1a304952bb84e5805da63a292fd"
+    },
+    {
+      "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds",
+      "bytes": 6294280,
+      "sha256": "431707b3fd10441e59aab5b414f1b478447a8ddf4a868fd9e4871b1d4db2e764"
+    }
+  ],
+  "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
+  "engineTarget": "Existing tapestry texture type plus own native F8 UI image; no ESM/ESP edits"
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "halveth.generation-providers/1.0.0",
+  "checkedAt": "2026-09-23T00:29:19.162Z",
+  "providers": [
+    {
+      "id": "adobe-firefly",
+      "name": "Adobe Firefly / Photoshop",
+      "officialUrl": "https://www.adobe.com/products/photoshop/generate-image.html",
+      "outputKind": "image_texture_source",
+      "formats": [
+        "PNG",
+        "JPG",
+        "GIF"
+      ],
+      "gameUse": "Textur- und Konzeptmaster erzeugen; vor OpenMW-Import Maße, UV-Ausrichtung, Farbkanal und Normal-/Specular-Maps prüfen.",
+      "availability": "REQUIRES_PROVIDER_ACCESS",
+      "accessNote": "Production brief included. Obtain the required software/account, plan, credits and export rights on your own computer; none are bundled.",
+      "sources": [
+        "https://www.adobe.com/products/photoshop/generate-image.html",
+        "https://helpx.adobe.com/photoshop/using/export-artboards-layers.html",
+        "https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/generative-credits-overview.html",
+        "https://helpx.adobe.com/substance-3d-sampler/using/export.html"
+      ]
+    },
+    {
+      "id": "adobe-after-effects",
+      "name": "Adobe After Effects",
+      "officialUrl": "https://www.adobe.com/products/aftereffects.html",
+      "outputKind": "cinematic_and_frame_sequence",
+      "formats": [
+        "movie file",
+        "still-image sequence"
+      ],
+      "gameUse": "Intro, Trailer, Lore-Vision oder vorbereitete Effektframes. Gerendertes Video erzeugt keinen begehbaren Spielort.",
+      "availability": "REQUIRES_PROVIDER_ACCESS",
+      "accessNote": "Production brief included. Obtain the required software/account, plan, credits and export rights on your own computer; none are bundled.",
+      "sources": [
+        "https://helpx.adobe.com/after-effects/using/basics-rendering-exporting.html",
+        "https://www.adobe.com/learn/after-effects/web/native-3d-meshes-substance-textures"
+      ]
+    },
+    {
+      "id": "meshy",
+      "name": "Meshy",
+      "officialUrl": "https://www.meshy.ai/",
+      "outputKind": "mesh_texture_rig_animation",
+      "formats": [
+        "GLB",
+        "FBX",
+        "OBJ",
+        "STL",
+        "USDZ",
+        "3MF"
+      ],
+      "gameUse": "3D-Requisiten als Ausgangsmodelle; Blender-Prüfung und Konvertierung nach NIF oder geprüftem OSG/COLLADA-Pfad. Figuren brauchen passende Skelette und Animationen.",
+      "availability": "REQUIRES_PROVIDER_ACCESS",
+      "accessNote": "Aktuelle offizielle Hilfe: Free bietet 100 monatliche Web-Credits, aber keine regulären Downloads und keinen API-Zugang. Bezahlter Zugang und API-Credits wurden nicht geprüft oder gekauft. Free-Assets: CC BY 4.0 mit Attribution; Rechte hängen vom Erzeugungsplan ab.",
+      "sources": [
+        "https://docs.meshy.ai/en/api/text-to-3d",
+        "https://docs.meshy.ai/en/api/rigging",
+        "https://docs.meshy.ai/en/api/animation",
+        "https://help.meshy.ai/en/articles/15696428-what-is-included-on-the-free-plan",
+        "https://help.meshy.ai/en/articles/16102098-can-i-use-meshy-assets-commercially",
+        "https://docs.meshy.ai/en/api/pricing"
+      ]
+    },
+    {
+      "id": "dreamina-seedance",
+      "name": "Dreamina / Seedance",
+      "officialUrl": "https://dreamina.capcut.com/tools/seedance-2-0",
+      "outputKind": "cinematic_video",
+      "formats": [
+        "MP4"
+      ],
+      "gameUse": "Siedlungsfilm, Trailer, Lore-Szene oder Bewegungsreferenz. Die Ausgabe ist Video; kein Mesh, Rig oder spielbarer Level.",
+      "availability": "REQUIRES_PROVIDER_ACCESS",
+      "accessNote": "Kontozugang, Credits und Exportrechte sind ungeprüft. BytePlus LAS dokumentiert Seedance 2.0: 4–15 s, 24 fps, bis 4K mit Modusgrenzen; Seedance 2.5: 4–30 s, 24 fps, 480/720p. Diese LAS-Werte sind keine Zusage für einen Dreamina-Nutzerplan. Kein bezahlter Auftrag gestartet.",
+      "sources": [
+        "https://dreamina.capcut.com/tools/seedance-2-0",
+        "https://www.byteplus.com/en/product/seedance",
+        "https://docs.byteplus.com/en/docs/Byteplus_LAS/video_gen_enhanced"
+      ]
+    },
+    {
+      "id": "blender-local",
+      "name": "Blender lokal",
+      "officialUrl": "https://www.blender.org/",
+      "outputKind": "local_mesh_material_authoring_and_conversion",
+      "formats": [
+        "BLEND",
+        "GLB",
+        "glTF",
+        "NIF via compatible addon",
+        "OSG via compatible export pipeline"
+      ],
+      "gameUse": "Eigene Modelle bauen, importierte Meshes bereinigen, UVs und Texturen prüfen, Kollision und Maßstab vorbereiten und mit passendem Exporter für OpenMW exportieren.",
+      "availability": "READY_LOCAL_BRIEF",
+      "accessNote": "Lokaler Produktionsbrief bereit. Blender wurde in Standardinstallationsorten, Uninstall-Einträgen und PATH nicht gefunden. Für den Modellimport sind Blender und ein zur Engine passender Exporter vorzubereiten.",
+      "sources": [
+        "https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html",
+        "https://openmw.readthedocs.io/en/stable/reference/modding/custom-models/pipeline-blender-nif.html",
+        "https://openmw.readthedocs.io/en/stable/reference/modding/custom-models/pipeline-blender-osgnative.html",
+        "https://openmw.readthedocs.io/en/stable/reference/modding/texture-modding/texture-basics.html"
+      ]
+    }
+  ],
+  "assetBriefs": [
+    {
+      "id": "scarlet-love-banner",
+      "title": "Scarlet Love Banner",
+      "target": "OpenMW · Texturmaster 1024 × 2048 · Hochformat 1:2",
+      "providerIds": [
+        "adobe-firefly",
+        "blender-local"
+      ],
+      "prompt": "Create one original game-texture master named ScarletLoveBanner, exactly 1024 x 2048 pixels, portrait aspect ratio 1:2. Show a single flat rectangular textile surface filling the entire frame, viewed perfectly front-on with an orthographic camera. Use deep scarlet woven cloth, restrained antique-gold embroidered moth-wing curves, and one small abstract heart-shaped stitch motif. The design should feel handmade, welcoming, ancient and elegant, suitable for an original astral settlement. Keep all ornament inside an 8% safe border and preserve visible fine fabric weave at full resolution. Use neutral, even, shadow-free illumination so this is a usable albedo texture, with no perspective, folds, drapery, object cast shadows, metallic glare, background, pole or surrounding scenery. No words, letters, numbers, runes, logos, watermarks, recognizable franchise emblems or existing characters. Deliver one lossless sRGB PNG named scarlet_love_banner_albedo.png. This is a flat texture source, not a rendered banner in a scene. Any normal or specular maps must be prepared and checked separately; do not label an artistic image as a measured material map.",
+      "acceptance": [
+        "PNG ist exakt 1024 × 2048 Pixel, Hochformat 1:2, ohne Text/Logo/Wasserzeichen.",
+        "Stoff ist frontparallel und füllt das Bild; keine perspektivischen Falten oder eingebrannten Schlagschatten.",
+        "Ornament bleibt innerhalb des 8%-Sicherheitsrandes; Herzmotiv und Mottenkurven sind eigene Gestaltung.",
+        "Albedo-Master bleibt erhalten; Engine-Ableitung mit passender UV-Zuordnung und gesondert geprüften DX-Normal-/Specular-Maps.",
+        "Vor Aktivierung: im separaten Asset-Pack laden, bei Tages- und Innenlicht prüfen; vorhandene Quest-/NPC-Datensätze bleiben erhalten.",
+        "Quelle, Generator/Modell, Erzeugungsdatum, Lizenz, Prompt und SHA-256 des tatsächlich exportierten Assets festhalten."
+      ]
+    },
+    {
+      "id": "astral-moth-shrine",
+      "title": "Astral Moth Shrine",
+      "target": "OpenMW · statische Requisite · GLB-Master, danach NIF oder geprüfter OSG-Export",
+      "providerIds": [
+        "meshy",
+        "blender-local"
+      ],
+      "prompt": "Create one original static game prop named AstralMothShrine: a small weathered basalt shrine with two broad moth-wing carvings surrounding an empty central recess, subtle antique-brass inlays, and a tiny rose-colored glass heart inset. It belongs to a welcoming astral garden settlement. No characters, text, runes, logos, recognizable franchise symbols, background scene, skeleton, rig, animation or particle system. Design for a 1.6-meter-tall prop, with the origin centered on the base, a flat stable bottom, clean outward normals and no detached floating fragments. Target at most 3000 triangles for LOD0 and 1000 triangles for a manually prepared LOD1; these are acceptance targets, not assumed generator guarantees. Use one non-overlapping UV atlas and no more than two materials. Provide a GLB source named astral_moth_shrine_source.glb plus separate 2048 x 2048 PNG base-color, tangent-normal, roughness and metallic maps. Declare the tangent-normal convention explicitly; the GLB source uses glTF +Y normals. Keep material textures free of baked lighting. Also provide a simple separate collision proxy if the tool supports it; otherwise flag collision as pending manual preparation. Delivery is an exchange asset, not an OpenMW-ready promise: import into Blender, validate topology, UVs, scale and collision, convert the normal map to the DX convention for the OpenMW derivative, adapt materials to the tested engine shader path, and export with a compatible NIF addon to Meshes/halveth/astral_moth_shrine.nif or with a tested static OSG pipeline. Place external engine textures under Textures/halveth/. Keep the GLB and PNG masters unchanged. Verify the exported prop in OpenMW-CS and a separate test addon before adding it to gameplay.",
+      "acceptance": [
+        "Statisches Originalobjekt ohne Rig, Animation, Figuren oder Markenmotive; keine losen Meshreste.",
+        "LOD0 höchstens 3000, LOD1 höchstens 1000 Dreiecke nach tatsächlich gemessenem Export; keine bloße Prompt-Zusage.",
+        "Maßstab, Basispivot, UVs, Normalen, Materialanzahl und einfache Kollision in Blender geprüft.",
+        "GLB/PNG-Master bleiben erhalten; glTF-+Y-Normalmap und OpenMW-DX-Ableitung werden eindeutig benannt.",
+        "NIF- oder OSG-Konvertierung mit tatsächlich passendem Exporter; GLB/FBX nicht nur umbenennen.",
+        "OpenMW-CS-Vorschau und separater Engine-Test zeigen Texturen, Schatten, korrekte Größe und Kollision; Speicher-/Bildratenwirkung beobachten.",
+        "Generator-/Planlizenz, erlaubte Referenzen, Attribution und Dateiprüfsummen vor Veröffentlichung festhalten."
+      ]
+    },
+    {
+      "id": "scarlet-settlement-cinematic",
+      "title": "Scarlet Settlement · 8-Sekunden-Film",
+      "target": "Cinematic · MP4 · 8 Sekunden · 1280 × 720 · 24 fps · ausdrücklich Video",
+      "providerIds": [
+        "dreamina-seedance",
+        "adobe-after-effects",
+        "blender-local"
+      ],
+      "prompt": "Create an original eight-second cinematic video of a welcoming astral garden settlement at blue-hour dusk. Deliver a single 1280 x 720 landscape MP4 at 24 frames per second, exactly eight seconds long, with one continuous slow forward camera move and no cuts. This is a pre-rendered cinematic, not gameplay footage or a playable world. At 0–2 seconds, reveal worn basalt steps and softly luminous local plants; at 2–5 seconds, glide toward a modest courtyard with original moth-wing shrine carvings and scarlet textile banners carrying only abstract gold embroidery; at 5–8 seconds, settle on warm lantern light and a small rose-glass heart detail at the shrine. Keep architecture, light direction and object positions consistent throughout. A few distant adult residents may walk naturally without close-up faces; there must be no fighting, injury or peril. Use restrained volumetric mist, gentle cloth motion and readable silhouettes, not overwhelming bloom. Optional audio: soft evening wind, distant footfalls and one quiet chime, with no dialogue, lyrics or recognizable melody. No HUD, cursor, subtitles, captions, logos, watermark, existing franchise characters, copied buildings or text in the image. Use only original or licensed reference assets. If the selected provider or plan cannot export the requested duration, frame rate, resolution or clean file, report the limitation and stop rather than silently changing the specification. Name the output scarlet_settlement_cinematic_8s.mp4 and retain the prompt and generation settings alongside it.",
+      "acceptance": [
+        "MP4 mit gemessenen 8 Sekunden, 1280 × 720 und 24 fps; anderer Exportstand bleibt als Abweichung sichtbar.",
+        "Ein zusammenhängender Kamerazug ohne Schnitt; Gegenstände und Architektur wechseln ihre Form oder Position nicht ungewollt.",
+        "Keine HUD-Elemente, Texte, Logos, Wasserzeichen oder übernommenen Franchise-Inhalte.",
+        "Als Cinematic gekennzeichnet; weder Spielgrafik-Benchmark noch Nachweis einer begehbaren Welt.",
+        "Modell, Anbieterprodukt und Nutzerplan getrennt notieren: Seedance 2.0/2.5 sowie Dreamina/BytePlus-Einstellungen nicht vermischen.",
+        "Tonrechte sowie Nutzungs-/Exportrechte des tatsächlich verwendeten Plans prüfen; lokale MP4-Datei und Prüfsumme sichern."
+      ]
+    }
+  ]
+}

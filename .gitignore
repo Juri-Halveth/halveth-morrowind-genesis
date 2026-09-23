@@ -1,0 +1,22 @@
+# Local game, model, conversation and profile state
+.local/
+local-config.json
+mod/bridge/inbox.json
+*.omwsave
+*.ess
+*.sqlite3*
+*.db
+*.log
+*.bak
+*.new
+*.tmp
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+dist/

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "halveth",
+    "name": "HALVETH",
+    "kind": "Projektfigur",
+    "description": "Entwirft neue Möglichkeiten für deine Spielwelt.",
+    "source": "Genesis starter"
+  },
+  {
+    "id": "lucinet",
+    "name": "LUCINET",
+    "kind": "Projektfigur",
+    "description": "Verbindet Spielwissen, Orte und die Erinnerung deiner Reise.",
+    "source": "Genesis starter"
+  },
+  {
+    "id": "rachel",
+    "name": "RACHEL",
+    "kind": "Projektfigur",
+    "description": "Begleitet deine Werkstatt mit Neu, In Arbeit und Erledigt.",
+    "source": "Genesis starter"
+  }
+]
