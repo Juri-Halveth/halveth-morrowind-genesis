@@ -1,14 +1,16 @@
-# HALVETH Morrowind Genesis · 0.5.0
+# HALVETH Morrowind Genesis · 0.6.0
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
 ## Spielen
 
-Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** lässt sich mit der vorhandenen nativen Workshop-Buildumgebung ergänzen.
+Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der lokale Windows-Einstieg **Morrowind - HALVETH** startet dasselbe Spiel über die vorhandene native Workshop-Buildumgebung; das öffentliche Quellpaket liefert weder `Morrowind.exe` noch einen fertigen Installer.
 
 - **F6** oder **HALVETH · Figur** im normalen Inventar/Dialog: Figur, Inventar, Magie und Begegnungen öffnen.
 - **F8:** mit JARVIS oder dem gewählten NPC sprechen; Heilen, +250 Gold, Startpunkt und Zurück nutzen.
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
+- **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.
+- **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Nachtglas und Original umschalten.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
 - **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
@@ -30,6 +32,8 @@ Das Journal registriert geöffnete Bücher und Schriftrollen anhand ihres Spiel-
 
 Die sechs eigenen Bücher enthalten 15 verfasste Textabschnitte und passende Lernfragen. Morrowind bestimmt die sichtbare Seiteneinteilung. Eigene alchemistische Rezepte aus diesen Geschichten sind zunächst Weltbeschreibung; Zutatenhilfe und Trankherstellung verwenden tatsächlich vorhandene Morrowind-Zutaten und -Effekte.
 
+Version 0.6 ergänzt im Wissensfenster einen **Rezeptplaner**. Er verbindet nur Zutaten aus dem aktuellen Inventar, deren gemeinsamen Effekt die Spielfigur nach ihrem tatsächlichen Alchemiewert schon erkennen darf. Du kannst ein Paar auswählen und im Spielstand merken; **Brauen** führt zum normalen Morrowind-Alchemiefenster. Verbrauch, Erfolg und Trank bleiben Regeln des Originalspiels. Ein gemerktes Rezept stellt keinen Trank von selbst her.
+
 | Zauber | Wirkung | Magicka |
 |---|---|---:|
 | LOVE | 6 Gesundheit pro Sekunde für 5 Sekunden | 8 |
@@ -37,6 +41,10 @@ Die sechs eigenen Bücher enthalten 15 verfasste Textabschnitte und passende Ler
 | AEGIS | 20 Schildpunkte für 30 Sekunden | 12 |
 
 Bücher und Zauber werden über die jeweiligen Schaltflächen angefordert. Vorhandene Exemplare und gelernte Zauber werden dabei nicht dupliziert. Die Alchemiehilfe zeigt passende Zutatenpaare aus dem aktuellen Inventar; gebraut wird im gewohnten Alchemiefenster.
+
+## Drei neue Spuren in derselben Welt
+
+**Spur des Wissens** zählt zwei verschiedene gelesene Texte und eine Begegnung. **Spur der Begegnung** zählt zwei verschiedene angesprochene Figuren und einen neu betretenen Ort. **Spur der Welt** verbindet drei Orte mit einem gelesenen Text. Das native Fenster zeigt jede Spur als **Neu**, **In Arbeit** oder **Erledigt**; Fortschritt gehört zum normalen Spielstand. Eine abgeschlossene Spur bietet einmalig bis zu 30 Ausdauerpunkte. Offenlassen einer Seite oder wiederholtes Anklicken derselben Figur erzeugt keinen zusätzlichen Fortschritt. Diese drei eigenen Wege setzen keine Bethesda-Queststufe um und ersetzen keine Handlung des Originalspiels.
 
 ## Gespräche und Spielwerkzeuge
 
@@ -50,7 +58,7 @@ Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öff
 
 Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
 
-Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das neue Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels.
+Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels. Version 0.6 ergänzt einen **eigenen OpenMW-Nachbearbeitungsfilter** mit drei wählbaren Lichtzuständen. Er verändert die Darstellung der laufenden Szene, nicht die Spielwelt-Assets oder OpenMWs Renderer. [Technik und Grenzen des Filters](docs/VISUAL-ATMOSPHERE.md).
 
 Die Erweiterung nutzt ein eigenes OpenMW-Profil. Spielstandkopien sind im öffentlichen Launcher standardmäßig aus; `--copy-saves` übernimmt ausdrücklich für diesen Start fehlende Kopien, ohne vorhandene Dateien zu überschreiben. Masterdateien und ursprüngliche Saves bleiben erhalten. Bestehende Grafik-, Sound- und Eingabeeinstellungen des Profils werden beim normalen Start beibehalten. Details: [docs/GRAPHICS.md](docs/GRAPHICS.md).
 
@@ -67,19 +75,23 @@ python tests/integration_cast.py
 python tests/integration_chat.py
 python tests/integration_chat.py --npc
 python tests/integration_universe.py
+python tests/integration_paths.py
+python tests/integration_visuals.py
 python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```
 
 Die optionalen Integrationstests benötigen die eigene OpenMW-/Morrowind-Installation. Sie verwenden eigene Testsitzungen statt persönlicher Spielstände. `.local/` enthält persönliche Daten, Sicherungen und Testbelege und gehört nicht ins öffentliche Repository.
 
-Die [native Prüfzusammenfassung für 0.5](docs/NATIVE-VERIFICATION-0.5.0.json) bindet die neue Oberfläche und einen echten Arrille-Modellrundlauf an ihre Prüfstände. 27 Fertigkeiten, zwölf Gegenstandskategorien, Zauberauswahl, Buchleser und die genaue Gesprächsfigur wurden im laufenden Spiel geprüft. Die [Prüfungen für 0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bleiben als eigener historischer Stand erhalten. Physische F6-/F7-/F8-Tasteneingaben wurden nicht verifiziert; die neue Mausleiste wurde bedient.
+Die [native Prüfzusammenfassung für 0.6](docs/NATIVE-VERIFICATION-0.6.0.json) bindet vier isolierte OpenMW-Läufe: Pfade mit echtem Speichern und Laden, Rezeptplaner mit Übergabe an das normale Alchemiefenster, den aktiven eigenen Shader und die bisherige F6-Weltansicht. Im vorhandenen Morrowind-Spielstand wurden die neue Mausleiste für Pfade, Wissen und alle drei Lichtmodi bedient; zwei geprüfte Spielstanddateien blieben unverändert. Die [Prüfungen für 0.5](docs/NATIVE-VERIFICATION-0.5.0.json) dokumentieren zusätzlich einen echten Arrille-Modellrundlauf; [0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bleibt als historischer Stand erhalten. Physische F6-/F7-/F8-Tasteneingaben sind weiter unbestätigt.
 
 `survey_universe.py` liest sämtliche Datensatz- und Unterdatensatzgrenzen der aktiven TES3-Plugins und baut lokal ein versionsgebundenes Register. Das Register und extrahierte Inhalte bleiben privat. Eine vollständige Strukturaufnahme dieser Plugins ist keine vollständige Prüfung sämtlicher Skriptpfade, Texturen oder Animationen. Umfang und weitere Entwicklungsäste stehen in [docs/UNIVERSE-0.5.md](docs/UNIVERSE-0.5.md).
 
 ## Weiterer Ausbau
 
 Weitere friedliche Questverzweigungen, ein Bausystem, neue Regionen, umfassende Bewegungs- und Kampfänderungen sowie individuelle Stimmen bleiben Entwicklungsarbeit **an Morrowind**. Die getrennten Realms-/Portal-Garden-Prototypen sind eingestellt; verwendbare Inhalte werden für diese Spielwelt portiert. Unreal-Rendererfunktionen sind durch die Portierung von Büchern oder Spielregeln nicht automatisch in OpenMW vorhanden.
+
+Die [Designübertragung aus New World und weiteren Vorbildern](docs/NEW-WORLD-DESIGN-TRANSFER.md) trennt vorhandene 0.6-Funktionen von späteren Ideen. Sie verwendet öffentliche Mechanikbeschreibungen als Anregung und übernimmt weder New-World-Quellcode noch Texte, Datenbankeinträge oder Grafikdateien.
 
 ## Lizenz und Veröffentlichung
 

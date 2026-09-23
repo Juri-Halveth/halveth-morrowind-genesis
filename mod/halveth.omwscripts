@@ -3,3 +3,5 @@ GLOBAL: scripts/halveth/content.lua
 PLAYER: scripts/halveth/player.lua
 PLAYER: scripts/halveth/knowledge.lua
 PLAYER: scripts/halveth/universe.lua
+PLAYER: scripts/halveth/paths.lua
+PLAYER: scripts/halveth/visuals.lua

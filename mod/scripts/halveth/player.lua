@@ -125,6 +125,7 @@ local function submit()
     pendingChat={id=requestId,startedAt=core.getRealTime()}
     C.emit({type='chat',sessionId=sessionId,requestId=requestId,entityMode=entityMode,text=text,context=c})
     self:sendEvent('HALVETH_ChatSubmitted',{sessionId=sessionId,requestId=requestId,text=text,contextJson=C.json(c)})
+    if entityMode=='npc' and dialogueTarget and I.HALVETHPaths then I.HALVETHPaths.noteNpc(dialogueTarget) end
     append('DU: '..text)
     inputText='';inputLayout.props.text='';window:update()
 end
@@ -151,6 +152,7 @@ local function open()
     if window then close();return end
     if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
     if I.HALVETHUniverse then I.HALVETHUniverse.close() end
+    if I.HALVETHPaths then I.HALVETHPaths.close() end
     windowMode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});hasAddedMode=true end
     local size=ui.screenSize()

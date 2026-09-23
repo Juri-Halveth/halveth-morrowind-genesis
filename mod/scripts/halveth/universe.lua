@@ -160,19 +160,25 @@ local function updateMenuBar()
     local show=(currentMode=='Interface' or currentMode=='Dialogue') and not window
         and not (I.HALVETH and I.HALVETH.isOpen())
         and not (I.HALVETHKnowledge and I.HALVETHKnowledge.isOpen())
+        and not (I.HALVETHPaths and I.HALVETHPaths.isOpen())
     if show and not menuBar then
+        local barWidth=math.min(1050,ui.screenSize().x-24)
+        local slot=math.floor((barWidth-20)/5)
         menuBar=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
-            props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),size=util.vector2(620,36)},
+            props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),size=util.vector2(barWidth,36)},
             content=ui.content{
-                button('[HALVETH · Figur / F6]',12,6,246,function()open()end),
-                button('[Wissen / F7]',270,6,155,function()I.HALVETHKnowledge.open()end),
-                button('[Gespraech / F8]',434,6,180,function()I.HALVETH.open()end)}}
+                button('[HALVETH · Figur]',10,6,slot-4,function()open()end),
+                button('[Wissen]',10+slot,6,slot-4,function()I.HALVETHKnowledge.open()end),
+                button('[Gespraech]',10+slot*2,6,slot-4,function()I.HALVETH.open()end),
+                button('[Pfade]',10+slot*3,6,slot-4,function()I.HALVETHPaths.open()end),
+                button('[Licht]',10+slot*4,6,slot-4,function()I.HALVETHVisuals.cycle()end)}}
     elseif not show and menuBar then menuBar:destroy();menuBar=nil end
 end
 open=function(requestedTab)
     if window then close();return end
     if I.HALVETH then I.HALVETH.close() end
     if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
+    if I.HALVETHPaths then I.HALVETHPaths.close() end
     mode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});addedMode=true end
     if requestedTab then selectTab(requestedTab) end
@@ -217,6 +223,8 @@ open=function(requestedTab)
     content[#content+1]=sortControl;content[#content+1]=actionControl
     content[#content+1]=button('[Wissen / F7]',18,h-37,170,function()close();I.HALVETHKnowledge.open()end)
     content[#content+1]=button('[Gespraeche / F8]',192,h-37,200,function()close();I.HALVETH.open()end)
+    content[#content+1]=button('[Pfade]',402,h-37,130,function()close();I.HALVETHPaths.open()end)
+    content[#content+1]=button('[Licht]',540,h-37,120,function()I.HALVETHVisuals.cycle()end)
     content[#content+1]=button('[Aktualisieren]',w-340,h-37,165,rebuild)
     content[#content+1]=button('[Schliessen / F6]',w-170,h-37,155,close)
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',

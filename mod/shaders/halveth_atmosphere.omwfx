@@ -1,0 +1,69 @@
+uniform_float uStrength {
+    default = 0.48;
+    min = 0.0;
+    max = 1.0;
+    step = 0.01;
+    display_name = "HALVETH Staerke";
+    description = "Staerke des atmosphaerischen Farbprofils.";
+    static = false;
+}
+
+uniform_float uTemperature {
+    default = 0.7;
+    min = -1.0;
+    max = 1.0;
+    step = 0.01;
+    display_name = "HALVETH Waerme";
+    description = "Warme Lichter und kuehle Schatten oder umgekehrt.";
+    static = false;
+}
+
+uniform_float uSaturation {
+    default = 1.04;
+    min = 0.8;
+    max = 1.2;
+    step = 0.01;
+    display_name = "HALVETH Farbe";
+    description = "Zurueckhaltende Farbtiefe.";
+    static = false;
+}
+
+uniform_float uVignette {
+    default = 0.1;
+    min = 0.0;
+    max = 0.3;
+    step = 0.01;
+    display_name = "HALVETH Randlicht";
+    description = "Sanfte Abdunklung nur am Bildrand.";
+    static = false;
+}
+
+fragment main {
+    omw_In vec2 omw_TexCoord;
+
+    void main() {
+        vec4 original = omw_GetLastShader(omw_TexCoord);
+        float luminance = dot(original.rgb, vec3(0.2126, 0.7152, 0.0722));
+        float highlight = smoothstep(0.12, 0.82, luminance);
+        vec3 shadowTint = vec3(1.0 - 0.025 * uTemperature, 1.0,
+                               1.0 + 0.03 * uTemperature);
+        vec3 highlightTint = vec3(1.0 + 0.055 * uTemperature,
+                                  1.0 + 0.012 * uTemperature,
+                                  1.0 - 0.045 * uTemperature);
+        vec3 graded = original.rgb * mix(shadowTint, highlightTint, highlight);
+        graded = mix(vec3(dot(graded, vec3(0.2126, 0.7152, 0.0722))),
+                     graded, uSaturation);
+        vec2 centered = omw_TexCoord * 2.0 - vec2(1.0);
+        float edge = smoothstep(0.62, 1.6, dot(centered, centered));
+        graded *= 1.0 - edge * uVignette;
+        omw_FragColor = vec4(mix(original.rgb, graded, uStrength), original.a);
+    }
+}
+
+technique {
+    description = "HALVETH Atmosphaere: dezente Schatten, Licht und Farben.";
+    version = "1.0";
+    author = "Juri-Halveth / HALVETH Genesis";
+    passes = main;
+    dynamic = true;
+}

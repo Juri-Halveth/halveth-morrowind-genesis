@@ -14,13 +14,14 @@ local catalog = require('scripts.halveth.content_catalog')
 local MAX_BOOKS, MAX_SECONDS = 4096, 120
 local books, selectedId, activeId, activeObject = {}, nil, nil, nil
 local practiceEvents, lastPractice = 0, nil
+local plannedPair, recipeIndex, restoreRecipeSelection = nil, 1, false
 local window, leftText, rightText, footerText, addedMode, panelMode
 local page, lastRefresh, requestSerial = 0, 0, 0
 local lastFrameTime
 local message = 'Lies ein echtes Buch oder eine Schriftrolle. F7 sammelt dein Wissen im Spiel.'
 local pendingContent = {}
 local retainedInvalidSave
-local refresh
+local refresh,close,open
 
 local function finite(n) return C.finite(n) end
 local function validId(s)
@@ -124,7 +125,8 @@ local function exportState()
         entries[id] = {title=entry.title,skill=entry.skill,isScroll=entry.isScroll,seconds=entry.seconds,
             studied=entry.studied,spent=entry.spent}
     end
-    return {version=1,books=entries,practiceEvents=practiceEvents,selectedId=selectedId}
+    return {version=1,books=entries,practiceEvents=practiceEvents,selectedId=selectedId,
+        plannedPair=plannedPair and {plannedPair[1],plannedPair[2]} or nil}
 end
 local function decodeState(data)
     if type(data) ~= 'table' or data.version ~= 1 or type(data.books) ~= 'table'
@@ -143,7 +145,10 @@ local function decodeState(data)
             studied=entry.studied,spent=entry.spent}
     end
     if data.selectedId ~= nil and not candidate[data.selectedId] then return nil end
-    return candidate
+    local plan=data.plannedPair
+    if plan ~= nil and (type(plan) ~= 'table' or not validId(plan[1]) or not validId(plan[2])
+        or plan[1] >= plan[2] or plan[3] ~= nil) then return nil end
+    return candidate,plan
 end
 local function snapshot()
     local result = exportState()
@@ -151,50 +156,130 @@ local function snapshot()
     result.bookCount = countBooks()
     result.nextBookId, result.nextPracticePercent = id, bonus
     result.activeBookId, result.panelOpen = activeId, window ~= nil
+    result.recipeIndex=recipeIndex
     if lastPractice then
         result.lastPractice = {}
         for key, value in pairs(lastPractice) do result.lastPractice[key] = value end
     end
     return result
 end
-local function ingredientHelp()
-    local lines, items, seen = {}, {}, {}
+local function ingredientRecipes()
+    local items, seen, recipes = {}, {}, {}
     local inventory = types.Actor.inventory(self)
     local all = inventory:getAll(types.Ingredient)
+    local level=types.NPC.stats.skills.alchemy(self).modified
+    local step=core.getGMST('fWortChanceValue')
+    assert(finite(level) and finite(step) and step>0,'Alchemy knowledge threshold unavailable')
     for _, object in ipairs(all) do
         if not seen[object.recordId] and #items < 256 then
             seen[object.recordId] = true
             local record = types.Ingredient.record(object)
             local effects = {}
             for _, effect in ipairs(record.effects) do
-                local key = tostring(effect.id)..':'..tostring(effect.affectedSkill or '')..':'..tostring(effect.affectedAttribute or '')
-                effects[key] = (effect.effect and effect.effect.name) or tostring(effect.id)
+                -- The engine's ingredient tooltip reveals effect index 0 at
+                -- fWortChanceValue, then one further effect per threshold.
+                if level >= (effect.index+1)*step then
+                    local key = tostring(effect.id)..':'..tostring(effect.affectedSkill or '')..':'..tostring(effect.affectedAttribute or '')
+                    effects[key] = (effect.effect and effect.effect.name) or tostring(effect.id)
+                end
             end
             items[#items+1] = {id=record.id,name=record.name,count=inventory:countOf(record.id),effects=effects}
         end
     end
     table.sort(items,function(a,b) if a.name == b.name then return a.id < b.id end; return a.name < b.name end)
-    lines[#lines+1] = 'ALCHEMIE MIT DEINEN ECHTEN ZUTATEN'
-    lines[#lines+1] = tostring(#items)..' verschiedene Zutaten im Inventar (maximal 256 ausgewertet).'
-    local matches = 0
     for a=1,#items do
         for b=a+1,#items do
             local shared = {}
             for key, name in pairs(items[a].effects) do if items[b].effects[key] then shared[#shared+1] = name end end
             table.sort(shared)
             if #shared > 0 then
-                matches = matches + 1
-                if matches <= 7 then
-                    lines[#lines+1] = string.format('%s x%d + %s x%d\n  %s',items[a].name,items[a].count,items[b].name,items[b].count,table.concat(shared,', '))
-                end
+                recipes[#recipes+1]={first=items[a],second=items[b],effects=shared}
             end
         end
     end
-    if matches == 0 then lines[#lines+1] = 'Noch kein Zutatenpaar mit gemeinsamen Originaleffekten gefunden.' end
-    if matches > 7 then lines[#lines+1] = tostring(matches-7)..' weitere passende Paare vorhanden.' end
-    lines[#lines+1] = 'Kombiniere zwei Zutaten mit gemeinsamem Effekt im Alchemiefenster. Benutze dafuer einen Moerser.'
-    lines[#lines+1] = 'Deine Alchemiefertigkeit bestimmt bekannte Effekte, Erfolg und Trankstaerke.'
-    return table.concat(lines,'\n\n'), #items, matches
+    return items,recipes,level,step
+end
+local function currentRecipe(recipes)
+    if #recipes == 0 then recipeIndex=1;return nil end
+    if restoreRecipeSelection and plannedPair then
+        for index,recipe in ipairs(recipes) do
+            if (recipe.first.id==plannedPair[1] and recipe.second.id==plannedPair[2])
+                or (recipe.first.id==plannedPair[2] and recipe.second.id==plannedPair[1]) then
+                recipeIndex=index;restoreRecipeSelection=false;break
+            end
+        end
+    end
+    recipeIndex=(recipeIndex-1)%#recipes+1
+    return recipes[recipeIndex]
+end
+local function ingredientHelp()
+    local items,recipes,level,step=ingredientRecipes()
+    local lines={'ALCHEMIE MIT DEINEN ECHTEN ZUTATEN',
+        string.format('%d Zutatenarten im Inventar (maximal 256 ausgewertet). Alchemie: %.0f. Sichtbare Effekte ab %.0f, %.0f, %.0f, %.0f.',
+            #items,level,step,2*step,3*step,4*step),
+        tostring(#recipes)..' Paare mit einem dir bereits bekannten gemeinsamen Effekt.'}
+    local pair=currentRecipe(recipes)
+    if pair then
+        lines[#lines+1]=string.format('REZEPT %d / %d\n%s x%d + %s x%d',recipeIndex,#recipes,
+            pair.first.name,pair.first.count,pair.second.name,pair.second.count)
+        lines[#lines+1]='Bekannter gemeinsamer Effekt: '..table.concat(pair.effects,', ')
+    else
+        lines[#lines+1]='Noch kein fuer dich erkennbares Zutatenpaar. Lies weiter, uebe Alchemie oder sammle Zutaten; unbekannte Originaleffekte bleiben verborgen.'
+    end
+    if plannedPair then
+        local first,second=plannedPair[1],plannedPair[2]
+        local remembered
+        for _,recipe in ipairs(recipes) do
+            if (recipe.first.id==first and recipe.second.id==second)
+                or (recipe.first.id==second and recipe.second.id==first) then
+                remembered=recipe.first.name..' + '..recipe.second.name;break
+            end
+        end
+        lines[#lines+1]='Dein gespeicherter Plan: '..(remembered or 'Ein frueher gemerktes Paar; Voraussetzungen derzeit nicht sichtbar oder Zutaten fehlen.')
+    end
+    local mortar=false
+    for _,object in ipairs(types.Actor.inventory(self):getAll(types.Apparatus)) do
+        if types.Apparatus.record(object).type==types.Apparatus.TYPE.MortarPestle then mortar=true;break end
+    end
+    lines[#lines+1]=mortar and 'Moerser vorhanden: [Brauen] oeffnet das normale Alchemiefenster.'
+        or 'Fuer das originale Alchemiefenster brauchst du einen Moerser und Stoessel.'
+    lines[#lines+1]='Ein gemerkter Plan ist eine Notiz. Zutatenverbrauch, Erfolg und Trank folgen ausschliesslich dem normalen Morrowind-System.'
+    return table.concat(lines,'\n\n'),#items,#recipes,recipes
+end
+local function browseRecipe(delta)
+    local _,recipes=ingredientRecipes()
+    if #recipes==0 then feedback('Noch kein dir bekanntes gemeinsames Zutatenpaar.');return false end
+    restoreRecipeSelection=false
+    recipeIndex=(recipeIndex-1+delta)%#recipes+1
+    refresh()
+    return true
+end
+local function rememberRecipe()
+    local _,recipes=ingredientRecipes()
+    local recipe=currentRecipe(recipes)
+    if not recipe then feedback('Zuerst ein erkennbares Zutatenpaar finden.');return false end
+    local first,second=recipe.first.id,recipe.second.id
+    if second<first then first,second=second,first end
+    plannedPair={first,second}
+    restoreRecipeSelection=false
+    feedback('Rezept im Morrowind-Spielstand gemerkt: '..recipe.first.name..' + '..recipe.second.name..'.')
+    refresh()
+    return true
+end
+local function openAlchemy()
+    local _,recipes=ingredientRecipes()
+    local recipe=currentRecipe(recipes)
+    if not recipe then feedback('Waehle zuerst ein bekanntes Zutatenpaar.');return false end
+    local mortar=false
+    for _,object in ipairs(types.Actor.inventory(self):getAll(types.Apparatus)) do
+        if types.Apparatus.record(object).type==types.Apparatus.TYPE.MortarPestle then mortar=true;break end
+    end
+    if not mortar then feedback('Du brauchst einen Moerser und Stoessel fuer die normale Alchemie.');return false end
+    close()
+    local ok=pcall(I.UI.addMode,'Alchemy')
+    if not ok then open();feedback('Das normale Alchemiefenster konnte hier nicht geoeffnet werden. Benutze den Moerser im Inventar.')
+        return false end
+    return true
 end
 local function journalText()
     local ids = sortedIds()
@@ -233,7 +318,7 @@ refresh = function()
     footerText.props.text = message
     window:update()
 end
-local function close()
+close = function()
     if window then window:destroy();window=nil end
     leftText,rightText,footerText=nil,nil,nil
     if addedMode then I.UI.removeMode('Interface');addedMode=false end
@@ -278,10 +363,11 @@ local function button(label,x,y,w,fn)
         props={position=util.vector2(x,y),size=util.vector2(w,30),text=label,textSize=16},
         events={mouseClick=async:callback(fn)}}
 end
-local function open()
+open = function()
     if window then close();return end
     if I.HALVETH and I.HALVETH.close then I.HALVETH.close() end
     if I.HALVETHUniverse then I.HALVETHUniverse.close() end
+    if I.HALVETHPaths then I.HALVETHPaths.close() end
     -- Reuse a native menu's cursor/pause instead of stacking a duplicate
     -- Interface mode: OpenMW removes every matching mode on removeMode.
     panelMode=I.UI.getMode() or 'Interface'
@@ -300,6 +386,10 @@ local function open()
         {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,props={position=util.vector2(18,14),text='HALVETH / MORROWIND / WISSEN',textSize=23}},
         {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,props={position=util.vector2(18,46),text='Deine Bibliothek · Alchemie · Magie',textSize=16}},
         button('[Figur / Inventar / F6]',w-280,16,255,function()close();if I.HALVETHUniverse then I.HALVETHUniverse.open() end end),
+        button('[< Rezept]',36+col,43,math.floor((col-18)/4),function()browseRecipe(-1)end),
+        button('[Rezept >]',42+col+math.floor((col-18)/4),43,math.floor((col-18)/4),function()browseRecipe(1)end),
+        button('[Merken]',48+col+2*math.floor((col-18)/4),43,math.floor((col-18)/4),rememberRecipe),
+        button('[Brauen]',54+col+3*math.floor((col-18)/4),43,math.floor((col-18)/4),openAlchemy),
         leftText,rightText,footerText,
         button('[< Text]',18,h-128,85,function()selectRelative(-1)end),
         button('[Text >]',108,h-128,85,function()selectRelative(1)end),
@@ -340,15 +430,16 @@ local function onFrame(dt)
 end
 local function onLoad(data)
     close();activeId=nil;activeObject=nil;pendingContent={};lastPractice=nil;lastFrameTime=nil
-    books={};selectedId=nil;practiceEvents=0;retainedInvalidSave=nil
+    books={};selectedId=nil;practiceEvents=0;plannedPair=nil;recipeIndex=1;restoreRecipeSelection=false;retainedInvalidSave=nil
     if data == nil then return end
-    local candidate=decodeState(data)
+    local candidate,plan=decodeState(data)
     if not candidate then
         retainedInvalidSave=data
         feedback('Dieser Wissensstand ist inkompatibel. Seine Originaldaten bleiben im Save erhalten.')
         return
     end
-    books=candidate;selectedId=data.selectedId;practiceEvents=data.practiceEvents
+    books=candidate;selectedId=data.selectedId;practiceEvents=data.practiceEvents;plannedPair=plan
+    restoreRecipeSelection=plan~=nil
 end
 
 if I.SkillProgression and I.SkillProgression.addSkillUsedHandler then
@@ -357,14 +448,15 @@ end
 
 return {
     interfaceName='HALVETHKnowledge',
-    interface={version=1,open=open,close=close,isOpen=function()return window~=nil end,getState=snapshot,study=study,answer=answer,
+    interface={version=2,open=open,close=close,isOpen=function()return window~=nil end,getState=snapshot,study=study,answer=answer,
         selectBook=function(id) if books[id] then selectedId=id;page=0;refresh();return true end;return false end,
         readSelected=readSelected,requestContent=contentRequest,
-        ingredientHelp=ingredientHelp,
+        ingredientHelp=ingredientHelp,browseRecipe=browseRecipe,rememberRecipe=rememberRecipe,openAlchemy=openAlchemy,
         -- Read-only save-contract check; never changes player stats or writes a save.
         checkSaveRoundTrip=function()
-            local data=exportState();local candidate=decodeState(data)
+            local data=exportState();local candidate,plan=decodeState(data)
             return candidate ~= nil and C.json(candidate) == C.json(data.books)
+                and C.json(plan)==C.json(data.plannedPair)
         end},
     engineHandlers={onFrame=onFrame,onLoad=onLoad,
         onSave=function() return retainedInvalidSave or exportState() end,

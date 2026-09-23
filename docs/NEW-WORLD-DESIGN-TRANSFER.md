@@ -1,0 +1,35 @@
+# Designtransfer in das vorhandene Morrowind
+
+Stand: 23. September 2026. **HALVETH Genesis erweitert TES III: Morrowind in OpenMW 0.51.** Alle spielbaren Ergänzungen dieses Projekts gehören in dessen vorhandene Welt, Menüs und Spielstände. Der lokale Einstieg heißt **Morrowind - HALVETH**. Ein optionaler Gesprächsdienst läuft im Hintergrund; es gibt kein zweites Spiel und keinen Browser als Spieloberfläche.
+
+Die verlinkten New-World-Seiten sind öffentliche **Beschreibungen von Designmustern**, kein Quellcode- oder Asset-Angebot. Jede HALVETH-Regel, Formulierung, UI und Shader-Datei wird für Morrowind eigenständig erstellt. Auch die Originaldaten der persönlichen Morrowind-Installation gelangen nicht ins öffentliche Paket.
+
+| Beobachtetes Muster und Quelle | Eigenständige Umsetzung in Morrowind | Stand in 0.6 |
+|---|---|---|
+| Die [offizielle Weltübersicht](https://www.newworld.com/de-de/game/world) zeigt, wie Regionen durch Landschaft, Geschichte und Stimmung unterscheidbar werden. | Orte als eigene Ziele entdecken; vorhandene Vvardenfell-Zellen und ihre Geschichten nutzen. Beleuchtung mit einem kleinen eigenen Filter variieren, ohne fremde Weltmodelle zu kopieren. | **Umgesetzt:** „Spur der Welt“ zählt verschiedene tatsächlich betretene Zellen; „Scharlachlicht“ und „Nachtglas“ sind wählbare OpenMW-Profile. Neue Landmassen und globale Texturersetzung sind nicht Teil von 0.6. |
+| Die [offizielle Beschreibung der Herstellung](https://www.newworld.com/de-de/news/articles/crafting-in-new-world) verbindet Rohstoffe, sichtbare Ergebnisse und wachsende Fertigkeit. | Bekannte Zutateneffekte aus Morrowinds realem Inventar erklären und passende Paare zum regulären Alchemiesystem führen. | **Umgesetzt:** Nativer Rezeptplaner mit merkbarem Paar. Er respektiert die Effektkenntnis der Spielfigur; das eigentliche Brauen bleibt Morrowind. Keine New-World-Rezepte, Gegenstände oder Zahlenwerte wurden übernommen. |
+| Die [offizielle Charakterprogression](https://www.newworld.com/de-de/news/articles/character-progression) unterscheidet Kampf, Sammeln und Herstellen als verständliche Lernpfade. | Morrowinds vorhandene 27 Fertigkeiten lesbar erklären und eigenes Wissen an beobachtete Handlungen binden. | **Teilweise:** Fertigkeitsansicht aus 0.5 und das bestehende Buch-/Praxisjournal; 0.6 ergänzt drei kleine, getrennte Lern- und Erkundungsspuren. Ein neues Fertigkeitsbaumsystem existiert nicht. |
+| Die [offizielle Questdesign-Beschreibung](https://www.newworld.com/de-de/news/articles/updates-on-quest-design) betont Ziele mit Orts-, Objekt- und Storybezug. | Eigene friedliche Nebenziele über Bücher, Begegnungen und Ortswechsel anbieten; das normale Morrowind-Questjournal und bestehende Quests erhalten. | **Umgesetzt:** „Spur des Wissens“, „Spur der Begegnung“, „Spur der Welt“ mit Neu/In Arbeit/Erledigt und einmaliger Ausdauerbelohnung. **Offen:** eine sorgfältig geschriebene alternative Lösung für eine konkrete Originalquest mit klaren Voraussetzungen und Rückweg. Die Quelle belegt keine unendlichen Questverzweigungen. |
+| Die [offizielle Hausbeschreibung](https://www.newworld.com/de-de/news/articles/making-your-mark-on-aeternum-player-housing) verbindet Zuhause, Einrichtung und persönliche Ziele. | Für eine künftige Morrowind-Zelle ein begrenztes, speicherbares Einrichtungsprinzip aus selbst erstellten Objekten entwerfen. | **Idee:** Kein Hauskauf, Bauplatz, platzierbares Inventar oder neues Gebäude in 0.6. |
+| Die [offizielle Fraktionsbeschreibung](https://www.newworld.com/de-de/news/articles/choose-your-faction) stellt unterschiedliche Zugehörigkeiten und Rollen heraus. | Dialogalternativen künftig an tatsächlich im Spiel vorhandene Zugehörigkeit, Sympathie und Queststand binden. | **Teilweise:** Der lokale Gesprächsbegleiter liest diese Laufzeitdaten. Es gibt noch keine neue Fraktionsökonomie oder generierte Fraktionsquests. |
+
+Die Quellen definieren Inspiration; sie liefern keinen Nachweis, dass New World hier Code, Grafiken oder Daten zur Wiederverwendung freigibt. [NWDB](https://nwdb.info/) ordnet Spielinformationen unter anderem nach Gegenständen, Rezepten, Fähigkeiten, Büchern, Quests und Figuren. Diese **Kategorie-Idee** hilft, unsere eigene Morrowind-Inventar- und Wissensnavigation zu prüfen. Die [NWDB-Nutzungsbedingungen](https://nwdb.info/terms-and-conditions) erlauben kein Scraping, keinen ungewöhnlichen Skriptzugriff und keine Wiederveröffentlichung ihrer Inhalte ohne andere Rechtsgrundlage. Deshalb enthält HALVETH weder einen NWDB-Import noch Kopien der dortigen Datensätze. Eine Quelle zu lesen ist keine Lizenz, ihr Material zu verteilen.
+
+## HALVETH-Rollen als konkrete Entwicklungsaufgaben
+
+- **HALVETH / Verständlichkeit:** Reale Spielzustände in einfachen Menüs erklären, etwa bekannte Zutateneffekte, Kosten eines Zaubers oder eine offene Spur.
+- **LUCINET / Verbindung:** Eine gelesene Seite, eine angesprochene Figur und einen betretenen Ort nur dann verbinden, wenn der jeweilige Spielereignis-Eintrag existiert. Fehlender Kontext bleibt offen.
+- **RACHEL / Kontinuität:** Jede eigene Spur zeigt Neu, In Arbeit oder Erledigt. Fortschritt und einmalige Belohnung bleiben im Spielstand gespeichert; wiederholtes Anklicken zählt nicht mehrfach.
+- **LOKI / Alternativen:** Eine spätere Questvariante muss als eigene, prüfbare Morrowind-Regel implementiert werden. Freier KI-Dialog allein darf keine Originalquest als „gelöst“ ausgeben.
+- **LOVE / Wirkung:** Das vorhandene Heilen und der eigene Lichtfilter schaffen eine freundliche Spieloption und eine andere Stimmung. Ein hübscher Filter ersetzt weder neue Texturen noch neue Animationen.
+
+Diese Namen beschreiben Entwurfsaufgaben. Sie sind keine Aussage über selbstständige Wesen oder unbegrenzte Agentenrechte. In der laufenden 0.6-Erweiterung können native Skripte nur die bewusst implementierten Spielaktionen ausführen.
+
+## Nächste native Baukanten
+
+1. **0.6 weiter prüfen:** Vier getrennte OpenMW-Testsitzungen haben Pfadfortschritt, Rezeptauswahl, das normale Alchemiefenster, Shaderumschaltung und Spielstand-Roundtrips bestätigt. Die neue Mausleiste wurde einmal im vorhandenen Spielstand bedient. Bildrate über längere Zeit und weitere Hardware bleiben eigene Prüfungen.
+2. **Eine Questalternative bauen:** Einen einzelnen Originalquest-Konflikt mit konkreten Startbedingungen, mindestens einer friedlichen Lösung, sichtbarem Ergebnis und Save/Reload-Test wählen. Der bestehende Questverlauf bleibt als Rückfallpfad erhalten.
+3. **Einen Ort gestalten:** Eine eigene kleine Zelle oder eine ergänzende Szene mit ausschließlich geklärten, eigenen Assets bauen und im Spiel bei Tag/Nacht sowie auf leistungsschwächerer Hardware prüfen.
+4. **Ein Wohn-/Werkstattobjekt erproben:** Platzierung, Besitz, Rücknahme und Speicherstand zuerst an einem eigenen Objekt verifizieren, bevor ein größeres Bausystem entsteht.
+
+Für diese Schritte braucht die öffentliche Quellverteilung keine offenen Docker- oder Internet-Ports. Die optionale Modellverbindung bleibt lokal. Ein späterer Mehrspielerbetrieb wäre eine neue, gesondert geprüfte Funktion und ist keine 0.6-Eigenschaft.

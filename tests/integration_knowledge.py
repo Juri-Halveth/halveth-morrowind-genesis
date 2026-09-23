@@ -77,8 +77,30 @@ local function tick()
         assert(state().panelOpen,'Native knowledge panel missing')
         eq(state().books[bookId].seconds,displayBefore,'Covered reader accrued time')
         assert(modes()==baselineModes,'Knowledge opening changed existing native menu stack')
+        alchemy().base=0
+        local hidden,count,hiddenPairs=I.HALVETHKnowledge.ingredientHelp()
+        assert(count>=2 and hiddenPairs==0 and hidden:find('unbekannte Originaleffekte',1,true),
+            'Low alchemy skill exposed unknown ingredient effects')
+        assert(not I.HALVETHKnowledge.rememberRecipe(),'Unknown effects made a saveable recipe')
+        alchemy().base=100
         local help,count,pairs=I.HALVETHKnowledge.ingredientHelp()
-        assert(count>=2 and pairs>=1 and help:find('Wickwheat',1,true),'Actual inventory ingredient guide failed')
+        assert(count>=2 and pairs>=1 and help:find('Wickwheat',1,true),'Known native inventory ingredient guide failed')
+        assert(I.HALVETHKnowledge.browseRecipe(1),'Recipe navigation failed')
+        assert(I.HALVETHKnowledge.rememberRecipe(),'Known recipe was not saved in knowledge state')
+        assert(state().plannedPair and state().plannedPair[1]<state().plannedPair[2],
+            'Saved recipe IDs were not canonical')
+        assert(I.HALVETHKnowledge.checkSaveRoundTrip(),'Recipe note does not roundtrip through save schema')
+        assert(I.HALVETHKnowledge.openAlchemy(),'Native alchemy handoff failed')
+        transition('alchemy-mode')
+    elseif stage=='alchemy-mode' and elapsed>0.3 then
+        assert(I.UI.getMode()=='Alchemy','Recipe handoff did not open original Alchemy mode')
+        assert(not state().panelOpen,'Knowledge panel covered native Alchemy mode')
+        I.UI.removeMode('Alchemy')
+        I.HALVETHKnowledge.open()
+        transition('alchemy-resume')
+    elseif stage=='alchemy-resume' and elapsed>0.3 then
+        assert(modes()==baselineModes and state().panelOpen,'Native reader stack not restored after Alchemy')
+        alchemy().base=before.base
         assert(I.HALVETHKnowledge.study(bookId),'Study failed')
         assert(not I.HALVETHKnowledge.study(bookId),'Repeated study granted another credit')
         assert(state().nextPracticePercent==5,'Unexpected initial bonus')
@@ -147,6 +169,8 @@ local function tick()
     elseif stage=='reloaded' and elapsed>0.8 then
         local s=state()
         assert(expected and s.bookCount==2,'Knowledge lost during actual save/load')
+        assert(s.plannedPair and expected.plannedPair and s.plannedPair[1]==expected.plannedPair[1]
+            and s.plannedPair[2]==expected.plannedPair[2],'Remembered alchemy recipe lost during actual save/load')
         assert(s.books[bookId].spent and s.books[scrollId].studied and not s.books[scrollId].spent,'Credit flags lost during save/load')
         eq(s.books[bookId].seconds,expected.books[bookId].seconds,'Book display time changed during save/load')
         eq(s.books[scrollId].seconds,expected.books[scrollId].seconds,'Scroll time changed during save/load')
@@ -162,7 +186,7 @@ local function tick()
         local s=state()
         assert(s.books[scrollId].spent and s.lastPractice.bookId==scrollId,'Restored pending credit did not work')
         eq(alchemy().progress-before.progress,1.05/progressBefore,'Restored credit did not reach normal progression')
-        finish(true,'nativeBook=PASS nativeScroll=PASS displayTime=PASS noIdleXP=PASS studyNoXP=PASS inventoryEffects=PASS nativeMenuStack=PASS alchemyModifier=PASS noRepeatedBonus=PASS capPreservesCredit=PASS actualSaveReload=PASS savedPendingCredit=PASS')
+        finish(true,'nativeBook=PASS nativeScroll=PASS displayTime=PASS noIdleXP=PASS studyNoXP=PASS hiddenEffects=PASS recipeNavigation=PASS rememberedRecipe=PASS nativeAlchemy=PASS nativeMenuStack=PASS alchemyModifier=PASS noRepeatedBonus=PASS capPreservesCredit=PASS actualSaveReload=PASS savedPendingCredit=PASS')
     end
 end
 return {engineHandlers={
@@ -221,9 +245,9 @@ GLOBAL_TEST = r'''local world=require('openmw.world')
 local types=require('openmw.types')
 return {eventHandlers={HALVETH_KnowledgeTestIngredients=function(data)
     local inv=types.Actor.inventory(data.player)
-    for _,id in ipairs({'ingred_marshmerrow_01','ingred_wickwheat_01'}) do
-        assert(types.Ingredient.records[id],'Original ingredient missing: '..id)
-        world.createObject(id,2):moveInto(inv)
+    for _,id in ipairs({'ingred_marshmerrow_01','ingred_wickwheat_01','apparatus_a_mortar_01'}) do
+        assert(types.Ingredient.records[id] or types.Apparatus.records[id],'Original alchemy item missing: '..id)
+        world.createObject(id,id=='apparatus_a_mortar_01' and 1 or 2):moveInto(inv)
     end
 end}}
 '''
@@ -250,7 +274,7 @@ def run(install_root: Path, state_dir: Path) -> dict:
     log_path = Path(receipt['stdout_log'])
     result = {
         'recordedAt': datetime.now(timezone.utc).isoformat(), 'passed': False,
-        'scope': 'Actual OpenMW interfaces: real Book and Scroll readers, display timer, no idle/study XP, inventory effect pairs, original alchemy progression handler, single-use bonus and skill cap, native menu stack, actual isolated save file and reload. No existing save loaded; no physical-input or screenshot assertion.',
+        'scope': 'Actual OpenMW interfaces: real Book and Scroll readers, display timer, no idle/study XP, skill-gated ingredient effects, recipe browsing and saved plan, original Alchemy mode, original progression handler, single-use bonus and skill cap, native menu stack, actual isolated save file and reload. No existing save loaded; no physical-input or screenshot assertion.',
         'profileDir': str(profile), 'log': str(log_path),
         'sourceConfigSHA256': receipt['source_config_sha256'],
         'sourceSettingsSHA256': receipt['source_settings_sha256'],

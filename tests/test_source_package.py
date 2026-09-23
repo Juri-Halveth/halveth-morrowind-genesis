@@ -73,10 +73,14 @@ class SourcePackageTests(unittest.TestCase):
             'mod/scripts/halveth/content_catalog.lua',
             'mod/scripts/halveth/content.lua',
             'mod/scripts/halveth/knowledge.lua',
+            'mod/scripts/halveth/paths.lua',
+            'mod/scripts/halveth/visuals.lua',
+            'mod/shaders/halveth_atmosphere.omwfx',
             'scripts/convert-banner.mjs',
             'docs/GENERATION-PIPELINE.md',
             'docs/NATIVE-VERIFICATION-0.4.0.json',
             'docs/NATIVE-VERIFICATION-0.5.0.json',
+            'docs/NATIVE-VERIFICATION-0.6.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -91,6 +95,20 @@ class SourcePackageTests(unittest.TestCase):
         packaged = release.collect_files()
         self.assertNotIn('PUBLIC-STATUS.json', packaged)
         self.assertNotIn('ASSET-PROVENANCE.json', packaged)
+
+    def test_only_the_original_native_shader_path_is_included(self):
+        allowed = release.OWNED_SHADER
+        unexpected = {
+            'mod/shaders/downloaded.omwfx',
+            'mod/shaders/halveth_atmosphere.omwfx.bak',
+            'mod/other/halveth_atmosphere.omwfx',
+            'assets/third-party.omwfx',
+        }
+        for name in {allowed} | unexpected:
+            self.put(name, name.encode('utf-8'))
+        packaged = release.collect_files()
+        self.assertEqual(packaged[allowed], allowed.encode('utf-8'))
+        self.assertFalse(unexpected.intersection(packaged))
 
     def test_private_runtime_and_unapproved_data_stay_out(self):
         private = {
@@ -130,15 +148,17 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.5.0')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.5.0-public-source.zip')
+        self.assertEqual(release.VERSION, '0.6.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.6.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
-        self.assertIn('Only the 3 exact owned banner asset paths', note)
+        self.assertIn('Only the 3 exact owned banner asset paths and the one original shader source path', note)
         self.assertIn('six original native books', note)
         self.assertIn('three native spells', note)
+        self.assertIn('native exploration paths', note)
+        self.assertIn('alchemy recipe planner', note)
         self.assertIn('MIT',note)
         self.assertIn('CC0-1.0',note)
         self.assertNotIn('LICENSE-DECISION',note)
@@ -172,6 +192,12 @@ class PublicValidationTests(unittest.TestCase):
     def test_missing_native_knowledge_code_stops_release(self):
         files=release.collect_files()
         del files['mod/scripts/halveth/knowledge.lua']
+        with self.assertRaisesRegex(ValueError,'Missing public release'):
+            release.validate_files(files)
+
+    def test_missing_original_shader_stops_release(self):
+        files=release.collect_files()
+        del files[release.OWNED_SHADER]
         with self.assertRaisesRegex(ValueError,'Missing public release'):
             release.validate_files(files)
 

@@ -1,0 +1,85 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.6.0",
+  "recordedAt": "2026-09-23T13:41:50Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "Four fresh isolated game sessions using owned test profiles; no personal saves loaded."
+  },
+  "checks": {
+    "nativeExplorationPaths": {
+      "state": "PASS",
+      "recordedAt": "2026-09-23T13:39:15Z",
+      "localReceiptSha256": "f95c4766db21bb8161f6ff2a1c7529ba0bcccdfa7476e546a8a3540164e662e5",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "realBookAndScrollReader": "PASS",
+      "realLoadedNpc": "ARRILLE",
+      "duplicateEventsIgnored": "PASS",
+      "oneTimeReward": "PASS_30_FATIGUE",
+      "actualSaveReload": "PASS_ACTIVE_COMPLETED_AND_CLAIMED_STATES",
+      "personalSavesUsed": false
+    },
+    "nativeVisualModes": {
+      "state": "PASS",
+      "recordedAt": "2026-09-23T13:39:36Z",
+      "localReceiptSha256": "98e06025d1b981edf9ceaa5ffd8dd540cef2b752b6a05c92f9338fa7106d9fd8",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "shaderCompiledAndActiveInRenderChain": true,
+      "testedModes": ["Scharlachlicht", "Nachtglas", "Original"],
+      "originalModeDisablesOnlyOwnedShader": "PASS_WITHIN_TESTED_CHAIN",
+      "personalSavesUsed": false
+    },
+    "nativeKnowledgeAndRecipePlanner": {
+      "state": "PASS",
+      "recordedAt": "2026-09-23T13:39:49Z",
+      "localReceiptSha256": "ea6f61872adf4784efc8c71e7787df07d13da5511d3c172355b6fc9de898060e",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "skillGatedIngredientEffects": "PASS",
+      "recipeNavigationAndSave": "PASS",
+      "originalAlchemyMenuHandoff": "PASS",
+      "bookAndScrollReading": "PASS",
+      "actualSaveReload": "PASS_RECIPE_AND_PENDING_CREDIT",
+      "personalSavesUsed": false
+    },
+    "nativeUniverseRegression": {
+      "state": "PASS",
+      "recordedAt": "2026-09-23T13:40:09Z",
+      "localReceiptSha256": "7b0f3e27e0ce270b01490d2a2e26dfd501a05b9bbba06236e02a2a0af3079f22",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "skills": 27,
+      "itemFamilies": 12,
+      "inventoryEntriesInFixture": 20,
+      "nearbyActorsInFixture": 7,
+      "personalSavesUsed": false
+    },
+    "directExistingGameEntry": {
+      "state": "OBSERVED_BY_PRIMARY_OPERATOR",
+      "recordedAt": "2026-09-23T13:46:09Z",
+      "localReceiptSha256": "74878127c682fe1c304efb4e1fe3436321bbf923b7160bba804cb6f320b246a7",
+      "route": "Existing Morrowind - HALVETH desktop entry loaded the existing Morrowind save copy",
+      "gameProcessesExcludingCrashMonitor": 1,
+      "companionVersion": "0.6.0",
+      "localModelAvailable": true,
+      "mousePathsWindow": "CLICKED_AND_CLOSED_IN_NATIVE_GAME",
+      "mouseKnowledgeWindow": "CLICKED_AND_CLOSED_IN_NATIVE_GAME",
+      "mouseVisualCycle": "NACHTGLAS_ORIGINAL_SCHARLACHLICHT_MESSAGES_OBSERVED",
+      "checkedSaveFiles": 2,
+      "checkedSaveHashesUnchanged": true,
+      "recentGameLogTail": "NO_LUA_OR_SHADER_ERRORS_IN_LAST_75_LINES",
+      "limit": "One loaded save copy and a few UI actions; no personal save was written, no full playthrough or frame-rate benchmark."
+    }
+  },
+  "limits": [
+    "The four automated tests call native interfaces in fresh characters; mouse clicks were separately observed in one existing game scene. Physical hotkey input remains unverified.",
+    "One owned shader in the render chain does not establish frame rate or full graphics quality on other hardware.",
+    "Three original routes are additional objectives, not a rewrite of Bethesda quests.",
+    "The recipe planner exposes known effects and opens Morrowind Alchemy; it does not craft automatically.",
+    "No full playthrough, all-NPC evaluation, Linux native gameplay test, new landmass or multiplayer system is claimed."
+  ]
+}
