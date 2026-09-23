@@ -16,7 +16,10 @@ from scripts.prepare_profile import atomic_text,default_install,prepare
 PLAYER_TEST=r'''local core=require('openmw.core')
 local self=require('openmw.self')
 local vfs=require('openmw.vfs')
-local names={'tx_bc_muck.dds','tx_bc_rock_01.dds','tx_bc_grass.dds'}
+local names={'tx_bc_muck.dds','tx_bc_rock_01.dds','tx_bc_grass.dds',
+    'tx_ai_dirtroad_01.dds','tx_land_darkgravel.dds','tx_rm_redrock_01.dds',
+    'tx_rm_rock_02.dds','tx_ac_dirt_01.dds','tx_rm_grayrock_01.dds',
+    'tx_ma_crackedearth.dds'}
 local done=false
 return {engineHandlers={onFrame=function()
     if done or not self.cell then return end
@@ -32,7 +35,7 @@ return {engineHandlers={onFrame=function()
             file:close()
         end
     end)
-    print('HALVETH_TERRAIN_'..(ok and 'PASS' or 'FAIL')..' '..(ok and 'threeOwnedDDS=PASS exterior=PASS' or tostring(err)))
+    print('HALVETH_TERRAIN_'..(ok and 'PASS' or 'FAIL')..' '..(ok and 'tenOwnedDDS=PASS exterior=PASS' or tostring(err)))
     core.quit()
 end}}
 '''
@@ -47,7 +50,7 @@ def run(install_root:Path,state_dir:Path)->dict:
     atomic_text(data/'scripts/halveth_genesis_smoke.lua',PLAYER_TEST)
     prepared['command'][-1]='Seyda Neen'
     result={'recordedAt':datetime.now(timezone.utc).isoformat(),
-        'scope':'Fresh isolated native OpenMW exterior; VFS resolves three owned terrain DDS files. No personal saves or visual screenshot.',
+        'scope':'Fresh isolated native OpenMW exterior; VFS resolves ten owned terrain DDS files. No personal saves or visual screenshot.',
         'passed':False,'profileDir':str(profile),'personalSavesUsed':False}
     process=None
     try:

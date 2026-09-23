@@ -22,7 +22,10 @@
     "generator": "Codex built-in imagegen",
     "origin": "Generated from a new text brief without reference images for the native in-game F8 panel",
     "generationBrief": "An original glowing garnet heart suspended in a bronze astrolabe; aubergine and midnight-blue background, no lettering, logos, game insignia, landscape, characters or New World reference",
-    "actualDimensions": [887, 1774],
+    "actualDimensions": [
+      887,
+      1774
+    ],
     "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/; no external game image input",
     "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
   },
@@ -31,7 +34,10 @@
     "generator": "Codex built-in imagegen",
     "origin": "New square Windows icon generated from the project's owned 0.7 LOVE astrolabe as the only visual reference",
     "generationBrief": "Bright ruby heart centered in a bold antique-gold astrolabe ring on a dark plum background, readable at 32 pixels, no text or franchise marks",
-    "actualDimensions": [1254, 1254],
+    "actualDimensions": [
+      1254,
+      1254
+    ],
     "sourceMethod": "Generated PNG copied byte-for-byte to installer; ICO is a build-time format derivative",
     "sha256": "c320038bdf7ae6e9821bbc590fd6ec35150147e730ff5186ff7bb305b2c4c951"
   },
@@ -40,7 +46,10 @@
     "generator": "Codex built-in imagegen",
     "origin": "Generated from an original text brief without reference images for the native OpenMW main menu",
     "generationBrief": "Original fantasy RPG portal over an alien volcanic coast, luminous bronze arcs, fungal silhouettes, scarlet, gold and violet light; no text, logos, characters or franchise emblems",
-    "actualDimensions": [1672, 941],
+    "actualDimensions": [
+      1672,
+      941
+    ],
     "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/",
     "sha256": "e660b5662742f853d077d6a3744dc3bae42bd9747241ed557fb4ff1396b222fd"
   },
@@ -49,14 +58,20 @@
     "generator": "Codex built-in imagegen",
     "origin": "Generated from a new text brief without third-party reference images",
     "generationBrief": "Top-down coastal peat and mud albedo with copper mineral flecks, roots and visibly greener emerald moss for an OpenMW terrain tile; neutral diffuse lighting and no symbols or text",
-    "actualDimensions": [1254, 1254],
+    "actualDimensions": [
+      1254,
+      1254
+    ],
     "sourceMethod": "Generated first from text and then edited with built-in imagegen using only the project's own first image; selected PNG copied byte-for-byte; Pillow wrote an uncompressed RGB DDS without changing decoded pixels",
     "usageScope": "Tx_BC_muck terrain texture. The installed Morrowind.esm LAND records for Seyda Neen (-2,-9) and (-2,-10) reference its LTEX index 92. Matching rock and grass materials use indices 94 and 90. Edge continuity and aesthetic result still need direct visual review."
   },
   "rebornBitterCoastCompanions": {
     "generator": "Codex built-in imagegen",
     "origin": "Distinct rock and grass materials generated using only the project's own green muck image as palette and scale reference",
-    "assets": ["reborn-bitter-coast-rock-1", "reborn-bitter-coast-grass-1"],
+    "assets": [
+      "reborn-bitter-coast-rock-1",
+      "reborn-bitter-coast-grass-1"
+    ],
     "sourceMethod": "Generated PNGs copied byte-for-byte; Pillow wrote uncompressed RGB DDS files with identical decoded pixels",
     "reviewStatus": "VFS and native exterior startup verified; final visual tile and seam review open"
   },
@@ -129,8 +144,117 @@
       "assetId": "reborn-bitter-coast-grass-1",
       "bytes": 4717676,
       "sha256": "7cae686b9738404cd4ca878e1308faeaeef20d8cf98503f4d02996e34536c0c6"
+    },
+    {
+      "path": "assets/RebornWorld/tx_ai_dirtroad_01-source.png",
+      "assetId": "reborn-world-tx_ai_dirtroad_01",
+      "bytes": 3810221,
+      "sha256": "aa759cd0a3c627f166ca0259d44391f4ae11c9e4729eed12d3ceb9112dcd54bf"
+    },
+    {
+      "path": "mod/Textures/tx_ai_dirtroad_01.dds",
+      "assetId": "reborn-world-tx_ai_dirtroad_01",
+      "bytes": 4717676,
+      "sha256": "c2cd7a1d52f04793be5f59ef75552a8d734c9fa31107026c4cc9ddd2599a215f"
+    },
+    {
+      "path": "assets/RebornWorld/tx_land_darkgravel-source.png",
+      "assetId": "reborn-world-tx_land_darkgravel",
+      "bytes": 3738836,
+      "sha256": "6a80b22a33d055969e82a203de9f5d6d1486b3a6dd2795559101b36dc23c146c"
+    },
+    {
+      "path": "mod/Textures/tx_land_darkgravel.dds",
+      "assetId": "reborn-world-tx_land_darkgravel",
+      "bytes": 4717676,
+      "sha256": "f21dd8c4a9d9c412eb88a2082176e21c72fae645647b6fb9d8a7b229f3c8c9f2"
+    },
+    {
+      "path": "assets/RebornWorld/tx_rm_redrock_01-source.png",
+      "assetId": "reborn-world-tx_rm_redrock_01",
+      "bytes": 3580774,
+      "sha256": "38e8b707633bc0f8dd6c85cd5057efe86bfaacb3290ebf1a6d94aaf1a45f2ce3"
+    },
+    {
+      "path": "mod/Textures/tx_rm_redrock_01.dds",
+      "assetId": "reborn-world-tx_rm_redrock_01",
+      "bytes": 4717676,
+      "sha256": "a0370bc8813d6edee5d8c4564255bca831b90586b5416434313d6d24e34a0204"
+    },
+    {
+      "path": "assets/RebornWorld/tx_rm_rock_02-source.png",
+      "assetId": "reborn-world-tx_rm_rock_02",
+      "bytes": 3720728,
+      "sha256": "c94798b1b7cb47d568beecf5996034d081d30790a5b3f734c1689d68fba35de8"
+    },
+    {
+      "path": "mod/Textures/tx_rm_rock_02.dds",
+      "assetId": "reborn-world-tx_rm_rock_02",
+      "bytes": 4717676,
+      "sha256": "6d88a25d5042c7341276931f74cb85c64f493c5988d137db54b06514f05f9ccc"
+    },
+    {
+      "path": "assets/RebornWorld/tx_ac_dirt_01-source.png",
+      "assetId": "reborn-world-tx_ac_dirt_01",
+      "bytes": 3697169,
+      "sha256": "5f11d9bfc2907738fe0c73481899c70b8fa0c493b617c845ec6c0b9e0824c481"
+    },
+    {
+      "path": "mod/Textures/tx_ac_dirt_01.dds",
+      "assetId": "reborn-world-tx_ac_dirt_01",
+      "bytes": 4717676,
+      "sha256": "41fffb79c81238c5f7c51a5dbe101161570694481c15d6fd0597123f038a17e4"
+    },
+    {
+      "path": "assets/RebornWorld/tx_rm_grayrock_01-source.png",
+      "assetId": "reborn-world-tx_rm_grayrock_01",
+      "bytes": 3669008,
+      "sha256": "ea35d998ebfd554d8ba579e42c7305931733fea638cd8040fb8888c11009fe6e"
+    },
+    {
+      "path": "mod/Textures/tx_rm_grayrock_01.dds",
+      "assetId": "reborn-world-tx_rm_grayrock_01",
+      "bytes": 4717676,
+      "sha256": "ff793099f1b3e850b07e5ec9fcaa5bfb607e94d4c5019123d9d0168bb79b76c5"
+    },
+    {
+      "path": "assets/RebornWorld/tx_ma_crackedearth-source.png",
+      "assetId": "reborn-world-tx_ma_crackedearth",
+      "bytes": 3658248,
+      "sha256": "de5e6915eb7f74e9b01247530046c3f3e3bf7399f090b9b1733e5a8443933aca"
+    },
+    {
+      "path": "mod/Textures/tx_ma_crackedearth.dds",
+      "assetId": "reborn-world-tx_ma_crackedearth",
+      "bytes": 4717676,
+      "sha256": "bc1b2e4de441c1ae3a42b8f1426292f184974aef13bbac86dbab5415e99f3148"
     }
   ],
   "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
-  "engineTarget": "Existing tapestry and Bitter Coast terrain texture types, own native F8 UI images and a Windows installer icon; no ESM/ESP edits"
+  "engineTarget": "Existing tapestry and ten terrain texture paths, own native F8 UI images and a Windows installer icon; no ESM/ESP edits",
+  "rebornWorldArtwork": {
+    "generator": "Codex built-in imagegen",
+    "origin": "Seven new images generated from text briefs without third-party reference images",
+    "assetIds": [
+      "tx_ai_dirtroad_01",
+      "tx_land_darkgravel",
+      "tx_rm_redrock_01",
+      "tx_rm_rock_02",
+      "tx_ac_dirt_01",
+      "tx_rm_grayrock_01",
+      "tx_ma_crackedearth"
+    ],
+    "generationBriefs": {
+      "tx_ai_dirtroad_01": "Orthographic warm umber compacted road soil with natural stones, sand, dry grass traces and muted green mineral variation; seamless diffuse albedo, no objects or text.",
+      "tx_land_darkgravel": "Orthographic dark volcanic gravel and ash with charcoal pumice, slate chips, violet mineral flecks and faint emerald lichen; seamless diffuse albedo, no objects or text.",
+      "tx_rm_redrock_01": "Orthographic rust-red basalt and ochre ironstone fragments with soot, grit and restrained amber glints; seamless diffuse albedo, no objects or text.",
+      "tx_rm_rock_02": "Orthographic cool charcoal basalt plates, mineral-gray chips, dusty cracks, faint emerald lichen and rust patina; seamless diffuse albedo, no objects or text.",
+      "tx_ac_dirt_01": "Orthographic fertile chocolate-brown loam with amber grains, emerald ground moss and tiny leaf fragments; seamless diffuse albedo, no objects or text.",
+      "tx_rm_grayrock_01": "Orthographic weathered slate-gray and warm-gray shale with cracks, gravel, pale mineral edges and rare moss specks; seamless diffuse albedo, no objects or text.",
+      "tx_ma_crackedearth": "Orthographic dry warm clay and ochre plates with irregular fine fissures and mineral dust; seamless diffuse albedo, no objects or text."
+    },
+    "sourceMethod": "Generated PNG masters copied byte-for-byte from the built-in imagegen output; Pillow 12.3.0 converted each to uncompressed RGB DDS; decoded RGB pixels match.",
+    "usageScope": "Seven Morrowind.esm LTEX texture-path overrides. Together with three earlier Bitter Coast materials, these names account for 217256 of 330752 raw LAND index positions in the installed base ESM snapshot; not a visible area or quality measurement.",
+    "reviewStatus": "Native VFS/exterior verification pending; visual tiling, seams and frame rate not yet personally reviewed."
+  }
 }
