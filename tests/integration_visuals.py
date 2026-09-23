@@ -42,15 +42,27 @@ local function step(t)
     elseif phase==2 and t>4 then
         phase=3
         assert(v.getState().enabled and v.getState().mode=='dawn','Morgenrot mode not active')
-        assert(v.setMode('nocturne'),'Nocturne mode failed')
+        assert(v.setMode('living'),'Lebendige Welt mode failed')
     elseif phase==3 and t>5 then
         phase=4
+        local living=v.getState()
+        assert(living.enabled and living.mode=='living','Lebendige Welt mode not active')
+        assert(living.environment and living.environment.source=='__EXPECTED_SOURCE__',
+            'Expected world weather sampling path absent')
+        if living.environment.source=='weather' then
+            assert(type(living.environment.sun)=='number' and
+                living.environment.sun>=0 and living.environment.sun<=1,
+                'Exterior sun percentage is invalid')
+        end
+        assert(v.setMode('nocturne'),'Nocturne mode failed')
+    elseif phase==4 and t>6 then
+        phase=5
         assert(v.getState().enabled and v.getState().mode=='nocturne','Nocturne mode not active')
         assert(not v.setMode('invalid-mode'),'Unknown mode accepted')
         assert(v.getState().mode=='nocturne','Unknown mode changed current mode')
         assert(v.setMode('original'),'Original mode failed')
-    elseif phase==4 and t>6 then
-        phase=5
+    elseif phase==5 and t>7 then
+        phase=6
         assert(not v.getState().enabled,'Original mode left HALVETH shader active')
         local found=false
         for _,item in ipairs(postprocessing.getChain()) do
@@ -58,10 +70,10 @@ local function step(t)
         end
         assert(not found,'HALVETH shader remained in real render chain')
         assert(v.setMode('scarlet'),'Restoring Scarlet mode failed')
-    elseif phase==5 and t>7 then
-        phase=6
+    elseif phase==6 and t>8 then
+        phase=7
         assert(v.getState().enabled,'Scarlet did not restore after original mode')
-        done=true;print('HALVETH_VISUALS_PASS modes=4 shader=halveth_atmosphere')
+        done=true;print('HALVETH_VISUALS_PASS modes=5 shader=halveth_atmosphere')
         core.quit()
     end
     if t>20 then fail('Timeout at phase '..phase) end
@@ -75,7 +87,7 @@ end}}
 '''
 
 
-def run():
+def run(start_cell: str, expected_source: str):
     state = ROOT / '.local' / 'visuals-integration' / (
         datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '-' + uuid.uuid4().hex[:8]
     )
@@ -91,19 +103,20 @@ def run():
     out = io.StringIO()
     settings.write(out)
     atomic_text(profile / 'settings.cfg', out.getvalue())
-    atomic_text(data / 'scripts' / 'halveth_visuals_test.lua', PLAYER)
+    atomic_text(data / 'scripts' / 'halveth_visuals_test.lua',
+                PLAYER.replace('__EXPECTED_SOURCE__', expected_source))
     live_manifest = (ROOT / 'mod' / 'halveth.omwscripts').read_text(encoding='utf-8')
     visual_registration = '' if 'PLAYER: scripts/halveth/visuals.lua' in live_manifest else (
         'PLAYER: scripts/halveth/visuals.lua\n'
     )
     atomic_text(data / 'halveth-genesis-smoke.omwscripts',
         visual_registration + 'PLAYER: scripts/halveth_visuals_test.lua\n')
-    prepared['command'][-1] = "Seyda Neen, Arrille's Tradehouse"
+    prepared['command'][-1] = start_cell
     log = Path(prepared['stdout_log'])
     source_files = ('mod/scripts/halveth/visuals.lua', 'mod/shaders/halveth_atmosphere.omwfx')
     result = {
         'recordedAt': datetime.now(timezone.utc).isoformat(),
-        'scope': 'Fresh isolated OpenMW 0.51 game, native shader compile and active render chain. No personal saves.',
+        'scope': f'Fresh isolated OpenMW 0.51 game in {start_cell}, native shader and {expected_source} light sampling. No personal saves.',
         'testedFiles': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in source_files},
         'personalSavesUsed': False,
     }
@@ -128,4 +141,8 @@ def run():
 
 
 if __name__ == '__main__':
-    raise SystemExit(run())
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cell', default="Seyda Neen, Arrille's Tradehouse")
+    parser.add_argument('--expect-source', choices=('interior', 'weather'), default='interior')
+    options = parser.parse_args()
+    raise SystemExit(run(options.cell, options.expect_source))

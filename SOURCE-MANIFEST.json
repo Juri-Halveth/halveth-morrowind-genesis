@@ -1,0 +1,540 @@
+{
+  "version": "0.8.0",
+  "publication": "PUBLIC_SOURCE_PACKAGE",
+  "licenses": {
+    "codeAndDocumentation": "MIT",
+    "originalBanner": "CC0-1.0"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 271,
+      "sha256": "085a7238383e03556b4b59b2aded11eb263452bec0655be3af248fcce152f328"
+    },
+    {
+      "path": "ASSET-LICENSE.md",
+      "bytes": 1874,
+      "sha256": "1e7e8de918da68cfbb84eabab0d193b281262938a21646b2bc912489aac2b2a3"
+    },
+    {
+      "path": "ASSET-PROVENANCE.json",
+      "bytes": 3532,
+      "sha256": "8851b8c4eee5cde71e6736f23037de787dc9f16900ee06c63fb4963154120263"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1112,
+      "sha256": "a3702feefcfb05df78f126c837d2c6f3f4e4d7bb4473d7cbf9301abca4353fbe"
+    },
+    {
+      "path": "LICENSES/CC0-1.0.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "PUBLIC-STATUS.json",
+      "bytes": 4508,
+      "sha256": "0a7ac48776653c0fa550847454032c80822260f9adb7d04b85fe64fb0b73c1e3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15539,
+      "sha256": "8138f28c40e828cb0b4294343ce440e01f4b6bbc914af4fbcd00e6804f5bca7f"
+    },
+    {
+      "path": "RELEASE-NOTE.txt",
+      "bytes": 2173,
+      "sha256": "10cefb04f564348aed687b1362f123a9dec86c56aafa560010c5c325016ee6a2"
+    },
+    {
+      "path": "START.cmd",
+      "bytes": 296,
+      "sha256": "95f9f8595a81eaf51d7a0306d902c3cde47c2e5f62bf1a41f3b7bb330500fe98"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "bytes": 2369,
+      "sha256": "6cf63af9f46aeed86dce22d5da5cb985c6a00352680b6923ddba4ca30ddc686c"
+    },
+    {
+      "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds",
+      "bytes": 6294280,
+      "sha256": "431707b3fd10441e59aab5b414f1b478447a8ddf4a868fd9e4871b1d4db2e764"
+    },
+    {
+      "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga",
+      "bytes": 4720658,
+      "sha256": "f23e9aa8655d2509bf613c498ed2e1211c5cd1a304952bb84e5805da63a292fd"
+    },
+    {
+      "path": "character_profile.py",
+      "bytes": 3294,
+      "sha256": "90b5184cbb47fddaf9500f5a92603d5827d043bc3400f1d99e0b1aca334cf4fc"
+    },
+    {
+      "path": "data/entities.json",
+      "bytes": 576,
+      "sha256": "ca1ff6cda65766310a59f1b505d6350d8a6291d9c28eda169b9092320d4a6af8"
+    },
+    {
+      "path": "data/generation-providers.json",
+      "bytes": 13354,
+      "sha256": "be7b1935758f8f531b1d3eaaca67146f940372cdfff49366825ebf829996fcda"
+    },
+    {
+      "path": "data/native-content.json",
+      "bytes": 11544,
+      "sha256": "e02f9a6d8ac3d6b5174e590e91b7dedc03c32c820519e64da4531967eb041f25"
+    },
+    {
+      "path": "data/project-knowledge.json",
+      "bytes": 15606,
+      "sha256": "26da2f3056ac6c8dd773219470a1116fb9892173b1ab21a05fa2fd355f5683ad"
+    },
+    {
+      "path": "data/projects.json",
+      "bytes": 2373,
+      "sha256": "40932c76585c6a0df0cf7169b5c37e89d6bdcd383265d5936930a067f72ad7f7"
+    },
+    {
+      "path": "docs/FIXNOTE-LAUNCHER-2026-09-19.md",
+      "bytes": 2077,
+      "sha256": "2f9cc3a67ab037efa544832796e96df49d4173af4261879f62956821f2690e92"
+    },
+    {
+      "path": "docs/GENERATION-PIPELINE.md",
+      "bytes": 5949,
+      "sha256": "769c22c24baec03f527fb4e5acac511d2149d1affb6c242deb75155b7d04cdf0"
+    },
+    {
+      "path": "docs/GRAPHICS.md",
+      "bytes": 10793,
+      "sha256": "41629c323b8f3c073c17c40aac2fe38ed2add5d357b16956a803301480c2aea6"
+    },
+    {
+      "path": "docs/NATIVE-CONTENT.md",
+      "bytes": 5601,
+      "sha256": "0df06a3046654d64f7df3be23090e04ec2e3e2b659e369e5ab5a84f99fbb8b06"
+    },
+    {
+      "path": "docs/NATIVE-VERIFICATION-0.4.0.json",
+      "bytes": 6457,
+      "sha256": "beccf4ff95aee6220c2db8a751444c7224f0cf9b8a1e7c5262856c37245185da"
+    },
+    {
+      "path": "docs/NATIVE-VERIFICATION-0.5.0.json",
+      "bytes": 6317,
+      "sha256": "cebeb8618696c04b6883cd5c150104204d3e4059b9bf0f23417be5f1af9b9ea7"
+    },
+    {
+      "path": "docs/NATIVE-VERIFICATION-0.6.0.json",
+      "bytes": 3850,
+      "sha256": "45765b10558e5d521ed2bb7cf12e2e058dc50e61b1ea5b38a68c5869b80bf5e7"
+    },
+    {
+      "path": "docs/NATIVE-VERIFICATION-0.7.0.json",
+      "bytes": 2351,
+      "sha256": "2a2bdcf86cb2688d7dd774dab23371dc635a9fd4b2d9dba96cf08a1386daf52c"
+    },
+    {
+      "path": "docs/NATIVE-VERIFICATION-0.8.0.json",
+      "bytes": 2914,
+      "sha256": "6caea4b5b9b42a76f29fb9dab62acdc99a0bb6a4e4dbcb33975b465e65cf7a63"
+    },
+    {
+      "path": "docs/NEW-WORLD-DESIGN-TRANSFER.md",
+      "bytes": 8742,
+      "sha256": "b54808dadf8053501240f5afb79039c8fa6dd5696638b75927c36882eac6cb07"
+    },
+    {
+      "path": "docs/OPENMW-ADAPTER.md",
+      "bytes": 11289,
+      "sha256": "9f587658a1cdadab8eb77865d0de903421a8ecc0457687e6ba1ba7152fa72a33"
+    },
+    {
+      "path": "docs/SCARLET-ATELIER.md",
+      "bytes": 5038,
+      "sha256": "abcc6c54f7b54dd317e1ae06389b1a54216dfec87ada732fa259eb90792514f0"
+    },
+    {
+      "path": "docs/SETUP.md",
+      "bytes": 5462,
+      "sha256": "4a3d30c265afb0a88f3493468d430e8faf534db38b65f28ce88002478b482c56"
+    },
+    {
+      "path": "docs/UNIVERSE-0.5.md",
+      "bytes": 6642,
+      "sha256": "d0c4255a420c65a4b4948a64a3ab56961479047a92752f420c75142792fdb011"
+    },
+    {
+      "path": "docs/VISUAL-ATMOSPHERE.md",
+      "bytes": 2807,
+      "sha256": "f5e9a709a9b6922d0660baf9f14eece2dcd81a7d489b0f44db935bc408f61187"
+    },
+    {
+      "path": "docs/VIVEC-GOLD.md",
+      "bytes": 7045,
+      "sha256": "f943acd1b887f61ea46b0d104b49a0e3a07ecd4ed90fe6bd21db3ae9008c6ee7"
+    },
+    {
+      "path": "docs/WORLDLIFE-0.8.md",
+      "bytes": 2442,
+      "sha256": "5cdacf18a7ed6ee0fb63918a5dec4ae5fe6b1f6d040aa158341e9a0f08c85b72"
+    },
+    {
+      "path": "graphics_status.py",
+      "bytes": 2686,
+      "sha256": "212abe559375a8621f2e22b3eebed991ccbfcb6c3af5ef8013da747840c39ec7"
+    },
+    {
+      "path": "installer/GenesisSetup.csproj",
+      "bytes": 999,
+      "sha256": "a10feb646e092e03b83a755b47cd1b0f3f8727ed434c78ea318f63bc025a0394"
+    },
+    {
+      "path": "installer/Program.cs",
+      "bytes": 31689,
+      "sha256": "d7e859e2bc208ec7aec0d56b276d426bda710d63f4a8bd9dd396a4231d18b8c1"
+    },
+    {
+      "path": "installer/README.md",
+      "bytes": 5257,
+      "sha256": "632b34c7c339716ff0fc3ae94ecfbf7ff3374f982265c65d3dbc3d56cd73594d"
+    },
+    {
+      "path": "installer/build_installer.py",
+      "bytes": 8811,
+      "sha256": "769b1b1ec8267229fafa007804d129b194175b8702916b8493ca1e1ef575ada3"
+    },
+    {
+      "path": "installer/love-astrolabe-icon-0.8.png",
+      "bytes": 2428841,
+      "sha256": "c320038bdf7ae6e9821bbc590fd6ec35150147e730ff5186ff7bb305b2c4c951"
+    },
+    {
+      "path": "installer/openmw-0.51.0-runtime-files.txt",
+      "bytes": 19629,
+      "sha256": "6a0e2fd3aa7d02d965e8eb19ef0b766bb8033eb59c2e5a6d1d5ec39bc506904a"
+    },
+    {
+      "path": "launcher.py",
+      "bytes": 9901,
+      "sha256": "07a205a9cf2f4bfdc3227faf18bc6720afe944b35042edf5a83aff8b84400952"
+    },
+    {
+      "path": "mod/Fonts/MysticCards.omwfont",
+      "bytes": 750,
+      "sha256": "4095f25ef86a03eabe9fb5366e8d4054891afffa4a6e8413e92d5b94449a6d25"
+    },
+    {
+      "path": "mod/Textures/halveth/love-astrolabe-0.7.png",
+      "bytes": 2219226,
+      "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
+    },
+    {
+      "path": "mod/Textures/halveth/scarlet-love-banner.png",
+      "bytes": 3418821,
+      "sha256": "eb80cd9ea3f038651ee7d74c7fc1d0478d44ba4a93465efd70027c8b4979ed0c"
+    },
+    {
+      "path": "mod/bridge/inbox.json",
+      "bytes": 30,
+      "sha256": "560b33e42f4f25f9a231452914326cb45cea330c65ae7e25dc138900a0b58497"
+    },
+    {
+      "path": "mod/halveth.omwscripts",
+      "bytes": 413,
+      "sha256": "7ab3bce3b4a32bea587273f9fbba0cfc7bcd2e904417200397796f67099346d2"
+    },
+    {
+      "path": "mod/scripts/halveth/actor_life.lua",
+      "bytes": 1743,
+      "sha256": "05019da618c06466dbaf11e97f1c53f7f614c3365ff5351e8c302503ee0668ab"
+    },
+    {
+      "path": "mod/scripts/halveth/actor_life_global.lua",
+      "bytes": 5423,
+      "sha256": "79c66b86fd95cb2663141b28bfbde01f34f1b4f2d16207f9bb8a8e5c96bb525f"
+    },
+    {
+      "path": "mod/scripts/halveth/common.lua",
+      "bytes": 3113,
+      "sha256": "0235126ec6db3abbc0c866bce26a030ce0842a2906fbb417d96de5abe2f02e0e"
+    },
+    {
+      "path": "mod/scripts/halveth/content.lua",
+      "bytes": 9290,
+      "sha256": "35622de296b8282c48ef0ac23cb2878db979478d55a42a595fc932b2f92ca93f"
+    },
+    {
+      "path": "mod/scripts/halveth/content_catalog.lua",
+      "bytes": 14114,
+      "sha256": "eb2f6d743ce760dc17cebe3fea6aeaccd7b8909a6c7d137e084855878a606a4d"
+    },
+    {
+      "path": "mod/scripts/halveth/fieldcraft.lua",
+      "bytes": 12436,
+      "sha256": "db191a55e249069899642a7811269fb15e646c063c2dabb069a2ba5e473d3b18"
+    },
+    {
+      "path": "mod/scripts/halveth/global.lua",
+      "bytes": 6406,
+      "sha256": "b8d1e097882f913e94146f4178e64b3ce7c5ec35e0ef41185c991fc7b6589bfb"
+    },
+    {
+      "path": "mod/scripts/halveth/inspect.lua",
+      "bytes": 10270,
+      "sha256": "a7136339e5718f0592f887e61bfdeb2c2a2f0d437832fe340867adc7f0a71440"
+    },
+    {
+      "path": "mod/scripts/halveth/knowledge.lua",
+      "bytes": 26345,
+      "sha256": "23b74dc2f7948dc9697133e7c75b3c5c07edb120492c2976188bd56878c3f292"
+    },
+    {
+      "path": "mod/scripts/halveth/paths.lua",
+      "bytes": 11797,
+      "sha256": "4148f556d5d740c8ede4e1a25371042efe48aa7a0177e06c2b5a08c30b01662f"
+    },
+    {
+      "path": "mod/scripts/halveth/player.lua",
+      "bytes": 16347,
+      "sha256": "8f0bf290ca15a06fe80f5461afa80bb1654e752a844c59d70ceae817c18d9e9c"
+    },
+    {
+      "path": "mod/scripts/halveth/universe.lua",
+      "bytes": 15352,
+      "sha256": "577712e15477c961479cae8c1c4d4dcc543037ed48cc224474fe11b56ec56ae4"
+    },
+    {
+      "path": "mod/scripts/halveth/visuals.lua",
+      "bytes": 5578,
+      "sha256": "526f8306c32e437ec2c12609b96a9d9499b26cb3dac9d79d1deff0df0515ded9"
+    },
+    {
+      "path": "mod/scripts/halveth/worldlife.lua",
+      "bytes": 16522,
+      "sha256": "ce73112a30ec6bcc0ed57712ce9e33497c82eee59298ddf01b3b0e6bbb42f2f0"
+    },
+    {
+      "path": "mod/shaders/halveth_atmosphere.omwfx",
+      "bytes": 2437,
+      "sha256": "496b5ff0607680f4540c0ec79f0bfb402dfd60a052808ff0a096a348dd5e1587"
+    },
+    {
+      "path": "native/GenesisEntry.cs",
+      "bytes": 3402,
+      "sha256": "4f4a5d836966d3105f8d02d946851957a59ac6baa25279d7a9e5e1fa9fcb7d62"
+    },
+    {
+      "path": "project_knowledge.py",
+      "bytes": 5618,
+      "sha256": "469860d9d71d68061c7eed04f34c2271600e03ce70f3719dd1ec31b4f6f91443"
+    },
+    {
+      "path": "scripts/build_head_adapter.py",
+      "bytes": 5734,
+      "sha256": "34e11ed0ddd5d2ff365aa68b2b9b77d7ecaff23a396b64d18eaf503d770a253d"
+    },
+    {
+      "path": "scripts/build_native_content.py",
+      "bytes": 3348,
+      "sha256": "2b948b812dab0b4f9c68549a386e3e57c4df704d438126dd7eb91de875c1272d"
+    },
+    {
+      "path": "scripts/build_native_entry.py",
+      "bytes": 5269,
+      "sha256": "cbe02d8fd95c5d0b9634a1c8ecac316972fbe84b156b21cfcb2ca0d7944e2448"
+    },
+    {
+      "path": "scripts/build_release.py",
+      "bytes": 12716,
+      "sha256": "af1bd95cb8644a46780cd5694f169856ddfeb68f13ec38e45d6a703b9ae624e2"
+    },
+    {
+      "path": "scripts/convert_banner.mjs",
+      "bytes": 2001,
+      "sha256": "08be151dc5514df376d392416904cbd172dd1608ab66d6d462d4be1e6f54c1b9"
+    },
+    {
+      "path": "scripts/graphics_profile.py",
+      "bytes": 12652,
+      "sha256": "0da767e4aa2f04cf4e9af3d473e8ce6f717a1b4de66b4502ec70883c242d5727"
+    },
+    {
+      "path": "scripts/import_lore.py",
+      "bytes": 5337,
+      "sha256": "cff62b755455f9525846e94c740b99086359975abbe78ceeba77b217523b65d0"
+    },
+    {
+      "path": "scripts/install_scarlet_banner.py",
+      "bytes": 11827,
+      "sha256": "dfb0c3bfff2813af7a8aae656d37161db4806bb4bc890e9f63e54ac5622fa70c"
+    },
+    {
+      "path": "scripts/install_shaders.py",
+      "bytes": 12434,
+      "sha256": "25ea19e86e9f0e812a934147aa9ba3f6573d991fa95da46363c43f90b97afa4e"
+    },
+    {
+      "path": "scripts/prepare_profile.py",
+      "bytes": 19184,
+      "sha256": "fbdb204738d7b7c7a563bbb817d299149fd63d8cb56577efbd080ddc1b8e95b2"
+    },
+    {
+      "path": "scripts/survey_universe.py",
+      "bytes": 8126,
+      "sha256": "abc0f3009e601af79191aaf652b2da9b55ca481f167cb475d2dcbd6eee33804c"
+    },
+    {
+      "path": "server.py",
+      "bytes": 33141,
+      "sha256": "367d4fc66275f374a97abdf994f5dbe516e99f996f686431bd0e26a7ad13a7ee"
+    },
+    {
+      "path": "tests/graphics_preview.py",
+      "bytes": 6458,
+      "sha256": "85443866832690d7a5e674c346cb004f8b0e91148754ab6be3c2bf55a45e9a63"
+    },
+    {
+      "path": "tests/integration_actor_life.py",
+      "bytes": 6816,
+      "sha256": "9dcb521a6594a444eee0f370ac46e3992011f0434caf3fb02028237331e62ef8"
+    },
+    {
+      "path": "tests/integration_art_070.py",
+      "bytes": 4643,
+      "sha256": "c20a26d5beb2ab8e90b97ddadf416c173ae6e5aeb11852de8dd99749227cad80"
+    },
+    {
+      "path": "tests/integration_cast.py",
+      "bytes": 6305,
+      "sha256": "bf86f8c6c7c3dc8f71626feb3594a0ced030edab9a7fd47b30a61c73c7eccdf5"
+    },
+    {
+      "path": "tests/integration_chat.py",
+      "bytes": 10711,
+      "sha256": "acccb7f6fbc1ec808266e8f60cffcdf0e8137463c3cfff8d532cfc0c2f401721"
+    },
+    {
+      "path": "tests/integration_content.py",
+      "bytes": 8771,
+      "sha256": "bd4c9325b83fced141425ea8e2dceff1e298c476bd5c9ee175e169381be4f493"
+    },
+    {
+      "path": "tests/integration_fieldcraft.py",
+      "bytes": 10629,
+      "sha256": "0dd49db9dd4f541b09793b98eaca51eeeb738b6d3294b7a76d2b58561019f4e9"
+    },
+    {
+      "path": "tests/integration_game.py",
+      "bytes": 6744,
+      "sha256": "16e7b3471a46e0e008924696d3e0e93af32f0ae7356841381f64eaf3101f846c"
+    },
+    {
+      "path": "tests/integration_installer.py",
+      "bytes": 6283,
+      "sha256": "b3fc8884d281463f59dd8b03b60bc0480bd0ea7cd660002658c53fe332c9bd5b"
+    },
+    {
+      "path": "tests/integration_knowledge.py",
+      "bytes": 18463,
+      "sha256": "1f6cd0e6f8e18a6c1837d3e02891c265a038f7598f9b20d3bfb157d54b4dac28"
+    },
+    {
+      "path": "tests/integration_paths.py",
+      "bytes": 13270,
+      "sha256": "5305524cab8bed238b1c315249e97709a7310cc87ee5bb3a8411e3b196160d57"
+    },
+    {
+      "path": "tests/integration_universe.py",
+      "bytes": 8222,
+      "sha256": "69a6bfa4ddff8f63f6a023b8724a5e939994298ce603852f40534fd959dff26c"
+    },
+    {
+      "path": "tests/integration_visuals.py",
+      "bytes": 6884,
+      "sha256": "35c035bbc1799443bdf38884046a0d7a0fb4a096b6fe5ead39010d0b98b2cfd4"
+    },
+    {
+      "path": "tests/integration_worldlife.py",
+      "bytes": 7313,
+      "sha256": "ceaa2ecbe3025dda227631f515a63b33a11613df5729c4aeafa906568036108a"
+    },
+    {
+      "path": "tests/preview_native_knowledge.py",
+      "bytes": 3536,
+      "sha256": "f4931b6b43f890cfe905a465defcd83686cea61d780a592467fa4d9ef3d61341"
+    },
+    {
+      "path": "tests/scarlet_preview.py",
+      "bytes": 8547,
+      "sha256": "44faf795e822f67860b2ed5db6189458c1b39ca1209eb0c3838b24538db2c49c"
+    },
+    {
+      "path": "tests/test_character_profile.py",
+      "bytes": 2832,
+      "sha256": "e293e39ca301300fdf384d1ccb70b61a1d666360ba3c94423ddda7b2251b537e"
+    },
+    {
+      "path": "tests/test_companion.py",
+      "bytes": 4659,
+      "sha256": "081bafd35e1734e979bea8394278753eca69e73bc50cb1afa45e8c9edfba6f2d"
+    },
+    {
+      "path": "tests/test_launcher.py",
+      "bytes": 10017,
+      "sha256": "c14a18b6fa84089afa15e1a3ce1ea73f8d56d6374359aec8d389f40747230b35"
+    },
+    {
+      "path": "tests/test_native_content_catalog.py",
+      "bytes": 1711,
+      "sha256": "f6c9c6ed3804ab7d020720c4af65257dca6d0b9de5bb3e6c26aeeb49f3a65032"
+    },
+    {
+      "path": "tests/test_project_knowledge.py",
+      "bytes": 10100,
+      "sha256": "bd368cf78d3e9346fb6a9c7a5e9ddb44a48c4dff657c1aa8a5d9fc9c5747d980"
+    },
+    {
+      "path": "tests/test_scarlet_banner.py",
+      "bytes": 6451,
+      "sha256": "fc8d85cbb35fffec0d7ce061f048cd9f108be441b927056dc29051af8d5986c5"
+    },
+    {
+      "path": "tests/test_source_package.py",
+      "bytes": 9965,
+      "sha256": "9e444bd64a5485b39d615729162d252a02c813eece5ca944565059968979fb69"
+    },
+    {
+      "path": "tests/test_universe_survey.py",
+      "bytes": 2120,
+      "sha256": "47c76db5f32e5c8160bc9df5c8b53f7ff479131e3fdd5cbff12a677ff1dba84c"
+    },
+    {
+      "path": "web/app.js",
+      "bytes": 29656,
+      "sha256": "337cb55cf7b3ed865ad8c535666454f13f76f433e8e48225a47aae6a3a021dd8"
+    },
+    {
+      "path": "web/atelier.css",
+      "bytes": 4226,
+      "sha256": "8b5df6a5dd0cee0ab74a3bae138c41241607cb8f5c0abb686708b8b96f0f5849"
+    },
+    {
+      "path": "web/atelier.js",
+      "bytes": 5343,
+      "sha256": "d0fd986404412e2d9c97f94944e555eeb99c187d29a953ace1ecab41c495ffa1"
+    },
+    {
+      "path": "web/index.html",
+      "bytes": 18431,
+      "sha256": "607299cdbdd0099a6324d9ff0c45519ff0f50aea94a89c75ff0757230130784b"
+    },
+    {
+      "path": "web/style.css",
+      "bytes": 35931,
+      "sha256": "9248837a9ce74683ffc9174b5c5bcc4e75bc4268638c22159b07628c8bfadeeb"
+    }
+  ]
+}

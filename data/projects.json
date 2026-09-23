@@ -16,13 +16,13 @@
   },
   {
     "id": "graphics",
-    "title": "Original-, Beauty- und Cinematic-Profile innerhalb derselben Morrowind-Installation",
+    "title": "Separate Original-, Beauty- und Cinematic-Profile",
     "status": "Erledigt"
   },
   {
     "id": "glitch",
-    "title": "Bestehende Quest-/Wirtschaftslogik erhalten; historischen Gold-Glitch gesondert prüfen",
-    "status": "Neu"
+    "title": "Vivec-Urkundenhandel und 250-Gold-Erinnerung bewahren",
+    "status": "In Arbeit"
   },
   {
     "id": "voices",
@@ -41,14 +41,14 @@
   },
   {
     "id": "textures",
-    "title": "Optionale Grafikpakete auswählen und lokal installieren",
-    "status": "Neu"
+    "title": "HD-Landschaft, neue Köpfe, Sternenhimmel und Shader installiert",
+    "status": "Erledigt"
   },
   {
     "id": "release",
-    "title": "GitHub-Quellprojekt mit MIT und eigener CC0-Kunst veröffentlicht",
+    "title": "Genesis 0.3.0 auf GitHub: MIT-Code und eigene CC0-Kunst",
     "status": "Erledigt",
-    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
+    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.3.0"
   },
   {
     "id": "scarlet-banner",
@@ -71,18 +71,14 @@
     "status": "Neu"
   },
   {
-    "id": "native-content",
-    "title": "Sechs eigene Bücher und LOVE/SPARK/AEGIS als native Morrowind-Datensätze",
-    "status": "Erledigt"
+    "id": "unreal-world",
+    "title": "Portal Garden 0.1.0: native Unreal-Welt, Installer und Source auf GitHub",
+    "status": "Erledigt",
+    "url": "https://github.com/Juri-Halveth/halveth-unreal/releases/tag/v0.1.0"
   },
   {
-    "id": "native-knowledge",
-    "title": "F7-Wissensjournal, Buchstudium und begrenzter Alchemie-Praxisbonus",
-    "status": "Erledigt"
-  },
-  {
-    "id": "native-entry",
-    "title": "Direkter Morrowind-Start mit unsichtbarem lokalem Begleiter",
-    "status": "Erledigt"
+    "id": "unreal-knowledge",
+    "title": "Portal Garden 0.2: Bücher, Alchemie, Verzauberung, Bauwerke und Wissen speichern",
+    "status": "In Arbeit"
   }
 ]

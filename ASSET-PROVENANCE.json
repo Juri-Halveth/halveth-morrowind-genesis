@@ -26,6 +26,15 @@
     "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/; no external game image input",
     "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
   },
+  "installerArtwork": {
+    "assetId": "love-astrolabe-icon-0.8",
+    "generator": "Codex built-in imagegen",
+    "origin": "New square Windows icon generated from the project's owned 0.7 LOVE astrolabe as the only visual reference",
+    "generationBrief": "Bright ruby heart centered in a bold antique-gold astrolabe ring on a dark plum background, readable at 32 pixels, no text or franchise marks",
+    "actualDimensions": [1254, 1254],
+    "sourceMethod": "Generated PNG copied byte-for-byte to installer; ICO is a build-time format derivative",
+    "sha256": "c320038bdf7ae6e9821bbc590fd6ec35150147e730ff5186ff7bb305b2c4c951"
+  },
   "files": [
     {
       "path": "mod/Textures/halveth/scarlet-love-banner.png",
@@ -39,6 +48,12 @@
       "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
     },
     {
+      "path": "installer/love-astrolabe-icon-0.8.png",
+      "assetId": "love-astrolabe-icon-0.8",
+      "bytes": 2428841,
+      "sha256": "c320038bdf7ae6e9821bbc590fd6ec35150147e730ff5186ff7bb305b2c4c951"
+    },
+    {
       "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga",
       "bytes": 4720658,
       "sha256": "f23e9aa8655d2509bf613c498ed2e1211c5cd1a304952bb84e5805da63a292fd"
@@ -50,5 +65,5 @@
     }
   ],
   "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
-  "engineTarget": "Existing tapestry texture type and two own native F8 UI images; no ESM/ESP edits"
+  "engineTarget": "Existing tapestry texture type, own native F8 UI images and a Windows installer icon; no ESM/ESP edits"
 }

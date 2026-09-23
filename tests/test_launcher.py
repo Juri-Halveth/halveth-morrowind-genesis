@@ -1,5 +1,6 @@
 """Launcher process checks with synthetic Windows output; never starts a game."""
 from contextlib import ExitStack
+import argparse
 from pathlib import Path
 from types import SimpleNamespace
 import subprocess
@@ -8,11 +9,13 @@ import tempfile
 import unittest
 import io
 import json
+import os
 from contextlib import redirect_stderr
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import launcher
+from scripts import prepare_profile
 
 
 class LauncherProcessTests(unittest.TestCase):
@@ -116,6 +119,7 @@ class DirectEntryTests(unittest.TestCase):
         start.assert_called_once_with('beauty')
         browser.assert_not_called()
 
+
     def test_play_passes_each_supported_graphics_profile(self):
         for profile in ('original', 'beauty', 'cinematic'):
             with self.subTest(profile=profile), patch.object(launcher, 'start_game') as start:
@@ -148,6 +152,41 @@ class DirectEntryTests(unittest.TestCase):
         companion.assert_called_once_with('beauty')
         game.assert_not_called()
         browser.assert_not_called()
+
+
+class InstalledProfileTests(unittest.TestCase):
+    def test_direct_play_preparation_never_copies_existing_saves_by_default(self):
+        with patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': ''}), \
+                patch('scripts.prepare_profile.prepare', return_value={}) as prepare:
+            launcher.prepare('beauty')
+        self.assertFalse(prepare.call_args.args[0].copy_saves)
+
+    def test_installer_can_bind_an_explicit_engine_root_without_changing_user_config(self):
+        engine = Path(tempfile.gettempdir()) / 'halveth-openmw-engine-example'
+        with patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': str(engine)}), \
+                patch('scripts.prepare_profile.prepare', return_value={}) as prepare:
+            launcher.prepare('beauty')
+        self.assertEqual(prepare.call_args.args[0].install_root, engine.resolve())
+        self.assertFalse(prepare.call_args.args[0].copy_saves)
+
+    def test_bundled_engine_allows_only_its_own_app_state_inside_install_tree(self):
+        with tempfile.TemporaryDirectory() as temp:
+            install = Path(temp) / 'bundle'
+            app = install / 'app'
+            engine = install / 'engine'
+            engine.mkdir(parents=True)
+            (engine / ('openmw.exe' if os.name == 'nt' else 'openmw')).write_bytes(b'fixture')
+            args = argparse.Namespace(install_root=install, state_dir=app / '.local',
+                                      profile='beauty', source_profile='max', smoke=False,
+                                      copy_saves=False, reset_settings=False)
+            with patch.object(prepare_profile, 'PROJECT', app):
+                # Missing fixture profile is the next expected error: the state
+                # guard itself must accept this exact bundled layout.
+                with self.assertRaises(FileNotFoundError):
+                    prepare_profile.prepare(args)
+                args.state_dir = install / 'engine' / '.local'
+                with self.assertRaisesRegex(ValueError, 'outside the original installation'):
+                    prepare_profile.prepare(args)
 
 
 if __name__ == '__main__':

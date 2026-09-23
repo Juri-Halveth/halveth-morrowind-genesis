@@ -1,0 +1,66 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.8.0",
+  "recordedAt": "2026-09-23T15:22:20Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "Four fresh isolated native sessions; no personal saves loaded. Prior checks are recorded in docs/NATIVE-VERIFICATION-0.7.0.json."
+  },
+  "checks": {
+    "worldlife": {
+      "state": "PASS",
+      "localReceiptSha256": "c1b6b53f70f8457082efc2a3739b417d5b5dc7026f18e6594af77d0003c51b69",
+      "sourceSha256": "ce73112a30ec6bcc0ed57712ce9e33497c82eee59298ddf01b3b0e6bbb42f2f0",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "realNpcAndNativeWindow": "PASS",
+      "presenceAndDialogueDeduplication": "PASS",
+      "companionContext": "PASS",
+      "actualSaveReload": "PASS",
+      "personalSavesUsed": false
+    },
+    "ambientActor": {
+      "state": "PASS",
+      "localReceiptSha256": "010e5af5cdf79dedb3fc483d4b8b24dcb9908b23d2cc0e7ec5e9adb6eb17cb4f",
+      "globalSourceSha256": "79c66b86fd95cb2663141b28bfbde01f34f1b4f2d16207f9bb8a8e5c96bb525f",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "ownedActorSpawned": "PASS",
+      "measuredWanderDistanceWorldUnits": 81.1,
+      "pauseAndResume": "PASS",
+      "actualSaveReload": "PASS",
+      "scopedDismissal": "PASS",
+      "personalSavesUsed": false
+    },
+    "visualsInterior": {
+      "state": "PASS",
+      "localReceiptSha256": "ac0be5b9e59b62b1ca5ab1e1eca3e5c8b1b697228e39d397282f152a0a8636b0",
+      "visualScriptSha256": "526f8306c32e437ec2c12609b96a9d9499b26cb3dac9d79d1deff0df0515ded9",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "fiveModesAndShaderInRenderChain": "PASS",
+      "interiorWeatherFallback": "PASS",
+      "personalSavesUsed": false
+    },
+    "visualsExterior": {
+      "state": "PASS",
+      "localReceiptSha256": "24f17601e5e59700840a616411541e460ce21da48f6267aee18aef74611d4e0d",
+      "visualScriptSha256": "526f8306c32e437ec2c12609b96a9d9499b26cb3dac9d79d1deff0df0515ded9",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "realWeatherSunSample": "PASS",
+      "fiveModesAndShaderInRenderChain": "PASS",
+      "personalSavesUsed": false
+    }
+  },
+  "priorNativeVerification": "docs/NATIVE-VERIFICATION-0.7.0.json",
+  "limits": [
+    "The regional faction pulse is a new simulation from observed encounters, not a claim about unloaded NPCs or actual global politics.",
+    "One opt-in HALVETH actor wanders outdoors in loaded cells; original NPC AI packages are untouched.",
+    "Native AI model inference is not yet integrated into OpenMW.exe. A separate C++ process proof and an uncompiled engine patch exist locally.",
+    "Shader activation and weather sampling do not establish frame rate, visual preference or universal mod compatibility.",
+    "No personal Morrowind save was loaded with 0.8 during these isolated checks."
+  ]
+}

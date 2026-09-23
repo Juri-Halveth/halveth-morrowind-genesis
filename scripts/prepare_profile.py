@@ -103,7 +103,9 @@ def prepare(args: argparse.Namespace) -> dict:
         raise ValueError("Source profile name must use 1-48 ASCII letters, digits, underscore or hyphen.")
     if args.smoke and args.copy_saves:
         raise ValueError("Smoke mode always uses a fresh game; omit --copy-saves.")
-    if state == install or install in state.parents:
+    bundled_layout = (PROJECT.parent == install and state == PROJECT / '.local'
+                      and (install / 'engine' / ('openmw.exe' if os.name == 'nt' else 'openmw')).is_file())
+    if (state == install or install in state.parents) and not bundled_layout:
         raise ValueError("State directory must be outside the original installation.")
     source = install / "profiles" / args.source_profile
     source_cfg = source / "openmw.cfg"

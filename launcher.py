@@ -15,37 +15,6 @@ ROOT=Path(__file__).resolve().parent
 STATE=ROOT/'.local'
 URL='http://127.0.0.1:18765'
 BRIDGE_STATUS=ROOT/'mod'/'bridge'/'companion-status.json'
-LAUNCH_OPTIONS={}
-
-
-def configure(args):
-    """Load only explicit per-checkout installation preferences, never game data."""
-    from scripts.prepare_profile import default_install
-    config_path=ROOT/'local-config.json'
-    saved={}
-    if config_path.exists():
-        saved=json.loads(config_path.read_text(encoding='utf-8'))
-        if not isinstance(saved,dict) or set(saved)-{'install_root','source_profile','model'}:
-            raise ValueError('Invalid local-config.json; expected installation, profile and model preferences.')
-        if any(not isinstance(value,str) or not value.strip() for value in saved.values()):
-            raise ValueError('Local configuration values must be nonempty strings.')
-    options={
-        'install_root':str(args.install_root or saved.get('install_root') or default_install()),
-        'source_profile':args.source_profile or saved.get('source_profile','max'),
-        'model':args.model or saved.get('model','hermes3:8b'),
-        'copy_saves':bool(args.copy_saves),
-    }
-    import re
-    if not re.fullmatch(r'[A-Za-z0-9_-]{1,48}',options['source_profile']):
-        raise ValueError('Source profile must contain 1-48 ASCII letters, digits, underscores or hyphens.')
-    if args.save_config:
-        persisted={key:options[key] for key in ('install_root','source_profile','model')}
-        temporary=config_path.with_suffix('.json.new')
-        temporary.write_text(json.dumps(persisted,indent=2)+'\n',encoding='utf-8')
-        temporary.replace(config_path)
-    LAUNCH_OPTIONS.clear()
-    LAUNCH_OPTIONS.update(options)
-    return options
 
 
 def get_status():
@@ -63,12 +32,12 @@ def background(command,log):
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
 
 
-def prepare(profile,copy_saves=None,reset_settings=False):
+def prepare(profile,copy_saves=False,reset_settings=False):
     from scripts.prepare_profile import prepare,DEFAULT_INSTALL
-    args=argparse.Namespace(install_root=Path(LAUNCH_OPTIONS.get('install_root',DEFAULT_INSTALL)),state_dir=STATE,
-        source_profile=LAUNCH_OPTIONS.get('source_profile','max'),profile=profile,smoke=False,
-        copy_saves=LAUNCH_OPTIONS.get('copy_saves',False) if copy_saves is None else copy_saves,
-        reset_settings=reset_settings)
+    selected_install=os.environ.get('HALVETH_MORROWIND_INSTALL_ROOT')
+    install_root=Path(selected_install).resolve() if selected_install else DEFAULT_INSTALL
+    args=argparse.Namespace(install_root=install_root,state_dir=STATE,
+        source_profile='max',profile=profile,smoke=False,copy_saves=copy_saves,reset_settings=reset_settings)
     return prepare(args)
 
 
@@ -91,7 +60,7 @@ def companion(profile='beauty'):
     log=STATE/'game.stdout.log'
     if existing is None:
         python=Path(sys.executable)
-        process=background([str(python),str(ROOT/'server.py'),'--log',str(log),'--model',LAUNCH_OPTIONS.get('model','hermes3:8b')],'companion.log')
+        process=background([str(python),str(ROOT/'server.py'),'--log',str(log)],'companion.log')
         (STATE/'companion.pid').write_text(str(process.pid),encoding='ascii')
         for _ in range(40):
             if get_status():
@@ -225,13 +194,7 @@ def main(argv=None):
         help='Start Morrowind and its hidden local companion directly, without a launcher window or browser.')
     mode.add_argument('--companion-only',action='store_true')
     parser.add_argument('--profile',choices=['original','beauty','cinematic'],default='beauty')
-    parser.add_argument('--install-root',type=Path)
-    parser.add_argument('--source-profile')
-    parser.add_argument('--model')
-    parser.add_argument('--copy-saves',action='store_true')
-    parser.add_argument('--save-config',action='store_true')
     args=parser.parse_args(argv)
-    configure(args)
     if args.companion_only:
         companion(args.profile)
         return 0

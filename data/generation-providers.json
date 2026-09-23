@@ -14,7 +14,7 @@
       ],
       "gameUse": "Textur- und Konzeptmaster erzeugen; vor OpenMW-Import Maße, UV-Ausrichtung, Farbkanal und Normal-/Specular-Maps prüfen.",
       "availability": "REQUIRES_PROVIDER_ACCESS",
-      "accessNote": "Production brief included. Obtain the required software/account, plan, credits and export rights on your own computer; none are bundled.",
+      "accessNote": "Produktionsbrief bereit. In den geprüften lokalen Standardinstallationsorten wurden Adobe-Apps nicht gefunden. Cloud-Konto, Plan und Credits sind noch ungeprüft.",
       "sources": [
         "https://www.adobe.com/products/photoshop/generate-image.html",
         "https://helpx.adobe.com/photoshop/using/export-artboards-layers.html",
@@ -33,7 +33,7 @@
       ],
       "gameUse": "Intro, Trailer, Lore-Vision oder vorbereitete Effektframes. Gerendertes Video erzeugt keinen begehbaren Spielort.",
       "availability": "REQUIRES_PROVIDER_ACCESS",
-      "accessNote": "Production brief included. Obtain the required software/account, plan, credits and export rights on your own computer; none are bundled.",
+      "accessNote": "Produktionsbrief bereit. After Effects wurde in den geprüften lokalen Standardinstallationsorten nicht gefunden. Installation und Lizenz fehlen als nutzbarer Zugang.",
       "sources": [
         "https://helpx.adobe.com/after-effects/using/basics-rendering-exporting.html",
         "https://www.adobe.com/learn/after-effects/web/native-3d-meshes-substance-textures"

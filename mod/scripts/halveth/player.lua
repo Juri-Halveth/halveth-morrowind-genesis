@@ -83,7 +83,9 @@ local function context()
     end
     table.sort(quests,function(a,b) return a.id<b.id end)
     while #quests>100 do table.remove(quests) end
+    local worldlife=I.HALVETHWorldlife and I.HALVETHWorldlife.getContext() or nil
     return {worldId=worldId,player=player,npc=npc,selectionMethod=method,nearby=actors,quests=quests,
+        worldlife=worldlife,
         book=lastBook,anchors={{id='session_start',label='Startpunkt dieser Sitzung'}},
         engine={apiRevision=core.API_REVISION},gameTime=core.getGameTime()}
 end

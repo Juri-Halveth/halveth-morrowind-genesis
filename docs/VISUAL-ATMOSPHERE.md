@@ -6,7 +6,8 @@ Spielwelt, die Figuren und die vorhandenen Grafikpakete bleiben dieselben.
 stellt die native Schnittstelle `HALVETHVisuals` bereit:
 
 - `getState()` meldet den gewaehlten Modus und ob OpenMW den Filter aktiviert hat.
-- `cycle()` wechselt zwischen Scharlachlicht, Morgenrot, Nachtglas und Original.
+- `cycle()` wechselt zwischen Scharlachlicht, Morgenrot, Lebendige Welt,
+  Nachtglas und Original.
 - `setMode('original')` deaktiviert den HALVETH-Filter. Andere Filter in der
   OpenMW-Kette werden dabei nicht beruehrt.
 
@@ -29,6 +30,17 @@ mehr Farbtiefe und Kontrast. Sie kopiert keine Grafik oder Shaderdatei aus
 New World. Der Modus wirkt auf die laufende Morrowind-Szene, nicht auf die
 Originaltexturen oder andere installierte Grafikpakete.
 
+**Lebendige Welt** fragt in Aussenbereichen alle zwei Sekunden Sonnenanteil und
+Sturmstatus der aktuellen OpenMW-Zelle ab und passt Waerme, Farbtiefe und
+Kontrast innerhalb enger Grenzen an. In Innenraeumen bleibt der Filter bei
+einer festen, milden Abstimmung. `getState().environment` zeigt die Quelle
+`weather` oder `interior` sowie den zuletzt gelesenen Sonnenanteil. Die
+Wetterabfrage veraendert weder Spielzeit noch Wetter oder Questdaten. Die
+beiden Pfade wurden in frischen, isolierten OpenMW-0.51-Spielprozessen mit
+aktiver Renderkette getestet. Das ist keine GPU-Benchmarkmessung.
+
 Die Runtime-Anbindung basiert auf der zum installierten Engine-Tag gehoerenden
 [OpenMW-0.51-Postprocessing-API](https://github.com/OpenMW/openmw/blob/openmw-0.51.0/files/lua_api/openmw/postprocessing.lua).
+Die Wetterwerte stammen aus der
+[OpenMW-0.51-Wetter-API](https://openmw.readthedocs.io/en/openmw-0.51.0/reference/lua-scripting/openmw_core.html#type-weather).
 Der GLSL-Code und die Lichtprofile sind neu fuer HALVETH Genesis verfasst.
