@@ -378,8 +378,8 @@
     },
     {
       "path": "scripts/prepare_profile.py",
-      "bytes": 19184,
-      "sha256": "fbdb204738d7b7c7a563bbb817d299149fd63d8cb56577efbd080ddc1b8e95b2"
+      "bytes": 19206,
+      "sha256": "8a7ecf0f16c914a613f881700d9b98a3d45d3ff1ba44d702839c474159d8033a"
     },
     {
       "path": "scripts/survey_universe.py",
