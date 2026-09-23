@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 0.9.0
+# HALVETH Morrowind Genesis · 1.0.0
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -65,6 +65,8 @@ Mit **Rufen** kann draußen ein eigener HALVETH-Wanderer entstehen. Er bewegt si
 Version 0.8.1 verbindet die Chronik direkt mit dem Gespräch: Figur auswählen, **Sprechen** anklicken, Unterhaltung beginnen. Ist die Figur nicht mehr in der geladenen Umgebung, bleibt das Weltleben-Fenster offen und meldet dies. Die sieben Aktionsknöpfe passen sich der Fensterbreite an. Der Weg wurde mit Arrille in einer isolierten OpenMW-Sitzung einschließlich Speichern/Laden geprüft.
 
 Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiterhin deiner Figur in derselben Morrowind-Welt; im Sicht-Fenster schaltest du Ich-Sicht, Außen-Sicht oder freien Blick um und drehst oder zoomst die Kamera. Das Fenster zeigt bis zu sechs geladene Figuren, deren Position in den aktuellen Bildausschnitt projiziert wird. Dieser begrenzte Blickkontext erreicht auch den lokalen Gesprächsbegleiter. Eine Projektion prüft weder Sichtlinien noch die Gedanken anderer Figuren. [Bedienung, Quellen und Grenzen](docs/PLAYER-PERSPECTIVE.md).
+
+**Version 1.0** ist die erste fest gebundene Ausgabe dieser OpenMW-Erweiterung. Die Weltleben-Erinnerung wird nur der tatsächlich angesprochenen NPC-Instanz zugeordnet; eine zuvor im Chronikfenster markierte Figur wird nicht in ein anderes Gespräch übernommen. Ein eigener Wanderer kann nach einem Zellwechsel gezielt zum Entfernen vorgemerkt werden, ohne die Figur dauerhaft zu blockieren. [Native Prüfungen und Grenzen](docs/NATIVE-VERIFICATION-1.0.0.json). Eine vorhandene OpenMW-0.51-Installation und lizenzierte Morrowind-Daten bleiben für den öffentlichen Installer erforderlich.
 
 Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 

@@ -153,23 +153,17 @@ local function snapshot()
         panelOpen=window~=nil,day=day(),cell=cellKey(self.cell),message=message,
         observationLimit=MAX_PEOPLE,pulseLimit=MAX_PULSES}
 end
-local function getContext()
+local function getContext(targetId)
     local s=snapshot()
-    local selectedPerson=nil
-    if selected and people[selected] then selectedPerson=people[selected] end
-    if not selectedPerson then
-        for _,actor in ipairs(nearby.actors) do
-            if actor:isValid() and people[tostring(actor.id)] then
-                selectedPerson=people[tostring(actor.id)];break
-            end
-        end
-    end
+    -- The chronicle's UI selection is not the current conversation partner.
+    -- Bind optional actor history only to the exact actor chosen by player.lua.
+    local target=targetId~=nil and people[tostring(targetId)] or nil
     local regional=C.array()
     for i=1,math.min(5,#s.pulses) do regional[#regional+1]=s.pulses[i] end
     return {gameDay=s.day,region=s.cell,observedPeople=#s.people,
-        npc=selectedPerson and {name=selectedPerson.name,role=selectedPerson.role,
-            place=selectedPerson.place,sightings=selectedPerson.sightings,
-            dialogues=selectedPerson.dialogues,factions=selectedPerson.factions} or nil,
+        npc=target and {id=target.id,name=target.name,role=target.role,
+            place=target.place,sightings=target.sightings,
+            dialogues=target.dialogues,factions=target.factions} or nil,
         regionalPulse=regional,pulseMeaning='Eigene Simulation aus beobachteten NPC-Praesenzen und Dialogen; kein Original-Fraktionswert.'}
 end
 local function close()

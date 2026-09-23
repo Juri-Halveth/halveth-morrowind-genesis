@@ -1,0 +1,46 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "1.0.0",
+  "recordedAt": "2026-09-23T18:17:21Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "Fresh disposable game sessions and a separate installed-0.9 regression; personal saves were not loaded or copied."
+  },
+  "checks": {
+    "exactNpcChronicleContext": {
+      "state": "PASS",
+      "localReceiptSha256": "9501d556590377d2b93c03bbacccfec6e5a551bcdefc7561d34de24b35969f96",
+      "actualArrilleConversation": "PASS",
+      "otherActorSelectionDoesNotLeak": "PASS",
+      "saveReload": "PASS",
+      "errorsObserved": 0
+    },
+    "ownedWandererOffscreenDismiss": {
+      "state": "PASS",
+      "localReceiptSha256": "0c03bb9a044cfcffd764fd04faf6e8cf133aba7a4ab9a3082ac4b738caa15721",
+      "sourceSha256": "5f2d353893538dd92353ca552316bb1b870d414b1db224bcbe5484ecaacdb759",
+      "movementMeasured": "82.6 game units",
+      "remoteDismissAndSaveReload": "PASS",
+      "exactOwnedActorRemovedOnRevisit": "PASS",
+      "originalActorsStillVisible": 15,
+      "replacementSpawnAndDismiss": "PASS",
+      "errorsObserved": 0
+    },
+    "installed09Baseline": {
+      "state": "PASS",
+      "localReceiptSha256": "4a29781aa608bd75db55c9eab24b13abacbae54b8eaebfc6792869212903536d",
+      "knowledgeSaveReload": "PASS",
+      "characterInventoryMagicNpcView": "PASS",
+      "personalSaveHashesUnchanged": true
+    }
+  },
+  "priorNativeVerification": "docs/NATIVE-VERIFICATION-0.9.0.json",
+  "limits": [
+    "Installed 0.9 baseline and current 1.0 source tests are distinct evidence surfaces; a 1.0 installed build is not yet claimed here.",
+    "The 1.0 native tests use disposable game sessions and do not prove compatibility with every personal save or mod load order.",
+    "Native UI interfaces were called; every control was not physically clicked at every resolution.",
+    "No complete world rewrite, general frame-rate measurement, hosted multiplayer or single-file licensed Morrowind game was tested."
+  ]
+}

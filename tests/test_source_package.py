@@ -100,6 +100,7 @@ class SourcePackageTests(unittest.TestCase):
             'docs/NATIVE-VERIFICATION-0.8.0.json',
             'docs/NATIVE-VERIFICATION-0.8.1.json',
             'docs/NATIVE-VERIFICATION-0.9.0.json',
+            'docs/NATIVE-VERIFICATION-1.0.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -167,8 +168,8 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.9.0')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.9.0-public-source.zip')
+        self.assertEqual(release.VERSION, '1.0.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-1.0.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
@@ -181,6 +182,7 @@ class SourcePackageTests(unittest.TestCase):
         self.assertIn('native Sammelatlas', note)
         self.assertIn('native observed-NPC worldlife journal', note)
         self.assertIn('native first-person, third-person and free-look camera panel', note)
+        self.assertIn('binds observed NPC history to the actual conversation target', note)
         self.assertIn('MIT',note)
         self.assertIn('CC0-1.0',note)
         self.assertNotIn('LICENSE-DECISION',note)

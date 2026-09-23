@@ -65,6 +65,12 @@ local function tick()
         assert(I.HALVETHWorldlife.isOpen(),'Native chronicle window did not open')
         assert(not I.HALVETHWorldlife.select('missing-instance'),'Unknown NPC was selected')
         assert(I.HALVETHWorldlife.select(actorId),'Observed Arrille could not be selected')
+        local bound=I.HALVETHWorldlife.getContext(actorId)
+        assert(bound.npc and bound.npc.id==actorId,'Observed history did not bind to the exact NPC')
+        assert(I.HALVETHWorldlife.getContext('another-instance').npc==nil,
+            'Chronicle UI selection leaked into another NPC conversation')
+        assert(I.HALVETHWorldlife.getContext().npc==nil,
+            'Chronicle UI selection leaked into a conversation without NPC target')
         assert(I.HALVETHWorldlife.talkSelected(),'Chronicle could not open conversation with nearby Arrille')
         assert(not I.HALVETHWorldlife.isOpen(),'Native chronicle window did not close')
         assert(I.HALVETH.isOpen(),'Selected NPC conversation did not open in game')

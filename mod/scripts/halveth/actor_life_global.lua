@@ -5,19 +5,25 @@ local types=require('openmw.types')
 local util=require('openmw.util')
 
 local actorId,recordId,pending,actorRef=nil,nil,nil,nil
+local MAX_RETIRED=128
+-- Unloaded generated actors cannot be resolved by FormId. Keep a save-backed
+-- removal intent until that exact actor becomes active again.
+local retired={}
+local function ownActor(actor,id,record)
+    return actor and actor:isValid() and actor.id==id and actor.recordId==record
+        and types.NPC.objectIsInstance(actor) and actor.contentFile==nil
+end
 local function resolve()
     if not actorId or not recordId then return nil end
-    local actor=actorRef
-    if actor and actor:isValid() and actor.id==actorId and actor.recordId==recordId
-        and types.NPC.objectIsInstance(actor) and actor.contentFile==nil then return actor end
-    actorRef=nil
-    -- Dynamically generated actor IDs have @... form, not content FormIds.
+    -- isValid() does not by itself establish that the actor is in a currently
+    -- active cell. In particular, a cached generated reference can survive a
+    -- player cell change. Only world.activeActors is authoritative here.
     for _,candidate in ipairs(world.activeActors) do
-        if candidate.id==actorId and candidate.recordId==recordId
-            and candidate.contentFile==nil and types.NPC.objectIsInstance(candidate) then
+        if ownActor(candidate,actorId,recordId) then
             actorRef=candidate;return candidate
         end
     end
+    actorRef=nil
 end
 local function report(player,requestId,ok,message)
     if not player or not player:isValid() then return end
@@ -36,7 +42,9 @@ local function request(data)
     local actor=resolve()
     if command=='status' then
         report(player,data.requestId,true,actor and 'Wanderer in der geladenen Welt.'
-            or actorId and 'Wanderer derzeit ausserhalb der geladenen Welt.' or 'Noch kein Wanderer gerufen.')
+            or actorId and 'Wanderer derzeit ausserhalb der geladenen Welt.'
+            or #retired>0 and ('Kein aktiver Wanderer; '..#retired..' eigene Figur(en) zur Entfernung vorgemerkt.')
+            or 'Noch kein Wanderer gerufen.')
         return
     end
     if command=='spawn' then
@@ -62,6 +70,17 @@ local function request(data)
         pending={player=player,requestId=data.requestId,frames=0}
         return
     end
+    if command=='dismiss' and actorId and not actor then
+        if #retired>=MAX_RETIRED then
+            report(player,data.requestId,false,
+                'Zu viele vorgemerkte Wanderer. Bitte zuerst eine ihrer Zellen erneut laden.');return
+        end
+        retired[#retired+1]={actorId=actorId,recordId=recordId}
+        actorId=nil;recordId=nil;actorRef=nil
+        report(player,data.requestId,true,
+            'Wanderer ausserhalb der geladenen Welt vorgemerkt; beim naechsten Laden genau seiner Zelle wird nur er entfernt.')
+        return
+    end
     if not actor then
         report(player,data.requestId,false,'Der eigene Wanderer ist hier nicht geladen.');return
     end
@@ -79,6 +98,18 @@ local function request(data)
     else report(player,data.requestId,false,'Unbekannte Wanderer-Aktion.') end
 end
 local function update()
+    if #retired>0 then
+        for _,candidate in ipairs(world.activeActors) do
+            for i=#retired,1,-1 do
+                local entry=retired[i]
+                if ownActor(candidate,entry.actorId,entry.recordId) then
+                    candidate:remove()
+                    table.remove(retired,i)
+                    break
+                end
+            end
+        end
+    end
     if not pending then return end
     pending.frames=pending.frames+1
     if pending.frames<5 then return end
@@ -91,11 +122,21 @@ local function update()
     pending=nil
 end
 return {engineHandlers={onUpdate=update,
-    onSave=function()return {version=1,actorId=actorId,recordId=recordId}end,
+    onSave=function()return {version=1,actorId=actorId,recordId=recordId,retired=retired}end,
     onLoad=function(data)
-        pending=nil;actorRef=nil
+        pending=nil;actorRef=nil;retired={}
         actorId=type(data)=='table' and data.version==1 and data.actorId or nil
         recordId=type(data)=='table' and data.version==1 and data.recordId or nil
+        if type(data)=='table' and data.version==1 and type(data.retired)=='table' then
+            for _,entry in ipairs(data.retired) do
+                if #retired>=MAX_RETIRED then break end
+                if type(entry)=='table' and type(entry.actorId)=='string'
+                    and type(entry.recordId)=='string' and entry.actorId:match('^@0x[%da-fA-F]+$')
+                    and entry.recordId:lower():match('^generated:') then
+                    retired[#retired+1]={actorId=entry.actorId,recordId=entry.recordId}
+                end
+            end
+        end
     end,
-    onNewGame=function()actorId=nil;recordId=nil;pending=nil;actorRef=nil end},
+    onNewGame=function()actorId=nil;recordId=nil;pending=nil;actorRef=nil;retired={} end},
     eventHandlers={HALVETH_AmbientRequest=request}}

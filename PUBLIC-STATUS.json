@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.9.0",
-  "scope": "Native TES III Morrowind extension: player-centred camera and bounded viewpoint context, observed worldlife chronicle with direct NPC conversation, live atmosphere, and earlier dialogue, knowledge and exploration paths",
+  "version": "1.0.0",
+  "scope": "Native TES III Morrowind/OpenMW extension: bounded player viewpoint, exact NPC chronicle binding, owned wanderer lifecycle, live atmosphere, and in-game dialogue, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -58,10 +58,10 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.8.1",
+    "version": "0.9.0",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "f1504ad174726b5a53a3eafdf81c0489aa80e95d",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.8.1"
+    "publicCommit": "13f65b1f9f1a4ac5a2046f0c947fd42aeb1c774f",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.9.0"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
@@ -86,15 +86,17 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "PASSED_PLAYER_CAMERA_ISOLATED_OPENMW_TEST",
-    "summary": "docs/NATIVE-VERIFICATION-0.9.0.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.8.1.json"
+    "state": "PASSED_EXACT_NPC_CONTEXT_AND_OWNED_WANDERER_NATIVE_SAVE_RELOAD",
+    "summary": "docs/NATIVE-VERIFICATION-1.0.0.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.9.0.json"
   },
   "limitations": [
     "The public source archive contains installer source and own art, but no Bethesda game assets or engine binaries",
     "Public setup candidate needs an existing configured OpenMW installation; private full-engine setup is local-only pending binary dependency and corresponding-source review",
     "One setup EXE and one visible game entry do not make Morrowind's runtime, resources, model weights, or licensed game assets a single file",
     "The public setup needs a previously configured OpenMW profile; the private local full-engine setup can instead bind the user's licensed Data Files directly",
+    "The public setup is unsigned and does not discover every standard Steam, GOG or OpenMW layout automatically",
+    "Free NPC speech still uses an optional separately installed local Ollama service; the game remains playable offline",
     "Building the setup from source requires .NET 10, Python, Pillow and the verified Python embeddable ZIP; running its self-contained EXE does not require a local compiler",
     "Native gameplay on Linux not tested",
     "Sustained frame rate and manual camera/button paths at every resolution remain unverified in the personal game session",
@@ -103,6 +105,6 @@
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T17:11:00Z",
+  "recordedAt": "2026-09-23T18:14:27Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

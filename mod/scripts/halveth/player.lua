@@ -83,7 +83,7 @@ local function context()
     end
     table.sort(quests,function(a,b) return a.id<b.id end)
     while #quests>100 do table.remove(quests) end
-    local worldlife=I.HALVETHWorldlife and I.HALVETHWorldlife.getContext() or nil
+    local worldlife=I.HALVETHWorldlife and I.HALVETHWorldlife.getContext(npc and npc.kind=='npc' and npc.id or nil) or nil
     local viewpoint=I.HALVETHPerspective and I.HALVETHPerspective.getState() or nil
     return {worldId=worldId,player=player,npc=npc,selectionMethod=method,nearby=actors,quests=quests,
         worldlife=worldlife,viewpoint=viewpoint,

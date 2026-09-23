@@ -8,7 +8,7 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.9.0'
+VERSION='1.0.0'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
@@ -23,7 +23,8 @@ EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'docs/NATIVE-VERIFICATION-0.6.0.json','docs/NATIVE-VERIFICATION-0.7.0.json',
                   'docs/NATIVE-VERIFICATION-0.8.0.json',
                   'docs/NATIVE-VERIFICATION-0.8.1.json',
-                  'docs/NATIVE-VERIFICATION-0.9.0.json'}
+                  'docs/NATIVE-VERIFICATION-0.9.0.json',
+                  'docs/NATIVE-VERIFICATION-1.0.0.json'}
 DATA_FILES={'data/projects.json','data/project-knowledge.json','data/generation-providers.json','data/native-content.json'}
 OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'mod/Textures/halveth/love-astrolabe-0.7.png',
@@ -100,6 +101,7 @@ def collect_files():
         'Version 0.8 adds a native observed-NPC worldlife journal, an optional owned wanderer, actor scheduling for the owned character, and live outdoor light response. The installer sources build a one-file Windows setup with an own LOVE icon; no installer EXE is part of this source ZIP.\n'
         'Version 0.8.1 opens a nearby observed NPC directly from the native Worldlife chronicle and lays out its controls responsively.\n'
         'Version 0.9 adds a native first-person, third-person and free-look camera panel, bounded viewport observations for the player dialogue context, and direct rotation and zoom controls.\n'
+        'Version 1.0 binds observed NPC history to the actual conversation target and makes the owned wanderer removable after changing cells, with native save/reload verification. It is a scoped OpenMW extension for an existing licensed Morrowind installation.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
         'Only the 5 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
@@ -134,6 +136,7 @@ def validate_files(files):
     required.add('docs/NATIVE-VERIFICATION-0.8.0.json')
     required.add('docs/NATIVE-VERIFICATION-0.8.1.json')
     required.add('docs/NATIVE-VERIFICATION-0.9.0.json')
+    required.add('docs/NATIVE-VERIFICATION-1.0.0.json')
     missing=required-files.keys()
     if missing:
         raise ValueError('Missing public release files: '+', '.join(sorted(missing)))
