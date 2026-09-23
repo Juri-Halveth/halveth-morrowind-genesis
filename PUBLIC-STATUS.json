@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.8.0",
-  "scope": "Native TES III Morrowind extension: observed worldlife chronicle, owned actor wandering, live outdoor atmosphere, single-file Windows setup candidate, and earlier dialogue, knowledge and exploration paths",
+  "version": "0.8.1",
+  "scope": "Native TES III Morrowind extension: observed worldlife chronicle with direct NPC conversation, owned actor wandering, live outdoor atmosphere, single-file Windows setup candidate, and earlier dialogue, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -27,6 +27,7 @@
     "nativeRecipePlanner": true,
     "nativeSammelatlas": true,
     "nativeObservedWorldlife": true,
+    "nativeWorldlifeDirectTalk": true,
     "ownedActorLife": true,
     "windowsSetupSource": "installer/",
     "windowsSetupVariants": ["owned-mod", "local-engine-private"],
@@ -55,10 +56,10 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.7.0",
+    "version": "0.8.0",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "36ce5a93f8f1c1836cac34338ee49f973fa59d1f",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.7.0"
+    "publicCommit": "46b04dc958f1a5d14f057f29dd1dd16f535a75dc",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.8.0"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
@@ -83,9 +84,9 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "PASSED_FOUR_ISOLATED_0_8_OPENMW_TESTS",
-    "summary": "docs/NATIVE-VERIFICATION-0.8.0.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.7.0.json"
+    "state": "PASSED_DIRECT_NPC_CONVERSATION_ISOLATED_OPENMW_TEST",
+    "summary": "docs/NATIVE-VERIFICATION-0.8.1.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.8.0.json"
   },
   "limitations": [
     "The public source archive contains installer source and own art, but no Bethesda game assets or engine binaries",
@@ -99,6 +100,6 @@
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T15:25:00Z",
+  "recordedAt": "2026-09-23T16:49:00Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 0.8.0
+# HALVETH Morrowind Genesis · 0.8.1
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -14,6 +14,7 @@ Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/R
 - **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.
 - **Sammeln** in der nativen Menüleiste öffnet den Sammelatlas: lose Zutaten in der geladenen Morrowind-Welt finden, ihren Ort notieren und ein Ziel im Spielbild verfolgen.
 - **Weltleben** in der nativen Menüleiste: beobachtete Figuren und regionale Fraktionsimpulse im Spiel verfolgen.
+- **Sprechen** im Weltleben-Fenster: eine noch nahe beobachtete Figur unmittelbar im nativen Gesprächsfenster ansprechen.
 - **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Morgenrot, Lebendige Welt, Nachtglas und Original umschalten.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
@@ -59,6 +60,8 @@ Die NPC-Auswahl bevorzugt das aktuelle Dialogziel, dann das anvisierte Wesen und
 Version 0.8 führt eine **native Weltleben-Chronik** ein. Sie merkt sich tatsächlich geladene und in der Nähe gesehene NPCs, wiederholte Begegnungen an anderen Orten sowie echte Gespräche im Spielstand. Ein regionaler Fraktionsimpuls ist eine klar getrennte neue Spielregel aus diesen Beobachtungen; er behauptet keine ungesehenen politischen Ereignisse. Der lokale Gesprächsbegleiter erhält daraus einen begrenzten Kontext. Die Original-Fraktionswerte und Queststufen werden nicht durch die Chronik verändert.
 
 Mit **Rufen** kann draußen ein eigener HALVETH-Wanderer entstehen. Er bewegt sich mit einem nativen OpenMW-Wanderpaket und kann pausiert, fortgesetzt oder gezielt entfernt werden. Die Original-NPCs bleiben unverändert. [Spielregel und Grenzen](docs/WORLDLIFE-0.8.md).
+
+Version 0.8.1 verbindet die Chronik direkt mit dem Gespräch: Figur auswählen, **Sprechen** anklicken, Unterhaltung beginnen. Ist die Figur nicht mehr in der geladenen Umgebung, bleibt das Weltleben-Fenster offen und meldet dies. Die sieben Aktionsknöpfe passen sich der Fensterbreite an. Der Weg wurde mit Arrille in einer isolierten OpenMW-Sitzung einschließlich Speichern/Laden geprüft.
 
 Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 

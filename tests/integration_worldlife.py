@@ -63,8 +63,12 @@ local function tick()
         assert(c and c.observedPeople>=1 and c.pulseMeaning,'Companion context lacks bounded worldlife')
         I.HALVETHWorldlife.open()
         assert(I.HALVETHWorldlife.isOpen(),'Native chronicle window did not open')
-        I.HALVETHWorldlife.close()
+        assert(not I.HALVETHWorldlife.select('missing-instance'),'Unknown NPC was selected')
+        assert(I.HALVETHWorldlife.select(actorId),'Observed Arrille could not be selected')
+        assert(I.HALVETHWorldlife.talkSelected(),'Chronicle could not open conversation with nearby Arrille')
         assert(not I.HALVETHWorldlife.isOpen(),'Native chronicle window did not close')
+        assert(I.HALVETH.isOpen(),'Selected NPC conversation did not open in game')
+        I.HALVETH.close()
         nextPhase('saved')
         require('openmw.types').Player.sendMenuEvent(self,'HALVETH_WorldlifeSave',{slot='worldlife-isolated'})
     elseif phase=='reloaded' and now-entered>1 then
@@ -73,7 +77,7 @@ local function tick()
         assert(I.HALVETHWorldlife.getState().panelOpen==false,'UI state persisted as open')
         assert(I.HALVETHWorldlife.observe(actor(),false),'Real NPC no longer observable after reload')
         assert(person(actorId).sightings==1,'Same-day presence inflated after reload')
-        finish(true,'realNPC=PASS presenceDedup=PASS dialogueDedup=PASS nativeWindow=PASS companionContext=PASS actualSaveReload=PASS')
+        finish(true,'realNPC=PASS presenceDedup=PASS dialogueDedup=PASS nativeConversation=PASS companionContext=PASS actualSaveReload=PASS')
     end
 end
 return {engineHandlers={

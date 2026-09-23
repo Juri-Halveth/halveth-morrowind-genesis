@@ -1,0 +1,38 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.8.1",
+  "recordedAt": "2026-09-23T16:50:06Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "One fresh isolated native session with the actual Arrille NPC, HALVETH native windows and actual save/reload. No personal save loaded."
+  },
+  "checks": {
+    "worldlifeDirectConversation": {
+      "state": "PASS",
+      "localReceiptSha256": "119275afc3a85dc2583cae9ba18b43144abfef3ceffc3e876fe8591df3ce0280",
+      "sourceSha256": "9ed7b3878b0bd30a9912523f96eaa9b5997cd600d99a9177ea03a08b6e0c8935",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "realNpcSelected": "PASS",
+      "nativeConversationOpened": "PASS",
+      "worldlifePanelClosed": "PASS",
+      "presenceAndDialogueDeduplication": "PASS",
+      "actualSaveReload": "PASS",
+      "personalSavesUsed": false
+    },
+    "sourceUnitSuite": {
+      "state": "PASS",
+      "count": 71,
+      "command": "python -m unittest discover -s tests -p test_*.py -q",
+      "scope": "Local Windows source and temporary fixtures"
+    }
+  },
+  "priorNativeVerification": "docs/NATIVE-VERIFICATION-0.8.0.json",
+  "limits": [
+    "The test invokes the native Worldlife interface with a real nearby NPC; it does not automate a physical mouse click on every display resolution.",
+    "A title-screen launch or isolated test does not prove performance or compatibility with every personal save and mod combination.",
+    "Free-form AI responses still use the optional local Ollama service; in-process model inference is not part of 0.8.1."
+  ]
+}

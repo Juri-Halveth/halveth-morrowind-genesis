@@ -16,7 +16,7 @@ local people,pulses={},{}
 local selected,window,detail,summary,rows,mode,addedMode=nil,nil,nil,nil,{},nil,false
 local retainedInvalidSave,lastScan,lastCell=nil,-100,nil
 local message='Diese Chronik beobachtet echte Begegnungen. Der Fraktionsimpuls ist eine zusaetzliche Spielsimulation.'
-local scan,refresh
+local scan,refresh,open
 
 local function validText(s)
     return type(s)=='string' and #s>0 and #s<=256 and not s:find('[%z\1-\31]')
@@ -178,10 +178,33 @@ local function close()
     if addedMode then I.UI.removeMode('Interface');addedMode=false end
     mode=nil
 end
-local function button(label,x,y,w,fn)
+local function button(label,x,y,w,fn,fontSize)
     return {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-        props={position=util.vector2(x,y),size=util.vector2(w,30),text=label,textSize=17},
+        props={position=util.vector2(x,y),size=util.vector2(w,30),text=label,textSize=fontSize or 17},
         events={mouseClick=async:callback(fn)}}
+end
+local function talkSelected()
+    if not (selected and people[selected]) then
+        message='Waehle zuerst eine beobachtete Figur.'
+        refresh();return false
+    end
+    local target
+    for _,actor in ipairs(nearby.actors) do
+        local info=actorInfo(actor)
+        if info and info.id==selected then target=actor;break end
+    end
+    if not target then
+        message='Diese Figur ist gerade nicht mehr in der geladenen Umgebung.'
+        refresh();return false
+    end
+    if not (I.HALVETH and I.HALVETH.talkTo) then
+        message='Das native Gespraechsfenster ist gerade nicht verfuegbar.'
+        refresh();return false
+    end
+    close()
+    if I.HALVETH.talkTo(target) then return true end
+    message='Diese Figur ist gerade nicht mehr ansprechbar.'
+    open();return false
 end
 local function detailText()
     local p=selected and people[selected]
@@ -193,6 +216,7 @@ local function detailText()
         lines[#lines+1]='Beobachtete Tage: '..p.sightings..' | Gespraeche: '..p.dialogues
         lines[#lines+1]='Bewegung: '..p.movement
         lines[#lines+1]='Fraktionen: '..(#p.factions>0 and table.concat(p.factions,', ') or 'keine erfasst')
+        lines[#lines+1]='[Sprechen] oeffnet direkt die Unterhaltung, solange diese Figur noch in deiner Naehe ist.'
     else lines[#lines+1]='Waehle links eine beobachtete Figur.' end
     lines[#lines+1]='REGIONALER IMPULS / EIGENE SIMULATION'
     local items=sortedPulses(cellKey(self.cell))
@@ -224,7 +248,7 @@ refresh=function()
     if summary then summary.props.text=#list..' beobachtete Figuren · Spieltag '..day()..' · '..message end
     if window then window:update() end
 end
-local function open()
+open=function()
     if window then close();return end
     if I.HALVETHUniverse then I.HALVETHUniverse.close() end
     if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
@@ -254,12 +278,21 @@ local function open()
     summary={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
         props={position=util.vector2(18,h-107),size=util.vector2(w-36,50),text='',textSize=15,wordWrap=true}}
     content[#content+1]=detail;content[#content+1]=summary
-    content[#content+1]=button('[Aktualisieren]',18,h-48,172,function()scan();refresh()end)
-    content[#content+1]=button('[Rufen]',196,h-48,100,function()I.HALVETHAmbient.spawn();refresh()end)
-    content[#content+1]=button('[Pause]',303,h-48,100,function()I.HALVETHAmbient.pause();refresh()end)
-    content[#content+1]=button('[Weiter]',410,h-48,100,function()I.HALVETHAmbient.resume();refresh()end)
-    content[#content+1]=button('[Entfernen]',517,h-48,130,function()I.HALVETHAmbient.dismiss();refresh()end)
-    content[#content+1]=button('[Schliessen]',w-166,h-48,148,close)
+    local controls={
+        {w<900 and '[Neu]' or '[Aktualisieren]',function()scan();refresh()end},
+        {'[Sprechen]',talkSelected},
+        {'[Rufen]',function()I.HALVETHAmbient.spawn();refresh()end},
+        {'[Pause]',function()I.HALVETHAmbient.pause();refresh()end},
+        {'[Weiter]',function()I.HALVETHAmbient.resume();refresh()end},
+        {'[Entfernen]',function()I.HALVETHAmbient.dismiss();refresh()end},
+        {'[Schliessen]',close},
+    }
+    local gap=6
+    local slot=math.floor((w-36-gap*(#controls-1))/#controls)
+    for i,control in ipairs(controls) do
+        content[#content+1]=button(control[1],18+(i-1)*(slot+gap),h-48,
+            slot,control[2],w<900 and 14 or 16)
+    end
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
         props={relativePosition=util.vector2(.5,.5),anchor=util.vector2(.5,.5),size=util.vector2(w,h)},
         content=ui.content(content)}
@@ -327,7 +360,14 @@ local function onLoad(data)
 end
 return {interfaceName='HALVETHWorldlife',
     interface={version=1,open=open,close=close,isOpen=function()return window~=nil end,
-        getState=snapshot,getContext=getContext,observe=observe,refresh=refresh},
+        getState=snapshot,getContext=getContext,observe=observe,refresh=refresh,
+        select=function(id)
+            if not people[id] then return false end
+            selected=id
+            if window then refresh() end
+            return true
+        end,
+        talkSelected=talkSelected},
     engineHandlers={onLoad=onLoad,onSave=function()return retainedInvalidSave or export()end,
         onFrame=function()
             if window and I.UI.getMode()~=mode then close() end

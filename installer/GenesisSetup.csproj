@@ -15,7 +15,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>HALVETH Morrowind</AssemblyName>
     <RootNamespace>Halveth.Genesis.Setup</RootNamespace>
-    <Version>0.8.0</Version>
+    <Version>0.8.1</Version>
     <ApplicationIcon Condition="Exists('love-astrolabe.ico')">love-astrolabe.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>

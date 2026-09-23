@@ -101,15 +101,15 @@ def main() -> None:
     if temporary.parent != BASE.resolve() or temporary.is_symlink():
         raise RuntimeError('Isolated smoke target escaped its workspace boundary.')
     try:
-        public = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.0-Setup.exe'
-        private = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.0-Local-Engine-Setup.exe'
+        public = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.1-Setup.exe'
+        private = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.1-Local-Engine-Setup.exe'
         results = [run_variant('owned-mod', public, temporary / 'public',
                                args.engine_root, args.source_profile, args.game_data),
                    run_variant('local-engine', private, temporary / 'private',
                                args.engine_root, args.source_profile, args.game_data)]
         empty_cleanup = run_empty_target_cleanup(public, temporary / 'empty',
                                                  args.engine_root, args.source_profile)
-        receipt = {'schema': 'halveth.genesis.installer-smoke/1', 'version': '0.8.0',
+        receipt = {'schema': 'halveth.genesis.installer-smoke/1', 'version': '0.8.1',
                    'status': 'PASS', 'scope': 'fresh isolated install/check/self-uninstall/retry',
                    'licensedGameDataCopied': False, 'personalSavesLoaded': False,
                    'results': results, 'emptyTargetCleanup': empty_cleanup}

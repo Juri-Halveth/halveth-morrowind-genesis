@@ -36,3 +36,10 @@ OpenMW-Test beobachtete 81,1 Welteinheiten tatsächliche Bewegung und prüfte
 Pause/Fortsetzung, Save/Reload und Entfernen. Der Wanderer verwendet Körper-
 und Kopfressourcen der vorhandenen Morrowind-Installation; er ist noch keine
 globale NPC-Bevölkerungs- oder politische Vollsimulation.
+
+Version 0.8.1 ergänzt **Sprechen** direkt in der Chronik. Der Knopf löst die
+gewählte Figureninstanz erneut in der geladenen Umgebung auf. Nur wenn sie
+noch dort und ansprechbar ist, öffnet sich das native HALVETH-Gespräch; sonst
+bleibt die Chronik offen und zeigt den Grund. Die sieben Bedienelemente teilen
+sich die verfügbare Fensterbreite. Ein isolierter OpenMW-Test mit Arrille
+prüfte Auswahl, Gesprächswechsel und Speichern/Laden.
