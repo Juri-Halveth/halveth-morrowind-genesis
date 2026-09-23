@@ -70,6 +70,8 @@ Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiter
 
 **Version 1.0.1** ergänzt einen eigenen Portal-Einstieg direkt im nativen OpenMW-Hauptmenü. „Fortsetzen“ lädt den jüngsten vorhandenen Spielstand, „Neue Reise“ startet Morrowind, und „Spielstände / Optionen“ öffnet die vorhandenen OpenMW-Einstellungen. Die neue Grafik ist ein Originalmotiv; die ältere native Schaltflächenansicht und die OpenMW-Versionszeile werden im Einstiegsbild überdeckt. [Prüfumfang und offene Wege](docs/NATIVE-VERIFICATION-1.0.1.json). Scarlet Beauty hellt dunkle Ecken mit angepasstem Innenlicht, SSAO und geringerem Vignettieren auf; persönliche Spielstände bleiben unverändert.
 
+Der **1.0.2-Kandidat** verbindet den nativen Pulsar-Ursprung mit drei eigenen Bitterküsten-Materialien direkt in Morrowind. [Reborn-Kartografie](docs/REBORN-CARTOGRAPHY.md) beschreibt die lokale Landzellen-Zuordnung, die tatsächlich ersetzten Bodentexturen und die noch offene Bildprüfung. Der veröffentlichte und installierte Stand 1.0.1 erhält diese Kandidatenänderung erst durch einen späteren Patch.
+
 Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 
 **Startpunkt** bezeichnet den Ort beim Laden der Sitzung. **Zurück** führt an den vor der letzten Teleportation gespeicherten Ort. Die Schaltfläche **+250 Gold** ist ein zusätzliches Werkzeug. Der historische Vivec-Glitch bleibt separat in [docs/VIVEC-GOLD.md](docs/VIVEC-GOLD.md) dokumentiert.
@@ -105,6 +107,7 @@ python tests/integration_actor_life.py
 python tests/integration_art_070.py
 python tests/integration_origin.py
 python tests/integration_origin.py --fault-ui
+python tests/integration_terrain.py
 python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```

@@ -44,6 +44,22 @@
     "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/",
     "sha256": "e660b5662742f853d077d6a3744dc3bae42bd9747241ed557fb4ff1396b222fd"
   },
+  "rebornBitterCoastArtwork": {
+    "assetId": "reborn-bitter-coast-muck-1",
+    "generator": "Codex built-in imagegen",
+    "origin": "Generated from a new text brief without third-party reference images",
+    "generationBrief": "Top-down coastal peat and mud albedo with copper mineral flecks, roots and visibly greener emerald moss for an OpenMW terrain tile; neutral diffuse lighting and no symbols or text",
+    "actualDimensions": [1254, 1254],
+    "sourceMethod": "Generated first from text and then edited with built-in imagegen using only the project's own first image; selected PNG copied byte-for-byte; Pillow wrote an uncompressed RGB DDS without changing decoded pixels",
+    "usageScope": "Tx_BC_muck terrain texture. The installed Morrowind.esm LAND records for Seyda Neen (-2,-9) and (-2,-10) reference its LTEX index 92. Matching rock and grass materials use indices 94 and 90. Edge continuity and aesthetic result still need direct visual review."
+  },
+  "rebornBitterCoastCompanions": {
+    "generator": "Codex built-in imagegen",
+    "origin": "Distinct rock and grass materials generated using only the project's own green muck image as palette and scale reference",
+    "assets": ["reborn-bitter-coast-rock-1", "reborn-bitter-coast-grass-1"],
+    "sourceMethod": "Generated PNGs copied byte-for-byte; Pillow wrote uncompressed RGB DDS files with identical decoded pixels",
+    "reviewStatus": "VFS and native exterior startup verified; final visual tile and seam review open"
+  },
   "files": [
     {
       "path": "mod/Textures/halveth/scarlet-love-banner.png",
@@ -77,8 +93,44 @@
       "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds",
       "bytes": 6294280,
       "sha256": "431707b3fd10441e59aab5b414f1b478447a8ddf4a868fd9e4871b1d4db2e764"
+    },
+    {
+      "path": "assets/RebornBitterCoast/tx_bc_muck-source.png",
+      "assetId": "reborn-bitter-coast-muck-1",
+      "bytes": 3532397,
+      "sha256": "4fb32756b3ee5ab1470a4b49573d1bf21d042dfa514e7fe64f49b07fa5af4854"
+    },
+    {
+      "path": "mod/Textures/tx_bc_muck.dds",
+      "assetId": "reborn-bitter-coast-muck-1",
+      "bytes": 4717676,
+      "sha256": "4073def7d38d37b8e26d228ed0c409e353e1550f358d2f54fd8605f5645b338d"
+    },
+    {
+      "path": "assets/RebornBitterCoast/tx_bc_rock_01-source.png",
+      "assetId": "reborn-bitter-coast-rock-1",
+      "bytes": 3683131,
+      "sha256": "2f3e0a95c5307714c4d94125bfc77494db976d6b13b64e676366831c578fd74d"
+    },
+    {
+      "path": "mod/Textures/tx_bc_rock_01.dds",
+      "assetId": "reborn-bitter-coast-rock-1",
+      "bytes": 4717676,
+      "sha256": "99b5874d2353726645f651228dd977d4e861d475c49b87d5c0ac79eae95fa6bf"
+    },
+    {
+      "path": "assets/RebornBitterCoast/tx_bc_grass-source.png",
+      "assetId": "reborn-bitter-coast-grass-1",
+      "bytes": 3555440,
+      "sha256": "451ddc35bd05732ddd9aaad2f7a91268081a1f09a8d5f27da8516c3b84b19623"
+    },
+    {
+      "path": "mod/Textures/tx_bc_grass.dds",
+      "assetId": "reborn-bitter-coast-grass-1",
+      "bytes": 4717676,
+      "sha256": "7cae686b9738404cd4ca878e1308faeaeef20d8cf98503f4d02996e34536c0c6"
     }
   ],
   "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
-  "engineTarget": "Existing tapestry texture type, own native F8 UI images and a Windows installer icon; no ESM/ESP edits"
+  "engineTarget": "Existing tapestry and Bitter Coast terrain texture types, own native F8 UI images and a Windows installer icon; no ESM/ESP edits"
 }
