@@ -8,7 +8,7 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='1.0.0'
+VERSION='1.0.1'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
@@ -24,10 +24,12 @@ EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'docs/NATIVE-VERIFICATION-0.8.0.json',
                   'docs/NATIVE-VERIFICATION-0.8.1.json',
                   'docs/NATIVE-VERIFICATION-0.9.0.json',
-                  'docs/NATIVE-VERIFICATION-1.0.0.json'}
+                  'docs/NATIVE-VERIFICATION-1.0.0.json',
+                  'docs/NATIVE-VERIFICATION-1.0.1.json'}
 DATA_FILES={'data/projects.json','data/project-knowledge.json','data/generation-providers.json','data/native-content.json'}
 OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'mod/Textures/halveth/love-astrolabe-0.7.png',
+              'mod/Textures/halveth/portal-menu-2100.png',
               'installer/love-astrolabe-icon-0.8.png',
               'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga',
               'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds'}
@@ -102,8 +104,9 @@ def collect_files():
         'Version 0.8.1 opens a nearby observed NPC directly from the native Worldlife chronicle and lays out its controls responsively.\n'
         'Version 0.9 adds a native first-person, third-person and free-look camera panel, bounded viewport observations for the player dialogue context, and direct rotation and zoom controls.\n'
         'Version 1.0 binds observed NPC history to the actual conversation target and makes the owned wanderer removable after changing cells, with native save/reload verification. It is a scoped OpenMW extension for an existing licensed Morrowind installation.\n'
+        'Version 1.0.1 adds an original portal main menu inside OpenMW and adjusts the Scarlet Beauty light defaults to lift dark corners. The menu was checked in an isolated native game session.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
-        'Only the 5 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
+        'Only the 6 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
         'A source archive is not a standalone installer, hosted CI pass or confirmation that publication succeeded.\n'
     ).encode('utf-8')
@@ -120,6 +123,7 @@ def validate_files(files):
               'mod/scripts/halveth/knowledge.lua','mod/scripts/halveth/universe.lua',
               'mod/scripts/halveth/inspect.lua','mod/scripts/halveth/paths.lua',
               'mod/scripts/halveth/visuals.lua','mod/scripts/halveth/perspective.lua',
+              'mod/scripts/halveth/menu_portal.lua',
               OWNED_SHADER,'character_profile.py',
               'mod/scripts/halveth/fieldcraft.lua',
         'mod/scripts/halveth/worldlife.lua','mod/scripts/halveth/actor_life.lua',
@@ -137,6 +141,7 @@ def validate_files(files):
     required.add('docs/NATIVE-VERIFICATION-0.8.1.json')
     required.add('docs/NATIVE-VERIFICATION-0.9.0.json')
     required.add('docs/NATIVE-VERIFICATION-1.0.0.json')
+    required.add('docs/NATIVE-VERIFICATION-1.0.1.json')
     missing=required-files.keys()
     if missing:
         raise ValueError('Missing public release files: '+', '.join(sorted(missing)))
@@ -151,7 +156,7 @@ def validate_files(files):
     provenance=json.loads(files['ASSET-PROVENANCE.json'])
     records={record['path']:record for record in provenance['files']}
     if set(records)!=OWNED_ASSETS:
-        raise ValueError('Asset provenance must bind exactly the five owned art paths.')
+        raise ValueError('Asset provenance must bind exactly the six owned art paths.')
     for name in OWNED_ASSETS:
         raw=files[name]
         if len(raw)!=records[name]['bytes'] or hashlib.sha256(raw).hexdigest()!=records[name]['sha256']:

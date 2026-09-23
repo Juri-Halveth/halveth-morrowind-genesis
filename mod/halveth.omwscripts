@@ -1,3 +1,4 @@
+MENU: scripts/halveth/menu_portal.lua
 GLOBAL: scripts/halveth/global.lua
 GLOBAL: scripts/halveth/content.lua
 GLOBAL: scripts/halveth/actor_life_global.lua

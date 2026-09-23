@@ -35,6 +35,15 @@
     "sourceMethod": "Generated PNG copied byte-for-byte to installer; ICO is a build-time format derivative",
     "sha256": "c320038bdf7ae6e9821bbc590fd6ec35150147e730ff5186ff7bb305b2c4c951"
   },
+  "portalMenuArtwork": {
+    "assetId": "portal-menu-2100",
+    "generator": "Codex built-in imagegen",
+    "origin": "Generated from an original text brief without reference images for the native OpenMW main menu",
+    "generationBrief": "Original fantasy RPG portal over an alien volcanic coast, luminous bronze arcs, fungal silhouettes, scarlet, gold and violet light; no text, logos, characters or franchise emblems",
+    "actualDimensions": [1672, 941],
+    "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/",
+    "sha256": "e660b5662742f853d077d6a3744dc3bae42bd9747241ed557fb4ff1396b222fd"
+  },
   "files": [
     {
       "path": "mod/Textures/halveth/scarlet-love-banner.png",
@@ -46,6 +55,12 @@
       "assetId": "love-astrolabe-0.7",
       "bytes": 2219226,
       "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
+    },
+    {
+      "path": "mod/Textures/halveth/portal-menu-2100.png",
+      "assetId": "portal-menu-2100",
+      "bytes": 2547067,
+      "sha256": "e660b5662742f853d077d6a3744dc3bae42bd9747241ed557fb4ff1396b222fd"
     },
     {
       "path": "installer/love-astrolabe-icon-0.8.png",

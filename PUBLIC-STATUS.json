@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "1.0.0",
-  "scope": "Native TES III Morrowind/OpenMW extension: bounded player viewpoint, exact NPC chronicle binding, owned wanderer lifecycle, live atmosphere, and in-game dialogue, knowledge and exploration paths",
+  "version": "1.0.1",
+  "scope": "Native TES III Morrowind/OpenMW extension: original portal entry, bounded player viewpoint, exact NPC chronicle binding, owned wanderer lifecycle, live atmosphere, and in-game dialogue, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -11,7 +11,9 @@
     "starterCards": 3,
     "builtInCompanion": "JARVIS",
     "projectDesignCards": 8,
-    "binaryAssetFiles": 5,
+    "binaryAssetFiles": 6,
+    "nativePortalMenu": "mod/scripts/halveth/menu_portal.lua",
+    "portalMenuArtwork": "mod/Textures/halveth/portal-menu-2100.png",
     "nativeBooks": 6,
     "authoredBookPassages": 15,
     "nativeSpells": 3,
@@ -58,10 +60,10 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.9.0",
+    "version": "1.0.0",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "13f65b1f9f1a4ac5a2046f0c947fd42aeb1c774f",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.9.0"
+    "publicCommit": "c2b89a3",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v1.0.0"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
@@ -86,9 +88,9 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "PASSED_EXACT_NPC_CONTEXT_AND_OWNED_WANDERER_NATIVE_SAVE_RELOAD",
-    "summary": "docs/NATIVE-VERIFICATION-1.0.0.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.9.0.json"
+    "state": "ISOLATED_NATIVE_PORTAL_RENDER_AND_ONE_CLICK_OBSERVED",
+    "summary": "docs/NATIVE-VERIFICATION-1.0.1.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-1.0.0.json"
   },
   "limitations": [
     "The public source archive contains installer source and own art, but no Bethesda game assets or engine binaries",

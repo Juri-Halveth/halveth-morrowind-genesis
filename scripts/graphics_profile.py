@@ -181,7 +181,7 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
                     "match sunlight to sun": "true", "apply lighting to environment maps": "true",
                     "auto use object normal maps": "true", "auto use terrain normal maps": "true",
                     "auto use object specular maps": "true", "auto use terrain specular maps": "true",
-                    "classic falloff": "false", "minimum interior brightness": "0.08", "soft particles": "true",
+                    "classic falloff": "false", "minimum interior brightness": "0.16", "soft particles": "true",
                     "antialias alpha test": "false" if shader_aa else "true"},
         "Water": {"shader": "true", "refraction": "true", "rtt size": "4096" if cinematic else "2048",
                   "reflection detail": "5" if cinematic else "4", "rain ripple detail": "2",
@@ -197,7 +197,7 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
     # valid YAML and avoids another Python dependency. Values match upstream
     # uniform types and declared ranges; all are editable via the F2 menu.
     uniforms = {
-        "ssao": {"cfg_samples": 48 if cinematic else 30, "cfg_intensity": 6.0, "cfg_radius": 100.0,
+        "ssao": {"cfg_samples": 48 if cinematic else 30, "cfg_intensity": 3.5, "cfg_radius": 100.0,
                  "cfg_temporal_filtering": 0.75, "cfg_blur_factor": 1.0},
         "clouds": {"sampling_quality": 1.5 if cinematic else 0.0, "cloud_detail": 3,
                    "mist_density": 0.18 if cinematic else 0.12, "interior_mist": 0.025, "point_glow_intensity": 0.2,
