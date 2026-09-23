@@ -36,5 +36,3 @@ Meshy-Auto-Rigging ist auf geeignete texturierte humanoide Zweibeiner beschränk
 Ein Asset wird erst nach den Akzeptanzpunkten des jeweiligen Briefs übernommen. Generatorwünsche wie Dreieckszahl, Auflösung und Dauer sind bis zur Dateiprüfung Zielwerte. Die Ausgabe erhält eine Herkunftsnotiz mit Prompt, Anbieterprodukt/Modell, Erzeugungszeit, zulässigen Referenzen, Lizenz/Attribution, Quellmaster und Prüfsumme. Engine-Ableitungen bleiben getrennt vom unveränderten Master. Gameplay- und Questdaten werden nicht zur bloßen Grafikinstallation umgeschrieben.
 
 Die Recherche ist ein endlicher offizieller Quellenstand. Es wurden weder Providerkonten noch tatsächlich generierte Dateien geprüft; eine Anbieterbeschreibung garantiert keine Bildqualität oder lokale Importfähigkeit.
-
-

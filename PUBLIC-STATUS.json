@@ -2,7 +2,7 @@
   "schema": "halveth.genesis.public-status/1",
   "version": "0.3.0",
   "scope": "Public source staging; own code, original starter register, paraphrased public design cards and exact original banner assets",
-  "publication": "PREPARED_NOT_YET_PUSHED",
+  "publication": "PUBLISHED_ON_GITHUB",
   "licenses": {
     "ownCodeAndDocs": "MIT",
     "ownedBannerRights": "CC0-1.0"
@@ -39,7 +39,7 @@
     "scope": "Temporary fixtures and local HTTP handler tests; no game launch, personal saves or paid model generation."
   },
   "hostedCI": {
-    "state": "WORKFLOW_DEFINED_NOT_YET_RUN",
+    "state": "PASSED",
     "matrix": {
       "os": [
         "ubuntu-latest",
@@ -49,7 +49,10 @@
         "3.11",
         "3.13"
       ]
-    }
+    },
+    "checkedCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
+    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35806245934",
+    "testsPerMatrixJob": 50
   },
   "limitations": [
     "Source release; no bundled game or installer",
@@ -58,5 +61,7 @@
     "No Unreal conversion, online server, crypto transaction or Steam submission in this source release",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T01:22:32.697500+00:00"
+  "recordedAt": "2026-09-23T01:22:32.697500+00:00",
+  "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis",
+  "initialPublicCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2"
 }

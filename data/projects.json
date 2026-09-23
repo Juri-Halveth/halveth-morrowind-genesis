@@ -46,8 +46,9 @@
   },
   {
     "id": "release",
-    "title": "Öffentliches Quellpaket mit MIT-Code und CC0-Bild; GitHub-Veröffentlichung vorbereiten",
-    "status": "In Arbeit"
+    "title": "GitHub-Quellprojekt mit MIT und eigener CC0-Kunst veröffentlicht",
+    "status": "Erledigt",
+    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
   },
   {
     "id": "scarlet-banner",
