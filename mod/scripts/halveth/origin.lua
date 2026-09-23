@@ -26,7 +26,7 @@ local function state()
 end
 
 local function select(id)
-    if not CHOICES[id] or completed then return false end
+    if not CHOICES[id] or completed or not armed then return false end
     choice=id;completed=true;armed=false
     close()
     ui.showMessage('Pulsar-Erwachen: '..CHOICES[id]..' ist deine erste HALVETH-Spur. F8 kennt diesen Anfang.')
