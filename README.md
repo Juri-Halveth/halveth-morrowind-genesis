@@ -104,6 +104,7 @@ python tests/integration_worldlife.py
 python tests/integration_actor_life.py
 python tests/integration_art_070.py
 python tests/integration_origin.py
+python tests/integration_origin.py --fault-ui
 python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```
