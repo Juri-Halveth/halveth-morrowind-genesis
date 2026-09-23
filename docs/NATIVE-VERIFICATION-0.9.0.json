@@ -1,0 +1,35 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.9.0",
+  "recordedAt": "2026-09-23T17:10:50Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "One fresh isolated real game session in Arrille's Tradehouse, using OpenMW camera, native UI and nearby loaded actors. No personal save loaded."
+  },
+  "checks": {
+    "playerPerspective": {
+      "state": "PASS",
+      "localReceiptSha256": "800d6c5a8008cf2eec10cb2e069d2ad64d66fbcc53be6faa6a67a813abe9f641",
+      "sourceSha256": "fd10d81b9b0a88fa8ff6257a70cecfdd902df3474ec86d5aeb78cc169e68f914",
+      "testScriptSha256": "403085c8e5d54551783eb5159b92d8eafe0c71511cfa48a0b3f2013dd3836ecd",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "firstPerson": "PASS",
+      "thirdPerson": "PASS",
+      "freeLook": "PASS",
+      "firstAndThirdPersistAfterFrames": "PASS",
+      "rotationAndBoundedZoom": "PASS",
+      "nativePanelOpenClose": "PASS",
+      "markedViewportContextInCompanion": "PASS",
+      "personalSavesUsed": false
+    }
+  },
+  "priorNativeVerification": "docs/NATIVE-VERIFICATION-0.8.1.json",
+  "limits": [
+    "Actor positions are projected into the camera viewport; occlusion and line of sight are not checked.",
+    "The test called native interface methods and created the in-game panel; it did not click each control with a physical mouse or assess every screen resolution.",
+    "No personal save, complete world redesign, NPC subjective experience or sustained frame-rate claim was tested."
+  ]
+}

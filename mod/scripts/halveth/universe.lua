@@ -163,9 +163,10 @@ local function updateMenuBar()
         and not (I.HALVETHPaths and I.HALVETHPaths.isOpen())
         and not (I.HALVETHFieldcraft and I.HALVETHFieldcraft.isOpen())
         and not (I.HALVETHWorldlife and I.HALVETHWorldlife.isOpen())
+        and not (I.HALVETHPerspective and I.HALVETHPerspective.isOpen())
     if show and not menuBar then
         local barWidth=math.min(1290,ui.screenSize().x-24)
-        local slot=math.floor((barWidth-20)/7)
+        local slot=math.floor((barWidth-20)/8)
         menuBar=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
             props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),size=util.vector2(barWidth,36)},
             content=ui.content{
@@ -175,7 +176,8 @@ local function updateMenuBar()
                 button('[Pfade]',10+slot*3,6,slot-4,function()I.HALVETHPaths.open()end),
                 button('[Sammeln]',10+slot*4,6,slot-4,function()I.HALVETHFieldcraft.open()end),
                 button('[Weltleben]',10+slot*5,6,slot-4,function()I.HALVETHWorldlife.open()end),
-                button('[Licht]',10+slot*6,6,slot-4,function()I.HALVETHVisuals.cycle()end)}}
+                button('[Licht]',10+slot*6,6,slot-4,function()I.HALVETHVisuals.cycle()end),
+                button('[Sicht]',10+slot*7,6,slot-4,function()I.HALVETHPerspective.open()end)}}
     elseif not show and menuBar then menuBar:destroy();menuBar=nil end
 end
 open=function(requestedTab)
@@ -185,6 +187,7 @@ open=function(requestedTab)
     if I.HALVETHPaths then I.HALVETHPaths.close() end
     if I.HALVETHFieldcraft then I.HALVETHFieldcraft.close() end
     if I.HALVETHWorldlife then I.HALVETHWorldlife.close() end
+    if I.HALVETHPerspective then I.HALVETHPerspective.close() end
     mode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});addedMode=true end
     if requestedTab then selectTab(requestedTab) end
@@ -233,7 +236,7 @@ open=function(requestedTab)
     content[#content+1]=button('[Sammeln]',520,h-37,115,function()close();I.HALVETHFieldcraft.open()end)
     content[#content+1]=button('[Weltleben]',635,h-37,130,function()close();I.HALVETHWorldlife.open()end)
     content[#content+1]=button('[Licht]',770,h-37,65,function()I.HALVETHVisuals.cycle()end)
-    content[#content+1]=button('[Aktualisieren]',w-340,h-37,165,rebuild)
+    content[#content+1]=button('[Sicht]',w-340,h-37,165,function()close();I.HALVETHPerspective.open()end)
     content[#content+1]=button('[Schliessen / F6]',w-170,h-37,155,close)
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
         props={relativePosition=util.vector2(.5,.5),anchor=util.vector2(.5,.5),size=util.vector2(w,h)},content=ui.content(content)}

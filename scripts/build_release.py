@@ -8,7 +8,7 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.8.1'
+VERSION='0.9.0'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
@@ -22,7 +22,8 @@ EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'docs/NATIVE-VERIFICATION-0.4.0.json','docs/NATIVE-VERIFICATION-0.5.0.json',
                   'docs/NATIVE-VERIFICATION-0.6.0.json','docs/NATIVE-VERIFICATION-0.7.0.json',
                   'docs/NATIVE-VERIFICATION-0.8.0.json',
-                  'docs/NATIVE-VERIFICATION-0.8.1.json'}
+                  'docs/NATIVE-VERIFICATION-0.8.1.json',
+                  'docs/NATIVE-VERIFICATION-0.9.0.json'}
 DATA_FILES={'data/projects.json','data/project-knowledge.json','data/generation-providers.json','data/native-content.json'}
 OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'mod/Textures/halveth/love-astrolabe-0.7.png',
@@ -98,6 +99,7 @@ def collect_files():
         'Version 0.7 adds the native Sammelatlas, a stronger Morgenrot light profile and the original LOVE astrolabe artwork in the in-game companion view.\n'
         'Version 0.8 adds a native observed-NPC worldlife journal, an optional owned wanderer, actor scheduling for the owned character, and live outdoor light response. The installer sources build a one-file Windows setup with an own LOVE icon; no installer EXE is part of this source ZIP.\n'
         'Version 0.8.1 opens a nearby observed NPC directly from the native Worldlife chronicle and lays out its controls responsively.\n'
+        'Version 0.9 adds a native first-person, third-person and free-look camera panel, bounded viewport observations for the player dialogue context, and direct rotation and zoom controls.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
         'Only the 5 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
@@ -115,10 +117,12 @@ def validate_files(files):
               'mod/scripts/halveth/content_catalog.lua','mod/scripts/halveth/content.lua',
               'mod/scripts/halveth/knowledge.lua','mod/scripts/halveth/universe.lua',
               'mod/scripts/halveth/inspect.lua','mod/scripts/halveth/paths.lua',
-              'mod/scripts/halveth/visuals.lua',OWNED_SHADER,'character_profile.py',
+              'mod/scripts/halveth/visuals.lua','mod/scripts/halveth/perspective.lua',
+              OWNED_SHADER,'character_profile.py',
               'mod/scripts/halveth/fieldcraft.lua',
         'mod/scripts/halveth/worldlife.lua','mod/scripts/halveth/actor_life.lua',
         'mod/scripts/halveth/actor_life_global.lua','tests/integration_actor_life.py',
+        'tests/integration_perspective.py',
         'tests/integration_installer.py',
               'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py','installer/README.md',
               'installer/openmw-0.51.0-runtime-files.txt',
@@ -129,6 +133,7 @@ def validate_files(files):
     required.add('docs/NATIVE-VERIFICATION-0.7.0.json')
     required.add('docs/NATIVE-VERIFICATION-0.8.0.json')
     required.add('docs/NATIVE-VERIFICATION-0.8.1.json')
+    required.add('docs/NATIVE-VERIFICATION-0.9.0.json')
     missing=required-files.keys()
     if missing:
         raise ValueError('Missing public release files: '+', '.join(sorted(missing)))

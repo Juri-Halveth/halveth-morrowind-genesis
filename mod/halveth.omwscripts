@@ -7,5 +7,6 @@ PLAYER: scripts/halveth/universe.lua
 PLAYER: scripts/halveth/paths.lua
 PLAYER: scripts/halveth/fieldcraft.lua
 PLAYER: scripts/halveth/visuals.lua
+PLAYER: scripts/halveth/perspective.lua
 PLAYER: scripts/halveth/worldlife.lua
 PLAYER: scripts/halveth/actor_life.lua

@@ -1,4 +1,4 @@
-Genesis 0.8.1: public-source package; own code/docs MIT, exact owned artwork files CC0-1.0 to the extent of owned rights.
+Genesis 0.9.0: public-source package; own code/docs MIT, exact owned artwork files CC0-1.0 to the extent of owned rights.
 This archive contains 3 original starter cards, built-in JARVIS, 8 original paraphrased cards with public source references, and an original generated Scarlet Love banner with its approved texture derivatives.
 Version 0.4 adds six original native books with fifteen authored passages, three native spells, an F7 knowledge journal, a bounded alchemy study bonus, and a direct Morrowind start with a hidden optional companion.
 Version 0.5 adds the native character/inventory/magic/encounter workbench, mouse access from normal menus, current-state character dialogue direction, antialiased bundled-font configuration and read-only plugin record survey tooling.
@@ -6,6 +6,7 @@ Version 0.6 adds original native exploration paths, an alchemy recipe planner, a
 Version 0.7 adds the native Sammelatlas, a stronger Morgenrot light profile and the original LOVE astrolabe artwork in the in-game companion view.
 Version 0.8 adds a native observed-NPC worldlife journal, an optional owned wanderer, actor scheduling for the owned character, and live outdoor light response. The installer sources build a one-file Windows setup with an own LOVE icon; no installer EXE is part of this source ZIP.
 Version 0.8.1 opens a nearby observed NPC directly from the native Worldlife chronicle and lays out its controls responsively.
+Version 0.9 adds a native first-person, third-person and free-look camera panel, bounded viewport observations for the player dialogue context, and direct rotation and zoom controls.
 The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.
 Only the 5 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.
 Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.

@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 0.8.1
+# HALVETH Morrowind Genesis · 0.9.0
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -16,6 +16,7 @@ Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/R
 - **Weltleben** in der nativen Menüleiste: beobachtete Figuren und regionale Fraktionsimpulse im Spiel verfolgen.
 - **Sprechen** im Weltleben-Fenster: eine noch nahe beobachtete Figur unmittelbar im nativen Gesprächsfenster ansprechen.
 - **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Morgenrot, Lebendige Welt, Nachtglas und Original umschalten.
+- **Sicht** im normalen Inventar- oder Dialogmenü: zwischen Ich-Sicht, Außen-Sicht und freiem Blick wechseln; Kamera drehen, Abstand ändern und zur vorherigen Ansicht zurückkehren.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
 - **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
@@ -63,6 +64,8 @@ Mit **Rufen** kann draußen ein eigener HALVETH-Wanderer entstehen. Er bewegt si
 
 Version 0.8.1 verbindet die Chronik direkt mit dem Gespräch: Figur auswählen, **Sprechen** anklicken, Unterhaltung beginnen. Ist die Figur nicht mehr in der geladenen Umgebung, bleibt das Weltleben-Fenster offen und meldet dies. Die sieben Aktionsknöpfe passen sich der Fensterbreite an. Der Weg wurde mit Arrille in einer isolierten OpenMW-Sitzung einschließlich Speichern/Laden geprüft.
 
+Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiterhin deiner Figur in derselben Morrowind-Welt; im Sicht-Fenster schaltest du Ich-Sicht, Außen-Sicht oder freien Blick um und drehst oder zoomst die Kamera. Das Fenster zeigt bis zu sechs geladene Figuren, deren Position in den aktuellen Bildausschnitt projiziert wird. Dieser begrenzte Blickkontext erreicht auch den lokalen Gesprächsbegleiter. Eine Projektion prüft weder Sichtlinien noch die Gedanken anderer Figuren. [Bedienung, Quellen und Grenzen](docs/PLAYER-PERSPECTIVE.md).
+
 Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 
 **Startpunkt** bezeichnet den Ort beim Laden der Sitzung. **Zurück** führt an den vor der letzten Teleportation gespeicherten Ort. Die Schaltfläche **+250 Gold** ist ein zusätzliches Werkzeug. Der historische Vivec-Glitch bleibt separat in [docs/VIVEC-GOLD.md](docs/VIVEC-GOLD.md) dokumentiert.
@@ -91,6 +94,7 @@ python tests/integration_universe.py
 python tests/integration_paths.py
 python tests/integration_visuals.py
 python tests/integration_visuals.py --cell "Seyda Neen" --expect-source weather
+python tests/integration_perspective.py
 python tests/integration_fieldcraft.py
 python tests/integration_worldlife.py
 python tests/integration_actor_life.py
@@ -100,6 +104,8 @@ python scripts/build_release.py
 ```
 
 Die optionalen Integrationstests benötigen die eigene OpenMW-/Morrowind-Installation. Sie verwenden eigene Testsitzungen statt persönlicher Spielstände. `.local/` enthält persönliche Daten, Sicherungen und Testbelege und gehört nicht ins öffentliche Repository.
+
+Die [native Prüfung für 0.9](docs/NATIVE-VERIFICATION-0.9.0.json) bindet einen frischen OpenMW-Lauf mit allen drei Kameramodi, deren Fortbestand über weitere Frames, Drehen, Zoom, nativem Sicht-Fenster und gekennzeichnetem Blickkontext. Die bestehende F6-Ansicht wurde danach separat mit echter Figur, 27 Fertigkeiten, Inventar, Zauber und Begegnungen erneut geprüft. Ein persönlicher Spielstand wurde dabei nicht geladen.
 
 Die [native Prüfzusammenfassung für 0.8](docs/NATIVE-VERIFICATION-0.8.0.json) bindet vier neue isolierte OpenMW-Läufe: beobachtete NPCs samt Dialog- und Speicherstand, einen tatsächlich wandernden eigenen NPC mit Pause/Weiter/Entfernen sowie den Fünf-Modi-Shader im Innen- und Außenraum mit realem Sonnenwert. Der private Installer wurde zusätzlich in eigenen frischen Spielsitzungen geprüft. Ein persönlicher Spielstand wurde für 0.8 nicht geladen; die neuen Skripte gelten beim nächsten normalen Spielstart.
 

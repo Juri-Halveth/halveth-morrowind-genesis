@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.8.1",
-  "scope": "Native TES III Morrowind extension: observed worldlife chronicle with direct NPC conversation, owned actor wandering, live outdoor atmosphere, single-file Windows setup candidate, and earlier dialogue, knowledge and exploration paths",
+  "version": "0.9.0",
+  "scope": "Native TES III Morrowind extension: player-centred camera and bounded viewpoint context, observed worldlife chronicle with direct NPC conversation, live atmosphere, and earlier dialogue, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -28,6 +28,8 @@
     "nativeSammelatlas": true,
     "nativeObservedWorldlife": true,
     "nativeWorldlifeDirectTalk": true,
+    "nativePlayerPerspective": ["first person", "third person", "free look", "rotation", "zoom"],
+    "boundedViewportActorContext": true,
     "ownedActorLife": true,
     "windowsSetupSource": "installer/",
     "windowsSetupVariants": ["owned-mod", "local-engine-private"],
@@ -56,10 +58,10 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.8.0",
+    "version": "0.8.1",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "46b04dc958f1a5d14f057f29dd1dd16f535a75dc",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.8.0"
+    "publicCommit": "f1504ad174726b5a53a3eafdf81c0489aa80e95d",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.8.1"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
@@ -84,9 +86,9 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "PASSED_DIRECT_NPC_CONVERSATION_ISOLATED_OPENMW_TEST",
-    "summary": "docs/NATIVE-VERIFICATION-0.8.1.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.8.0.json"
+    "state": "PASSED_PLAYER_CAMERA_ISOLATED_OPENMW_TEST",
+    "summary": "docs/NATIVE-VERIFICATION-0.9.0.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.8.1.json"
   },
   "limitations": [
     "The public source archive contains installer source and own art, but no Bethesda game assets or engine binaries",
@@ -95,11 +97,12 @@
     "The public setup needs a previously configured OpenMW profile; the private local full-engine setup can instead bind the user's licensed Data Files directly",
     "Building the setup from source requires .NET 10, Python, Pillow and the verified Python embeddable ZIP; running its self-contained EXE does not require a local compiler",
     "Native gameplay on Linux not tested",
-    "Sustained frame rate and every 0.8 mouse/button path remain unverified in the personal game session",
+    "Sustained frame rate and manual camera/button paths at every resolution remain unverified in the personal game session",
+    "Viewport projection is not line-of-sight or an NPC's subjective experience",
     "No complete quest rewrite, global texture replacement, new landmass or multiplayer service",
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T16:49:00Z",
+  "recordedAt": "2026-09-23T17:11:00Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

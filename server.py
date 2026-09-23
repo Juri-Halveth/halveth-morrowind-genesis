@@ -264,6 +264,7 @@ class Companion:
                 'Bei einer NPC-Rolle sprichst du als genau diese Figur, nicht als JARVIS oder Softwareassistent. '
                 'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
                 'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
+                'spiel.viewpoint ist eine Momentaufnahme der Kameraprojektion, keine gepruefte Sichtlinie oder NPC-Erinnerung. '
                 'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '

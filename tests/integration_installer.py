@@ -97,23 +97,23 @@ def main() -> None:
     parser.add_argument('--game-data', type=Path, required=True)
     args = parser.parse_args()
     BASE.mkdir(parents=True, exist_ok=True)
-    temporary = Path(tempfile.mkdtemp(prefix='final-0.8-', dir=BASE)).resolve()
+    temporary = Path(tempfile.mkdtemp(prefix='final-0.9-', dir=BASE)).resolve()
     if temporary.parent != BASE.resolve() or temporary.is_symlink():
         raise RuntimeError('Isolated smoke target escaped its workspace boundary.')
     try:
-        public = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.1-Setup.exe'
-        private = SETUPS / 'HALVETH-Morrowind-Genesis-0.8.1-Local-Engine-Setup.exe'
+        public = SETUPS / 'HALVETH-Morrowind-Genesis-0.9.0-Setup.exe'
+        private = SETUPS / 'HALVETH-Morrowind-Genesis-0.9.0-Local-Engine-Setup.exe'
         results = [run_variant('owned-mod', public, temporary / 'public',
                                args.engine_root, args.source_profile, args.game_data),
                    run_variant('local-engine', private, temporary / 'private',
                                args.engine_root, args.source_profile, args.game_data)]
         empty_cleanup = run_empty_target_cleanup(public, temporary / 'empty',
                                                  args.engine_root, args.source_profile)
-        receipt = {'schema': 'halveth.genesis.installer-smoke/1', 'version': '0.8.1',
+        receipt = {'schema': 'halveth.genesis.installer-smoke/1', 'version': '0.9.0',
                    'status': 'PASS', 'scope': 'fresh isolated install/check/self-uninstall/retry',
                    'licensedGameDataCopied': False, 'personalSavesLoaded': False,
                    'results': results, 'emptyTargetCleanup': empty_cleanup}
-        (BASE / 'final-0.8-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n',
+        (BASE / 'final-0.9-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n',
                                                    encoding='utf-8')
         print(json.dumps(receipt, indent=2))
     finally:

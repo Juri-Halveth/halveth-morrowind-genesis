@@ -77,11 +77,13 @@ class SourcePackageTests(unittest.TestCase):
             'mod/scripts/halveth/knowledge.lua',
             'mod/scripts/halveth/paths.lua',
             'mod/scripts/halveth/visuals.lua',
+            'mod/scripts/halveth/perspective.lua',
             'mod/scripts/halveth/fieldcraft.lua',
             'mod/scripts/halveth/worldlife.lua',
             'mod/scripts/halveth/actor_life.lua',
             'mod/scripts/halveth/actor_life_global.lua',
             'tests/integration_actor_life.py',
+            'tests/integration_perspective.py',
             'tests/integration_installer.py',
             'installer/GenesisSetup.csproj',
             'installer/Program.cs',
@@ -97,6 +99,7 @@ class SourcePackageTests(unittest.TestCase):
             'docs/NATIVE-VERIFICATION-0.7.0.json',
             'docs/NATIVE-VERIFICATION-0.8.0.json',
             'docs/NATIVE-VERIFICATION-0.8.1.json',
+            'docs/NATIVE-VERIFICATION-0.9.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -164,8 +167,8 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.8.1')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.8.1-public-source.zip')
+        self.assertEqual(release.VERSION, '0.9.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.9.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
@@ -177,6 +180,7 @@ class SourcePackageTests(unittest.TestCase):
         self.assertIn('alchemy recipe planner', note)
         self.assertIn('native Sammelatlas', note)
         self.assertIn('native observed-NPC worldlife journal', note)
+        self.assertIn('native first-person, third-person and free-look camera panel', note)
         self.assertIn('MIT',note)
         self.assertIn('CC0-1.0',note)
         self.assertNotIn('LICENSE-DECISION',note)
