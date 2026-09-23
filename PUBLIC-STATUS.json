@@ -1,8 +1,8 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.4.0",
-  "scope": "Native TES III Morrowind/OpenMW extension source, original books and spells, direct game entry and exact owned banner assets",
-  "publication": "SOURCE_BRANCH_CANDIDATE_NO_RELEASE",
+  "version": "0.5.0",
+  "scope": "Native TES III Morrowind extension: character/inventory/magic/encounter interface, current-state NPC direction and existing knowledge/spells",
+  "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
     "ownedBannerRights": "CC0-1.0"
@@ -16,7 +16,13 @@
     "authoredBookPassages": 15,
     "nativeSpells": 3,
     "nativeKnowledgeJournal": "F7",
-    "directNativeGameEntry": true
+    "directNativeGameEntry": true,
+    "nativeUniverseWindow": "F6",
+    "nativeMouseEntryBar": true,
+    "nativeInventoryCategories": 12,
+    "nativeSkillInspection": 27,
+    "runtimeCharacterDirection": true,
+    "readOnlyPluginSurveyTool": true
   },
   "excluded": [
     "Bethesda game assets and plugins",
@@ -30,29 +36,19 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "publication": "PUBLISHED_ON_GITHUB",
-    "initialPublicCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
+    "initialPublicCommit": "d0728931ba6ad517b08d9a13833df78f5bc50ff9",
     "hostedCI": {
       "state": "PASSED",
-      "matrix": {
-        "os": [
-          "ubuntu-latest",
-          "windows-latest"
-        ],
-        "python": [
-          "3.11",
-          "3.13"
-        ]
-      },
-      "checkedCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
-      "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35806245934",
-      "testsPerMatrixJob": 50
+      "checkedCommit": "d0728931ba6ad517b08d9a13833df78f5bc50ff9",
+      "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35853767326",
+      "testsPerMatrixJob": 65
     }
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
-    "count": 65,
+    "count": 71,
     "command": "python -m unittest discover -s tests -v",
     "platform": "Windows",
     "python": "3.14.6",
@@ -73,9 +69,8 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "SCOPED_NATIVE_CHECKS_AND_FINAL_UI_REVIEW_COMPLETE",
-    "summary": "docs/NATIVE-VERIFICATION-0.4.0.json",
-    "knowledgeRevisionBoundary": "Persistence/bonus check and final UI revision have distinct source hashes and scopes."
+    "state": "SCOPED_NATIVE_CHECKS_AND_MOUSE_REVIEW_COMPLETE",
+    "summary": "docs/NATIVE-VERIFICATION-0.5.0.json"
   },
   "limitations": [
     "Source release; no bundled Bethesda game assets, engine or installer",
@@ -85,6 +80,6 @@
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T11:18:03.897482+00:00",
+  "recordedAt": "2026-09-23T12:52:48.149491Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

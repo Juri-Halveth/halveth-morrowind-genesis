@@ -8,15 +8,15 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.4.0'
+VERSION='0.5.0'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
 ROOT_FILES={'.gitignore','.gitattributes','README.md','LICENSE','ASSET-LICENSE.md','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md',
             'PUBLIC-STATUS.json','ASSET-PROVENANCE.json',
-            'launcher.py','server.py','graphics_status.py','project_knowledge.py','START.cmd'}
+            'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','START.cmd'}
 SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','.github','LICENSES'}
-EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt','docs/NATIVE-VERIFICATION-0.4.0.json'}
+EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt','docs/NATIVE-VERIFICATION-0.4.0.json','docs/NATIVE-VERIFICATION-0.5.0.json'}
 DATA_FILES={'data/projects.json','data/project-knowledge.json','data/generation-providers.json','data/native-content.json'}
 OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga',
@@ -28,7 +28,7 @@ EXCLUDED_FILES={'data/entities.json','data/entity-sources.json','data/graphics-i
                 'mod/bridge/inbox.json','mod/bridge/companion-status.json','source-manifest.json','local-config.json'}
 SOURCE_SUFFIXES={
     'docs':{'.md'},
-    'mod':{'.lua','.omwscripts'},
+    'mod':{'.lua','.omwscripts','.omwfont'},
     'native':{'.cs'},
     'scripts':{'.py','.ps1','.cmd','.sh','.mjs'},
     'tests':{'.py'},
@@ -81,6 +81,7 @@ def collect_files():
         f'Genesis {VERSION}: public-source package; own code/docs MIT, exact banner files CC0-1.0 to the extent of owned rights.\n'
         'This archive contains 3 original starter cards, built-in JARVIS, 8 original paraphrased cards with public source references, and an original generated Scarlet Love banner with its approved texture derivatives.\n'
         'Version 0.4 adds six original native books with fifteen authored passages, three native spells, an F7 knowledge journal, a bounded alchemy study bonus, and a direct Morrowind start with a hidden optional companion.\n'
+        'Version 0.5 adds the native character/inventory/magic/encounter workbench, mouse access from normal menus, current-state character dialogue direction, antialiased bundled-font configuration and read-only plugin record survey tooling.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
         'Only the 3 exact owned banner asset paths are allowed. Other downloaded textures, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
@@ -96,8 +97,10 @@ def validate_files(files):
               'mod/bridge/inbox.json','data/native-content.json','native/GenesisEntry.cs',
               'scripts/build_native_entry.py','scripts/build_native_content.py',
               'mod/scripts/halveth/content_catalog.lua','mod/scripts/halveth/content.lua',
-              'mod/scripts/halveth/knowledge.lua',*OWNED_ASSETS}
+              'mod/scripts/halveth/knowledge.lua','mod/scripts/halveth/universe.lua',
+              'mod/scripts/halveth/inspect.lua','character_profile.py','mod/Fonts/MysticCards.omwfont',*OWNED_ASSETS}
     required.add('docs/NATIVE-VERIFICATION-0.4.0.json')
+    required.add('docs/NATIVE-VERIFICATION-0.5.0.json')
     missing=required-files.keys()
     if missing:
         raise ValueError('Missing public release files: '+', '.join(sorted(missing)))

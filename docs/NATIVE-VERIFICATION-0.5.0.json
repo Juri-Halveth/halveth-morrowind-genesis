@@ -1,0 +1,130 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.5.0",
+  "recordedAt": "2026-09-23T12:52:48.149491Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "One local development machine; isolated fresh test characters; no personal saves used by integration tests."
+  },
+  "sourceHashScope": "Hashes bind tested local bytes. Git may normalize text line endings. Prior 0.4 checks remain separately versioned.",
+  "checks": {
+    "nativeUniverse": {
+      "state": "PASS",
+      "originalLocalReceiptSha256": "f22d5a141d2af8836a1416ed3e9e7b6d5101fa9ca7709387ae047a3d0c7f83de",
+      "recordedAt": "2026-09-23T12:45:07.042548+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "testedFiles": {
+        "mod/scripts/halveth/universe.lua": "e51e91e305a33b2ddac6ef49183f78c1046d168447f395ce44fcde18928d94b7",
+        "mod/scripts/halveth/inspect.lua": "a7136339e5718f0592f887e61bfdeb2c2a2f0d437832fe340867adc7f0a71440",
+        "mod/scripts/halveth/player.lua": "0502313a633b96d0258857be414369731ec7b03a3fba5a299b8c92f5fd34b9a5",
+        "mod/scripts/halveth/knowledge.lua": "2982b058e2e6fb1ef08cf2235578739acc863bfae6639374fca393a89b23a532"
+      },
+      "skills": 27,
+      "itemCategories": 12,
+      "inventoryEntriesInFixture": 20,
+      "nearbyActorsInFixture": 7,
+      "spellSelection": "PASS_NATIVE_SELECTED_SPELL",
+      "nativeBookReader": "PASS",
+      "exactActorConversationTarget": "PASS",
+      "menuOwnership": "PASS_BORROWED_INTERFACE_RETAINED",
+      "inventorySearch": "PASS_EMPTY_AND_RESET",
+      "personalSavesUsed": false
+    },
+    "nativeMouseReview": {
+      "state": "OBSERVED_BY_PRIMARY_OPERATOR",
+      "scope": "1280x720 windowed preview",
+      "inventoryMagicEncounterTabs": "OBSERVED",
+      "normalInventoryEntryBar": "CLICKED_AND_OPENED_NATIVE_PANEL",
+      "fontConfiguration": "LOADED_AND_VISUALLY_REVIEWED",
+      "fontConfigurationSha256": "4095f25ef86a03eabe9fb5366e8d4054891afffa4a6e8413e92d5b94449a6d25",
+      "luaManifestSha256": "d71eb9eedcbfdd4a634e16ecb1ebf81557eaa9d355180cf7cf29c2b0b53e3871",
+      "physicalF6F7F8Keys": "NOT_VERIFIED"
+    },
+    "nativeNpcModelRoundTrip": {
+      "state": "PASS",
+      "originalLocalReceiptSha256": "227a88103c9c07bfb48d3a1c7fd01bd9f7c97da118750ac53312c4cfcc5aba9c",
+      "recordedAt": "2026-09-23T12:49:20.579737+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "model": "hermes3:8b",
+      "mode": "MODEL_LIVE",
+      "speaker": "Arrille",
+      "runtimeClass": "Trader",
+      "runtimeServices": [
+        "Barter",
+        "Spells"
+      ],
+      "runtimeDisposition": 40,
+      "exactRequestAndContextMatched": true,
+      "exactReplyMatchedNativeUi": true,
+      "modelElapsedSeconds": 22.446,
+      "worldActionsRecorded": 0,
+      "testedFiles": {
+        "server.py": "d5d43a92dfa9b7d85f70f0261ecceee72c9d58b6364f600100011ef5b6b53322",
+        "character_profile.py": "90b5184cbb47fddaf9500f5a92603d5827d043bc3400f1d99e0b1aca334cf4fc",
+        "tests/integration_chat.py": "acccb7f6fbc1ec808266e8f60cffcdf0e8137463c3cfff8d532cfc0c2f401721",
+        "mod/scripts/halveth/player.lua": "0502313a633b96d0258857be414369731ec7b03a3fba5a299b8c92f5fd34b9a5",
+        "mod/scripts/halveth/inspect.lua": "a7136339e5718f0592f887e61bfdeb2c2a2f0d437832fe340867adc7f0a71440"
+      },
+      "qualityObservation": "Role and offered trader services fit the scene. German reply contained grammatical awkwardness and exceeded requested sentence count.",
+      "limit": "One actual local NPC conversation; not a quality evaluation of all characters."
+    },
+    "directExistingEntry": {
+      "recordedAt": "2026-09-23T12:56:53.503598+00:00",
+      "state": "OBSERVED_BY_PRIMARY_OPERATOR",
+      "route": "Existing Morrowind - HALVETH desktop entry, original Morrowind menu, existing profile save loaded",
+      "companionVersion": "0.5.0",
+      "companionConnected": true,
+      "localModelAvailable": true,
+      "localLoreEntries": 36227,
+      "gameProcessesExcludingCrashMonitor": 1,
+      "newSeparateGameEntryCreated": false,
+      "nativeMouseEntry": "CLICKED_FROM_NORMAL_INVENTORY",
+      "nativeCharacterAndInventoryViews": "OBSERVED",
+      "actualInventoryEntriesObserved": 40,
+      "originalSaveFilesChanged": false,
+      "checkedCopiedSaveFiles": 2,
+      "copiedSaveHashesUnchanged": true,
+      "luaErrorsObserved": 0,
+      "physicalF6": "INJECTION_NO_OBSERVED_RESPONSE",
+      "limit": "Read-only native UI review of the loaded copy; no personal save written and no full NPC/quest/graphics traversal."
+    }
+  },
+  "recordSurvey": {
+    "scope": "Every byte of the listed TES3 plugins walked as record/subrecord structure. Effective identities tracked for supported records.",
+    "originalLocalSummarySha256": "17ae3f462aac8b26cc79bbe2838858331534bbfa712d2150a55b24baebaf0b96",
+    "pluginBytes": 95200284,
+    "pluginRecords": 70263,
+    "recordTypes": 43,
+    "effective": {
+      "NPC_": 3049,
+      "CREA": 399,
+      "BOOK": 638,
+      "SPEL": 1068,
+      "SCPT": 1215,
+      "WEAP": 652,
+      "ARMO": 422,
+      "ENCH": 808,
+      "CELL": 2893,
+      "INFO": 32148
+    },
+    "appearance": {
+      "npcDefinitions": 3049,
+      "headsUsingInstalledAdapter": 3045,
+      "hairUsingInstalledAdapter": 2831,
+      "scope": "Resolved BODY model assignments in active load order; not a visual check of every NPC."
+    },
+    "sourceMutations": 0,
+    "limit": "Aggregate counts only. Full extracted register remains local; BSA assets, every script branch and every rendered character have not been evaluated."
+  },
+  "limits": [
+    "Existing head/hair adapter coverage is not a new 0.5 character mesh pack or a visual check of every character.",
+    "New font configuration references the existing engine font; its font binary is not redistributed.",
+    "No new renderer, whole-world quest rewrite, voice synthesis, motion overhaul or build system is claimed.",
+    "No FPS guarantee, Linux native gameplay check or universal mod compatibility claim.",
+    "This summary excludes machine paths, raw chats, session IDs, saves and extracted game text."
+  ]
+}

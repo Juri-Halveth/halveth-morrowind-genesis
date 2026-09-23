@@ -23,9 +23,10 @@ import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from graphics_status import graphics_status
 from project_knowledge import ProjectKnowledge, DEFAULT_PATH as PROJECT_KNOWLEDGE_PATH, MAX_QUERY_CHARS
+from character_profile import profile as character_profile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.4.0'
+VERSION = '0.5.0'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768
@@ -123,6 +124,12 @@ class Store:
     def counts(self):
         with self.connect() as db:
             return {table: db.execute('SELECT count(*) FROM ' + table).fetchone()[0] for table in ('entities','memories','lore')}
+
+    def actor_source(self, record_id):
+        with self.connect() as db:
+            row = db.execute('SELECT id,title,text,source FROM lore WHERE id=? LIMIT 1',
+                             ('actor:' + str(record_id),)).fetchone()
+        return dict(row) if row else None
 
 
 class Companion:
@@ -239,15 +246,25 @@ class Companion:
                 snapshot=json.loads(json.dumps(self.context if context_snapshot is None else context_snapshot))
                 session=self.session if session_snapshot is None else session_snapshot
                 live=self.connected() and session==self.session
+            npc = snapshot.get('npc') if entity_id.startswith('npc:') else None
+            persona = character_profile(npc, history)
+            if npc:
+                source = self.store.actor_source(npc.get('recordId'))
+                if source:
+                    lore = [source] + [row for row in lore if row['id'] != source['id']][:4]
             actions = self.suggestions(message,session)
             self.store.remember(entity_id,'user',message)
             system = (
                 'Du bist ein deutschsprachiger Rollenspielpartner in HALVETH Morrowind Genesis. '
-                'Du bist der lokale Begleiter von Genesis, erreichbar im Konstellarium und über die eingebaute OpenMW-Lua-Oberfläche mit F8. '
+                'Du sprichst innerhalb von Morrowind in der nativen OpenMW-Lua-Oberfläche mit F8. '
                 'Freie Texte werden vom lokalen Ollama beantwortet, Spielwerkzeuge laufen über diese Mod. '
                 'Du bist kein uneingeschränkter Konsoleninterpreter. '
                 'Sprich lebendig, warm, konkret und knapp, typischerweise 2-5 Sätze. '
                 'Bleibe in deiner unten beschriebenen Rolle. Spielwelt und neue Fantasie dürfen wachsen. '
+                'Bei einer NPC-Rolle sprichst du als genau diese Figur, nicht als JARVIS oder Softwareassistent. '
+                'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
+                'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
+                'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '
                 'Vvardenfell ist eine Insel in der Provinz Morrowind auf Tamriel. Vivec ist eine Stadt auf Vvardenfell. '
@@ -269,7 +286,7 @@ class Companion:
                 'Unbekannte persönliche NPC-Erinnerungen erfindest du nicht als frühere Begegnungen. '
                 'Neue Geschichten dürfen ausdrücklich als neue Idee vorgeschlagen werden. '
                 'Reale Personen in Referenzkarten nicht imitieren oder ihre Beteiligung behaupten.\n'
-                + json.dumps({'rolle':entity,'spiel':snapshot,'spielVerbunden':live,
+                + json.dumps({'rolle':entity,'charakterProfil':persona,'spiel':snapshot,'spielVerbunden':live,
                     'quellen':lore,'projektDesignReferenzen':project_references,
                     'angeboteneWerkzeuge':actions},ensure_ascii=False)
             )

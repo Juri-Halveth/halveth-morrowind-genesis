@@ -281,6 +281,7 @@ end
 local function open()
     if window then close();return end
     if I.HALVETH and I.HALVETH.close then I.HALVETH.close() end
+    if I.HALVETHUniverse then I.HALVETHUniverse.close() end
     -- Reuse a native menu's cursor/pause instead of stacking a duplicate
     -- Interface mode: OpenMW removes every matching mode on removeMode.
     panelMode=I.UI.getMode() or 'Interface'
@@ -298,6 +299,7 @@ local function open()
     local items={
         {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,props={position=util.vector2(18,14),text='HALVETH / MORROWIND / WISSEN',textSize=23}},
         {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,props={position=util.vector2(18,46),text='Deine Bibliothek · Alchemie · Magie',textSize=16}},
+        button('[Figur / Inventar / F6]',w-280,16,255,function()close();if I.HALVETHUniverse then I.HALVETHUniverse.open() end end),
         leftText,rightText,footerText,
         button('[< Text]',18,h-128,85,function()selectRelative(-1)end),
         button('[Text >]',108,h-128,85,function()selectRelative(1)end),
@@ -355,7 +357,7 @@ end
 
 return {
     interfaceName='HALVETHKnowledge',
-    interface={version=1,open=open,close=close,getState=snapshot,study=study,answer=answer,
+    interface={version=1,open=open,close=close,isOpen=function()return window~=nil end,getState=snapshot,study=study,answer=answer,
         selectBook=function(id) if books[id] then selectedId=id;page=0;refresh();return true end;return false end,
         readSelected=readSelected,requestContent=contentRequest,
         ingredientHelp=ingredientHelp,

@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 0.4.0
+# HALVETH Morrowind Genesis · 0.5.0
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -6,6 +6,7 @@ Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenM
 
 Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** lässt sich mit der vorhandenen nativen Workshop-Buildumgebung ergänzen.
 
+- **F6** oder **HALVETH · Figur** im normalen Inventar/Dialog: Figur, Inventar, Magie und Begegnungen öffnen.
 - **F8:** mit JARVIS oder dem gewählten NPC sprechen; Heilen, +250 Gold, Startpunkt und Zurück nutzen.
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
@@ -14,6 +15,14 @@ Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt
 - **F2:** die vorhandenen Shaderregler öffnen.
 
 Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8b`. Ist der Dienst nicht erreichbar, startet Morrowind weiter offline; Wissen, Bücher und direkte Spielwerkzeuge bleiben verfügbar. Der reguläre Einstieg öffnet weder einen Browser noch ein zusätzliches Konfigurationsfenster.
+
+## Figur, Ausrüstung und Begegnungen
+
+Das neue F6-Fenster arbeitet mit den tatsächlichen Daten deiner Spielfigur. Es erklärt alle 27 Fertigkeiten, zeigt Attribute und Zustandswerte, durchsucht das aktuelle Inventar und sortiert Gegenstände wahlweise nach Name oder Wert pro Gewicht. Zwölf Gegenstandskategorien liefern passende Details, etwa Waffenschaden, Zustand, Verzauberung oder die durch Alchemie bereits erkennbaren Zutateneffekte.
+
+Unter **Magie** stehen die aktuell erlernten Zauber mit Kosten, Reichweite, Dauer und Wirkung. **Zauber auswählen** setzt die normale Morrowind-Auswahl; anschließend zauberst du wie gewohnt. Unter **Begegnungen** findest du geladene Figuren im Umkreis von 3.000 Spieleinheiten und kannst gezielt mit einer davon sprechen. Bücher öffnen ihren vorhandenen Buch- oder Schriftrollenleser. Die Schaltflächenleiste im normalen Inventar und Dialog macht F6, F7 und F8 auch per Maus erreichbar.
+
+NPC-Gespräche erhalten Beruf, Dienste, Zugehörigkeiten, Verletzung und aktuelle Sympathie aus dem Spiel. Ein stabiler eigener Sprechstil ergänzt diese Daten und das getrennte Gesprächsgedächtnis. Die Stilauswahl ist Inszenierung; sie fügt keine erfundene Originalbiografie hinzu. Das lokale Modell kann weiterhin sprachliche und inhaltliche Fehler machen.
 
 ## Wissen und Magie in Morrowind
 
@@ -41,6 +50,8 @@ Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öff
 
 Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
 
+Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das neue Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels.
+
 Die Erweiterung nutzt ein eigenes OpenMW-Profil. Spielstandkopien sind im öffentlichen Launcher standardmäßig aus; `--copy-saves` übernimmt ausdrücklich für diesen Start fehlende Kopien, ohne vorhandene Dateien zu überschreiben. Masterdateien und ursprüngliche Saves bleiben erhalten. Bestehende Grafik-, Sound- und Eingabeeinstellungen des Profils werden beim normalen Start beibehalten. Details: [docs/GRAPHICS.md](docs/GRAPHICS.md).
 
 ## Entwicklung
@@ -54,12 +65,17 @@ python tests/integration_content.py
 python tests/integration_knowledge.py
 python tests/integration_cast.py
 python tests/integration_chat.py
+python tests/integration_chat.py --npc
+python tests/integration_universe.py
+python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```
 
 Die optionalen Integrationstests benötigen die eigene OpenMW-/Morrowind-Installation. Sie verwenden eigene Testsitzungen statt persönlicher Spielstände. `.local/` enthält persönliche Daten, Sicherungen und Testbelege und gehört nicht ins öffentliche Repository.
 
-Die [native Prüfzusammenfassung für 0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bindet Inhalts-, Speicher-, Zauber- und Gesprächsprüfungen an ihre jeweiligen Quellenstände. Das abschließend überarbeitete Wissensfenster wurde im Spiel mit Mausbedienung betrachtet; die davor geprüfte Speicher-/Bonuslogik und diese spätere UI-Fassung tragen getrennte Hashes. Physische F7-/F8-Tasteneingaben wurden nicht verifiziert.
+Die [native Prüfzusammenfassung für 0.5](docs/NATIVE-VERIFICATION-0.5.0.json) bindet die neue Oberfläche und einen echten Arrille-Modellrundlauf an ihre Prüfstände. 27 Fertigkeiten, zwölf Gegenstandskategorien, Zauberauswahl, Buchleser und die genaue Gesprächsfigur wurden im laufenden Spiel geprüft. Die [Prüfungen für 0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bleiben als eigener historischer Stand erhalten. Physische F6-/F7-/F8-Tasteneingaben wurden nicht verifiziert; die neue Mausleiste wurde bedient.
+
+`survey_universe.py` liest sämtliche Datensatz- und Unterdatensatzgrenzen der aktiven TES3-Plugins und baut lokal ein versionsgebundenes Register. Das Register und extrahierte Inhalte bleiben privat. Eine vollständige Strukturaufnahme dieser Plugins ist keine vollständige Prüfung sämtlicher Skriptpfade, Texturen oder Animationen. Umfang und weitere Entwicklungsäste stehen in [docs/UNIVERSE-0.5.md](docs/UNIVERSE-0.5.md).
 
 ## Weiterer Ausbau
 
@@ -69,4 +85,4 @@ Weitere friedliche Questverzweigungen, ein Bausystem, neue Regionen, umfassende 
 
 Eigener Code und eigene Texte: **MIT**. Die ausdrücklich benannten LOVE-Grafikdateien: **CC0-1.0**, siehe [ASSET-LICENSE.md](ASSET-LICENSE.md). Spenden sind freiwillig. Originale Spieldaten, andere Mods, Engine und Sprachmodelle behalten ihre jeweiligen Bedingungen.
 
-Die bisherige öffentliche Fassung liegt im [Morrowind-Repository](https://github.com/Juri-Halveth/halveth-morrowind-genesis). Diese Version 0.4 wird lokal gebaut und geprüft; ein lokales Paket allein bedeutet noch keine veröffentlichte Version.
+Quellstand, Prüfungen und veröffentlichte Pakete stehen im [Morrowind-Repository](https://github.com/Juri-Halveth/halveth-morrowind-genesis). Den Veröffentlichungsstand einer Version zeigt die [Release-Liste](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases); ein lokales Paket allein bedeutet noch keine Veröffentlichung.

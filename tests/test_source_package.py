@@ -61,6 +61,8 @@ class SourcePackageTests(unittest.TestCase):
     def test_owned_data_code_and_optional_receipts_are_included(self):
         allowed = {
             'project_knowledge.py',
+            'character_profile.py',
+            'mod/Fonts/MysticCards.omwfont',
             'data/projects.json',
             'data/project-knowledge.json',
             'data/generation-providers.json',
@@ -74,6 +76,7 @@ class SourcePackageTests(unittest.TestCase):
             'scripts/convert-banner.mjs',
             'docs/GENERATION-PIPELINE.md',
             'docs/NATIVE-VERIFICATION-0.4.0.json',
+            'docs/NATIVE-VERIFICATION-0.5.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -127,8 +130,8 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.4.0')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.4.0-public-source.zip')
+        self.assertEqual(release.VERSION, '0.5.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.5.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)

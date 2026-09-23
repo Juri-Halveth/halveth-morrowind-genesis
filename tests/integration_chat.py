@@ -23,6 +23,7 @@ from server import Companion, Handler, ThreadingHTTPServer, MODEL
 from scripts.prepare_profile import atomic_text, default_install, prepare
 
 REQUEST_TEXT='JARVIS, begrüße mich in einem kurzen deutschen Satz. Wir testen gerade unser freies Gespräch in Morrowind. Führe keine Spielaktion aus.'
+NPC_REQUEST='Hallo Arrille. Was kannst du mir als Haendler hier anbieten? Antworte als du selbst in zwei kurzen deutschen Saetzen mit einer passenden Rueckfrage.'
 
 NATIVE_CHAT = r'''local core=require('openmw.core')
 local self=require('openmw.self')
@@ -81,11 +82,22 @@ class WitnessCompanion(Companion):
         return result
 
 
-def run(install_root: Path, state_dir: Path, port: int, model: str) -> dict:
+def run(install_root: Path, state_dir: Path, port: int, model: str, npc_mode=False) -> dict:
     args = argparse.Namespace(install_root=install_root, state_dir=state_dir,
                               source_profile='max', profile='beauty', smoke=True,
                               copy_saves=False, reset_settings=True)
     prepared = prepare(args)
+    native_chat=NATIVE_CHAT
+    request_text=REQUEST_TEXT
+    expected_speaker='JARVIS'
+    if npc_mode:
+        prepared['command'][-1]="Seyda Neen, Arrille's Tradehouse"
+        request_text=NPC_REQUEST
+        expected_speaker='Arrille'
+        native_chat=native_chat.replace("local C=require('scripts.halveth.common')", "local C=require('scripts.halveth.common')\nlocal nearby=require('openmw.nearby')\nlocal I=require('openmw.interfaces')")
+        native_chat=native_chat.replace('sent=true', "sent=true\n            local target\n            for _,actor in ipairs(nearby.actors) do if actor.recordId=='arrille' then target=actor end end\n            assert(target and I.HALVETH.talkTo(target),'Arrille targeting failed')")
+        native_chat=native_chat.replace("entityMode='jarvis'", "entityMode='npc'").replace(REQUEST_TEXT,NPC_REQUEST)
+        native_chat=native_chat.replace("data.speaker=='JARVIS'", "data.speaker=='Arrille'")
     profile = Path(prepared['profile_dir'])
     # This asynchronous model test must keep rendering while another app has
     # focus. Exclusive fullscreen can suspend OpenMW's frame callbacks on
@@ -99,7 +111,7 @@ def run(install_root: Path, state_dir: Path, port: int, model: str) -> dict:
     settings.write(settings_stream)
     atomic_text(settings_path, settings_stream.getvalue())
     data = profile / 'data'
-    atomic_text(data / 'scripts' / 'halveth_genesis_smoke.lua', NATIVE_CHAT)
+    atomic_text(data / 'scripts' / 'halveth_genesis_smoke.lua', native_chat)
     inbox = data / 'bridge' / 'inbox.json'
     atomic_text(inbox, '{}\n')
     log_path = Path(prepared['stdout_log'])
@@ -117,6 +129,7 @@ def run(install_root: Path, state_dir: Path, port: int, model: str) -> dict:
         'model': model, 'profile_dir': str(profile), 'log': str(log_path),
         'inbox': str(inbox), 'server_port': http.server_port,
         'test_window': {'mode': 'windowed', 'minimize_on_focus_loss': False},
+        'npc_mode': npc_mode,
     }
     try:
         availability = app.models()
@@ -140,7 +153,9 @@ def run(install_root: Path, state_dir: Path, port: int, model: str) -> dict:
         result['sent_requests'] = [{k: event[k] for k in ('sessionId', 'requestId', 'entityMode', 'text')} for event in sent]
         result['received_replies'] = received
         result['model_witnesses'] = app.chat_witnesses
-        result['exact_request_match']=len(sent)==1 and sent[0]['text']==REQUEST_TEXT
+        result['exact_request_match']=len(sent)==1 and sent[0]['text']==request_text
+        result['npc_profile_context'] = ({k:sent[0]['context']['npc'].get(k) for k in ('name','recordId','className','disposition','services')}
+                                         if npc_mode and len(sent)==1 else None)
         result['exact_source_context_match']=(len(sent)==len(sources)==1 and
             sent[0]['requestId']==sources[0]['requestId'] and sent[0]['text']==sources[0]['text'] and
             sent[0]['context']==json.loads(sources[0]['contextJson']))
@@ -153,7 +168,7 @@ def run(install_root: Path, state_dir: Path, port: int, model: str) -> dict:
                 and any('HALVETH_CHAT_PASS' in marker for marker in result['markers'])
                 and incoming['sessionId'] == outgoing['sessionId']
                 and incoming['requestId'] == outgoing['requestId']
-                and incoming['speaker'] == 'JARVIS' and incoming['uiOpen'] is True
+                and incoming['speaker'] == expected_speaker and incoming['uiOpen'] is True
                 and incoming['reply'] == model_reply['reply']
                 and model_reply['mode'] == 'MODEL_LIVE'
                 and result['world_actions_recorded'] == 0
@@ -182,8 +197,9 @@ def main() -> int:
     parser.add_argument('--state-dir', type=Path, default=ROOT / '.local' / 'integration-chat')
     parser.add_argument('--port', type=int, default=18767)
     parser.add_argument('--model', default=MODEL)
+    parser.add_argument('--npc', action='store_true')
     args = parser.parse_args()
-    result = run(args.install_root, args.state_dir.resolve(), args.port, args.model)
+    result = run(args.install_root, args.state_dir.resolve(), args.port, args.model, args.npc)
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if result['passed'] else 1
 

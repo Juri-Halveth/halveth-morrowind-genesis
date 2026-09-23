@@ -2,7 +2,7 @@
 
 ## Background companion
 
-Python 3.11+ with SQLite runs the local companion. Normal launch starts it in the background and opens Morrowind directly. F8 provides conversations and actions inside the game; F7 opens the native knowledge journal. Ollama is optional: model conversations require an already installed model, while native books, spells and learning continue offline. No dependency or model downloads happen automatically. `python launcher.py --companion-only` starts the configured background service without opening a browser or game window.
+Python 3.11+ with SQLite runs the local companion. Normal launch starts it in the background and opens Morrowind directly. F6 opens the native character/inventory/magic/encounter view, F7 the knowledge journal, and F8 conversations. A clickable bar in the normal inventory and dialogue also opens these views. Ollama is optional: model conversations require an already installed model, while native inspection, books, spells and learning continue offline. No dependency or model downloads happen automatically. `python launcher.py --companion-only` starts the configured background service without opening a browser or game window.
 
 ## Installation layout
 

@@ -11,6 +11,7 @@ local markup=require('openmw.markup')
 local input=require('openmw.input')
 local camera=require('openmw.camera')
 local C=require('scripts.halveth.common')
+local inspect=require('scripts.halveth.inspect')
 
 local sessionId, worldId, ready, counter = nil,nil,false,0
 local lastSequence,lastPoll,lastContext,lastRegister=0,-100,-100,-100
@@ -39,14 +40,9 @@ local function append(text)
     if window then window:update() end
 end
 local function state(actor)
-    local r=actor.type.record(actor)
-    local out={id=actor.id,worldId=worldId,recordId=actor.recordId,name=r.name or actor.recordId,
-        cell=actor.cell and actor.cell.name or '',position=C.position(actor.position)}
-    if types.NPC.objectIsInstance(actor) then
-        out.race=r.race;out.class=r.class;out.kind='npc'
-        local ok,factions=pcall(types.NPC.getFactions,actor)
-        if ok then out.factions=C.array();for _,f in ipairs(factions) do out.factions[#out.factions+1]=f end end
-    else out.kind='creature' end
+    local out=inspect.actor(actor,self)
+    out.worldId=worldId
+    out.position=C.position(actor.position)
     return out
 end
 local function context()
@@ -76,7 +72,7 @@ local function context()
         local ok,s=pcall(state,ray.hitObject)
         if ok then npc=s;method='crosshair_actor' end
     end
-    if dialogueTarget and dialogueTarget:isValid() and (dialogueTarget.position-self.position):length()<1000 then
+    if dialogueTarget and dialogueTarget:isValid() and (dialogueTarget.position-self.position):length()<=3000 then
         local ok,s=pcall(state,dialogueTarget)
         if ok then npc=s;method='dialogue_target' end
     end
@@ -146,13 +142,15 @@ end
 local function chooseMode(mode)
     entityMode=mode
     if statusLayout then
-        statusLayout.props.text=mode=='jarvis' and 'Gespraech: JARVIS · lokaler Weltbegleiter' or 'Gespraech: NPC/Wesen · Dialogziel, Fadenkreuz oder naechstes Wesen'
+        local c=context()
+        statusLayout.props.text=mode=='jarvis' and 'Gespraech: JARVIS · lokaler Weltbegleiter' or ('Gespraech: '..(c.npc and c.npc.name or 'kein Wesen in der Naehe'))
         if window then window:update() end
     end
 end
 local function open()
     if window then close();return end
     if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
+    if I.HALVETHUniverse then I.HALVETHUniverse.close() end
     windowMode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});hasAddedMode=true end
     local size=ui.screenSize()
@@ -185,6 +183,10 @@ local function open()
             button('[Wissen / F7]',20,height-182,185,function()
                 close()
                 if I.HALVETHKnowledge then I.HALVETHKnowledge.open() end
+            end),
+            button('[Figur / Inventar / Magie · F6]',220,height-182,380,function()
+                close()
+                if I.HALVETHUniverse then I.HALVETHUniverse.open() end
             end),
             {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
                 props={position=util.vector2(20,height-144),size=util.vector2(width-150,22),text='Deine Nachricht',textSize=15}},
@@ -269,7 +271,16 @@ local function heal(data)
 end
 return {
     interfaceName='HALVETH',
-    interface={version=1,open=open,close=close,requestAction=requestAction,getSessionId=function() return sessionId end},
+    interface={version=2,open=open,close=close,isOpen=function()return window~=nil end,requestAction=requestAction,getSessionId=function() return sessionId end,
+        getContext=context,
+        talkTo=function(actor)
+            if not actor or not actor:isValid() or not types.Actor.objectIsInstance(actor)
+                or types.Actor.isDead(actor) or (actor.position-self.position):length()>3000 then return false end
+            dialogueTarget=actor
+            if not window then open() end
+            chooseMode('npc')
+            return true
+        end},
     engineHandlers={onFrame=frame,onInit=startSession,onLoad=function() close();startSession() end,
         onKeyPress=function(key)
             if key.code==input.KEY.F8 then open() end
