@@ -1,68 +1,72 @@
-# HALVETH Morrowind Genesis 0.3.0
+# HALVETH Morrowind Genesis · 0.4.0
 
-An open-source local companion and Lua mod for **OpenMW 0.51.0**: free-form conversations, separate memories for encountered characters, four explicit game actions, and an original Scarlet LOVE tapestry.
+Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
-**Code and documentation: MIT.** Commercial use, modification and redistribution are permitted under the license. The generated banner has its own terms in [ASSET-LICENSE.md](ASSET-LICENSE.md). This repository distributes our extension, not Morrowind, OpenMW, a language model, or third-party graphics packs.
+## Spielen
 
-![Original Scarlet LOVE artwork](mod/Textures/halveth/scarlet-love-banner.png)
+Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** lässt sich mit der vorhandenen nativen Workshop-Buildumgebung ergänzen.
 
-## Included
+- **F8:** mit JARVIS oder dem gewählten NPC sprechen; Heilen, +250 Gold, Startpunkt und Zurück nutzen.
+- **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
+- **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
+- **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
+- **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
+- **F2:** die vorhandenen Shaderregler öffnen.
 
-- Native **F8** game window and optional local browser companion.
-- Local Ollama conversations with JARVIS and encountered NPCs/creatures.
-- SQLite memory separated by campaign and character instance; lore indexing from your own installed game files.
-- Explicit **heal**, **give gold**, **return to session start** and **return from the last teleport** actions, completed only after the game replies.
-- Three original starter cards: HALVETH, LUCINET and RACHEL, plus built-in JARVIS.
-- Eight original design summaries with commit-bound public source references, selected when relevant.
-- Optional 887 × 1774 Scarlet LOVE tapestry and native F8 artwork.
-- Original, Beauty and Cinematic profile helpers; a Rachel-style build board and generation atelier with production briefs.
+Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8b`. Ist der Dienst nicht erreichbar, startet Morrowind weiter offline; Wissen, Bücher und direkte Spielwerkzeuge bleiben verfügbar. Der reguläre Einstieg öffnet weder einen Browser noch ein zusätzliches Konfigurationsfenster.
 
-This is a source release of an OpenMW extension. It is not a standalone game installer or Unreal conversion. New worlds, multiplayer, payments, blockchain and Steam distribution are future work.
+## Wissen und Magie in Morrowind
 
-## Quick start: companion and atelier
+Das Journal registriert geöffnete Bücher und Schriftrollen anhand ihres Spiel-Datensatzes. Es merkt die Anzeigezeit im Buchfenster, Studiennotizen und verbrauchte Praxisboni im normalen Spielstand. Anzeigezeit ist kein gemessenes Textverständnis. Es gibt keinen Mindesttimer und keine XP allein fürs Offenlassen eines Buches.
 
-Install **Python 3.11 or later** with SQLite support. No pip dependencies are needed for the companion or unit tests.
+Die sechs eigenen Bücher enthalten 15 verfasste Textabschnitte und passende Lernfragen. Morrowind bestimmt die sichtbare Seiteneinteilung. Eigene alchemistische Rezepte aus diesen Geschichten sind zunächst Weltbeschreibung; Zutatenhilfe und Trankherstellung verwenden tatsächlich vorhandene Morrowind-Zutaten und -Effekte.
 
-```console
-python server.py
-```
+| Zauber | Wirkung | Magicka |
+|---|---|---:|
+| LOVE | 6 Gesundheit pro Sekunde für 5 Sekunden | 8 |
+| SPARK | Schockprojektil mit 12–18 Schaden | 10 |
+| AEGIS | 20 Schildpunkte für 30 Sekunden | 12 |
 
-Open **http://127.0.0.1:18765/**. The atelier and source cards work without the game; game actions need a connected OpenMW session. The server listens on loopback only and is not intended as a public web service.
+Bücher und Zauber werden über die jeweiligen Schaltflächen angefordert. Vorhandene Exemplare und gelernte Zauber werden dabei nicht dupliziert. Die Alchemiehilfe zeigt passende Zutatenpaare aus dem aktuellen Inventar; gebraut wird im gewohnten Alchemiefenster.
 
-For local model answers install [Ollama](https://ollama.com/) separately and obtain a model you are allowed to use. The default is `hermes3:8b`; weights and their license are not included. Choose an already installed model with `python server.py --model your-local-model-name`. Without a working model, the companion exposes a limited offline response path. It does not silently send conversations to a cloud provider.
+## Gespräche und Spielwerkzeuge
 
-## Connect your game
+Die NPC-Auswahl bevorzugt das aktuelle Dialogziel, dann das anvisierte Wesen und schließlich das nächste Wesen. Der Begleiter erhält begrenzten Kontext zu Ort, Figur, Zustandswerten, Quests und dem zuletzt geöffneten Buch. Erinnerungen sind je Kampagne und Figureninstanz getrennt.
 
-You need **OpenMW 0.51.0** and your own lawful Morrowind installation. The profile helper expects an installation root containing `engine/openmw.exe` (`engine/openmw` on Linux), matching `engine/resources/`, and `profiles/max/openmw.cfg` plus `settings.cfg`. Your configuration points to your existing game data. A standard OpenMW installation is not automatically converted into this layout.
+Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 
-```console
-python launcher.py --install-root "D:/Games/MyOpenMW" --source-profile max
-```
+**Startpunkt** bezeichnet den Ort beim Laden der Sitzung. **Zurück** führt an den vor der letzten Teleportation gespeicherten Ort. Die Schaltfläche **+250 Gold** ist ein zusätzliches Werkzeug. Der historische Vivec-Glitch bleibt separat in [docs/VIVEC-GOLD.md](docs/VIVEC-GOLD.md) dokumentiert.
 
-On Windows, `START.cmd` opens the Tk launcher. Other platforms use `python launcher.py`; Tk may need an OS package. See [SETUP.md](docs/SETUP.md) for the first-run configuration and direct CLI route. The optional banner is enabled with `python scripts/install_scarlet_banner.py apply`, followed by profile preparation and a game restart.
+## Grafik und bestehende Spielstände
 
-Press **F8** in a loaded game. NPC mode prefers the dialogue target, then the crosshair target, then a nearby actor. Model answers are generated fiction and can be inaccurate; design sources are not Morrowind lore or evidence of completed game actions.
+Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
 
-## Preserve your world
+Die Erweiterung nutzt ein eigenes OpenMW-Profil. Spielstandkopien sind im öffentlichen Launcher standardmäßig aus; `--copy-saves` übernimmt ausdrücklich für diesen Start fehlende Kopien, ohne vorhandene Dateien zu überschreiben. Masterdateien und ursprüngliche Saves bleiben erhalten. Bestehende Grafik-, Sound- und Eingabeeinstellungen des Profils werden beim normalen Start beibehalten. Details: [docs/GRAPHICS.md](docs/GRAPHICS.md).
 
-Genesis uses separate `.local/profiles/`. Save copying is opt-in through `--copy-saves`; existing destination saves are not overwritten. Save a separate game before gameplay changes. Teleport return stores one prior position, not a general undo history.
+## Entwicklung
 
-The banner changes every use of one tapestry texture type, with no quest, NPC or economy records. Disable it with `python scripts/install_scarlet_banner.py restore`, prepare the profile again and restart OpenMW. See [SCARLET-ATELIER.md](docs/SCARLET-ATELIER.md).
+`mod/scripts/halveth/` enthält die direkt im Spiel laufenden Lua-Erweiterungen. `data/native-content.json` ist die Quelle der eigenen Bücher und Zauber. `server.py` verbindet das Spiel im Hintergrund mit lokalem Modell und Gedächtnis. `native/GenesisEntry.cs` und `scripts/build_native_entry.py` erstellen den nativen Spieleinstieg mit der vorhandenen Windows-Buildumgebung.
 
-## Develop and package
-
-```console
-python -m unittest discover -s tests -v
-python scripts/build_release.py --check
+```text
+python launcher.py --play --profile beauty
+python -m unittest discover -s tests -p "test_*.py"
+python tests/integration_content.py
+python tests/integration_knowledge.py
+python tests/integration_cast.py
+python tests/integration_chat.py
 python scripts/build_release.py
 ```
 
-The release builder uses an explicit source/asset whitelist, resets starter cards and mailbox, checks license/provenance files and verifies archived bytes. Output goes to `dist/` with a checksum. Native tests require your own game/model and remain separate from dependency-free unit tests.
+Die optionalen Integrationstests benötigen die eigene OpenMW-/Morrowind-Installation. Sie verwenden eigene Testsitzungen statt persönlicher Spielstände. `.local/` enthält persönliche Daten, Sicherungen und Testbelege und gehört nicht ins öffentliche Repository.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [PUBLIC-STATUS.json](PUBLIC-STATUS.json) and the Windows/Linux CI workflow. A defined workflow is not a hosted CI pass until GitHub runs it.
+Die [native Prüfzusammenfassung für 0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bindet Inhalts-, Speicher-, Zauber- und Gesprächsprüfungen an ihre jeweiligen Quellenstände. Das abschließend überarbeitete Wissensfenster wurde im Spiel mit Mausbedienung betrachtet; die davor geprüfte Speicher-/Bonuslogik und diese spätere UI-Fassung tragen getrennte Hashes. Physische F7-/F8-Tasteneingaben wurden nicht verifiziert.
 
-## License and content
+## Weiterer Ausbau
 
-MIT covers original code, documentation, UI and original design summaries. Banner terms are separate. Referenced upstream contents retain their own licenses; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+Weitere friedliche Questverzweigungen, ein Bausystem, neue Regionen, umfassende Bewegungs- und Kampfänderungen sowie individuelle Stimmen bleiben Entwicklungsarbeit **an Morrowind**. Die getrennten Realms-/Portal-Garden-Prototypen sind eingestellt; verwendbare Inhalte werden für diese Spielwelt portiert. Unreal-Rendererfunktionen sind durch die Portierung von Büchern oder Spielregeln nicht automatisch in OpenMW vorhanden.
 
-No Bethesda archives/plugins, extracted lore, private character register, saves, conversations, credentials, model weights or downloaded mod packs are included. Optional donations will not be a condition of the MIT license.
+## Lizenz und Veröffentlichung
+
+Eigener Code und eigene Texte: **MIT**. Die ausdrücklich benannten LOVE-Grafikdateien: **CC0-1.0**, siehe [ASSET-LICENSE.md](ASSET-LICENSE.md). Spenden sind freiwillig. Originale Spieldaten, andere Mods, Engine und Sprachmodelle behalten ihre jeweiligen Bedingungen.
+
+Die bisherige öffentliche Fassung liegt im [Morrowind-Repository](https://github.com/Juri-Halveth/halveth-morrowind-genesis). Diese Version 0.4 wird lokal gebaut und geprüft; ein lokales Paket allein bedeutet noch keine veröffentlichte Version.

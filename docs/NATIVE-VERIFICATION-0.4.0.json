@@ -1,0 +1,129 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.4.0",
+  "recordedAt": "2026-09-23T11:17:09.965222+00:00",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "One development machine; isolated fresh test characters and dedicated test saves."
+  },
+  "sourceHashScope": "Native-test file hashes bind the tested local source bytes. Git may normalize text line endings in a checkout; these are not a claim that all checks ran on one final byte snapshot.",
+  "checks": {
+    "content": {
+      "originalLocalReceiptSha256": "9e12ea3c7c36ae261e13d15be3337df52059b9d41942db08ccac34257b23e7c5",
+      "recordedAt": "2026-09-23T10:59:09.073354+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "state": "PASS",
+      "nativeBooks": 6,
+      "authoredPassages": 15,
+      "nativeLearnedSpells": 3,
+      "nativeEffectParameters": "PASS",
+      "repeatedGrantDuplicatePrevention": "PASS",
+      "stableRecordIds": "PASS",
+      "personalSavesUsed": false,
+      "testedFiles": {
+        "mod/scripts/halveth/content.lua": "35622de296b8282c48ef0ac23cb2878db979478d55a42a595fc932b2f92ca93f",
+        "mod/scripts/halveth/content_catalog.lua": "eb2f6d743ce760dc17cebe3fea6aeaccd7b8909a6c7d137e084855878a606a4d",
+        "data/native-content.json": "e02f9a6d8ac3d6b5174e590e91b7dedc03c32c820519e64da4531967eb041f25"
+      }
+    },
+    "knowledgePersistenceAndBonus": {
+      "originalLocalReceiptSha256": "68597bfc8788391b03197c1cf90491a3a92499f00f4878d3ce107d98e7174a2f",
+      "recordedAt": "2026-09-23T11:07:40.063640+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "state": "PASS_ON_BOUND_TESTED_REVISION",
+      "nativeBookAndScrollReaders": "PASS",
+      "displayTimer": "PASS",
+      "noIdleOrStudyXp": "PASS",
+      "inventoryEffectPairs": "PASS",
+      "nativeMenuStack": "PASS",
+      "alchemyBonusPercentObserved": 5,
+      "oneUseCreditAndSkillCap": "PASS",
+      "actualIsolatedSaveAndReload": "PASS",
+      "pendingCreditRestored": "PASS",
+      "personalSavesUsed": false,
+      "testedFiles": {
+        "mod/scripts/halveth/knowledge.lua": "477fdd5535b7965a3f94c72e6c76c12d585a42b99a7caabe820bd463bef15778",
+        "mod/scripts/halveth/player.lua": "e3956f2a1d7d0dec55b53ad878f486c7ed5c08ba655b7fd916c53720fe2a0873",
+        "mod/scripts/halveth/content.lua": "35622de296b8282c48ef0ac23cb2878db979478d55a42a595fc932b2f92ca93f",
+        "mod/halveth.omwscripts": "65502b4de8b8df50c353e0d8b585dc500de2693611f0e1251bd14459210d67ad"
+      }
+    },
+    "casting": {
+      "originalLocalReceiptSha256": "b008d31f150fa68f53761c5273a2431e4dde38f980bd0a90beb4ad97d007d9bd",
+      "recordedAt": "2026-09-23T11:09:30.956361+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "state": "PASS",
+      "route": "Native spell selection, spell stance and use control; no direct effect injection.",
+      "love": {
+        "healthBefore": 1,
+        "healthAfterDuringObservation": 19.400037765503,
+        "magickaConsumed": 8
+      },
+      "aegis": {
+        "nativeShieldMagnitude": 20,
+        "magickaConsumed": 12
+      },
+      "sparkProjectileImpact": "NOT_TESTED",
+      "physicalInputVerified": false,
+      "castAnimationVisualReview": false,
+      "testedFiles": {
+        "mod/scripts/halveth/content.lua": "35622de296b8282c48ef0ac23cb2878db979478d55a42a595fc932b2f92ca93f",
+        "mod/scripts/halveth/content_catalog.lua": "eb2f6d743ce760dc17cebe3fea6aeaccd7b8909a6c7d137e084855878a606a4d",
+        "data/native-content.json": "e02f9a6d8ac3d6b5174e590e91b7dedc03c32c820519e64da4531967eb041f25"
+      }
+    },
+    "liveNativeConversation": {
+      "originalLocalReceiptSha256": "5f09479dfa7f5a7da4a09aafdae381268a098841cab110fb768419b2201d89aa",
+      "recordedAt": "2026-09-23T11:13:41.707630+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "state": "PASS",
+      "route": "Native game dialog to production companion, live local model and matching in-game reply.",
+      "model": "hermes3:8b",
+      "mode": "MODEL_LIVE",
+      "modelElapsedSeconds": 10.513,
+      "replyUtf8Bytes": 198,
+      "replyUiOpen": true,
+      "requestAndContextMatched": true,
+      "worldActionsRecorded": 0,
+      "claimLimit": "One successful local round trip, not a latency guarantee or evaluation of all NPC personalities."
+    },
+    "finalNativeUi": {
+      "originalLocalReceiptSha256": "223e85c527f28ea14bc04d92effa762eabe241c513e2b17964f137b137c9a1c7",
+      "recordedAt": "2026-09-23T11:10:21.705812+00:00",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "state": "OBSERVED_WITH_SEPARATE_OPERATOR_REVIEW",
+      "knowledgeLuaSha256": "1e9ce71ec9324651a528130baada9b3ddda2b52fbb56d1180f6eca4a132357a7",
+      "journalAndNativeBookReader": "OBSERVED",
+      "mouseStudyAndReadControls": "OBSERVED_BY_PRIMARY_OPERATOR",
+      "physicalKeyboardHotkeys": "NOT_VERIFIED_KEY_INJECTION_FAILED",
+      "sourceTransition": "After the bound persistence test, explanatory timer/bonus text and three clickable answer buttons were added using the existing answer callback. Final UI/mouse review is separate; persistence assertions were not rerun on this UI revision."
+    },
+    "directNativeEntry": {
+      "state": "OBSERVED_BY_PRIMARY_OPERATOR",
+      "route": "Existing Morrowind desktop entry with --genesis beauty to one OpenMW game process.",
+      "originalMorrowindMainMenu": "OBSERVED",
+      "existingCopiedSaveLoaded": "OBSERVED",
+      "productionCompanionVersion": "0.4.0",
+      "productionCompanionConnected": true,
+      "localModelAvailable": true,
+      "luaErrorsObserved": 0,
+      "personalSaveWrittenByTest": false,
+      "physicalF8Key": "NOT_VERIFIED",
+      "claimLimit": "Live local operator observation; no claim of a fresh-machine install or a single monolithic executable."
+    }
+  },
+  "limits": [
+    "No personal save was loaded by these integration tests.",
+    "Final native UI review does not prove physical keyboard hotkeys or every viewport size.",
+    "No end-to-end SPARK projectile impact assertion or cast-animation visual review.",
+    "No Linux native gameplay validation, all-mod compatibility guarantee or FPS claim.",
+    "This summary excludes local paths, process/session IDs, private conversations, game assets and raw logs."
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.3.0",
-  "scope": "Public source staging; own code, original starter register, paraphrased public design cards and exact original banner assets",
-  "publication": "PUBLISHED_ON_GITHUB",
+  "version": "0.4.0",
+  "scope": "Native TES III Morrowind/OpenMW extension source, original books and spells, direct game entry and exact owned banner assets",
+  "publication": "SOURCE_BRANCH_CANDIDATE_NO_RELEASE",
   "licenses": {
     "ownCodeAndDocs": "MIT",
     "ownedBannerRights": "CC0-1.0"
@@ -11,7 +11,12 @@
     "starterCards": 3,
     "builtInCompanion": "JARVIS",
     "projectDesignCards": 8,
-    "binaryAssetFiles": 3
+    "binaryAssetFiles": 3,
+    "nativeBooks": 6,
+    "authoredBookPassages": 15,
+    "nativeSpells": 3,
+    "nativeKnowledgeJournal": "F7",
+    "directNativeGameEntry": true
   },
   "excluded": [
     "Bethesda game assets and plugins",
@@ -21,25 +26,40 @@
     "game saves",
     "conversations and runtime logs",
     "machine paths and credentials",
-    "model weights"
+    "model weights",
+    "live bridge inbox contents and companion-status state"
   ],
-  "priorDevelopmentObservations": {
-    "engine": "OpenMW 0.51.0",
-    "date": "2026-09-23",
-    "nativeBannerRendering": "observed in a disposable scene",
-    "nativeF8ModelRoundtrip": "observed with local Ollama",
-    "scope": "Development machine only; original logs, personal environment inventories and screenshots are not redistributed. Not a fresh test of every public setup."
+  "priorRelease": {
+    "version": "0.3.0",
+    "publication": "PUBLISHED_ON_GITHUB",
+    "initialPublicCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
+    "hostedCI": {
+      "state": "PASSED",
+      "matrix": {
+        "os": [
+          "ubuntu-latest",
+          "windows-latest"
+        ],
+        "python": [
+          "3.11",
+          "3.13"
+        ]
+      },
+      "checkedCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
+      "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35806245934",
+      "testsPerMatrixJob": 50
+    }
   },
   "publicPackageTests": {
-    "state": "PASSED",
-    "count": 50,
+    "state": "PASSED_LOCAL_SOURCE_SUITE",
+    "count": 65,
     "command": "python -m unittest discover -s tests -v",
     "platform": "Windows",
     "python": "3.14.6",
-    "scope": "Temporary fixtures and local HTTP handler tests; no game launch, personal saves or paid model generation."
+    "scope": "Temporary source/package/launcher fixtures and local HTTP handler tests; no game launch or model download. Native checks are separately scoped in the native verification summary."
   },
   "hostedCI": {
-    "state": "PASSED",
+    "state": "CONSULT_GITHUB_COMMIT_CHECKS",
     "matrix": {
       "os": [
         "ubuntu-latest",
@@ -50,18 +70,21 @@
         "3.13"
       ]
     },
-    "checkedCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2",
-    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35806245934",
-    "testsPerMatrixJob": 50
+    "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
+  },
+  "nativeVerification": {
+    "state": "SCOPED_NATIVE_CHECKS_AND_FINAL_UI_REVIEW_COMPLETE",
+    "summary": "docs/NATIVE-VERIFICATION-0.4.0.json",
+    "knowledgeRevisionBoundary": "Persistence/bonus check and final UI revision have distinct source hashes and scopes."
   },
   "limitations": [
-    "Source release; no bundled game or installer",
+    "Source release; no bundled Bethesda game assets, engine or installer",
     "OpenMW layout contract requires manual setup outside known HALVETH bundles",
+    "Native Windows entry requires the existing Workshop C# sources and a local compiler",
     "Native gameplay on Linux not tested",
-    "No Unreal conversion, online server, crypto transaction or Steam submission in this source release",
+    "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T01:22:32.697500+00:00",
-  "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis",
-  "initialPublicCommit": "c7c6733d7b29d9aea39ff3c7ee7403a5bf6cb1f2"
+  "recordedAt": "2026-09-23T11:18:03.897482+00:00",
+  "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

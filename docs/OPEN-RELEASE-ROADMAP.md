@@ -1,4 +1,6 @@
-# HALVETH – offener Release und Unreal-Ausbau
+# Historischer Release-Entwurf – durch Morrowind 0.4 abgelöst
+
+Dieser Plan vom 23. September 2026 dokumentiert eine frühere Produktentscheidung. Die eigenständigen Realms-/Portal-Garden-Projekte wurden eingestellt. Die aktive Entwicklung erfolgt innerhalb von TES III: Morrowind über OpenMW; die aktuelle Richtung steht in der README und in NATIVE-CONTENT.md. Die folgende frühere Planung ist keine aktuelle Zusage eines separaten Spiels, Unreal-Ports oder Steam-Releases.
 
 Stand: 23. September 2026. Veröffentlichungsplan für den eigenen HALVETH-Code, eigene Inhalte und die nächste eigenständige Spielwelt. Dieser Plan beschreibt die Veröffentlichungsregeln und nächste Produktstufe; ein konkreter Upload, Unreal-Build oder Steam-Release erhält seinen eigenen Ergebnisnachweis.
 

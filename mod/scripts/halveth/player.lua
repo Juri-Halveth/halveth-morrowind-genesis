@@ -15,11 +15,23 @@ local C=require('scripts.halveth.common')
 local sessionId, worldId, ready, counter = nil,nil,false,0
 local lastSequence,lastPoll,lastContext,lastRegister=0,-100,-100,-100
 local seen, received, healed={}, {}, {}
-local window,inputLayout,transcriptLayout,statusLayout
+local window,inputLayout,transcriptLayout,statusLayout,windowMode
 local inputText,transcript='','HALVETH ist da. F8 oeffnet dein Begleiterfenster.\nFreie Gespraeche laufen ueber den lokalen Begleiter.'
 local dialogueTarget,lastBook,hasAddedMode=nil,nil,false
 local entityMode='jarvis'
 local pendingChat=nil
+
+local function companionOffline()
+    local ok,status=pcall(function()
+        local f=vfs.open('bridge/companion-status.json')
+        if not f then return nil end
+        local bytes=f:read(257);f:close()
+        if not bytes or #bytes>256 then return nil end
+        local data=markup.decodeYaml(bytes)
+        return type(data)=='table' and data.status or nil
+    end)
+    return ok and status=='offline'
+end
 
 local function append(text)
     transcript=C.tail(transcript..'\n\n'..text,18000)
@@ -106,6 +118,7 @@ end
 local function submit()
     local text=inputText:match('^%s*(.-)%s*$')
     if #text==0 or not ready then return end
+    if companionOffline() then append('Der lokale Gespraechsbegleiter ist gerade offline. Wissen, Buecher und alle direkten Spielwerkzeuge bleiben nutzbar.');return end
     if pendingChat then append('Deine vorige Antwort entsteht noch.');return end
     if #text>16000 or (utf8.len(text) or #text)>4000 then append('Bitte maximal 4000 Zeichen pro Nachricht.');return end
     counter=counter+1
@@ -123,6 +136,7 @@ local function close()
     if window then window:destroy();window=nil end
     inputLayout=nil;transcriptLayout=nil;statusLayout=nil
     if hasAddedMode then I.UI.removeMode('Interface');hasAddedMode=false end
+    windowMode=nil
 end
 local function button(label,x,y,width,fn)
     return {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
@@ -138,6 +152,8 @@ local function chooseMode(mode)
 end
 local function open()
     if window then close();return end
+    if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
+    windowMode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});hasAddedMode=true end
     local size=ui.screenSize()
     local width=math.min(1000,size.x-40)
@@ -153,7 +169,7 @@ local function open()
     local artWidth=banner and math.min(160,(height-232)/2) or 0
     local transcriptWidth=width-40-(banner and artWidth+44 or 0)
     transcriptLayout={type=ui.TYPE.TextEdit,template=I.MWUI.templates.textEditBox,
-        props={position=util.vector2(20,75),size=util.vector2(transcriptWidth,height-232),text=transcript,
+        props={position=util.vector2(20,75),size=util.vector2(transcriptWidth,height-266),text=transcript,
             textSize=17,readOnly=true,multiline=true,wordWrap=true}}
     inputLayout={type=ui.TYPE.TextEdit,template=I.MWUI.templates.textEditLine,
         props={position=util.vector2(8,7),size=util.vector2(width-170,28),autoSize=false,text=inputText,textSize=18},
@@ -166,6 +182,10 @@ local function open()
             button('[JARVIS]',width-210,15,108,function() chooseMode('jarvis') end),
             button('[NPC]',width-95,15,85,function() chooseMode('npc') end),
             statusLayout,transcriptLayout,
+            button('[Wissen / F7]',20,height-182,185,function()
+                close()
+                if I.HALVETHKnowledge then I.HALVETHKnowledge.open() end
+            end),
             {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
                 props={position=util.vector2(20,height-144),size=util.vector2(width-150,22),text='Deine Nachricht',textSize=15}},
             {type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,
@@ -185,6 +205,7 @@ local function open()
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
         props={relativePosition=util.vector2(.5,.5),anchor=util.vector2(.5,.5),size=util.vector2(width,height)},
         content=ui.content(contents)}
+    if companionOffline() then append('Gespraechsbegleiter offline. Wissen mit F7 und direkte Spielwerkzeuge funktionieren weiter.') end
     emitContext()
 end
 local function poll()
@@ -229,7 +250,7 @@ local function frame()
     if pendingChat and now-pendingChat.startedAt>180 then
         pendingChat=nil;append('Die Antwortverbindung hat noch keine Antwort geliefert. Du kannst erneut schreiben.')
     end
-    if window and hasAddedMode and I.UI.getMode()~='Interface' then close() end
+    if window and I.UI.getMode()~=windowMode then close() end
 end
 local function handleResult(data)
     if data.sessionId~=sessionId or received[data.actionId] then return end
@@ -248,7 +269,7 @@ local function heal(data)
 end
 return {
     interfaceName='HALVETH',
-    interface={version=1,open=open,requestAction=requestAction,getSessionId=function() return sessionId end},
+    interface={version=1,open=open,close=close,requestAction=requestAction,getSessionId=function() return sessionId end},
     engineHandlers={onFrame=frame,onInit=startSession,onLoad=function() close();startSession() end,
         onKeyPress=function(key)
             if key.code==input.KEY.F8 then open() end

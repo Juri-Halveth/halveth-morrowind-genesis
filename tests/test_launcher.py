@@ -6,6 +6,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import io
+import json
+from contextlib import redirect_stderr
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -22,6 +25,7 @@ class LauncherProcessTests(unittest.TestCase):
         self.stack = ExitStack()
         self.addCleanup(self.stack.close)
         self.stack.enter_context(patch.object(launcher, 'STATE', self.state))
+        self.stack.enter_context(patch.object(launcher, 'BRIDGE_STATUS', self.state / 'bridge' / 'companion-status.json'))
         self.stack.enter_context(patch.object(launcher, 'os', SimpleNamespace(name='nt')))
         self.stack.enter_context(patch.object(launcher.subprocess, 'CREATE_NO_WINDOW', 0, create=True))
         self.stack.enter_context(patch.object(launcher, 'companion', return_value={
@@ -80,6 +84,70 @@ class LauncherProcessTests(unittest.TestCase):
         (self.state / 'game.pid').unlink()
         self.assertEqual(launcher.start_game('beauty'), 43000)
         self.run.assert_not_called()
+
+    def test_companion_failure_starts_real_game_offline_and_preserves_error(self):
+        (self.state / 'game.pid').unlink()
+        with patch.object(launcher, 'companion', side_effect=RuntimeError('local service unavailable')), \
+                patch.object(launcher, 'prepare', return_value={
+                    'command': ['existing-openmw'], 'cwd': str(self.state),
+                }) as prepare:
+            self.assertEqual(launcher.start_game('beauty'), 43000)
+        prepare.assert_called_once_with('beauty')
+        self.assertEqual(self.spawn.call_args.args[0], ['existing-openmw'])
+        self.assertIn('local service unavailable', (self.state / 'companion-start-errors.log').read_text())
+        self.assertIn('"status": "offline"', (self.state / 'companion-availability.json').read_text())
+        self.assertEqual(json.loads((self.state / 'bridge' / 'companion-status.json').read_text()),
+                         {'status': 'offline'})
+
+    def test_missing_game_inputs_still_fail_instead_of_faking_success(self):
+        with patch.object(launcher, 'companion', side_effect=RuntimeError('service failed')), \
+                patch.object(launcher, 'prepare', side_effect=FileNotFoundError('game assets missing')):
+            with self.assertRaisesRegex(FileNotFoundError, 'game assets missing'):
+                launcher.start_game('beauty')
+        self.assert_no_launch_or_log_change()
+
+
+class DirectEntryTests(unittest.TestCase):
+    def test_play_enters_existing_game_without_tkinter_or_browser(self):
+        with patch.object(launcher, 'start_game', return_value=1234) as start, \
+                patch('webbrowser.open') as browser, \
+                patch.dict(sys.modules, {'tkinter': None}):
+            self.assertEqual(launcher.main(['--play']), 0)
+        start.assert_called_once_with('beauty')
+        browser.assert_not_called()
+
+    def test_play_passes_each_supported_graphics_profile(self):
+        for profile in ('original', 'beauty', 'cinematic'):
+            with self.subTest(profile=profile), patch.object(launcher, 'start_game') as start:
+                self.assertEqual(launcher.main(['--play', '--profile', profile]), 0)
+                start.assert_called_once_with(profile)
+
+    def test_companion_only_mode_cannot_be_combined_with_direct_play(self):
+        with patch.object(launcher, 'start_game') as start, redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as result:
+                launcher.main(['--play', '--companion-only'])
+        self.assertEqual(result.exception.code, 2)
+        start.assert_not_called()
+
+    def test_play_start_failure_is_visible_to_native_parent(self):
+        with patch.object(launcher, 'start_game', side_effect=RuntimeError('startup failed')):
+            with self.assertRaisesRegex(RuntimeError, 'startup failed'):
+                launcher.main(['--play'])
+
+    def test_default_entry_also_starts_game_without_browser_or_tk(self):
+        with patch.object(launcher, 'start_game') as start, patch('webbrowser.open') as browser, \
+                patch.dict(sys.modules, {'tkinter': None}):
+            self.assertEqual(launcher.main([]), 0)
+        start.assert_called_once_with('beauty')
+        browser.assert_not_called()
+
+    def test_companion_only_is_a_hidden_service_start(self):
+        with patch.object(launcher, 'companion') as companion, patch.object(launcher, 'start_game') as game, \
+                patch('webbrowser.open') as browser:
+            self.assertEqual(launcher.main(['--companion-only']), 0)
+        companion.assert_called_once_with('beauty')
+        game.assert_not_called()
+        browser.assert_not_called()
 
 
 if __name__ == '__main__':

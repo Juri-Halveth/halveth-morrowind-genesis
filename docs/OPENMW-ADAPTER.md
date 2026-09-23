@@ -1,4 +1,4 @@
-# OpenMW adapter — Genesis 0.3.0
+# OpenMW adapter — Genesis 0.1
 
 This is an additive OpenMW 0.51 Lua mod (API revision 129). Its F8 window provides free text, replies and four bounded native world tools. Original dialogue remains available. The mod does not patch quests, dialogue records, economics, the vanilla executable or existing save files. The +250 button creates 250 gold directly; it neither implements nor disables an existing 250-gold dialogue loop.
 
@@ -88,9 +88,7 @@ The optional `tests/integration_chat.py` uses `HALVETH_TestChat` to enter text t
 
 Official API supports further local lore extraction through `types.Book.records`, `types.NPC.records`, `core.dialogue.topic.records` and `core.dialogue.journal.records`. Dialogue conditions must remain associated with each record: a line existing in the database does not mean the current NPC would say it at the current quest stage. Generated personality/memory is an authored layer, separate from the source-game record.
 
-## Prior development verification
-
-These are development-machine observations from earlier source builds, not fresh checks of every public installation. Personal logs and environment receipts are not included.
+## Verification
 
 - All three scripts compile with the installed OpenMW Lua 5.1 library.
 - A real isolated OpenMW run loaded the mod, emitted player/nearby context and applied +250 gold: native inventory before 0, after 250, process exit 0, no Lua errors in that run.

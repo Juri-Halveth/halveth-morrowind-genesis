@@ -25,7 +25,7 @@ from graphics_status import graphics_status
 from project_knowledge import ProjectKnowledge, DEFAULT_PATH as PROJECT_KNOWLEDGE_PATH, MAX_QUERY_CHARS
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.3.0'
+VERSION = '0.4.0'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768

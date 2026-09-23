@@ -2,6 +2,7 @@
 .local/
 local-config.json
 mod/bridge/inbox.json
+mod/bridge/companion-status.json
 *.omwsave
 *.ess
 *.sqlite3*

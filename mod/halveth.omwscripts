@@ -1,2 +1,4 @@
 GLOBAL: scripts/halveth/global.lua
+GLOBAL: scripts/halveth/content.lua
 PLAYER: scripts/halveth/player.lua
+PLAYER: scripts/halveth/knowledge.lua

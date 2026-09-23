@@ -1,5 +1,6 @@
-Genesis 0.3.0: public-source package; own code/docs MIT, exact banner files CC0-1.0 to the extent of owned rights.
+Genesis 0.4.0: public-source package; own code/docs MIT, exact banner files CC0-1.0 to the extent of owned rights.
 This archive contains 3 original starter cards, built-in JARVIS, 8 original paraphrased cards with public source references, and an original generated Scarlet Love banner with its approved texture derivatives.
+Version 0.4 adds six original native books with fifteen authored passages, three native spells, an F7 knowledge journal, a bounded alchemy study bonus, and a direct Morrowind start with a hidden optional companion.
 The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.
 Only the 3 exact owned banner asset paths are allowed. Other downloaded textures, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.
 Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.

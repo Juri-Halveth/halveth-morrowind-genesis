@@ -19,4 +19,4 @@ Model text remains text. New game actions need explicit parameters and a game re
 
 `python scripts/build_release.py` writes a checked source ZIP and SHA-256 to ignored `dist/`. Keep version, notes and status aligned. A ZIP is not a game installer, native test or hosted CI result.
 
-Use repository issues for sanitized reproduction details. Do not upload game archives, save files, conversations or tokens. Unreal/world prototypes and online services should have their own dependency and asset boundaries.
+Use repository issues for sanitized reproduction details. Do not upload game archives, save files, conversations or tokens. New player features belong inside TES III Morrowind/OpenMW. The companion may run invisibly in the background; normal gameplay must not depend on a browser panel or a separate game.

@@ -1,4 +1,4 @@
-"""Small native launcher for the separate Genesis world and its local companion."""
+"""Launch TES III Morrowind through OpenMW, with the in-game HALVETH mod."""
 from pathlib import Path
 import argparse
 import configparser
@@ -8,12 +8,13 @@ import subprocess
 import sys
 import threading
 import time
+import traceback
 import urllib.request
-import webbrowser
 
 ROOT=Path(__file__).resolve().parent
 STATE=ROOT/'.local'
 URL='http://127.0.0.1:18765'
+BRIDGE_STATUS=ROOT/'mod'/'bridge'/'companion-status.json'
 LAUNCH_OPTIONS={}
 
 
@@ -90,8 +91,7 @@ def companion(profile='beauty'):
     log=STATE/'game.stdout.log'
     if existing is None:
         python=Path(sys.executable)
-        process=background([str(python),str(ROOT/'server.py'),'--log',str(log),
-            '--model',LAUNCH_OPTIONS.get('model','hermes3:8b')],'companion.log')
+        process=background([str(python),str(ROOT/'server.py'),'--log',str(log),'--model',LAUNCH_OPTIONS.get('model','hermes3:8b')],'companion.log')
         (STATE/'companion.pid').write_text(str(process.pid),encoding='ascii')
         for _ in range(40):
             if get_status():
@@ -103,7 +103,26 @@ def companion(profile='beauty'):
 
 
 def start_game(profile):
-    receipt=companion(profile)
+    try:
+        receipt=companion(profile)
+        availability={'status':'available','profile':profile}
+    except Exception:
+        # The local AI/service is optional. A valid TES III profile can play
+        # offline even if the service or its local model is unavailable.
+        details=traceback.format_exc()
+        receipt=prepare(profile)
+        availability={'status':'offline','profile':profile,
+            'message':'Morrowind startet offline. Der lokale Begleiter ist momentan nicht erreichbar.'}
+        STATE.mkdir(parents=True,exist_ok=True)
+        with (STATE/'companion-start-errors.log').open('a',encoding='utf-8') as output:
+            output.write(details+'\n')
+    (STATE/'companion-availability.json').write_text(json.dumps(availability,ensure_ascii=False)+'\n',encoding='utf-8')
+    # This small VFS-visible record supplies the nonblocking in-game status.
+    # Diagnostics and local file paths remain in .local, outside game content.
+    BRIDGE_STATUS.parent.mkdir(parents=True,exist_ok=True)
+    pending=BRIDGE_STATUS.with_name(BRIDGE_STATUS.name+'.new')
+    pending.write_text(json.dumps({'status':availability['status']})+'\n',encoding='utf-8')
+    pending.replace(BRIDGE_STATUS)
     pid_path=STATE/'game.pid'
     if os.name=='nt' and pid_path.exists():
         pid=pid_path.read_text(encoding='ascii').strip()
@@ -120,7 +139,8 @@ def start_game(profile):
             if any(line.strip().lower().split(b',',2)[:2]==expected for line in result.stdout.splitlines()):
                 raise RuntimeError('Dein Genesis-Spiel läuft bereits. Wechsle in das vorhandene Fenster.')
     with (STATE/'game.stdout.log').open('w',encoding='utf-8') as log:
-        process=subprocess.Popen(receipt['command'],cwd=receipt['cwd'],stdout=log,stderr=subprocess.STDOUT)
+        process=subprocess.Popen(receipt['command'],cwd=receipt['cwd'],stdout=log,stderr=subprocess.STDOUT,
+            creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
     pid_path.write_text(str(process.pid),encoding='ascii')
     (STATE/'active-profile.json').write_text(json.dumps({'profile':profile,'pid':process.pid}),encoding='utf-8')
     return process.pid
@@ -198,150 +218,26 @@ def apply_graphics(profile):
     return 'Grafikprofil vorbereitet. Die aktuellen Werte stehen in der Profilübersicht.'
 
 
-def main():
+def main(argv=None):
     parser=argparse.ArgumentParser()
-    parser.add_argument('--companion-only',action='store_true')
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--play',action='store_true',
+        help='Start Morrowind and its hidden local companion directly, without a launcher window or browser.')
+    mode.add_argument('--companion-only',action='store_true')
     parser.add_argument('--profile',choices=['original','beauty','cinematic'],default='beauty')
-    parser.add_argument('--install-root',type=Path,help='Installation root with engine/ and profiles/.')
-    parser.add_argument('--source-profile',help='Existing source profile directory name, usually max.')
-    parser.add_argument('--model',help='Already installed local Ollama model.')
-    parser.add_argument('--copy-saves',action='store_true',help='Copy source saves once, without overwriting; opt-in for this run.')
-    parser.add_argument('--save-config',action='store_true',help='Remember installation/profile/model in ignored local-config.json.')
-    args=parser.parse_args()
-    try:
-        configure(args)
-    except (OSError,ValueError) as exc:
-        parser.error(str(exc))
+    parser.add_argument('--install-root',type=Path)
+    parser.add_argument('--source-profile')
+    parser.add_argument('--model')
+    parser.add_argument('--copy-saves',action='store_true')
+    parser.add_argument('--save-config',action='store_true')
+    args=parser.parse_args(argv)
+    configure(args)
     if args.companion_only:
         companion(args.profile)
-        webbrowser.open(URL)
-        return
-    import tkinter as tk
-    from tkinter import messagebox
-    window=tk.Tk()
-    window.title('HALVETH · Morrowind Genesis')
-    window.geometry('920x860')
-    window.minsize(840,820)
-    bg='#111716'; panel='#1a211c'; edge='#384332'; ink='#e8e1ce'; muted='#a4ae98'; scarlet='#a55c5b'; gold='#c6b08a'
-    window.configure(bg=bg)
-    frame=tk.Frame(window,bg=bg,padx=32,pady=22)
-    frame.pack(fill='both',expand=True)
-    def label(parent,text,size=10,color=ink,serif=False,background=None,**options):
-        item=tk.Label(parent,text=text,bg=background or bg,fg=color,
-            font=('Georgia' if serif else 'Segoe UI',size),justify='left',anchor='w',**options)
-        return item
-    top=tk.Frame(frame,bg=bg); top.pack(fill='x')
-    label(top,'✧  HALVETH  /  MORROWIND GENESIS',10,gold).pack(side='left')
-    label(top,'SCARLET EDITION · LOKAL',8,muted).pack(side='right')
-    tk.Frame(frame,bg=edge,height=1).pack(fill='x',pady=(14,18))
-    label(frame,'Zurück in eine schönere Welt.',28,ink,serif=True).pack(fill='x')
-    label(frame,'Wähle das Licht für deine nächste Geschichte.',11,'#cf9188').pack(fill='x',pady=(5,17))
-    selected=tk.StringVar(value=args.profile)
-    selector=tk.Frame(frame,bg=bg); selector.pack(fill='x')
-    profile_cards={}
-    for index,(key,(name,subtitle,description)) in enumerate(PROFILE_COPY.items()):
-        selector.columnconfigure(index,weight=1,uniform='profile')
-        card=tk.Frame(selector,bg=panel,highlightbackground=edge,highlightthickness=1,padx=15,pady=13)
-        card.grid(row=0,column=index,sticky='nsew',padx=(0,10) if index<2 else 0)
-        radio=tk.Radiobutton(card,text=name,variable=selected,value=key,bg=panel,fg=ink,
-            activebackground=panel,activeforeground=gold,selectcolor='#3b382a',font=('Georgia',19),
-            cursor='hand2',anchor='w',highlightthickness=0)
-        radio.pack(fill='x')
-        label(card,subtitle,9,gold,background=panel).pack(fill='x',pady=(4,7))
-        label(card,description,9,muted,background=panel,wraplength=225,height=3).pack(fill='x')
-        profile_cards[key]=card
-    label(frame,'AKTUELLE PROFILDATEI',8,gold).pack(fill='x',pady=(20,7))
-    overview=tk.Frame(frame,bg=panel,highlightbackground=edge,highlightthickness=1,padx=16,pady=11)
-    overview.pack(fill='x')
-    overview_status=tk.StringVar()
-    label(overview,'',9,muted,background=panel,textvariable=overview_status).pack(fill='x',pady=(0,7))
-    metrics=tk.Frame(overview,bg=panel); metrics.pack(fill='x')
-    metric_vars={}
-    for index,title in enumerate(('Auflösung','Schattenauflösung','Wasserauflösung','Texturfilter','Sichtweite (Spielwerte)','Nachbearbeitung')):
-        col=index%3; row=index//3; metrics.columnconfigure(col,weight=1,uniform='metric')
-        slot=tk.Frame(metrics,bg=panel);slot.grid(row=row,column=col,sticky='ew',pady=5)
-        label(slot,title,8,muted,background=panel).pack(fill='x')
-        metric_vars[title]=tk.StringVar(value='—')
-        label(slot,'',12,ink,background=panel,textvariable=metric_vars[title]).pack(fill='x')
-    installed=tk.StringVar()
-    label(frame,'INHALTE & CHARAKTERE',8,gold).pack(fill='x',pady=(16,5))
-    label(frame,'',9,muted,textvariable=installed,wraplength=830,height=3).pack(fill='x')
-    message=tk.StringVar(value='F8 öffnet JARVIS im Spiel. Wähle oben ein Profil und starte deine Reise.')
-    buttons=[]
-    def refresh_overview(*_):
-        profile=selected.get(); info=describe_profile(profile)
-        for key,card in profile_cards.items():
-            card.configure(highlightbackground=scarlet if key==profile else edge,highlightthickness=2 if key==profile else 1)
-        state='Vorbereitet · Werte aus deiner Profildatei' if info['prepared'] else 'Wird beim ersten Start als eigenes Profil angelegt'
-        if info['settingsError']:
-            state=info['settingsError']
-        overview_status.set(state)
-        for title,value in info['settings'].items():
-            metric_vars[title].set(value)
-        packages=info['packages']
-        if packages:
-            parts=[]
-            for item in packages[:2]:
-                status='Dateien vorhanden' if item['filesPresent'] is True else 'Dateien fehlen' if item['filesPresent'] is False else item['status']
-                parts.append(f"{item['name']}: {status}")
-            if len(packages)>2:
-                parts.append(f"+ {len(packages)-2} weitere im Konstellarium")
-            line='  ·  '.join(parts)
-        else:
-            line='Zusätzliche Grafikpakete: noch kein Installationsbeleg vorhanden.'
-        if info['characterStyle']:
-            line+='\n'+info['characterStyle']
-        installed.set(line)
-    selected.trace_add('write',refresh_overview)
-    def run(operation,success):
-        profile=selected.get()
-        for button in buttons:
-            button.configure(state='disabled')
-        for child in selector.winfo_children():
-            for widget in child.winfo_children():
-                if isinstance(widget,tk.Radiobutton):widget.configure(state='disabled')
-        message.set('Deine Welt wird vorbereitet …')
-        def worker():
-            try:
-                result=operation(profile)
-                response=result if isinstance(result,str) else success
-                window.after(0,lambda:message.set(response))
-            except Exception as exc:
-                error=str(exc)
-                window.after(0,lambda:messagebox.showerror('HALVETH',error,parent=window))
-                window.after(0,lambda:message.set('Der Vorgang konnte nicht abgeschlossen werden.'))
-            finally:
-                def finish():
-                    for button in buttons:button.configure(state='normal')
-                    for child in selector.winfo_children():
-                        for widget in child.winfo_children():
-                            if isinstance(widget,tk.Radiobutton):widget.configure(state='normal')
-                    refresh_overview()
-                try:window.after(0,finish)
-                except RuntimeError:pass
-        threading.Thread(target=worker,daemon=True).start()
-    def open_companion(profile):
-        companion(profile)
-        webbrowser.open(URL)
-    controls=tk.Frame(frame,bg=bg);controls.pack(fill='x',pady=(10,9))
-    for title,operation,success in [('Grafikvorlage anwenden',apply_graphics,''),('Profilübersicht aktualisieren',None,'')]:
-        button=tk.Button(controls,text=title,command=(lambda op=operation,done=success:run(op,done)) if operation else refresh_overview,
-            bg='#252f24',fg='#c8cbb5',activebackground='#394032',activeforeground=ink,
-            relief='flat',font=('Segoe UI',9),padx=14,pady=8,cursor='hand2')
-        button.pack(side='left',padx=(0,8));buttons.append(button)
-    label(frame,'Grafikvorlage anwenden aktualisiert die Grafikwerte dieses Genesis-Profils mit Sicherung.\nPersönliche Spiel-, Ton- und Eingabeeinstellungen bleiben erhalten.',8,muted).pack(fill='x',pady=(0,12))
-    primary=tk.Frame(frame,bg=bg);primary.pack(fill='x')
-    for title,operation,success,colour in [
-        ('✦  GENESIS SPIELEN',start_game,'OpenMW wurde gestartet. Lade deinen Spielstand und betrete Vvardenfell.',scarlet),
-        ('KONSTELLARIUM ÖFFNEN',open_companion,'Das Konstellarium wurde im Browser geöffnet.','#303b2c')]:
-        button=tk.Button(primary,text=title,command=lambda op=operation,done=success:run(op,done),bg=colour,fg='#fff0dd',
-            activebackground='#bb756d',activeforeground='white',relief='flat',font=('Segoe UI',11,'bold'),pady=13,padx=18,cursor='hand2')
-        button.pack(side='left',fill='x',expand=True,padx=(0,10) if operation is start_game else 0)
-        buttons.append(button)
-    label(frame,'',9,muted,textvariable=message,wraplength=830).pack(fill='x',pady=(12,0))
-    refresh_overview()
-    window.mainloop()
+        return 0
+    start_game(args.profile)
+    return 0
 
 
 if __name__=='__main__':
-    main()
+    raise SystemExit(main())

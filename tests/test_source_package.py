@@ -64,8 +64,16 @@ class SourcePackageTests(unittest.TestCase):
             'data/projects.json',
             'data/project-knowledge.json',
             'data/generation-providers.json',
+            'data/native-content.json',
+            'native/GenesisEntry.cs',
+            'scripts/build_native_entry.py',
+            'scripts/build_native_content.py',
+            'mod/scripts/halveth/content_catalog.lua',
+            'mod/scripts/halveth/content.lua',
+            'mod/scripts/halveth/knowledge.lua',
             'scripts/convert-banner.mjs',
             'docs/GENERATION-PIPELINE.md',
+            'docs/NATIVE-VERIFICATION-0.4.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -89,6 +97,9 @@ class SourcePackageTests(unittest.TestCase):
             'data/entity-sources.json',
             'data/graphics-install.json',
             'data/local-config.json',
+            'mod/bridge/companion-status.json',
+            'native/genesis-entry.json',
+            'native/Morrowind-Workshop.exe',
             'docs/screenshots/history.md',
             'mod/saves/current.ess',
             'mod/profiles/user.omwscripts',
@@ -99,6 +110,7 @@ class SourcePackageTests(unittest.TestCase):
             'assets/.local/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds',
             'BUILD-0.2.0.json',
             'BUILD-0.3.0.json',
+            'BUILD-0.4.0.json',
             'BUILD-RESULT.json',
             'GRAPHICS-RESULT.json',
             'dist/scripts/old-source.py',
@@ -115,13 +127,15 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.3.0')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.3.0-public-source.zip')
+        self.assertEqual(release.VERSION, '0.4.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.4.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
         self.assertIn('Only the 3 exact owned banner asset paths', note)
+        self.assertIn('six original native books', note)
+        self.assertIn('three native spells', note)
         self.assertIn('MIT',note)
         self.assertIn('CC0-1.0',note)
         self.assertNotIn('LICENSE-DECISION',note)
@@ -150,6 +164,18 @@ class PublicValidationTests(unittest.TestCase):
         files=release.collect_files()
         files['README.md']=('C:'+chr(92)+'Users'+chr(92)+'private-user'+chr(92)+'document').encode()
         with self.assertRaisesRegex(ValueError,'Machine-specific path'):
+            release.validate_files(files)
+
+    def test_missing_native_knowledge_code_stops_release(self):
+        files=release.collect_files()
+        del files['mod/scripts/halveth/knowledge.lua']
+        with self.assertRaisesRegex(ValueError,'Missing public release'):
+            release.validate_files(files)
+
+    def test_live_companion_status_cannot_be_added_to_public_snapshot(self):
+        files=release.collect_files()
+        files['mod/bridge/companion-status.json']=b'{"status":"available"}'
+        with self.assertRaisesRegex(ValueError,'Runtime companion status'):
             release.validate_files(files)
 
 

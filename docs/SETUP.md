@@ -1,8 +1,8 @@
 # Setup on your own computer
 
-## Companion only
+## Background companion
 
-Python 3.11+ with SQLite is sufficient for `python server.py`. Open http://127.0.0.1:18765/ locally. Ollama is optional for the atelier/offline interface; model conversations require an already installed model. No dependency or model downloads happen automatically.
+Python 3.11+ with SQLite runs the local companion. Normal launch starts it in the background and opens Morrowind directly. F8 provides conversations and actions inside the game; F7 opens the native knowledge journal. Ollama is optional: model conversations require an already installed model, while native books, spells and learning continue offline. No dependency or model downloads happen automatically. `python launcher.py --companion-only` starts the configured background service without opening a browser or game window.
 
 ## Installation layout
 
@@ -25,10 +25,12 @@ An alternative for experienced modders is to add the repository's absolute `mod/
 ## Native launcher
 
 ```console
-python launcher.py --install-root "D:/Games/MyOpenMW" --source-profile max --model hermes3:8b --save-config
+python launcher.py --play --install-root "D:/Games/MyOpenMW" --source-profile max --model hermes3:8b --save-config
 ```
 
-This stores only installation, source profile and model choices in ignored `local-config.json`. Later `START.cmd` / `python launcher.py` uses them. Save copying is **off by default**. Add `--copy-saves` deliberately for a run to copy existing saves once; this choice is never persisted. Native Tk may require `python3-tk` on Linux. The launcher retains the original implementation's Windows process check; native Linux gameplay is not claimed tested.
+This stores only installation, source profile and model choices in ignored `local-config.json`. Later `START.cmd` / `python launcher.py` uses them and starts the game directly. Save copying is **off by default**. Add `--copy-saves` deliberately for a run to copy existing saves once; this choice is never persisted. The launcher imports neither Tk nor a browser. It retains the Windows process check; native Linux gameplay is not claimed tested.
+
+On Windows, `scripts/build_native_entry.py` can extend an existing HALVETH native Workshop source checkout containing `Core.cs`, `Workshop.cs` and `app.manifest`. Pass its directory with `--native-source`. The helper uses the installed .NET compiler and Framework references; alternate locations can be supplied with `--compiler` and `--framework`. This public package includes `GenesisEntry.cs`, not a complete bundled engine or the legacy Workshop sources. A successful build creates an isolated candidate EXE and local path configuration under ignored `.local/native-entry-candidate/`; it does not replace the installed launcher or shortcuts. `--check-genesis beauty` checks that candidate's bound local entry files without starting the game; `--genesis beauty` invokes the direct game route. Runtime and configuration files remain separate on disk behind the single visible entry.
 
 Close a manually started companion on port 18765 before using the launcher's companion startup: the launcher reuses an already running service, so an unrelated log/model configuration will not change automatically.
 

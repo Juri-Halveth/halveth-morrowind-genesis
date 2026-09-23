@@ -16,7 +16,7 @@
   },
   {
     "id": "graphics",
-    "title": "Separate Original-, Beauty- und Cinematic-Profile",
+    "title": "Original-, Beauty- und Cinematic-Profile innerhalb derselben Morrowind-Installation",
     "status": "Erledigt"
   },
   {
@@ -69,5 +69,20 @@
     "id": "external-assets",
     "title": "Weitere 3D-Modelle und Filmszenen über konkrete Anbieterzugänge erzeugen",
     "status": "Neu"
+  },
+  {
+    "id": "native-content",
+    "title": "Sechs eigene Bücher und LOVE/SPARK/AEGIS als native Morrowind-Datensätze",
+    "status": "Erledigt"
+  },
+  {
+    "id": "native-knowledge",
+    "title": "F7-Wissensjournal, Buchstudium und begrenzter Alchemie-Praxisbonus",
+    "status": "Erledigt"
+  },
+  {
+    "id": "native-entry",
+    "title": "Direkter Morrowind-Start mit unsichtbarem lokalem Begleiter",
+    "status": "Erledigt"
   }
 ]

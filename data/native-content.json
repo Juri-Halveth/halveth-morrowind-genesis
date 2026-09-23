@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "license": "MIT",
+  "books": [
+    {
+      "key": "glassleaf-primer",
+      "title": "HALVETH: The Glassleaf Primer",
+      "author": "Iria of the Quiet Kiln",
+      "kind": "Book",
+      "skill": "alchemy",
+      "isScroll": false,
+      "pages": [
+        {
+          "text": "When the blue moon lowers over the Confluence, Glassleaf turns clear enough to show its veins of silver. Iria gathered two leaves and folded them around one bead of Lumen Dew. The first Lumen Draught glowed like a hearth seen through rain, carrying the garden's warmth into a traveler's weary limbs.",
+          "prompt": "What does one Lumen Draught require?",
+          "answers": [
+            "Two Glassleaf and one Lumen Dew",
+            "One Stone and one Timber",
+            "Three Moon Salt"
+          ],
+          "correct": 1
+        },
+        {
+          "text": "The old gatekeepers wrote their wards on slate. One Moon Salt held the line steady, while one Prism Dust taught it to catch the stars. Together they became Ward Ink. Salt gives the mark its boundary; dust gives it a voice that light can answer. Without both, the gate's inscriptions fade before dawn.",
+          "prompt": "Which pair makes Ward Ink?",
+          "answers": [
+            "Timber and Ember Moss",
+            "Moon Salt and Prism Dust",
+            "Glassleaf and Stone"
+          ],
+          "correct": 2
+        },
+        {
+          "text": "Binding Resin was born during the red storm, when the council's shelter split along its ribs. Iria joined one Timber, one Glassleaf and one Ember Moss into a warm amber thread. The moss lent its patient ember, the leaf its silver veins, and the wood its grain. By morning the broken frame stood whole.",
+          "prompt": "Which third ingredient completes Timber and Glassleaf for Binding Resin?",
+          "answers": [
+            "Stone",
+            "Moon Salt",
+            "Ember Moss"
+          ],
+          "correct": 3
+        }
+      ]
+    },
+    {
+      "key": "ink-between-stars",
+      "title": "HALVETH: Ink Between Stars",
+      "author": "Sera, Keeper of Small Lights",
+      "kind": "Book",
+      "skill": "enchant",
+      "isScroll": false,
+      "pages": [
+        {
+          "text": "Sera found a lantern that shone only when nobody carried it. Its star had no home inside the glass. She drew a closed ring of Ward Ink around the wick, and the wandering light settled into the circle. The first lesson of Lantern Weave is shelter: a clear boundary lets a small radiance remain.",
+          "prompt": "What gave the wandering lantern-light a place to remain?",
+          "answers": [
+            "An open crack in the glass",
+            "A closed ring of Ward Ink",
+            "A pile of cold ash"
+          ],
+          "correct": 2
+        },
+        {
+          "text": "To strengthen Lantern Weave, Sera braided one Ward Ink with one Prism Dust. The first knot remembered evening, the second midnight, and the third dawn. Each knot gives its bearer room for ten more measures of mana. Travelers call those three knots the Nightkeeper's Promise: a greater inner reservoir for the road ahead.",
+          "prompt": "Which pair strengthens a knot of Lantern Weave?",
+          "answers": [
+            "Timber and Moon Salt",
+            "Glassleaf and Stone",
+            "Ward Ink and Prism Dust"
+          ],
+          "correct": 3
+        },
+        {
+          "text": "Quiet Step began with a messenger crossing the sleeping crystal beds. One Binding Resin and one Lumen Draught taught her magic to move with less waste. Each of its three ranks reduces a spell's mana cost by five parts in a hundred. The crystals still woke at her final footfall, until a traveler's pencil found the missing rest in the pattern.",
+          "prompt": "Which resources does one Quiet Step rank consume?",
+          "answers": [
+            "Binding Resin and Lumen Draught",
+            "Moon Salt and Timber",
+            "Two Stone"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "key": "three-supports",
+      "title": "HALVETH: A House Needs Three Supports",
+      "author": "Rachel's Workshop Collective",
+      "kind": "Book",
+      "skill": "armorer",
+      "isScroll": false,
+      "pages": [
+        {
+          "text": "Rachel's first workbench tilted toward the tide until four Stone were set beneath its corners. Each corner carried its share of the weight, while the earth between them remained open to roots and rain. From that patient square grew the Ground foundations on which the Confluence raised its camps.",
+          "prompt": "What is the cost of one Ground module?",
+          "answers": [
+            "One Prism Dust",
+            "Four Stone",
+            "Three Lumen Dew"
+          ],
+          "correct": 2
+        },
+        {
+          "text": "Once a Ground workbench anchors the settlement, its people can raise a Camp wherever the paths need shelter. Three Timber form its ribs and one Binding Resin binds the crossings. Rachel left the eastern side open to morning warmth, and planted no post where a Glassleaf root already held the soil.",
+          "prompt": "What must exist before a Camp can be built?",
+          "answers": [
+            "A completed Ground module",
+            "A sealed crystal lantern",
+            "A boat on the outer tide"
+          ],
+          "correct": 1
+        },
+        {
+          "text": "A settlement with a Ground workbench can raise Beacons along its distant paths. Two Stone carry each bowl; one Ward Ink inscribes its rim; one Prism Dust wakes its light. The glow points inward toward shelter, never outward like a challenge. On storm nights the lost follow the gentle rim back to the Confluence.",
+          "prompt": "What wakes the Beacon's inscribed bowl with light?",
+          "answers": [
+            "Three Timber alone",
+            "A sealed layer of cold mud",
+            "Prism Dust meeting the Ward Ink"
+          ],
+          "correct": 3
+        }
+      ]
+    },
+    {
+      "key": "moonwater-scroll",
+      "title": "HALVETH: A Scroll of Moonwater Accounts",
+      "author": "Unknown Garden Apprentice",
+      "kind": "Scroll",
+      "skill": "alchemy",
+      "isScroll": true,
+      "pages": [
+        {
+          "text": "Before sunrise, the underside of Glassleaf gathers Lumen Dew. The blue moon's reflection stays in each bead long after the sky turns gold. When a leaf releases its dew, the glow returns through the roots to the moonwater channels. That is why the oldest gardens shine beneath the ground as well as above it.",
+          "prompt": "Where does a Glassleaf send the glow after releasing its dew?",
+          "answers": [
+            "Into the council's locked archive",
+            "Through its roots to the moonwater channels",
+            "Into the smoke above a kiln"
+          ],
+          "correct": 2
+        },
+        {
+          "text": "Ember Moss grows where a fallen lantern once warmed the soil. It holds a low crimson glow through winter and releases it slowly when the channels run cold. The apprentices call it the garden's banked hearth. Its warmth gives Binding Resin the patience to bend with living wood.",
+          "prompt": "Which plant is called the garden's banked hearth?",
+          "answers": [
+            "Ember Moss",
+            "Glassleaf",
+            "The white reeds of the outer tide"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "key": "quiet-scribble",
+      "title": "HALVETH: A Margin Full of Quiet Signals",
+      "author": "A Traveler's Pencil",
+      "kind": "Scribble",
+      "skill": "enchant",
+      "isScroll": true,
+      "pages": [
+        {
+          "text": "In the margin: Sera, your last curl answers the crystal too quickly. Leave a breath between the second mark and the closing stroke. I tried it beside the blue beds tonight. My boots crossed the stones, and the sleeping crystals kept their song. The silence belongs inside the pattern. - a hurried pencil, rain at the edge",
+          "prompt": "What completes the Quiet Step pattern in this margin note?",
+          "answers": [
+            "A louder final stroke",
+            "A second pair of boots",
+            "A pause before the closing stroke"
+          ],
+          "correct": 3
+        },
+        {
+          "text": "Another note, drawn around a moth: Turn the Beacon's bright rim toward the path, not into a traveler's eyes. A moth follows a soft edge better than a blinding center. We want our light to say that a place remains beside the fire. A welcome can be seen from far away.",
+          "prompt": "How is the beacon's signal described here?",
+          "answers": [
+            "An invitation to return",
+            "A challenge to the outer tide",
+            "A warning to keep away"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "key": "council-journal",
+      "title": "HALVETH: Minutes of an Unfinished Garden",
+      "author": "The Confluence Council",
+      "kind": "Journal",
+      "skill": "speechcraft",
+      "isScroll": false,
+      "pages": [
+        {
+          "text": "Scarlet asked that the dew be shared before the common lanterns dimmed. Lucinet wanted the channels measured, so the next dry season would find the gardeners prepared. Rachel set aside a small reserve and listened to both. The council wrote every proposal into its minutes, then placed the decision in the traveler's hands.",
+          "prompt": "Who proposed measuring the moonwater channels?",
+          "answers": [
+            "Scarlet",
+            "Lucinet",
+            "The gate's silent lantern"
+          ],
+          "correct": 2
+        },
+        {
+          "text": "After the archive was settled, the council returned to Rachel's first foundation. A common camp would welcome the tired; a repair reserve would care for weathered paths; a line of beacons would guide the explorers home. Rachel laid three small stones on the bench, one for each future, and waited for the traveler to choose.",
+          "prompt": "What would a line of beacons offer the explorers?",
+          "answers": [
+            "A closed archive",
+            "A new moonwater source",
+            "A visible route home"
+          ],
+          "correct": 3
+        }
+      ]
+    }
+  ],
+  "spells": [
+    {
+      "key": "love",
+      "title": "HALVETH LOVE - Heilschein",
+      "cost": 8,
+      "effects": [
+        {
+          "id": "restorehealth",
+          "range": "Self",
+          "area": 0,
+          "magnitudeMin": 6,
+          "magnitudeMax": 6,
+          "duration": 5
+        }
+      ]
+    },
+    {
+      "key": "spark",
+      "title": "HALVETH SPARK - Sternenfunke",
+      "cost": 10,
+      "effects": [
+        {
+          "id": "shockdamage",
+          "range": "Target",
+          "area": 0,
+          "magnitudeMin": 12,
+          "magnitudeMax": 18,
+          "duration": 1
+        }
+      ]
+    },
+    {
+      "key": "aegis",
+      "title": "HALVETH AEGIS - Lichtwacht",
+      "cost": 12,
+      "effects": [
+        {
+          "id": "shield",
+          "range": "Self",
+          "area": 0,
+          "magnitudeMin": 20,
+          "magnitudeMax": 20,
+          "duration": 30
+        }
+      ]
+    }
+  ]
+}
