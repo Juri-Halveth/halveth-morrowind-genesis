@@ -1,0 +1,7 @@
+# Der Herzbrief – optionale Geschichte im echten Morrowind
+
+Der Herzbrief ist ein eigenständiger, fiktionaler Nebenpfad im laufenden OpenMW-Spiel. Er behauptet keine Veränderung an den alten Quests oder Dialogen. Sera ist die Verfasserin des eigenen Brieftexts, keine vorgetäuschte bereits sichtbare Morrowind-Figur.
+
+Im Spiel **F8** öffnen, **[Herzbrief]** anklicken und eine von drei Antworten wählen. Dann einen Text im normalen Buch- oder Schriftrollenfenster lesen und mit einer vorhandenen Figur sprechen. Das native Weltleben zählt ein Gespräch mit einer tatsächlich geladenen Figur nach der Antwort; das Wissensjournal zählt einen tatsächlich geöffneten Text. Ein bereits entdeckter Text genügt, damit kein künstlicher Lese-Grind entsteht. Danach kann **LOVE – Heilschein** einzeln gelernt und im gewöhnlichen Zaubermenü ausgewählt werden. Der Pfad und die Belohnung werden im Morrowind-Spielstand gespeichert.
+
+Die Liebesgeschichte bleibt freiwillig: Eine Antwort und ein hilfreicher Zauber erzwingen keine Beziehung zu einer Spielfigur. Weitere Kapitel können später auf denselben gespeicherten Stand aufbauen. Der lokale native Integrationstest `python tests/integration_heart.py` prüfte die Szene, einen echten Buchmodus, die vorhandene Arrille-Referenz, genau den LOVE-Zauber und einen realen Save/Reload in einer wegwerfbaren OpenMW-Umgebung. Physische Mausklicks, die ästhetische Wirkung im persönlichen Spielstand und eine vollständige Romanze sind dadurch noch nicht belegt.

@@ -8,7 +8,7 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='1.0.2'
+VERSION='1.0.3'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
@@ -112,6 +112,7 @@ def collect_files():
         'Version 1.0 binds observed NPC history to the actual conversation target and makes the owned wanderer removable after changing cells, with native save/reload verification. It is a scoped OpenMW extension for an existing licensed Morrowind installation.\n'
         'Version 1.0.1 adds an original portal main menu inside OpenMW and adjusts the Scarlet Beauty light defaults to lift dark corners. The menu was checked in an isolated native game session.\n'
         'Version 1.0.2 candidate adds a new-game Pulsar origin, guarded native UI fallbacks and three original Bitter Coast terrain materials (peat, rock and grass). Their aesthetic and edge continuity need direct visual review.\n'
+        'Version 1.0.3 candidate adds the optional native Heart Letter scene. A real book reading and recorded NPC conversation unlock only the LOVE healing spell; the scene and reward survive a save/reload.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
         'Only the 12 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'

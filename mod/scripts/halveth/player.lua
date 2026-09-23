@@ -85,9 +85,10 @@ local function context()
     while #quests>100 do table.remove(quests) end
     local worldlife=I.HALVETHWorldlife and I.HALVETHWorldlife.getContext(npc and npc.kind=='npc' and npc.id or nil) or nil
     local origin=I.HALVETHOrigin and I.HALVETHOrigin.getState() or nil
+    local heart=I.HALVETHHeart and I.HALVETHHeart.getState() or nil
     local viewpoint=I.HALVETHPerspective and I.HALVETHPerspective.getState() or nil
     return {worldId=worldId,player=player,npc=npc,selectionMethod=method,nearby=actors,quests=quests,
-        worldlife=worldlife,origin=origin,viewpoint=viewpoint,
+        worldlife=worldlife,origin=origin,heart=heart,viewpoint=viewpoint,
         book=lastBook,anchors={{id='session_start',label='Startpunkt dieser Sitzung'}},
         engine={apiRevision=core.API_REVISION},gameTime=core.getGameTime()}
 end
@@ -197,6 +198,10 @@ local function open()
             button('[Figur / Inventar / Magie · F6]',220,height-182,380,function()
                 close()
                 if I.HALVETHUniverse then I.HALVETHUniverse.open() end
+            end),
+            button('[Herzbrief]',610,height-182,155,function()
+                close()
+                if I.HALVETHHeart then I.HALVETHHeart.open() end
             end),
             {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
                 props={position=util.vector2(20,height-144),size=util.vector2(width-150,22),text='Deine Nachricht',textSize=15}},
