@@ -26,7 +26,7 @@ from project_knowledge import ProjectKnowledge, DEFAULT_PATH as PROJECT_KNOWLEDG
 from character_profile import profile as character_profile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.6.0'
+VERSION = '0.7.0'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768

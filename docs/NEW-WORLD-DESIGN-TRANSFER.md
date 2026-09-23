@@ -15,6 +15,12 @@ Die verlinkten New-World-Seiten sind öffentliche **Beschreibungen von Designmus
 
 Die Quellen definieren Inspiration; sie liefern keinen Nachweis, dass New World hier Code, Grafiken oder Daten zur Wiederverwendung freigibt. [NWDB](https://nwdb.info/) ordnet Spielinformationen unter anderem nach Gegenständen, Rezepten, Fähigkeiten, Büchern, Quests und Figuren. Diese **Kategorie-Idee** hilft, unsere eigene Morrowind-Inventar- und Wissensnavigation zu prüfen. Die [NWDB-Nutzungsbedingungen](https://nwdb.info/terms-and-conditions) erlauben kein Scraping, keinen ungewöhnlichen Skriptzugriff und keine Wiederveröffentlichung ihrer Inhalte ohne andere Rechtsgrundlage. Deshalb enthält HALVETH weder einen NWDB-Import noch Kopien der dortigen Datensätze. Eine Quelle zu lesen ist keine Lizenz, ihr Material zu verteilen.
 
+## Rechteprüfung für die gewünschte direkte Übernahme
+
+Am 23. September 2026 wurden die von der [offiziellen New-World-Legalseite](https://www.newworld.com/en-us/legal) verlinkten Bedingungen erneut geprüft. [Amazon Games Terms §2.5 und §4.2(c)](https://digprjsurvey.amazon.co.uk/csad/help/node/G201482650) untersagen die nicht eigens erlaubte Kopie beziehungsweise Ableitung des Spielclients und die Nutzung von Game Content in einem anderen Spiel. Die [Content Usage Policy](https://digprjsurvey.amazon.co.uk/csad/help/node/GNX7GA7HXVL9V8XZ) nennt Spiele und Mods mit diesem Inhalt ausdrücklich als unzulässig. Eine Drittkomponente mit eigener Open-Source-Lizenz macht den New-World-Client, dessen Modelle oder Texturen nicht automatisch frei. Für die direkte Übernahme wäre eine gesonderte Rechtefreigabe nötig. Der hier gebaute Sammelatlas, Morgenrot-Shader und das LOVE-Astrolabium bestehen aus eigenen Dateien für Morrowind; keiner dieser Bestandteile enthält New-World-Code oder -Grafik.
+
+**0.7 in der vorhandenen Spielwelt:** Der Sammelatlas liest tatsächlich geladene lose Morrowind-Zutaten, zeigt sie im nativen Menü und verfolgt ein gewähltes Ziel per HUD. Er merkt eine Zutatenart pro Ort im Spielstand. Morgenrot erweitert den eigenen Filter um eine wärmere, farbigere Abstimmung; das Astrolabium ersetzt das F8-Bild, wenn OpenMW die neue Originaldatei lädt. Das sind kleine, konkrete Bausteine und keine Übernahme eines fremden Game-Clients oder eine vollständige Grafikneufassung.
+
 ## HALVETH-Rollen als konkrete Entwicklungsaufgaben
 
 - **HALVETH / Verständlichkeit:** Reale Spielzustände in einfachen Menüs erklären, etwa bekannte Zutateneffekte, Kosten eines Zaubers oder eine offene Spur.

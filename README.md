@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 0.6.0
+# HALVETH Morrowind Genesis · 0.7.0
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -10,7 +10,8 @@ Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt
 - **F8:** mit JARVIS oder dem gewählten NPC sprechen; Heilen, +250 Gold, Startpunkt und Zurück nutzen.
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
 - **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.
-- **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Nachtglas und Original umschalten.
+- **Sammeln** in der nativen Menüleiste öffnet den Sammelatlas: lose Zutaten in der geladenen Morrowind-Welt finden, ihren Ort notieren und ein Ziel im Spielbild verfolgen.
+- **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Morgenrot, Nachtglas und Original umschalten.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
 - **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
@@ -34,6 +35,8 @@ Die sechs eigenen Bücher enthalten 15 verfasste Textabschnitte und passende Ler
 
 Version 0.6 ergänzt im Wissensfenster einen **Rezeptplaner**. Er verbindet nur Zutaten aus dem aktuellen Inventar, deren gemeinsamen Effekt die Spielfigur nach ihrem tatsächlichen Alchemiewert schon erkennen darf. Du kannst ein Paar auswählen und im Spielstand merken; **Brauen** führt zum normalen Morrowind-Alchemiefenster. Verbrauch, Erfolg und Trank bleiben Regeln des Originalspiels. Ein gemerktes Rezept stellt keinen Trank von selbst her.
 
+Version 0.7 ergänzt einen **Sammelatlas** für lose, tatsächlich geladene Zutaten in der näheren Umgebung. Er zeigt Name, ungefähre Entfernung und Himmelsrichtung, merkt eine Zutatenart pro Ort einmalig im Spielstand und kann ein sichtbares Sammelziel im normalen Spielbild markieren. Der Atlas durchsucht keine fremden Inventare oder geschlossenen Behälter. Aufheben und Alchemie bleiben die normalen Morrowind-Handlungen.
+
 | Zauber | Wirkung | Magicka |
 |---|---|---:|
 | LOVE | 6 Gesundheit pro Sekunde für 5 Sekunden | 8 |
@@ -56,9 +59,9 @@ Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öff
 
 ## Grafik und bestehende Spielstände
 
-Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
+Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Version 0.7 zeigt im F8-Fenster ein neu generiertes LOVE-Astrolabium als Originalmotiv. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
 
-Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels. Version 0.6 ergänzt einen **eigenen OpenMW-Nachbearbeitungsfilter** mit drei wählbaren Lichtzuständen. Er verändert die Darstellung der laufenden Szene, nicht die Spielwelt-Assets oder OpenMWs Renderer. [Technik und Grenzen des Filters](docs/VISUAL-ATMOSPHERE.md).
+Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels. Version 0.6 ergänzt einen **eigenen OpenMW-Nachbearbeitungsfilter**; 0.7 erweitert ihn um das deutlich kräftigere **Morgenrot**. Drei Modi färben die laufende Szene, **Original** deaktiviert den eigenen Filter. Die Spielwelt-Assets und OpenMWs Renderer werden dabei nicht ersetzt. [Technik und Grenzen des Filters](docs/VISUAL-ATMOSPHERE.md).
 
 Die Erweiterung nutzt ein eigenes OpenMW-Profil. Spielstandkopien sind im öffentlichen Launcher standardmäßig aus; `--copy-saves` übernimmt ausdrücklich für diesen Start fehlende Kopien, ohne vorhandene Dateien zu überschreiben. Masterdateien und ursprüngliche Saves bleiben erhalten. Bestehende Grafik-, Sound- und Eingabeeinstellungen des Profils werden beim normalen Start beibehalten. Details: [docs/GRAPHICS.md](docs/GRAPHICS.md).
 
@@ -77,11 +80,15 @@ python tests/integration_chat.py --npc
 python tests/integration_universe.py
 python tests/integration_paths.py
 python tests/integration_visuals.py
+python tests/integration_fieldcraft.py
+python tests/integration_art_070.py
 python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```
 
 Die optionalen Integrationstests benötigen die eigene OpenMW-/Morrowind-Installation. Sie verwenden eigene Testsitzungen statt persönlicher Spielstände. `.local/` enthält persönliche Daten, Sicherungen und Testbelege und gehört nicht ins öffentliche Repository.
+
+Die [native Prüfzusammenfassung für 0.7](docs/NATIVE-VERIFICATION-0.7.0.json) bindet drei isolierte OpenMW-Läufe: Sammelatlas mit echter loser Zutat, HUD und Speichern/Laden; alle vier Lichtzustände samt aktivem Shader; die tatsächliche Auswahl der neuen PNG im nativen F8-Fenster. Der bestehende persönliche Spielprozess wurde vor 0.7 gestartet; die neuen Skripte laden bei seinem nächsten normalen Start. Das neue Mausfeld wurde in der persönlichen Spielsession noch nicht separat angeklickt.
 
 Die [native Prüfzusammenfassung für 0.6](docs/NATIVE-VERIFICATION-0.6.0.json) bindet vier isolierte OpenMW-Läufe: Pfade mit echtem Speichern und Laden, Rezeptplaner mit Übergabe an das normale Alchemiefenster, den aktiven eigenen Shader und die bisherige F6-Weltansicht. Im vorhandenen Morrowind-Spielstand wurden die neue Mausleiste für Pfade, Wissen und alle drei Lichtmodi bedient; zwei geprüfte Spielstanddateien blieben unverändert. Die [Prüfungen für 0.5](docs/NATIVE-VERIFICATION-0.5.0.json) dokumentieren zusätzlich einen echten Arrille-Modellrundlauf; [0.4](docs/NATIVE-VERIFICATION-0.4.0.json) bleibt als historischer Stand erhalten. Physische F6-/F7-/F8-Tasteneingaben sind weiter unbestätigt.
 
@@ -91,7 +98,7 @@ Die [native Prüfzusammenfassung für 0.6](docs/NATIVE-VERIFICATION-0.6.0.json) 
 
 Weitere friedliche Questverzweigungen, ein Bausystem, neue Regionen, umfassende Bewegungs- und Kampfänderungen sowie individuelle Stimmen bleiben Entwicklungsarbeit **an Morrowind**. Die getrennten Realms-/Portal-Garden-Prototypen sind eingestellt; verwendbare Inhalte werden für diese Spielwelt portiert. Unreal-Rendererfunktionen sind durch die Portierung von Büchern oder Spielregeln nicht automatisch in OpenMW vorhanden.
 
-Die [Designübertragung aus New World und weiteren Vorbildern](docs/NEW-WORLD-DESIGN-TRANSFER.md) trennt vorhandene 0.6-Funktionen von späteren Ideen. Sie verwendet öffentliche Mechanikbeschreibungen als Anregung und übernimmt weder New-World-Quellcode noch Texte, Datenbankeinträge oder Grafikdateien.
+Die [Designübertragung aus New World und weiteren Vorbildern](docs/NEW-WORLD-DESIGN-TRANSFER.md) trennt eigene Morrowind-Funktionen von späteren Ideen und dokumentiert die aktuelle Rechteprüfung. Sie verwendet öffentliche Mechanikbeschreibungen als Anregung. New-World-Quellcode, Texturen, Modelle und Datenbankeinträge sind nicht enthalten.
 
 ## Lizenz und Veröffentlichung
 

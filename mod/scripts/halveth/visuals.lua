@@ -4,13 +4,15 @@ local postprocessing = require('openmw.postprocessing')
 local ui = require('openmw.ui')
 
 local SHADER = 'halveth_atmosphere'
-local ORDER = {'scarlet', 'nocturne', 'original'}
+local ORDER = {'scarlet', 'dawn', 'nocturne', 'original'}
 local PRESETS = {
     original = {title='Original'},
     scarlet = {title='Scharlachlicht', strength=0.48, temperature=0.78,
-        saturation=1.04, vignette=0.10},
+        saturation=1.04, vignette=0.10, contrast=1.00},
+    dawn = {title='Morgenrot', strength=0.72, temperature=0.92,
+        saturation=1.14, vignette=0.08, contrast=1.12},
     nocturne = {title='Nachtglas', strength=0.45, temperature=-0.68,
-        saturation=1.02, vignette=0.12},
+        saturation=1.02, vignette=0.12, contrast=1.05},
 }
 
 local mode = 'scarlet'
@@ -43,6 +45,7 @@ local function apply()
         shader:setFloat('uTemperature', preset.temperature)
         shader:setFloat('uSaturation', preset.saturation)
         shader:setFloat('uVignette', preset.vignette)
+        shader:setFloat('uContrast', preset.contrast)
         shader:enable()
     end)
     if not ok then

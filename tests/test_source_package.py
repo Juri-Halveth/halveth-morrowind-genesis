@@ -28,9 +28,10 @@ class SourcePackageTests(unittest.TestCase):
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(content)
 
-    def test_only_exact_owned_banner_assets_are_included(self):
+    def test_only_exact_owned_art_assets_are_included(self):
         owned = {
             'mod/Textures/halveth/scarlet-love-banner.png',
+            'mod/Textures/halveth/love-astrolabe-0.7.png',
             'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga',
             'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds',
         }
@@ -75,12 +76,14 @@ class SourcePackageTests(unittest.TestCase):
             'mod/scripts/halveth/knowledge.lua',
             'mod/scripts/halveth/paths.lua',
             'mod/scripts/halveth/visuals.lua',
+            'mod/scripts/halveth/fieldcraft.lua',
             'mod/shaders/halveth_atmosphere.omwfx',
             'scripts/convert-banner.mjs',
             'docs/GENERATION-PIPELINE.md',
             'docs/NATIVE-VERIFICATION-0.4.0.json',
             'docs/NATIVE-VERIFICATION-0.5.0.json',
             'docs/NATIVE-VERIFICATION-0.6.0.json',
+            'docs/NATIVE-VERIFICATION-0.7.0.json',
             'PUBLIC-STATUS.json',
             'LICENSE',
             'LICENSES/CC0-1.0.txt',
@@ -148,17 +151,18 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '0.6.0')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.6.0-public-source.zip')
+        self.assertEqual(release.VERSION, '0.7.0')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-0.7.0-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
-        self.assertIn('Only the 3 exact owned banner asset paths and the one original shader source path', note)
+        self.assertIn('Only the 4 exact owned art asset paths and the one original shader source path', note)
         self.assertIn('six original native books', note)
         self.assertIn('three native spells', note)
         self.assertIn('native exploration paths', note)
         self.assertIn('alchemy recipe planner', note)
+        self.assertIn('native Sammelatlas', note)
         self.assertIn('MIT',note)
         self.assertIn('CC0-1.0',note)
         self.assertNotIn('LICENSE-DECISION',note)
@@ -168,7 +172,7 @@ class PublicValidationTests(unittest.TestCase):
     def test_current_public_tree_has_bound_assets_and_licenses(self):
         files=release.collect_files()
         result=release.validate_files(files)
-        self.assertEqual(result['assetCount'],3)
+        self.assertEqual(result['assetCount'],4)
         self.assertNotIn('BUILD-RESULT.json',files)
 
     def test_changed_asset_bytes_fail_provenance_check(self):

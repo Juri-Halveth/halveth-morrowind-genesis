@@ -16,7 +16,7 @@ local inspect=require('scripts.halveth.inspect')
 local sessionId, worldId, ready, counter = nil,nil,false,0
 local lastSequence,lastPoll,lastContext,lastRegister=0,-100,-100,-100
 local seen, received, healed={}, {}, {}
-local window,inputLayout,transcriptLayout,statusLayout,windowMode
+local window,inputLayout,transcriptLayout,statusLayout,windowMode,artworkPath
 local inputText,transcript='','HALVETH ist da. F8 oeffnet dein Begleiterfenster.\nFreie Gespraeche laufen ueber den lokalen Begleiter.'
 local dialogueTarget,lastBook,hasAddedMode=nil,nil,false
 local entityMode='jarvis'
@@ -133,7 +133,7 @@ local function close()
     if window then window:destroy();window=nil end
     inputLayout=nil;transcriptLayout=nil;statusLayout=nil
     if hasAddedMode then I.UI.removeMode('Interface');hasAddedMode=false end
-    windowMode=nil
+    windowMode=nil;artworkPath=nil
 end
 local function button(label,x,y,width,fn)
     return {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
@@ -158,14 +158,18 @@ local function open()
     local size=ui.screenSize()
     local width=math.min(1000,size.x-40)
     local height=math.min(580,size.y-40)
-    -- Optional, locally installed artwork. A missing pack keeps the full chat.
+    -- Optional original artwork in this native window. A missing texture keeps the full chat.
     local banner
-    local artPath='textures/halveth/scarlet-love-banner.png'
-    local ok,resource=pcall(function()
-        if not vfs.fileExists(artPath) then return nil end
-        return ui.texture{path=artPath}
-    end)
-    if ok and resource and width>=860 and height>=510 then banner=resource end
+    if width>=860 and height>=510 then
+        for _,artPath in ipairs({'textures/halveth/love-astrolabe-0.7.png',
+                                  'textures/halveth/scarlet-love-banner.png'}) do
+            local ok,resource=pcall(function()
+                if not vfs.fileExists(artPath) then return nil end
+                return ui.texture{path=artPath}
+            end)
+            if ok and resource then banner=resource;artworkPath=artPath;break end
+        end
+    end
     local artWidth=banner and math.min(160,(height-232)/2) or 0
     local transcriptWidth=width-40-(banner and artWidth+44 or 0)
     transcriptLayout={type=ui.TYPE.TextEdit,template=I.MWUI.templates.textEditBox,
@@ -273,7 +277,9 @@ local function heal(data)
 end
 return {
     interfaceName='HALVETH',
-    interface={version=2,open=open,close=close,isOpen=function()return window~=nil end,requestAction=requestAction,getSessionId=function() return sessionId end,
+    interface={version=2,open=open,close=close,isOpen=function()return window~=nil end,
+        getArtworkPath=function()return window and artworkPath or nil end,
+        requestAction=requestAction,getSessionId=function() return sessionId end,
         getContext=context,
         talkTo=function(actor)
             if not actor or not actor:isValid() or not types.Actor.objectIsInstance(actor)

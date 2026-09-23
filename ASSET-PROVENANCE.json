@@ -17,11 +17,26 @@
   "pixelConversion": "FFmpeg PNG to TGA and raw BGRA; DDS header added without resizing or editing pixels",
   "decodedRgbaSha256": "11ce51acc789112eadb4a31c4444f22b6839b269c2772a1dc5a8f289248e0f0b",
   "pngDdsPixelEquality": "PASS via independent FFmpeg decodes to RGBA SHA256",
+  "additionalOriginalArtwork": {
+    "assetId": "love-astrolabe-0.7",
+    "generator": "Codex built-in imagegen",
+    "origin": "Generated from a new text brief without reference images for the native in-game F8 panel",
+    "generationBrief": "An original glowing garnet heart suspended in a bronze astrolabe; aubergine and midnight-blue background, no lettering, logos, game insignia, landscape, characters or New World reference",
+    "actualDimensions": [887, 1774],
+    "sourceMethod": "Generated PNG copied byte-for-byte into mod/Textures/halveth/; no external game image input",
+    "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
+  },
   "files": [
     {
       "path": "mod/Textures/halveth/scarlet-love-banner.png",
       "bytes": 3418821,
       "sha256": "eb80cd9ea3f038651ee7d74c7fc1d0478d44ba4a93465efd70027c8b4979ed0c"
+    },
+    {
+      "path": "mod/Textures/halveth/love-astrolabe-0.7.png",
+      "assetId": "love-astrolabe-0.7",
+      "bytes": 2219226,
+      "sha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448"
     },
     {
       "path": "assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga",
@@ -35,5 +50,5 @@
     }
   ],
   "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
-  "engineTarget": "Existing tapestry texture type plus own native F8 UI image; no ESM/ESP edits"
+  "engineTarget": "Existing tapestry texture type and two own native F8 UI images; no ESM/ESP edits"
 }

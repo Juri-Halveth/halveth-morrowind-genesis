@@ -1,17 +1,17 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "0.6.0",
-  "scope": "Native TES III Morrowind extension: existing 0.5 interface and dialogue plus three save-backed exploration paths, an alchemy recipe planner and one owned atmosphere shader",
+  "version": "0.7.0",
+  "scope": "Native TES III Morrowind extension: in-game Sammelatlas for loaded ingredients, four-state original atmosphere shader, and original LOVE artwork alongside existing dialogue, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
-    "ownedBannerRights": "CC0-1.0"
+    "ownedArtworkRights": "CC0-1.0"
   },
   "included": {
     "starterCards": 3,
     "builtInCompanion": "JARVIS",
     "projectDesignCards": 8,
-    "binaryAssetFiles": 3,
+    "binaryAssetFiles": 4,
     "nativeBooks": 6,
     "authoredBookPassages": 15,
     "nativeSpells": 3,
@@ -25,9 +25,12 @@
     "readOnlyPluginSurveyTool": true,
     "nativeExplorationPaths": 3,
     "nativeRecipePlanner": true,
+    "nativeSammelatlas": true,
+    "nativeLoveAstrolabe": "mod/Textures/halveth/love-astrolabe-0.7.png",
     "ownedOpenMWShaderSource": "mod/shaders/halveth_atmosphere.omwfx",
     "visualModes": [
       "Scharlachlicht",
+      "Morgenrot",
       "Nachtglas",
       "Original"
     ],
@@ -46,15 +49,15 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "0.5.0",
+    "version": "0.6.0",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "3dddd9b4ba6a3adf50af20b393642dc7189206ee",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.5.0",
+    "publicCommit": "971dea8665f830b29de0622119f8ebe7b96b6408",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v0.6.0",
     "hostedCI": {
       "state": "PASSED",
-      "checkedCommit": "3dddd9b4ba6a3adf50af20b393642dc7189206ee",
-      "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35863782440",
-      "testsPerMatrixJob": 71
+      "checkedCommit": "971dea8665f830b29de0622119f8ebe7b96b6408",
+      "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions/runs/35869638890",
+      "testsPerMatrixJob": 73
     }
   },
   "publicPackageTests": {
@@ -80,20 +83,20 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "PASSED_FOUR_ISOLATED_OPENMW_TESTS_AND_DIRECT_MOUSE_REVIEW",
-    "summary": "docs/NATIVE-VERIFICATION-0.6.0.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.5.0.json"
+    "state": "PASSED_THREE_ISOLATED_0_7_OPENMW_TESTS_WITH_PRIOR_0_6_DIRECT_MOUSE_REVIEW",
+    "summary": "docs/NATIVE-VERIFICATION-0.7.0.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-0.6.0.json"
   },
   "limitations": [
     "Source release; no bundled Bethesda game assets, engine or installer",
     "OpenMW layout contract requires manual setup outside known HALVETH bundles",
     "Native Windows entry requires the existing Workshop C# sources and a local compiler",
     "Native gameplay on Linux not tested",
-    "Version 0.6 physical hotkeys and sustained frame rate are not yet verified",
+    "Version 0.7 new mouse button and sustained frame rate are not yet verified in the personal game session",
     "No complete quest rewrite, global texture replacement, new landmass or multiplayer service",
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T13:47:42Z",
+  "recordedAt": "2026-09-23T14:01:30Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

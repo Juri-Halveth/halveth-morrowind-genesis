@@ -1,0 +1,51 @@
+{
+  "schema": "halveth.genesis.native-verification/1",
+  "version": "0.7.0",
+  "recordedAt": "2026-09-23T14:01:30Z",
+  "environment": {
+    "game": "The Elder Scrolls III: Morrowind",
+    "engine": "OpenMW 0.51.0",
+    "platform": "Windows",
+    "coverage": "Three fresh isolated game sessions using owned test profiles; no personal saves loaded. Prior 0.6 native results remain documented separately."
+  },
+  "checks": {
+    "nativeSammelatlas": {
+      "state": "PASS",
+      "localReceiptSha256": "b4553593fcf23938974edc9d0def62d0c5b0f385e712d0e76ab950da7227b169",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "realLooseIngredient": "PASS",
+      "nativePanelAndHud": "PASS",
+      "uniqueIngredientAndCellNote": "PASS",
+      "actualSaveReload": "PASS",
+      "originalGoldAndAlchemyUnchanged": "PASS_IN_TEST_SCENE",
+      "personalSavesUsed": false
+    },
+    "nativeVisualModes": {
+      "state": "PASS",
+      "localReceiptSha256": "9dd30571918c5e97b556f2c9dee24261c47c82518e610b1635969283bb002da3",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "shaderCompiledAndActiveInRenderChain": true,
+      "testedModes": ["Scharlachlicht", "Morgenrot", "Nachtglas", "Original"],
+      "personalSavesUsed": false
+    },
+    "nativeLoveAstrolabe": {
+      "state": "PASS",
+      "localReceiptSha256": "03552a750b93ec5685275750d08f0a892a1ecfbcdde6400ab3f8cf8c7257e324",
+      "exitCode": 0,
+      "errorsObserved": 0,
+      "actualF8VfsSelection": "PASS_NEW_ORIGINAL_PNG",
+      "assetSha256": "9c969d88f4464580fc7b7d77293cc4132b22ecf114efad7b04f7523f53331448",
+      "personalSavesUsed": false
+    }
+  },
+  "priorNativeVerification": "docs/NATIVE-VERIFICATION-0.6.0.json",
+  "limits": [
+    "Version 0.7 has isolated native interface and F8 artwork tests; its new mouse button has not yet been clicked in the personal game session.",
+    "The currently open personal game process loaded version 0.6 before these source changes; the new scripts appear on its next normal launch.",
+    "The shader test establishes compilation and render-chain selection, not a frame-rate benchmark or visual preference on other hardware.",
+    "The Sammelatlas reads loaded loose ingredients and stores observations; it does not harvest, craft, rewrite quests or modify Bethesda assets.",
+    "No New World game code, artwork or data was included."
+  ]
+}

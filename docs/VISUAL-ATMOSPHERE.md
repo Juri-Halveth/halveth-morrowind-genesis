@@ -6,7 +6,7 @@ Spielwelt, die Figuren und die vorhandenen Grafikpakete bleiben dieselben.
 stellt die native Schnittstelle `HALVETHVisuals` bereit:
 
 - `getState()` meldet den gewaehlten Modus und ob OpenMW den Filter aktiviert hat.
-- `cycle()` wechselt zwischen Scharlachlicht, Nachtglas und Original.
+- `cycle()` wechselt zwischen Scharlachlicht, Morgenrot, Nachtglas und Original.
 - `setMode('original')` deaktiviert den HALVETH-Filter. Andere Filter in der
   OpenMW-Kette werden dabei nicht beruehrt.
 
@@ -23,6 +23,11 @@ Zusatzaufwand, ersetzt aber keine gemessene Bildratenpruefung auf anderer
 Hardware. Der Filter setzt die OpenMW-Nachbearbeitung voraus; wenn diese
 deaktiviert oder der Shader nicht verfuegbar ist, zeigt `getState().enabled`
 keine Aktivierung an.
+
+Morgenrot ist eine eigene, kraeftigere HALVETH-Abstimmung mit waermerem Licht,
+mehr Farbtiefe und Kontrast. Sie kopiert keine Grafik oder Shaderdatei aus
+New World. Der Modus wirkt auf die laufende Morrowind-Szene, nicht auf die
+Originaltexturen oder andere installierte Grafikpakete.
 
 Die Runtime-Anbindung basiert auf der zum installierten Engine-Tag gehoerenden
 [OpenMW-0.51-Postprocessing-API](https://github.com/OpenMW/openmw/blob/openmw-0.51.0/files/lua_api/openmw/postprocessing.lua).

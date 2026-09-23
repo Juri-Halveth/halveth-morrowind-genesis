@@ -38,15 +38,19 @@ local function step(t)
             if item.name=='halveth_atmosphere' then found=true end
         end
         assert(found,'Own shader absent from real render chain')
-        assert(v.setMode('nocturne'),'Nocturne mode failed')
+        assert(v.setMode('dawn'),'Morgenrot mode failed')
     elseif phase==2 and t>4 then
         phase=3
+        assert(v.getState().enabled and v.getState().mode=='dawn','Morgenrot mode not active')
+        assert(v.setMode('nocturne'),'Nocturne mode failed')
+    elseif phase==3 and t>5 then
+        phase=4
         assert(v.getState().enabled and v.getState().mode=='nocturne','Nocturne mode not active')
         assert(not v.setMode('invalid-mode'),'Unknown mode accepted')
         assert(v.getState().mode=='nocturne','Unknown mode changed current mode')
         assert(v.setMode('original'),'Original mode failed')
-    elseif phase==3 and t>5 then
-        phase=4
+    elseif phase==4 and t>6 then
+        phase=5
         assert(not v.getState().enabled,'Original mode left HALVETH shader active')
         local found=false
         for _,item in ipairs(postprocessing.getChain()) do
@@ -54,10 +58,10 @@ local function step(t)
         end
         assert(not found,'HALVETH shader remained in real render chain')
         assert(v.setMode('scarlet'),'Restoring Scarlet mode failed')
-    elseif phase==4 and t>6 then
-        phase=5
+    elseif phase==5 and t>7 then
+        phase=6
         assert(v.getState().enabled,'Scarlet did not restore after original mode')
-        done=true;print('HALVETH_VISUALS_PASS modes=3 shader=halveth_atmosphere')
+        done=true;print('HALVETH_VISUALS_PASS modes=4 shader=halveth_atmosphere')
         core.quit()
     end
     if t>20 then fail('Timeout at phase '..phase) end
