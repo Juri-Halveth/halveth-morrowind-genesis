@@ -7,7 +7,7 @@ stellt die native Schnittstelle `HALVETHVisuals` bereit:
 
 - `getState()` meldet den gewaehlten Modus und ob OpenMW den Filter aktiviert hat.
 - `cycle()` wechselt zwischen Scharlachlicht, Morgenrot, Lebendige Welt,
-  Nachtglas und Original.
+  Aurora, Nachtglas und Original.
 - `setMode('original')` deaktiviert den HALVETH-Filter. Andere Filter in der
   OpenMW-Kette werden dabei nicht beruehrt.
 
@@ -18,7 +18,8 @@ eine anklickbare Spieloberflaeche gebunden werden. F9 wird bewusst nicht belegt,
 in der verwendeten OpenMW-0.51-Eingabekonfiguration Quickload ausloest.
 
 Der Shader liest die aktuelle Szene einmal und setzt einen sanften Ton in
-Lichtern und Schatten sowie eine schwache Randabdunklung. Er erzeugt keine
+Lichtern und Schatten sowie eine schwache Randabdunklung. Der Regler
+`HALVETH Schattenlicht` hebt vor allem dunkle Bildstellen an. Er erzeugt keine
 zusaetzlichen Renderziele und laedt keine Texturen. Das begrenzt seinen
 Zusatzaufwand, ersetzt aber keine gemessene Bildratenpruefung auf anderer
 Hardware. Der Filter setzt die OpenMW-Nachbearbeitung voraus; wenn diese
@@ -29,6 +30,13 @@ Morgenrot ist eine eigene, kraeftigere HALVETH-Abstimmung mit waermerem Licht,
 mehr Farbtiefe und Kontrast. Sie kopiert keine Grafik oder Shaderdatei aus
 New World. Der Modus wirkt auf die laufende Morrowind-Szene, nicht auf die
 Originaltexturen oder andere installierte Grafikpakete.
+
+**Aurora** ist eine sattere Variante fuer die laufende Szene. Scharlachlicht,
+Morgenrot und Lebendige Welt erhalten zugleich eine kleine Schattenaufhellung;
+helle Bildstellen bleiben durch die luminanzabhaengige Gewichtung weitgehend
+unangetastet. Der Effekt zeichnet weder neue Geometrie noch ersetzt er
+Haeuser, Figuren oder Texturen. Ob er in einer bestimmten Zelle besser aussieht,
+muss im Spiel verglichen werden.
 
 **Lebendige Welt** fragt in Aussenbereichen alle zwei Sekunden Sonnenanteil und
 Sturmstatus der aktuellen OpenMW-Zelle ab und passt Waerme, Farbtiefe und

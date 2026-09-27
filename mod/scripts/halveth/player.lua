@@ -16,11 +16,21 @@ local inspect=require('scripts.halveth.inspect')
 local sessionId, worldId, ready, counter = nil,nil,false,0
 local lastSequence,lastPoll,lastContext,lastRegister=0,-100,-100,-100
 local seen, received, healed={}, {}, {}
-local window,inputLayout,transcriptLayout,statusLayout,windowMode,artworkPath
-local inputText,transcript='','HALVETH ist da. F8 oeffnet dein Begleiterfenster.\nFreie Gespraeche laufen ueber den lokalen Begleiter.'
+local window,inputLayout,transcriptLayout,statusLayout,itemLayout,filterLayout,windowMode,artworkPath
+local inputText,transcript='','HALVETH ist da. Die Welt hoert zu.\n\nStelle eine Frage zur Welt, zu einer Figur oder zu deinem Weg.\nWaehle unten einen Gegenstand oder ein Buch und fuege es deiner Frage bei.\nMit /hilfe siehst du die direkten Spielbefehle.'
 local dialogueTarget,lastBook,hasAddedMode=nil,nil,false
 local entityMode='jarvis'
 local pendingChat=nil
+local chooseMode
+local close
+local inventoryItems,inventoryIndex,inventoryFilter,attachedItemId,attachedReference={},1,'all',nil,nil
+local ink=util.color.rgb(.96,.94,.86)
+local pearl=util.color.rgb(.78,.91,.98)
+local gold=util.color.rgb(1,.79,.45)
+local rose=util.color.rgb(1,.58,.77)
+local violet=util.color.rgb(.76,.68,1)
+local cyan=util.color.rgb(.47,.92,.98)
+local mint=util.color.rgb(.57,1,.75)
 
 local function companionOffline()
     local ok,status=pcall(function()
@@ -38,6 +48,113 @@ local function append(text)
     transcript=C.tail(transcript..'\n\n'..text,18000)
     if transcriptLayout then transcriptLayout.props.text=transcript end
     if window then window:update() end
+end
+
+local function refreshInventory()
+    local selected=inventoryItems[inventoryIndex] and inventoryItems[inventoryIndex].id
+    local list,seen={},{}
+    for _,object in ipairs(types.Actor.inventory(self):getAll()) do
+        local id=object.recordId
+        if type(id)=='string' and not seen[id] and (inventoryFilter=='all' or types.Book.objectIsInstance(object)) then
+            local ok,record=pcall(function() return object.type.record(object) end)
+            if ok and record then
+                seen[id]=true
+                local kind=inspect.kind(object)
+                list[#list+1]={id=id,name=record.name or id,kind=kind}
+            end
+        end
+    end
+    table.sort(list,function(a,b)
+        if a.name==b.name then return a.id<b.id end
+        return a.name<b.name
+    end)
+    inventoryItems=list
+    inventoryIndex=1
+    for index,item in ipairs(list) do if item.id==selected then inventoryIndex=index;break end end
+end
+
+local function refreshItemLabel()
+    if itemLayout then
+        local item=inventoryItems[inventoryIndex]
+        itemLayout.props.text=item and (tostring(inventoryIndex)..'/'..#inventoryItems..'  '..C.head(item.name,90)..' · '..item.kind)
+            or 'Kein passender Gegenstand im Inventar'
+    end
+    if filterLayout then filterLayout.props.text=inventoryFilter=='all' and '[Alle]' or '[Buecher]' end
+    if window then window:update() end
+end
+
+local function cycleItem(step)
+    refreshInventory()
+    if #inventoryItems>0 then inventoryIndex=(inventoryIndex-1+step)%#inventoryItems+1 end
+    refreshItemLabel()
+end
+
+local function selectInventoryItem(id)
+    if type(id)~='string' then return false end
+    refreshInventory()
+    for index,item in ipairs(inventoryItems) do
+        if item.id==id then inventoryIndex=index;refreshItemLabel();return true end
+    end
+    refreshItemLabel()
+    return false
+end
+
+local function insertItem()
+    refreshInventory()
+    local item=inventoryItems[inventoryIndex]
+    if not item then append('Im Inventar ist gerade kein passender Gegenstand.');return false end
+    attachedItemId=item.id
+    local reference='[Inventar: '..C.head(item.name:gsub('[%z\1-\31]',' '),96)..']'
+    if attachedReference then
+        local at=inputText:find(attachedReference,1,true)
+        if at then inputText=inputText:sub(1,at-1)..inputText:sub(at+#attachedReference) end
+    end
+    attachedReference=reference
+    if inputText:match('^%s*$') then
+        inputText='Was ist das und wie kann ich es in Morrowind verwenden? '..reference
+    elseif not inputText:find(reference,1,true) then
+        inputText=C.head(inputText,3700)..' '..reference
+    end
+    if inputLayout then inputLayout.props.text=inputText end
+    append('EINGEFUEGT: '..item.name..' · echte Inventardaten werden der Frage beigefuegt.')
+    return true
+end
+
+local function insertNamedItem(query,booksOnly)
+    if type(query)~='string' or #query>120 or query:match('^%s*$') then
+        append('Bitte einen kurzen Gegenstandsnamen eingeben. Beispiel: /gegenstand Glasblatt')
+        return false
+    end
+    inventoryFilter=booksOnly and 'books' or 'all'
+    refreshInventory()
+    local needle=query:lower()
+    for index,item in ipairs(inventoryItems) do
+        if item.name:lower():find(needle,1,true) or item.id:lower():find(needle,1,true) then
+            inventoryIndex=index
+            refreshItemLabel()
+            return insertItem()
+        end
+    end
+    refreshItemLabel()
+    append('Kein passender '..(booksOnly and 'Text' or 'Gegenstand')..' im aktuellen Inventar: '..C.head(query,120))
+    return false
+end
+
+local function selectedItemContext()
+    if not attachedItemId then return nil end
+    local inventory=types.Actor.inventory(self)
+    local object=inventory:find(attachedItemId)
+    if not object or not object:isValid() then return nil end
+    local record=object.type.record(object)
+    local kind=inspect.kind(object)
+    local details={id=object.recordId,name=C.head(record.name or object.recordId,256),kind=kind,
+        count=inventory:countOf(object.recordId),description=C.head(inspect.item(object,self),2400)}
+    if types.Book.objectIsInstance(object) then
+        local book=types.Book.record(object)
+        details.book={title=C.head(book.name or object.recordId,256),
+            text=C.head(book.text or '',5000),truncated=#(book.text or '')>5000}
+    end
+    return details
 end
 local function state(actor)
     local out=inspect.actor(actor,self)
@@ -102,6 +219,7 @@ local function startSession()
     sessionId=string.format('omw-%d-%d-%d',os.time(),math.floor(core.getRealTime()*1000)%1000000000,math.random(100000,999999))
     ready=false;worldId=nil;counter=0;lastSequence=0;seen={};received={};healed={};pendingChat=nil
     lastPoll=-100;lastContext=-100;lastRegister=-100;dialogueTarget=nil;lastBook=nil
+    attachedItemId=nil;attachedReference=nil;inventoryItems={};inventoryIndex=1;inventoryFilter='all'
 end
 local function requestAction(kind,params,id)
     if not ready then append('Die Weltverbindung wird vorbereitet. Bitte gleich erneut versuchen.');return false end
@@ -116,15 +234,109 @@ local function requestAction(kind,params,id)
     core.sendGlobalEvent('HALVETH_Action',{player=self.object,sessionId=sessionId,action={id=id,kind=kind,params=params or {}}})
     return true
 end
+local function clearInput()
+    inputText=''
+    attachedItemId=nil
+    attachedReference=nil
+    if inputLayout then inputLayout.props.text='' end
+    if window then window:update() end
+end
+
+local citizenCommands={
+    ['/buerger rufen']='spawn',['/bürger rufen']='spawn',
+    ['/buerger entfernen']='dismiss',['/bürger entfernen']='dismiss',
+    ['/buerger status']='status',['/bürger status']='status',
+}
+
+local function citizenCommand(kind)
+    local citizens=I.HALVETHCitizens
+    if not citizens then append('Die neuen Buerger sind in dieser Installation noch nicht vorhanden.');return end
+    if kind=='status' then
+        citizens.refresh()
+        local state=citizens.getState()
+        local people=type(state)=='table' and type(state.people)=='table' and state.people or {}
+        local names={}
+        for _,person in ipairs(people) do
+            if type(person)=='table' and type(person.name)=='string' then
+                names[#names+1]=C.head(person.name,80)
+            end
+        end
+        append('BUERGER · letzter Weltstand: '..#people..' aktiv'
+            ..(#names>0 and (' · '..table.concat(names,', ')) or '')
+            ..'. Die Welt aktualisiert den Stand gleich erneut.')
+        return
+    end
+    local accepted=kind=='spawn' and citizens.spawn() or citizens.dismiss()
+    if accepted then
+        append(kind=='spawn' and 'BUERGER · Ruf an die Welt gesendet. Draußen koennen zwei eigene Bewohner erscheinen; /buerger status zeigt ihren Stand.'
+            or 'BUERGER · Entfernen angefordert. /buerger status zeigt den folgenden Weltstand.')
+    else
+        append('BUERGER · Der Weltauftrag konnte gerade nicht gesendet werden.')
+    end
+end
+
+local function command(text)
+    if text=='/hilfe' then
+        append('KONSOLE: Frage frei nach Welt, Figur, Gegenstand oder Buch. '
+            ..'Ein Inventarobjekt unten waehlen und mit [Einfuegen] beifuegen. '
+            ..'Direkte Befehle: /heilen · /gold 250 · /startpunkt · /zurueck · '
+            ..'/npc · /jarvis · /buch · /mikrofon. '
+            ..'Eigene Bewohner: /buerger rufen · /buerger entfernen · /buerger status. '
+            ..'Suchen: /gegenstand NAME oder /buch NAME. '
+            ..'Nur diese geprueften Spielaktionen werden ausgefuehrt.')
+    elseif text=='/heilen' then
+        requestAction('heal_player',{})
+    elseif text=='/gold' or text:match('^/gold %d+$') then
+        local amount=tonumber(text:match('^/gold (%d+)$') or '250')
+        if amount and amount>=1 and amount<=100000 then requestAction('give_gold',{amount=amount})
+        else append('Goldbetrag: ganze Zahl von 1 bis 100000. Beispiel: /gold 250') end
+    elseif text=='/startpunkt' then
+        requestAction('teleport_anchor',{anchor='session_start'})
+    elseif text=='/zurueck' then
+        requestAction('return_anchor',{})
+    elseif text=='/npc' then
+        chooseMode('npc')
+    elseif text=='/jarvis' then
+        chooseMode('jarvis')
+    elseif text=='/buch' then
+        inventoryFilter=inventoryFilter=='all' and 'books' or 'all'
+        refreshInventory();refreshItemLabel()
+    elseif text=='/mikrofon' then
+        if I.HALVETHMicrophone then close();I.HALVETHMicrophone.open()
+        else append('Die Mikrofon-Einwilligung ist in dieser Installation noch nicht vorhanden.') end
+    elseif citizenCommands[text] then
+        citizenCommand(citizenCommands[text])
+    else
+        append('Unbekannter Befehl. /hilfe zeigt die verfuegbaren Aktionen. Freie Fragen ohne / gehen an den lokalen Begleiter.')
+    end
+end
+
 local function submit()
     local text=inputText:match('^%s*(.-)%s*$')
-    if #text==0 or not ready then return end
+    if #text==0 then return end
+    if text=='/gegenstand' then clearInput();insertItem();return end
+    local itemQuery=text:match('^/gegenstand%s+(.+)$')
+    if itemQuery then clearInput();insertNamedItem(itemQuery,false);return end
+    local bookQuery=text:match('^/buch%s+(.+)$')
+    if bookQuery then clearInput();insertNamedItem(bookQuery,true);return end
+    if text:sub(1,1)=='/' then command(text);clearInput();return end
+    if not ready then append('Die Weltverbindung wird vorbereitet. Bitte gleich erneut versuchen.');return end
     if companionOffline() then append('Der lokale Gespraechsbegleiter ist gerade offline. Wissen, Buecher und alle direkten Spielwerkzeuge bleiben nutzbar.');return end
     if pendingChat then append('Deine vorige Antwort entsteht noch.');return end
     if #text>16000 or (utf8.len(text) or #text)>4000 then append('Bitte maximal 4000 Zeichen pro Nachricht.');return end
     counter=counter+1
     local ok,c=pcall(context)
     if not ok then append('Weltkontext wird gerade geladen.');return end
+    if attachedItemId then
+        local itemOK,item=pcall(selectedItemContext)
+        if not itemOK or not item then
+            attachedItemId=nil
+            attachedReference=nil
+            append('Der eingefuegte Gegenstand liegt nicht mehr in deinem Inventar. Waehle ihn erneut.')
+            return
+        end
+        c.selectedInventoryItem=item
+    end
     if entityMode=='npc' and not c.npc then append('Im aktuellen Kontext ist kein Wesen ausgewaehlt.');return end
     local requestId='chat-'..sessionId..'-'..counter
     pendingChat={id=requestId,startedAt=core.getRealTime()}
@@ -132,40 +344,51 @@ local function submit()
     self:sendEvent('HALVETH_ChatSubmitted',{sessionId=sessionId,requestId=requestId,text=text,contextJson=C.json(c)})
     if entityMode=='npc' and dialogueTarget and I.HALVETHPaths then I.HALVETHPaths.noteNpc(dialogueTarget) end
     append('DU: '..text)
-    inputText='';inputLayout.props.text='';window:update()
+    attachedItemId=nil
+    attachedReference=nil
+    clearInput()
 end
-local function close()
+close=function()
     if window then window:destroy();window=nil end
-    inputLayout=nil;transcriptLayout=nil;statusLayout=nil
+    inputLayout=nil;transcriptLayout=nil;statusLayout=nil;itemLayout=nil;filterLayout=nil
     if hasAddedMode then I.UI.removeMode('Interface');hasAddedMode=false end
     windowMode=nil;artworkPath=nil
 end
-local function button(label,x,y,width,fn)
+local function button(label,x,y,width,fn,color)
     return {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-        props={position=util.vector2(x,y),size=util.vector2(width,30),text=label,textSize=17},
+        props={position=util.vector2(x,y),size=util.vector2(width,46),text=label,textSize=25,
+            textColor=color or pearl},
         events={mouseClick=async:callback(fn)}}
 end
-local function chooseMode(mode)
+chooseMode=function(mode)
     entityMode=mode
     if statusLayout then
-        local c=context()
-        statusLayout.props.text=mode=='jarvis' and 'Gespraech: JARVIS · lokaler Weltbegleiter' or ('Gespraech: '..(c.npc and c.npc.name or 'kein Wesen in der Naehe'))
+        local ok,c=pcall(context)
+        local name=ok and c.npc and c.npc.name or 'kein Wesen in der Naehe'
+        statusLayout.props.text=mode=='jarvis' and 'JARVIS · dein lokaler Weltbegleiter' or ('WESEN · '..name)
         if window then window:update() end
     end
 end
 local function open()
     if window then close();return end
+    if I.HALVETHMicrophone and I.HALVETHMicrophone.isOpen and I.HALVETHMicrophone.isOpen() then
+        ui.showMessage('Bitte entscheide zuerst im Mikrofonfenster. Danach oeffnet F8 die Konsole.')
+        return
+    end
     if I.HALVETHKnowledge then I.HALVETHKnowledge.close() end
     if I.HALVETHUniverse then I.HALVETHUniverse.close() end
     if I.HALVETHPaths then I.HALVETHPaths.close() end
     windowMode=I.UI.getMode() or 'Interface'
     if not I.UI.getMode() then I.UI.addMode('Interface',{windows={}});hasAddedMode=true end
     local size=ui.screenSize()
-    local width=math.min(1000,size.x-40)
-    local height=math.min(580,size.y-40)
-    -- Optional original artwork in this native window. A missing texture keeps the full chat.
+    local width=math.min(1480,size.x-36)
+    -- Keep the console clear of bottom-centred gameplay notifications at 720p.
+    local height=math.min(940,math.max(680,math.floor(size.y*.69)))
+    height=math.min(height,size.y-36)
+    refreshInventory()
+    -- This is one native OpenMW window. Artwork never replaces the readable transcript.
     local banner
-    if width>=860 and height>=510 then
+    if width>=1100 and height>=760 then
         for _,artPath in ipairs({'textures/halveth/love-astrolabe-0.7.png',
                                   'textures/halveth/scarlet-love-banner.png'}) do
             local ok,resource=pcall(function()
@@ -175,53 +398,75 @@ local function open()
             if ok and resource then banner=resource;artworkPath=artPath;break end
         end
     end
-    local artWidth=banner and math.min(160,(height-232)/2) or 0
-    local transcriptWidth=width-40-(banner and artWidth+44 or 0)
+    local cardWidth=width-40
+    local cardHeight=height-431
+    local artWidth=banner and math.min(170,(cardHeight-26)/2) or 0
+    local transcriptWidth=cardWidth-28-(banner and artWidth+22 or 0)
     transcriptLayout={type=ui.TYPE.TextEdit,template=I.MWUI.templates.textEditBox,
-        props={position=util.vector2(20,75),size=util.vector2(transcriptWidth,height-266),text=transcript,
-            textSize=17,readOnly=true,multiline=true,wordWrap=true}}
+        props={position=util.vector2(14,12),size=util.vector2(transcriptWidth,cardHeight-24),text=transcript,
+            textSize=31,textColor=ink,readOnly=true,multiline=true,wordWrap=true}}
     inputLayout={type=ui.TYPE.TextEdit,template=I.MWUI.templates.textEditLine,
-        props={position=util.vector2(8,7),size=util.vector2(width-170,28),autoSize=false,text=inputText,textSize=18},
+        props={position=util.vector2(12,10),size=util.vector2(width-237,43),
+            autoSize=false,text=inputText,textSize=31,textColor=ink},
         events={textChanged=async:callback(function(text) inputText=text end),
             keyPress=async:callback(function(key) if key.code==input.KEY.Enter then submit() end end)}}
     statusLayout={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-        props={position=util.vector2(20,45),size=util.vector2(width-40,25),text=entityMode=='jarvis' and 'Gespraech: JARVIS · lokaler Weltbegleiter' or 'Gespraech: NPC/Wesen · Dialogziel, Fadenkreuz oder naechstes Wesen',textSize=15}}
-    local contents={
-            {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,props={position=util.vector2(20,15),text='HALVETH / MORROWIND GENESIS',textSize=21}},
-            button('[JARVIS]',width-210,15,108,function() chooseMode('jarvis') end),
-            button('[NPC]',width-95,15,85,function() chooseMode('npc') end),
-            statusLayout,transcriptLayout,
-            button('[Wissen / F7]',20,height-182,185,function()
-                close()
-                if I.HALVETHKnowledge then I.HALVETHKnowledge.open() end
-            end),
-            button('[Figur / Inventar / Magie · F6]',220,height-182,380,function()
-                close()
-                if I.HALVETHUniverse then I.HALVETHUniverse.open() end
-            end),
-            button('[Herzbrief]',610,height-182,155,function()
-                close()
-                if I.HALVETHHeart then I.HALVETHHeart.open() end
-            end),
-            {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-                props={position=util.vector2(20,height-144),size=util.vector2(width-150,22),text='Deine Nachricht',textSize=15}},
-            {type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,
-                props={position=util.vector2(20,height-117),size=util.vector2(width-150,42)},
-                content=ui.content{inputLayout}},
-            button('[Senden]',width-108,height-108,94,submit),
-            button('[Heilen]',20,height-57,106,function() requestAction('heal_player',{}) end),
-            button('[+250 Gold]',136,height-57,137,function() requestAction('give_gold',{amount=250}) end),
-            button('[Startpunkt]',280,height-57,150,function() requestAction('teleport_anchor',{anchor='session_start'}) end),
-            button('[Zurueck]',437,height-57,127,function() requestAction('return_anchor',{}) end),
-            button('[Schliessen]',width-155,height-57,145,close),
-        }
+        props={position=util.vector2(24,101),size=util.vector2(width-48,33),
+            text=entityMode=='jarvis' and 'JARVIS · dein lokaler Weltbegleiter'
+                or 'WESEN · Dialogziel, Fadenkreuz oder naechstes Wesen',
+            textSize=26,textColor=pearl}}
+    itemLayout={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
+        props={position=util.vector2(555,height-278),size=util.vector2(width-580,44),
+            text='',textSize=26,textColor=ink}}
+    filterLayout=button('',24,height-278,152,function()
+        inventoryFilter=inventoryFilter=='all' and 'books' or 'all'
+        refreshInventory();refreshItemLabel()
+    end,violet)
+    local conversation={transcriptLayout}
     if banner then
-        contents[#contents+1]={type=ui.TYPE.Image,name='scarletLoveBanner',
-            props={position=util.vector2(width-40-artWidth,75),size=util.vector2(artWidth,artWidth*2),resource=banner}}
+        conversation[#conversation+1]={type=ui.TYPE.Image,name='scarletLoveBanner',
+            props={position=util.vector2(cardWidth-artWidth-14,13),
+                size=util.vector2(artWidth,artWidth*2),resource=banner}}
+    end
+    local contents={
+            {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,
+                props={position=util.vector2(24,18),text='VERACHEL / MORROWIND',textSize=36,textColor=gold}},
+            button('[JARVIS]',width-392,20,150,function() chooseMode('jarvis') end,cyan),
+            button('[WESEN]',width-220,20,130,function() chooseMode('npc') end,mint),
+            button('[X]',width-70,20,48,close,rose),
+            statusLayout,
+            {type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,
+                props={position=util.vector2(20,137),size=util.vector2(cardWidth,cardHeight)},
+                content=ui.content(conversation)},
+            filterLayout,
+            button('[<]',190,height-278,62,function() cycleItem(-1) end,cyan),
+            button('[>]',268,height-278,62,function() cycleItem(1) end,cyan),
+            button('[Einfuegen]',346,height-278,190,insertItem,mint),
+            itemLayout,
+            {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
+                props={position=util.vector2(24,height-210),size=util.vector2(width-48,34),
+                    text='DEINE FRAGE ODER EIN SPIELBEFEHL  ·  /hilfe',textSize=25,textColor=gold}},
+            {type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,
+                props={position=util.vector2(24,height-172),size=util.vector2(width-205,64)},
+                content=ui.content{inputLayout}},
+            button('[ABSCHICKEN]',width-163,height-157,151,submit,gold),
+            {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
+                props={position=util.vector2(24,height-80),size=util.vector2(width-48,48),
+                    text='F8 / Esc schliessen   ·   F6 Figur   ·   F7 Wissen   ·   /mikrofon fuer Einwilligung',
+                    textSize=23,textColor=pearl}},
+        }
+    local stages={'SOURCE','RECEIVE','ACCEPT','RELATE','PRESERVE','UPDATE'}
+    local shades={rose,gold,mint,cyan,violet,rose}
+    local step=(width-48)/#stages
+    for index,title in ipairs(stages) do
+        contents[#contents+1]={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
+            props={position=util.vector2(24+(index-1)*step,67),size=util.vector2(step-6,27),
+                text=title,textSize=20,textColor=shades[index]}}
     end
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
-        props={relativePosition=util.vector2(.5,.5),anchor=util.vector2(.5,.5),size=util.vector2(width,height)},
+        props={relativePosition=util.vector2(.5,.46),anchor=util.vector2(.5,.5),size=util.vector2(width,height)},
         content=ui.content(contents)}
+    refreshItemLabel()
     if companionOffline() then append('Gespraechsbegleiter offline. Wissen mit F7 und direkte Spielwerkzeuge funktionieren weiter.') end
     emitContext()
 end
@@ -290,11 +535,23 @@ return {
         getArtworkPath=function()return window and artworkPath or nil end,
         requestAction=requestAction,getSessionId=function() return sessionId end,
         getContext=context,
+        getConsoleState=function()
+            local item=inventoryItems[inventoryIndex]
+            return {open=window~=nil,mode=entityMode,selectedItemId=item and item.id or nil,
+                attachedItemId=attachedItemId,filter=inventoryFilter,inputText=inputText}
+        end,
+        attachItem=function(id)
+            if not window then open() end
+            if not window then return false end
+            if not selectInventoryItem(id) then return false end
+            return insertItem()
+        end,
         talkTo=function(actor)
             if not actor or not actor:isValid() or not types.Actor.objectIsInstance(actor)
                 or types.Actor.isDead(actor) or (actor.position-self.position):length()>3000 then return false end
             dialogueTarget=actor
             if not window then open() end
+            if not window then return false end
             chooseMode('npc')
             return true
         end},
@@ -311,6 +568,7 @@ return {
         HALVETH_TestOpen=open,
         HALVETH_TestChat=function(data)
             if not window then open() end
+            if not window then return end
             chooseMode(data.entityMode=='npc' and 'npc' or 'jarvis')
             inputText=type(data.text)=='string' and data.text or ''
             if inputLayout then inputLayout.props.text=inputText;window:update() end

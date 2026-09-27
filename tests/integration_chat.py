@@ -36,6 +36,8 @@ return {
         local elapsed=core.getRealTime()-started
         if elapsed>=4 and not sent then
             sent=true
+            local microphone=require('openmw.interfaces').HALVETHMicrophone
+            if microphone and microphone.isOpen and microphone.isOpen() then microphone.decline() end
             self:sendEvent('HALVETH_TestChat',{
                 entityMode='jarvis',
                 text='JARVIS, begrüße mich in einem kurzen deutschen Satz. Wir testen gerade unser freies Gespräch in Morrowind. Führe keine Spielaktion aus.'})

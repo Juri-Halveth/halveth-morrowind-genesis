@@ -13,7 +13,7 @@ local C=require('scripts.halveth.common')
 
 local MAX_PEOPLE,MAX_PULSES=128,96
 local people,pulses={},{}
-local selected,window,detail,summary,rows,mode,addedMode,momentToggle=nil,nil,nil,nil,{},nil,false,nil
+local selected,window,detail,summary,rows,mode,addedMode,momentToggle,citizenToggle=nil,nil,nil,nil,{},nil,false,nil,nil
 local retainedInvalidSave,lastScan,lastCell=nil,-100,nil
 local message='Diese Chronik beobachtet echte Begegnungen. Der Fraktionsimpuls ist eine zusaetzliche Spielsimulation.'
 local scan,refresh,open
@@ -168,7 +168,7 @@ local function getContext(targetId)
 end
 local function close()
     if window then window:destroy();window=nil end
-    detail=nil;summary=nil;momentToggle=nil;rows={}
+    detail=nil;summary=nil;momentToggle=nil;citizenToggle=nil;rows={}
     if addedMode then I.UI.removeMode('Interface');addedMode=false end
     mode=nil
 end
@@ -229,6 +229,15 @@ local function detailText()
         lines[#lines+1]=ambient.message or 'Noch kein Wanderer gerufen.'
         lines[#lines+1]='Draussen rufen, native Wander-Routine pausieren oder fortsetzen, nur diesen selbst erzeugten NPC entfernen.'
     end
+    if I.HALVETHCitizens then
+        local citizens=I.HALVETHCitizens.getState()
+        lines[#lines+1]='EIGENE BUERGER / FREIE WEGE'
+        lines[#lines+1]=citizens.message or 'Noch keine eigenen Buerger gerufen.'
+        for _,person in ipairs(citizens.people or {}) do
+            lines[#lines+1]=person.name..' · '..(person.loaded and 'hier geladen' or 'gerade ausser Sicht')
+        end
+        lines[#lines+1]='Nur eigene, gerufene Figuren erhalten eine Wander-Routine. Originale Quest-NPCs und ihre AI bleiben unveraendert.'
+    end
     if I.HALVETHWorldMoments then
         local moments=I.HALVETHWorldMoments.getState()
         lines[#lines+1]='WELTMOMENTE / BEOBACHTETES AUSSENLICHT'
@@ -253,6 +262,9 @@ refresh=function()
     if summary then summary.props.text=#list..' beobachtete Figuren · Spieltag '..day()..' · '..message end
     if momentToggle and I.HALVETHWorldMoments then
         momentToggle.props.text=I.HALVETHWorldMoments.getState().enabled and '[Momente aus]' or '[Momente an]'
+    end
+    if citizenToggle and I.HALVETHCitizens then
+        citizenToggle.props.text=#(I.HALVETHCitizens.getState().people or {})>0 and '[Buerger -]' or '[Buerger +]'
     end
     if window then window:update() end
 end
@@ -302,12 +314,21 @@ open=function()
             refresh()
         end})
     end
+    if I.HALVETHCitizens then
+        table.insert(controls,#controls,{'[Buerger +]',function()
+            local citizens=I.HALVETHCitizens
+            if #(citizens.getState().people or {})>0 then citizens.dismiss()
+            else citizens.spawn() end
+            refresh()
+        end})
+    end
     local gap=6
     local slot=math.floor((w-36-gap*(#controls-1))/#controls)
     for i,control in ipairs(controls) do
         local item=button(control[1],18+(i-1)*(slot+gap),h-48,
             slot,control[2],w<900 and 14 or 16)
         if control[1]=='[Momente aus]' then momentToggle=item end
+        if control[1]=='[Buerger +]' then citizenToggle=item end
         content[#content+1]=item
     end
     window=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',

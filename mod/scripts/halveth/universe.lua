@@ -165,21 +165,18 @@ local function updateMenuBar()
         and not (I.HALVETHWorldlife and I.HALVETHWorldlife.isOpen())
         and not (I.HALVETHHeart and I.HALVETHHeart.isOpen())
         and not (I.HALVETHPerspective and I.HALVETHPerspective.isOpen())
+        and not (I.HALVETHMicrophone and I.HALVETHMicrophone.isOpen
+            and I.HALVETHMicrophone.isOpen())
     if show and not menuBar then
-        local barWidth=math.min(1290,ui.screenSize().x-24)
-        local slot=math.floor((barWidth-20)/9)
+        local barWidth=math.min(420,ui.screenSize().x-24)
+        local launcher=button('[HALVETH · KONSOLE  /  F8]',16,9,barWidth-32,
+            function() I.HALVETH.open() end)
+        launcher.props.textSize=22
+        launcher.props.textColor=util.color.rgb(1,.84,.58)
         menuBar=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
-            props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),size=util.vector2(barWidth,36)},
-            content=ui.content{
-                button('[HALVETH · Figur]',10,6,slot-4,function()open()end),
-                button('[Wissen]',10+slot,6,slot-4,function()I.HALVETHKnowledge.open()end),
-                button('[Gespraech]',10+slot*2,6,slot-4,function()I.HALVETH.open()end),
-                button('[Pfade]',10+slot*3,6,slot-4,function()I.HALVETHPaths.open()end),
-                button('[Herzbrief]',10+slot*4,6,slot-4,function()I.HALVETHHeart.open()end),
-                button('[Sammeln]',10+slot*5,6,slot-4,function()I.HALVETHFieldcraft.open()end),
-                button('[Weltleben]',10+slot*6,6,slot-4,function()I.HALVETHWorldlife.open()end),
-                button('[Licht]',10+slot*7,6,slot-4,function()I.HALVETHVisuals.cycle()end),
-                button('[Sicht]',10+slot*8,6,slot-4,function()I.HALVETHPerspective.open()end)}}
+            props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),
+                size=util.vector2(barWidth,49)},
+            content=ui.content{launcher}}
     elseif not show and menuBar then menuBar:destroy();menuBar=nil end
 end
 open=function(requestedTab)
@@ -252,6 +249,7 @@ local function snapshot()
 end
 return {interfaceName='HALVETHUniverse',
     interface={version=1,open=open,close=close,getState=snapshot,selectTab=selectTab,refresh=rebuild,perform=perform,
+        getLauncherState=function() return {visible=menuBar~=nil,entryCount=menuBar and 1 or 0} end,
         select=function(id)for _,entry in ipairs(filtered)do if entry.id==id then selection=id;refresh();return true end end;return false end,
         search=function(text)query=C.head(text,160);page=0;if searchLayout then searchLayout.props.text=query end;refresh()end},
     engineHandlers={onLoad=function()close();if menuBar then menuBar:destroy();menuBar=nil end end,onKeyPress=function(key)

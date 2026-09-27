@@ -46,6 +46,8 @@ local function step(t)
         core.sendGlobalEvent('HALVETH_UniverseFixtures',{player=self.object})
     elseif phase==1 and t>4 and content then
         phase=2
+        if I.HALVETHMicrophone and I.HALVETHMicrophone.isOpen
+            and I.HALVETHMicrophone.isOpen() then I.HALVETHMicrophone.decline() end
         u.open('character')
         local s=u.getState();assert(s.panelOpen and s.entryCount==28,'Character +27 skills missing')
         assert(s.detail:find('ATTRIBUTE',1,true),'Native character attributes missing')

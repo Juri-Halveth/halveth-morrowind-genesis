@@ -6,16 +6,18 @@ local core = require('openmw.core')
 local self = require('openmw.self')
 
 local SHADER = 'halveth_atmosphere'
-local ORDER = {'scarlet', 'dawn', 'living', 'nocturne', 'original'}
+local ORDER = {'scarlet', 'dawn', 'living', 'aurora', 'nocturne', 'original'}
 local PRESETS = {
     original = {title='Original'},
     scarlet = {title='Scharlachlicht', strength=0.48, temperature=0.78,
-        saturation=1.04, vignette=0.03, contrast=1.00},
+        saturation=1.04, vignette=0.03, contrast=1.00, shadowLift=0.04},
     dawn = {title='Morgenrot', strength=0.72, temperature=0.92,
-        saturation=1.14, vignette=0.02, contrast=1.08},
+        saturation=1.14, vignette=0.02, contrast=1.08, shadowLift=0.055},
     living = {title='Lebendige Welt'},
+    aurora = {title='Aurora', strength=0.78, temperature=0.10,
+        saturation=1.18, vignette=0.01, contrast=1.06, shadowLift=0.085},
     nocturne = {title='Nachtglas', strength=0.45, temperature=-0.68,
-        saturation=1.02, vignette=0.06, contrast=1.05},
+        saturation=1.02, vignette=0.06, contrast=1.05, shadowLift=0.015},
 }
 
 local mode = 'scarlet'
@@ -47,8 +49,8 @@ end
 local function livingPreset()
     sampleEnvironment()
     if environment.sun == nil then
-        return {strength=0.30, temperature=0.16, saturation=1.04,
-            vignette=0.02, contrast=1.03}
+        return {strength=0.40, temperature=0.16, saturation=1.07,
+            vignette=0.01, contrast=1.03, shadowLift=0.07}
     end
     local sun = environment.sun
     local storm = environment.storm
@@ -56,7 +58,8 @@ local function livingPreset()
         temperature=-0.42 + 1.14 * sun - (storm and 0.12 or 0),
         saturation=1.00 + 0.08 * sun - (storm and 0.04 or 0),
         vignette=0.04 - 0.02 * sun,
-        contrast=1.04 + 0.04 * sun}
+        contrast=1.04 + 0.04 * sun,
+        shadowLift=0.06 - 0.025 * sun}
 end
 
 local function ensureShader()
@@ -87,6 +90,7 @@ local function apply()
         shader:setFloat('uSaturation', preset.saturation)
         shader:setFloat('uVignette', preset.vignette)
         shader:setFloat('uContrast', preset.contrast)
+        shader:setFloat('uShadowLift', preset.shadowLift)
         if not shader:isEnabled() then shader:enable() end
     end)
     if not ok then

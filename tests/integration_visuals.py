@@ -58,8 +58,10 @@ local function step(t)
     elseif phase==4 and t>6 then
         phase=5
         assert(v.getState().enabled and v.getState().mode=='nocturne','Nocturne mode not active')
+        assert(v.setMode('aurora'),'Aurora mode failed')
+        assert(v.getState().enabled and v.getState().mode=='aurora','Aurora mode not active')
         assert(not v.setMode('invalid-mode'),'Unknown mode accepted')
-        assert(v.getState().mode=='nocturne','Unknown mode changed current mode')
+        assert(v.getState().mode=='aurora','Unknown mode changed current mode')
         assert(v.setMode('original'),'Original mode failed')
     elseif phase==5 and t>7 then
         phase=6
@@ -73,7 +75,7 @@ local function step(t)
     elseif phase==6 and t>8 then
         phase=7
         assert(v.getState().enabled,'Scarlet did not restore after original mode')
-        done=true;print('HALVETH_VISUALS_PASS modes=5 shader=halveth_atmosphere')
+        done=true;print('HALVETH_VISUALS_PASS modes=6 shader=halveth_atmosphere')
         core.quit()
     end
     if t>20 then fail('Timeout at phase '..phase) end

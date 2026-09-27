@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "1.0.1",
-  "scope": "Native TES III Morrowind/OpenMW extension: original portal entry, bounded player viewpoint, exact NPC chronicle binding, owned wanderer lifecycle, live atmosphere, and in-game dialogue, knowledge and exploration paths",
+  "version": "1.0.5-preview",
+  "scope": "Native TES III Morrowind/OpenMW extension: one F8 text console, per-launch microphone consent, original portal, bounded player viewpoint, exact NPC chronicle, optional owned citizens, live atmosphere, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -11,7 +11,7 @@
     "starterCards": 3,
     "builtInCompanion": "JARVIS",
     "projectDesignCards": 8,
-    "binaryAssetFiles": 6,
+    "binaryAssetFiles": 27,
     "nativePortalMenu": "mod/scripts/halveth/menu_portal.lua",
     "portalMenuArtwork": "mod/Textures/halveth/portal-menu-2100.png",
     "nativeBooks": 6,
@@ -20,7 +20,11 @@
     "nativeKnowledgeJournal": "F7",
     "directNativeGameEntry": true,
     "nativeUniverseWindow": "F6",
-    "nativeMouseEntryBar": true,
+    "singleNativeConsoleEntry": true,
+    "nativeInventoryBookAttachment": true,
+    "microphonePerLaunchOptIn": true,
+    "spokenOutput": false,
+    "optionalOwnedCitizens": 2,
     "nativeInventoryCategories": 12,
     "nativeSkillInspection": 27,
     "runtimeCharacterDirection": true,
@@ -42,6 +46,7 @@
       "Scharlachlicht",
       "Morgenrot",
       "Lebendige Welt",
+      "Aurora",
       "Nachtglas",
       "Original"
     ],
@@ -60,17 +65,17 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "1.0.0",
+    "version": "1.0.4",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "c2b89a3",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v1.0.0"
+    "publicCommit": "7cc6b6367e232ad2d3260141cd8d1a6d093e29f8",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v1.0.4"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
-    "count": 71,
+    "count": 80,
     "command": "python -m unittest discover -s tests -p 'test_*.py' -q",
     "platform": "Windows",
-    "python": "3.14.6",
+    "python": "3.14.7",
     "scope": "Temporary source/package/launcher fixtures and local HTTP handler tests; no game launch or model download. Native checks are separately scoped in the native verification summary."
   },
   "hostedCI": {
@@ -88,9 +93,9 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "ISOLATED_NATIVE_PORTAL_RENDER_AND_ONE_CLICK_OBSERVED",
-    "summary": "docs/NATIVE-VERIFICATION-1.0.1.json",
-    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-1.0.0.json"
+    "state": "ISOLATED_NATIVE_CONSOLE_MIC_DECLINE_CITIZENS_AND_VISUAL_MODES_OBSERVED",
+    "summary": "docs/NATIVE-VERIFICATION-1.0.5.json",
+    "lastCompletedSummary": "docs/NATIVE-VERIFICATION-1.0.5.json"
   },
   "limitations": [
     "The public source archive contains installer source and own art, but no Bethesda game assets or engine binaries",
@@ -98,7 +103,9 @@
     "One setup EXE and one visible game entry do not make Morrowind's runtime, resources, model weights, or licensed game assets a single file",
     "The public setup needs a previously configured OpenMW profile; the private local full-engine setup can instead bind the user's licensed Data Files directly",
     "The public setup is unsigned and does not discover every standard Steam, GOG or OpenMW layout automatically",
-    "Free NPC speech still uses an optional separately installed local Ollama service; the game remains playable offline",
+    "Free NPC text dialogue still uses an optional separately installed local Ollama service; the game remains playable offline",
+    "The microphone is closed until current-launch in-game consent; actual physical audio capture and recognition quality have not been user-tested",
+    "Only two opt-in HALVETH-owned citizens receive new autonomous movement; original quest NPC AI is unchanged",
     "Building the setup from source requires .NET 10, Python, Pillow and the verified Python embeddable ZIP; running its self-contained EXE does not require a local compiler",
     "Native gameplay on Linux not tested",
     "Sustained frame rate and manual camera/button paths at every resolution remain unverified in the personal game session",
@@ -107,6 +114,6 @@
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-23T18:14:27Z",
+  "recordedAt": "2026-09-27T19:10:00Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

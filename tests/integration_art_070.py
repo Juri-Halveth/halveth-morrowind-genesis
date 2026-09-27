@@ -35,9 +35,11 @@ return {engineHandlers={onFrame=function()
     local ok,err=pcall(function()
         assert(vfs.fileExists(path),'owned texture not mounted')
         local size=ui.screenSize()
-        assert(size.x>=900 and size.y>=550,'test window too small for art')
+        assert(size.x>=1100 and size.y>=760,'test window too small for art')
         local h=I.HALVETH
         assert(h and h.getArtworkPath,'native F8 art interface missing')
+        if I.HALVETHMicrophone and I.HALVETHMicrophone.isOpen
+            and I.HALVETHMicrophone.isOpen() then I.HALVETHMicrophone.decline() end
         h.open()
         assert(h.isOpen(),'native F8 panel did not open')
         assert(h.getArtworkPath()==path,'native panel selected '..tostring(h.getArtworkPath()))
@@ -62,8 +64,8 @@ def run() -> int:
     cfg = configparser.ConfigParser(interpolation=None)
     cfg.read(profile / 'settings.cfg', encoding='utf-8-sig')
     cfg['Video']['window mode'] = '0'
-    cfg['Video']['resolution x'] = '1280'
-    cfg['Video']['resolution y'] = '720'
+    cfg['Video']['resolution x'] = '1600'
+    cfg['Video']['resolution y'] = '900'
     cfg['Video']['minimize on focus loss'] = 'false'
     settings = io.StringIO()
     cfg.write(settings)
@@ -77,7 +79,7 @@ def run() -> int:
     log = Path(prepared['stdout_log'])
     result = {
         'recordedAt': datetime.now(timezone.utc).isoformat(),
-        'scope': 'Fresh native Morrowind F8 art selection, owned PNG; no personal saves or world-changing actions.',
+        'scope': 'Fresh native Morrowind F8 art selection at 1600x900, owned PNG; no personal saves or world-changing actions.',
         'assetSha256': hashlib.sha256(ART.read_bytes()).hexdigest(),
         'playerScriptSha256': hashlib.sha256((ROOT / 'mod/scripts/halveth/player.lua').read_bytes()).hexdigest(),
         'personalSavesUsed': False,

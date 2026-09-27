@@ -191,8 +191,8 @@ class SourcePackageTests(unittest.TestCase):
         self.assertFalse(any(b'PRIVATE_' in value for value in packaged.values()))
 
     def test_version_and_release_note_describe_owned_additions(self):
-        self.assertEqual(release.VERSION, '1.0.4')
-        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-1.0.4-public-source.zip')
+        self.assertEqual(release.VERSION, '1.0.5')
+        self.assertEqual(release.DEST.name, 'HALVETH-Morrowind-Genesis-1.0.5-public-source.zip')
         note = release.collect_files()['RELEASE-NOTE.txt'].decode('utf-8')
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
