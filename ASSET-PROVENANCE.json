@@ -228,10 +228,23 @@
       "assetId": "reborn-world-tx_ma_crackedearth",
       "bytes": 4717676,
       "sha256": "bc1b2e4de441c1ae3a42b8f1426292f184974aef13bbac86dbab5415e99f3148"
+    },
+    {
+      "path": "mod/Video/new_game.webm",
+      "assetId": "portal-new-game-film-1",
+      "bytes": 456146,
+      "sha256": "3f7d90a706841ee16a9bc596fd433e527d4705c54e2f23f0e8b42260255f91c8"
     }
   ],
   "licenseSelection": "CC0-1.0 to the extent of contributor-owned rights; see ASSET-LICENSE.md and LICENSES/CC0-1.0.txt",
-  "engineTarget": "Existing tapestry and ten terrain texture paths, own native F8 UI images and a Windows installer icon; no ESM/ESP edits",
+  "engineTarget": "Existing tapestry and ten terrain texture paths, native F8 images, owned new-game movie and Windows installer icon; no ESM/ESP edits",
+  "portalIntroVideo": {
+    "assetId": "portal-new-game-film-1",
+    "origin": "Four-second silent portal transition derived solely from the project's own portal-menu-2100.png",
+    "sourceSha256": "e660b5662742f853d077d6a3744dc3bae42bd9747241ed557fb4ff1396b222fd",
+    "renderMethod": "scripts/build_intro.py; FFmpeg VP9 1280x720 at 24 fps, zoom and fades; no Bethesda media",
+    "nativeVerification": "Fresh isolated OpenMW new-game test loaded the movie, origin UI, prison ship and save/reload without a missing-video warning. This does not prove user-visible fullscreen presentation on every GPU."
+  },
   "rebornWorldArtwork": {
     "generator": "Codex built-in imagegen",
     "origin": "Seven new images generated from text briefs without third-party reference images",
@@ -255,6 +268,6 @@
     },
     "sourceMethod": "Generated PNG masters copied byte-for-byte from the built-in imagegen output; Pillow 12.3.0 converted each to uncompressed RGB DDS; decoded RGB pixels match.",
     "usageScope": "Seven Morrowind.esm LTEX texture-path overrides. Together with three earlier Bitter Coast materials, these names account for 217256 of 330752 raw LAND index positions in the installed base ESM snapshot; not a visible area or quality measurement.",
-    "reviewStatus": "Native VFS/exterior verification pending; visual tiling, seams and frame rate not yet personally reviewed."
+    "reviewStatus": "Native VFS/exterior verification passed; visual tiling, seams and frame rate not yet personally reviewed."
   }
 }

@@ -197,7 +197,7 @@ class SourcePackageTests(unittest.TestCase):
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
-        self.assertIn('Only the 26 exact owned art asset paths and the one original shader source path', note)
+        self.assertIn('Only the 27 exact owned art/media asset paths and the one original shader source path', note)
         self.assertIn('portal main menu inside OpenMW', note)
         self.assertIn('six original native books', note)
         self.assertIn('three native spells', note)
@@ -216,7 +216,7 @@ class PublicValidationTests(unittest.TestCase):
     def test_current_public_tree_has_bound_assets_and_licenses(self):
         files=release.collect_files()
         result=release.validate_files(files)
-        self.assertEqual(result['assetCount'],26)
+        self.assertEqual(result['assetCount'],27)
         self.assertNotIn('BUILD-RESULT.json',files)
 
     def test_changed_asset_bytes_fail_provenance_check(self):

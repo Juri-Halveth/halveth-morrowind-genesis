@@ -9,7 +9,7 @@ TARGET = ROOT / "mod/scripts/halveth/content_catalog.lua"
 
 
 def validate(data):
-    if data.get("schema") != 1 or data.get("license") != "MIT":
+    if data.get("schema") != 1 or data.get("license") != "MIT" or data.get("locale") != "de-DE":
         raise ValueError("Unknown content contract")
     books, spells = data["books"], data["spells"]
     if len(books) != 6 or sum(len(b["pages"]) for b in books) != 15 or len(spells) != 3:

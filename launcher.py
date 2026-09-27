@@ -60,7 +60,7 @@ def companion(profile='beauty'):
     log=STATE/'game.stdout.log'
     if existing is None:
         python=Path(sys.executable)
-        process=background([str(python),str(ROOT/'server.py'),'--log',str(log)],'companion.log')
+        process=background([str(python),str(ROOT/'server.py'),'--log',str(log),'--voice'],'companion.log')
         (STATE/'companion.pid').write_text(str(process.pid),encoding='ascii')
         for _ in range(40):
             if get_status():

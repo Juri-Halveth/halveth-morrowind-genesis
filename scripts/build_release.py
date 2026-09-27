@@ -14,7 +14,7 @@ DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # including files placed outside the ordinary .local directory.
 ROOT_FILES={'.gitignore','.gitattributes','README.md','LICENSE','ASSET-LICENSE.md','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md',
             'PUBLIC-STATUS.json','ASSET-PROVENANCE.json',
-            'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','START.cmd'}
+            'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','voice_output.py','START.cmd'}
 SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','installer','.github','LICENSES'}
 EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py',
@@ -52,7 +52,8 @@ OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'assets/RebornWorld/tx_rm_grayrock_01-source.png',
               'mod/Textures/tx_rm_grayrock_01.dds',
               'assets/RebornWorld/tx_ma_crackedearth-source.png',
-              'mod/Textures/tx_ma_crackedearth.dds'}
+              'mod/Textures/tx_ma_crackedearth.dds',
+              'mod/Video/new_game.webm'}
 # The original shader is source text. Keep its path exact: a blanket .omwfx
 # allowance could accidentally package third-party shader downloads.
 OWNED_SHADER='mod/shaders/halveth_atmosphere.omwfx'
@@ -127,9 +128,9 @@ def collect_files():
         'Version 1.0.1 adds an original portal main menu inside OpenMW and adjusts the Scarlet Beauty light defaults to lift dark corners. The menu was checked in an isolated native game session.\n'
         'Version 1.0.2 candidate adds a new-game Pulsar origin, guarded native UI fallbacks and three original Bitter Coast terrain materials (peat, rock and grass). Their aesthetic and edge continuity need direct visual review.\n'
         'Version 1.0.3 candidate adds the optional native Heart Letter scene. A real book reading and recorded NPC conversation unlock only the LOVE healing spell; the scene and reward survive a save/reload.\n'
-        'Version 1.0.4 preview adds seven original terrain materials for roads, volcanic rock, gravel, fertile soil and cracked earth. Ten selected texture paths occur in 217256 of 330752 base-world terrain index positions; this is structural coverage, not rendered-area or visual-quality proof.\n'
+        'Version 1.0.4 preview adds seven original terrain materials for roads, volcanic rock, gravel, fertile soil and cracked earth. Ten selected texture paths occur in 217256 of 330752 base-world terrain index positions; this is structural coverage, not rendered-area or visual-quality proof. Own books and study questions are German; free local NPC replies request German and optional Windows speech uses installed German voices. Native world moments react sparsely to observed outdoor light and storm; an owned four-second portal film fills the OpenMW new-game movie slot.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
-        'Only the 26 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
+        'Only the 27 exact owned art/media asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
         'A source archive is not a standalone installer, hosted CI pass or confirmation that publication succeeded.\n'
     ).encode('utf-8')
@@ -179,7 +180,7 @@ def validate_files(files):
     provenance=json.loads(files['ASSET-PROVENANCE.json'])
     records={record['path']:record for record in provenance['files']}
     if set(records)!=OWNED_ASSETS:
-        raise ValueError('Asset provenance must bind exactly the 26 owned art paths.')
+        raise ValueError('Asset provenance must bind exactly the 27 owned art paths.')
     for name in OWNED_ASSETS:
         raw=files[name]
         if len(raw)!=records[name]['bytes'] or hashlib.sha256(raw).hexdigest()!=records[name]['sha256']:

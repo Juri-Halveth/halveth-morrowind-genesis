@@ -24,9 +24,10 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from graphics_status import graphics_status
 from project_knowledge import ProjectKnowledge, DEFAULT_PATH as PROJECT_KNOWLEDGE_PATH, MAX_QUERY_CHARS
 from character_profile import profile as character_profile
+from voice_output import VoiceOutput
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.8.0'
+VERSION = '1.0.4'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768
@@ -133,7 +134,7 @@ class Store:
 
 
 class Companion:
-    def __init__(self, state_dir, log=None, inbox=None, model=MODEL, project_knowledge_path=None):
+    def __init__(self, state_dir, log=None, inbox=None, model=MODEL, project_knowledge_path=None, voice=False):
         self.state_dir = Path(state_dir)
         self.store = Store(self.state_dir / 'universe.sqlite3')
         self.project_knowledge = ProjectKnowledge(
@@ -141,6 +142,7 @@ class Companion:
         self.log = Path(log) if log else None
         self.inbox = Path(inbox) if inbox else ROOT / 'mod' / 'bridge' / 'inbox.json'
         self.model = model
+        self.voice = VoiceOutput() if voice else None
         self.csrf = secrets.token_urlsafe(32)
         self.lock = threading.RLock()
         self.chat_lock = threading.Lock()
@@ -256,6 +258,8 @@ class Companion:
             self.store.remember(entity_id,'user',message)
             system = (
                 'Du bist ein deutschsprachiger Rollenspielpartner in HALVETH Morrowind Genesis. '
+                'Antworte ausschließlich auf Deutsch, auch wenn ein Buch, NPC-Name oder Lore-Auszug Englisch ist. '
+                'Eigennamen dürfen unverändert bleiben. Übersetze englische Quellen sinngemäß, ohne neue Fakten hinzuzufügen. '
                 'Du sprichst innerhalb von Morrowind in der nativen OpenMW-Lua-Oberfläche mit F8. '
                 'Freie Texte werden vom lokalen Ollama beantwortet, Spielwerkzeuge laufen über diese Mod. '
                 'Du bist kein uneingeschränkter Konsoleninterpreter. '
@@ -404,6 +408,8 @@ class Companion:
                     return
                 self.reply_queue.append({'sessionId':self.session,'reply':result['reply'],
                     'requestId':data.get('requestId'),'speaker':speaker})
+            if self.voice:
+                self.voice.say(speaker, result['reply'])
         except Exception as exc:
             print('Game chat:',type(exc).__name__,str(exc),flush=True)
             with self.lock:
@@ -603,8 +609,9 @@ def main():
     parser.add_argument('--log',type=Path)
     parser.add_argument('--inbox',type=Path)
     parser.add_argument('--model',default=MODEL)
+    parser.add_argument('--voice',action='store_true',help='Read game replies with installed German Windows voices.')
     args=parser.parse_args()
-    app=Companion(args.state_dir,args.log,args.inbox,args.model)
+    app=Companion(args.state_dir,args.log,args.inbox,args.model,voice=args.voice)
     app.start()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     server.app=app
