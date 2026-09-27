@@ -61,6 +61,7 @@ class PatchTests(unittest.TestCase):
         self.assertEqual(json.loads(self.state.read_text())['version'], update.BASE_VERSION)
         self.assertFalse((self.root / 'app/voice_input.py').exists())
 
+    @unittest.skipUnless(os.name == 'nt', 'Windows tasklist guard')
     def test_running_recorded_game_blocks_patch(self):
         pid_path = self.root / 'app/.local/game.pid'
         pid_path.parent.mkdir(parents=True, exist_ok=True)
