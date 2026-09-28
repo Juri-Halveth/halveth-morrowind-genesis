@@ -16,8 +16,9 @@ ROOT_FILES={'.gitignore','.gitattributes','README.md','LICENSE','ASSET-LICENSE.m
             'PUBLIC-STATUS.json','ASSET-PROVENANCE.json',
             'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','dialogue_method.py',
             'voice_output.py','voice_input.py','START.cmd'}
-SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','installer','.github','LICENSES'}
+SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','tools','web','installer','.github','LICENSES'}
 EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
+                  'tools/visual_field/global.lua','tools/visual_field/player.lua','tools/visual_field/actor.lua',
                   'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py',
                   'installer/README.md','installer/openmw-0.51.0-runtime-files.txt',
                   'docs/NATIVE-VERIFICATION-0.4.0.json','docs/NATIVE-VERIFICATION-0.5.0.json',
@@ -60,7 +61,7 @@ OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
 # The original shaders are source text. Keep their paths exact: a blanket .omwfx
 # allowance could accidentally package third-party shader downloads.
 OWNED_SHADER='mod/shaders/halveth_atmosphere.omwfx'
-OWNED_SHADERS={OWNED_SHADER,'mod/shaders/halveth_sculpted.omwfx'}
+OWNED_SHADERS={OWNED_SHADER,'mod/shaders/halveth_sculpted.omwfx','mod/shaders/halveth_storybook.omwfx'}
 EXCLUDED_PARTS={'.local','.git','__pycache__','.pytest_cache','.venv','venv','obj','bin',
                 'node_modules','runtime','profiles','saves','screenshots','captures',
                 'downloads','backups','work','logs','dist'}
@@ -137,7 +138,7 @@ def collect_files():
         'Version 1.0.5 adds one larger native F8 text console with bounded real inventory/book attachment, an explicit per-game microphone consent gate, local German speech-to-text after opt-in, no spoken output, and an Aurora/shadow-light visual mode. Generated citizens are opt-in and original quest NPC AI remains unchanged.\n'
         'Version 1.0.6 restores the ordinary Morrowind character-creation sequence: the forced Pulsar choice and automatic microphone question are retired. A loose scroll in Arrille\'s Tradehouse can reveal F8 and JARVIS through play; /mikrofon requests consent only after a deliberate command. The Scarlet Beauty profile is tuned for a measured Seyda Neen scene. Downloaded visual packs and the private World Reforged overlay are not bundled.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
-        'Only the 27 exact owned art/media asset paths and the two original shader source paths are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
+        'Only the 27 exact owned art/media asset paths and the three original shader source paths are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
         'A source archive is not a standalone installer, hosted CI pass or confirmation that publication succeeded.\n'
     ).encode('utf-8')

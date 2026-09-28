@@ -3,6 +3,7 @@ param(
     [string]$InstallRoot = (Join-Path $env:USERPROFILE 'AppData\Local\HALVETH\Morrowind Genesis'),
     [switch]$DryRun,
     [switch]$Apply,
+    [switch]$Storybook,
     [string]$ExpectedPlanSha256
 )
 Set-StrictMode -Version Latest
@@ -17,6 +18,7 @@ $utf8 = [Text.UTF8Encoding]::new($false)
 # This list is the complete write scope; game data, settings and graphics manifests are excluded.
 $files = @('server.py', 'dialogue_method.py', 'mod/scripts/halveth/player.lua',
     'scripts/graphics_profile.py', 'mod/shaders/halveth_sculpted.omwfx')
+if ($Storybook) { $files += 'mod/shaders/halveth_storybook.omwfx' }
 
 function Hash-Bytes([byte[]]$Raw) {
     $algorithm = [Security.Cryptography.SHA256]::Create()
@@ -137,6 +139,7 @@ $contract = [ordered]@{
     features = [ordered]@{ sculptedVisuals = '1.0.0'; dialogueMethod = '1.0.0' }
     files = $details
 }
+if ($Storybook) { $contract.features['storybookVisuals'] = '1.0.0' }
 $planSha256 = Hash-Bytes ($utf8.GetBytes(($contract | ConvertTo-Json -Depth 12 -Compress)))
 $receipt = [ordered]@{
     schema = $contract.schema
@@ -201,7 +204,7 @@ try {
     if (-not $state.PSObject.Properties['features'] -or $null -eq $state.features) {
         $state | Add-Member -NotePropertyName features -NotePropertyValue ([pscustomobject]@{}) -Force
     }
-    foreach ($feature in @('sculptedVisuals','dialogueMethod')) {
+    foreach ($feature in $contract.features.Keys) {
         $state.features | Add-Member -NotePropertyName $feature -NotePropertyValue ([pscustomobject]@{
             version = '1.0.0'; installedAtUtc = [DateTime]::UtcNow.ToString('o');
             planSha256 = $planSha256; backup = $backup

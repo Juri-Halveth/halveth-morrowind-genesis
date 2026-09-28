@@ -151,6 +151,24 @@ finally { $held.Dispose() }
         self.assertFalse((self.install / "app/.local/patch-backups").exists())
         self.assert_untouched()
 
+    def test_storybook_is_opt_in_and_bound_to_its_own_plan(self) -> None:
+        name = 'mod/shaders/halveth_storybook.omwfx'
+        (self.source / name).write_bytes(b'original storybook shader fixture')
+        ordinary = self.plan()
+        result = self.run_patch('-DryRun', '-Storybook')
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        plan = json.loads(result.stdout)
+        self.assertNotEqual(plan['planSha256'], ordinary['planSha256'])
+        self.assertEqual(len(plan['contract']['files']), 6)
+        refused = self.run_patch('-Apply', '-Storybook', '-ExpectedPlanSha256', ordinary['planSha256'])
+        self.assertNotEqual(refused.returncode, 0)
+        applied = self.run_patch('-Apply', '-Storybook', '-ExpectedPlanSha256', plan['planSha256'])
+        self.assertEqual(applied.returncode, 0, applied.stdout + applied.stderr)
+        self.assertEqual((self.install / 'app' / name).read_bytes(), b'original storybook shader fixture')
+        state = json.loads(self.state_path.read_bytes())
+        self.assertEqual(state['features']['storybookVisuals']['version'], '1.0.0')
+        self.assert_untouched()
+
     def test_changed_source_invalidates_plan(self) -> None:
         plan = self.plan()
         (self.source / FILES[-1]).write_bytes(b"revised shader fixture")
