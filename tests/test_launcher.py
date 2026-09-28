@@ -155,6 +155,63 @@ class DirectEntryTests(unittest.TestCase):
 
 
 class InstalledProfileTests(unittest.TestCase):
+    def test_bundled_engine_and_max_profile_win_over_external_default(self):
+        with tempfile.TemporaryDirectory() as temp:
+            install = Path(temp) / 'private-genesis'
+            app = install / 'app'
+            engine = install / 'engine'
+            max_profile = install / 'profiles' / 'max'
+            app.mkdir(parents=True)
+            engine.mkdir()
+            max_profile.mkdir(parents=True)
+            (engine / ('openmw.exe' if os.name == 'nt' else 'openmw')).write_bytes(b'engine')
+            (max_profile / 'openmw.cfg').write_text('content=Morrowind.esm\n', encoding='utf-8')
+            with patch.object(launcher, 'ROOT', app), \
+                    patch.object(launcher, 'STATE', app / '.local'), \
+                    patch.object(prepare_profile, 'DEFAULT_INSTALL', Path(temp) / 'other-openmw'), \
+                    patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': ''}), \
+                    patch.object(prepare_profile, 'prepare', return_value={}) as prepare:
+                launcher.prepare('beauty')
+            args = prepare.call_args.args[0]
+            self.assertEqual(args.install_root, install.resolve())
+            self.assertEqual(args.source_profile, 'max')
+            self.assertEqual(args.state_dir, app / '.local')
+            self.assertFalse(args.copy_saves)
+
+    def test_explicit_engine_root_wins_even_when_bundle_is_present(self):
+        with tempfile.TemporaryDirectory() as temp:
+            install = Path(temp) / 'private-genesis'
+            app = install / 'app'
+            engine = install / 'engine'
+            max_profile = install / 'profiles' / 'max'
+            app.mkdir(parents=True)
+            engine.mkdir()
+            max_profile.mkdir(parents=True)
+            (engine / ('openmw.exe' if os.name == 'nt' else 'openmw')).write_bytes(b'engine')
+            (max_profile / 'openmw.cfg').write_text('content=Morrowind.esm\n', encoding='utf-8')
+            explicit = Path(temp) / 'explicit-openmw'
+            with patch.object(launcher, 'ROOT', app), \
+                    patch.object(prepare_profile, 'DEFAULT_INSTALL', Path(temp) / 'other-openmw'), \
+                    patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': str(explicit)}), \
+                    patch.object(prepare_profile, 'prepare', return_value={}) as prepare:
+                launcher.prepare('beauty')
+            self.assertEqual(prepare.call_args.args[0].install_root, explicit.resolve())
+
+    def test_owned_mod_without_bundled_engine_uses_external_default(self):
+        with tempfile.TemporaryDirectory() as temp:
+            install = Path(temp) / 'public-owned-mod'
+            app = install / 'app'
+            (install / 'profiles' / 'max').mkdir(parents=True)
+            app.mkdir()
+            (install / 'profiles' / 'max' / 'openmw.cfg').write_text('content=Morrowind.esm\n', encoding='utf-8')
+            external = Path(temp) / 'configured-openmw'
+            with patch.object(launcher, 'ROOT', app), \
+                    patch.object(prepare_profile, 'DEFAULT_INSTALL', external), \
+                    patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': ''}), \
+                    patch.object(prepare_profile, 'prepare', return_value={}) as prepare:
+                launcher.prepare('beauty')
+            self.assertEqual(prepare.call_args.args[0].install_root, external)
+
     def test_direct_play_preparation_never_copies_existing_saves_by_default(self):
         with patch.dict(os.environ, {'HALVETH_MORROWIND_INSTALL_ROOT': ''}), \
                 patch('scripts.prepare_profile.prepare', return_value={}) as prepare:
