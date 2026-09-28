@@ -43,7 +43,7 @@ end
 
 local function button(label,x,y,w,fn)
     return {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-        props={position=util.vector2(x,y),size=util.vector2(w,34),text=label,textSize=18},
+        props={position=util.vector2(x,y),size=util.vector2(w,40),autoSize=false,text=label,textSize=20},
         events={mouseClick=async:callback(fn)}}
 end
 
@@ -70,25 +70,30 @@ local function open()
     priorMode=I.UI.getMode()
     if not priorMode then I.UI.addMode('Interface',{windows={}});addedMode=true end
     local screen=ui.screenSize()
-    local w=math.min(750,screen.x-40)
-    local h=math.min(365,screen.y-40)
+    local w=math.min(900,screen.x-40)
+    local h=math.min(430,screen.y-40)
     local live=state=='starting' or state=='listening'
     local description = live and
         'Mikrofon für diese Sitzung freigegeben. Gesprochenes erscheint als Text in F8.' or
         'Darf HALVETH für diese Spielsitzung das Systemmikrofon lokal nutzen?'
-    local detail='Erkanntes Deutsch wird lokal als Text in .local/microphone mitgeschrieben.\n'
+    local detail='Erkanntes Deutsch wird lokal als Text gespeichert.\n'
+        ..'Pfad: .local/microphone im Spielprofil.\n'
         ..'Es entsteht keine Audiodatei. Keine Cloud-Übertragung.\n'
-        ..'Mit Jarvis oder Halveth angesprochene Fragen können schriftlich beantwortet werden.\n'
-        ..'Ohne Ja bleibt das Mikrofon geschlossen. Bei jedem Spielstart wird neu gefragt.'
+        ..'Fragen an Jarvis oder Halveth erhalten Textantworten.\n'
+        ..'Ohne Ja bleibt das Mikrofon geschlossen.\n'
+        ..'Bei jedem Spielstart wird neu gefragt.'
     local content={
         {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,
-            props={position=util.vector2(24,22),text='HALVETH · MIKROFON',textSize=25}},
+            props={position=util.vector2(24,22),size=util.vector2(w-48,42),autoSize=false,
+                text='HALVETH · MIKROFON',textSize=28}},
         {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-            props={position=util.vector2(24,78),size=util.vector2(w-48,40),text=description,textSize=18}},
+            props={position=util.vector2(24,78),size=util.vector2(w-48,50),autoSize=false,
+                wordWrap=true,text=description,textSize=21}},
         {type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
-            props={position=util.vector2(24,133),size=util.vector2(w-48,145),text=detail,textSize=16}},
-        button(live and '[Mikrofon stoppen]' or '[Ja, lokal mithören]',24,h-62,260,live and decline or accept),
-        button(live and '[Schliessen]' or '[Nein, ohne Mikrofon]',w-280,h-62,250,live and close or decline),
+            props={position=util.vector2(24,140),size=util.vector2(w-48,h-230),autoSize=false,
+                wordWrap=true,text=detail,textSize=19}},
+        button(live and '[Mikrofon stoppen]' or '[Ja, lokal mithören]',24,h-65,280,live and decline or accept),
+        button(live and '[Schliessen]' or '[Nein, ohne Mikrofon]',w-310,h-65,280,live and close or decline),
     }
     panel=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
         props={relativePosition=util.vector2(.5,.5),anchor=util.vector2(.5,.5),size=util.vector2(w,h)},
