@@ -2,7 +2,7 @@
 
 `installer/build_installer.py` baut eine **einzige Setup-EXE**. Ein Klick installiert den nativen HALVETH-Einstieg, die eigene OpenMW-Mod, Bücher, Zauber, UI und den lokalen Gesprächsbegleiter. Die Python-3.14.7-Laufzeit steckt geprüft in der EXE. Nach der Installation ist `HALVETH Morrowind.exe` der sichtbare Spieleinstieg; es startet das echte OpenMW/Morrowind und seinen Begleiter.
 
-Die öffentliche Variante `HALVETH-Morrowind-Genesis-1.0.5-Setup.exe` benötigt eine vorhandene, konfigurierte OpenMW-0.51.0-Installation im HALVETH-Layout (`engine/openmw.exe`, `profiles/max/openmw.cfg`, `profiles/max/settings.cfg`). Die nur lokal erzeugbare Variante `HALVETH-Morrowind-Genesis-1.0.5-Local-Engine-Setup.exe` enthält zusätzlich die vorhandene OpenMW-Engine, deren Standardressourcen und GPLv3-Lizenz. Sie kann entweder ein bestehendes Profil samt Mod-Ladereihenfolge übernehmen oder mit `--game-data` nur den eigenen lizenzierten `Data Files`-Ordner anbinden. Sie wird **nicht veröffentlicht**, bevor die genauen Binärdateien, Abhängigkeiten und die zugehörige Quellbereitstellung vollständig geprüft sind. Beide Varianten nutzen die Morrowind-Daten aus der eigenen lizenzierten Installation; sie kopieren oder verbreiten weder `Morrowind.esm`, Erweiterungen, Spielstände, heruntergeladene Grafikpakete noch Modellgewichte.
+Die öffentliche Variante `HALVETH-Morrowind-Genesis-1.0.6-Setup.exe` benötigt eine vorhandene, konfigurierte OpenMW-0.51.0-Installation im HALVETH-Layout (`engine/openmw.exe`, `profiles/max/openmw.cfg`, `profiles/max/settings.cfg`). Die nur lokal erzeugbare Variante `HALVETH-Morrowind-Genesis-1.0.6-Local-Engine-Setup.exe` enthält zusätzlich die vorhandene OpenMW-Engine, deren Standardressourcen und GPLv3-Lizenz. Sie kann entweder ein bestehendes Profil samt Mod-Ladereihenfolge übernehmen oder mit `--game-data` nur den eigenen lizenzierten `Data Files`-Ordner anbinden. Sie wird **nicht veröffentlicht**, bevor die genauen Binärdateien, Abhängigkeiten und die zugehörige Quellbereitstellung vollständig geprüft sind. Beide Varianten nutzen die Morrowind-Daten aus der eigenen lizenzierten Installation; sie kopieren oder verbreiten weder `Morrowind.esm`, Erweiterungen, Spielstände, heruntergeladene Grafikpakete noch Modellgewichte.
 
 ```powershell
 python installer/build_installer.py
@@ -24,7 +24,16 @@ python scripts/apply_1_0_5.py --installed $genesisInstall
 & (Join-Path $genesisInstall 'HALVETH Morrowind.exe') --check --target $genesisInstall
 ```
 
-Die Aktualisierung ist nur fuer diesen Ausgangsstand vorgesehen; bei fremd geaenderten verwalteten Dateien bricht sie vor dem Schreiben ab. Danach das Spiel neu starten, damit die neue F8-Konsole und die Mikrofonfrage geladen werden. Ein bereits laufender alter Begleiter muss ebenfalls neu starten, damit die Vorlesefunktion abgeschaltet bleibt.
+Die Aktualisierung ist nur fuer diesen historischen Ausgangsstand vorgesehen; bei fremd geaenderten verwalteten Dateien bricht sie vor dem Schreiben ab. Danach das Spiel neu starten, damit die F8-Konsole geladen wird. Der Begleiter muss ebenfalls neu starten, damit die Vorlesefunktion abgeschaltet bleibt.
+
+Fuer die bestehende, manifestgebundene **1.0.5-preview**-Installation ist `scripts/apply_1_0_6.py` der getrennte Vorwaertspatch. Er prueft verwaltete Quelldateien, sichert ersetzte Bytes und das Manifest und laesst Profile, Spielstaende, heruntergeladene Grafikpakete und Bethesda-Daten unangetastet. Das Spiel und der Begleiter muessen vorher beendet sein. Zuerst den Trockenlauf ausfuehren, dann patchen und die installierte EXE pruefen:
+
+```powershell
+$genesisInstall = Join-Path $env:LOCALAPPDATA 'HALVETH\Morrowind Genesis'
+python scripts/apply_1_0_6.py --installed $genesisInstall --dry-run
+python scripts/apply_1_0_6.py --installed $genesisInstall
+& (Join-Path $genesisInstall 'HALVETH Morrowind.exe') --check --target $genesisInstall
+```
 
 ```powershell
 & "<Setup-EXE>" --install --target "<neuer Zielordner>" --engine-root "<vorhandene HALVETH-OpenMW-Installation>" --source-profile "<vorhandenes OpenMW-Profil>" --no-shortcuts

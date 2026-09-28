@@ -1,4 +1,4 @@
-"""Verify the native consent gate in a disposable OpenMW world, declining it.
+"""Verify the native consent gate only opens after a deliberate F8 action.
 
 This never starts the Python companion and never opens an audio device.
 """
@@ -34,16 +34,22 @@ return {engineHandlers={onFrame=function()
         if core.getRealTime()-began<4 then return end
         local mic=assert(I.HALVETHMicrophone,'Native microphone consent interface missing')
         assert(mic.getState()=='undecided','Microphone was enabled without consent')
-        assert(mic.isOpen(),'Consent panel was not visible')
-        assert(I.UI.getMode()=='Interface','In-game startup consent did not open')
+        assert(not mic.isOpen(),'New Game opened unsolicited microphone consent')
+        local initialMode=I.UI.getMode() -- Another story window may be open.
+        I.HALVETH.open()
+        assert(I.HALVETH.isOpen(),'F8 console did not open before mic request')
+        I.HALVETH.close()
+        mic.open()
+        assert(mic.isOpen(),'Deliberate microphone request did not open consent')
+        assert(I.UI.getMode()=='Interface','Native microphone choice has no focus')
         I.HALVETH.open()
         assert(not I.HALVETH.isOpen(),'F8 console covered the consent choice')
         assert(mic.isOpen(),'Consent was displaced by F8 console')
         mic.decline()
         assert(mic.getState()=='declined','No did not persist for this session')
         assert(not mic.isOpen(),'Consent panel remained visible after No')
-        assert(I.UI.getMode()~='Interface','Consent modal left the game blocked')
-        finish(true,'nativePrompt=PASS defaultOff=PASS f8Blocked=PASS decline=PASS modeCleanup=PASS')
+        assert(I.UI.getMode()==initialMode,'Consent modal changed the previous UI mode')
+        finish(true,'noStartupPrompt=PASS defaultOff=PASS deliberatePrompt=PASS f8Blocked=PASS decline=PASS')
     end)
     if not ok then finish(false,tostring(err)) end
     if began and core.getRealTime()-began>15 then finish(false,'Timeout') end
@@ -65,7 +71,7 @@ def run() -> int:
     log = Path(prepared['stdout_log'])
     result = {
         'recordedAt': datetime.now(timezone.utc).isoformat(),
-        'scope': 'Fresh disposable native game: prompt defaults off, No path; no companion, no microphone process, no personal saves.',
+        'scope': 'Fresh disposable native game: no startup prompt, deliberate F8 permission request, No path; no companion, no microphone process, no personal saves.',
         'testedFiles': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                         for name in ('mod/scripts/halveth/microphone.lua', 'mod/halveth.omwscripts')},
         'personalSavesUsed': False,

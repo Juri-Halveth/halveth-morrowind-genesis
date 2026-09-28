@@ -14,7 +14,6 @@ local window,detail,status,searchLayout,mode,addedMode,sortControl,actionControl
 local tab,query,page,selection,order='character','',0,nil,'name'
 local entries,filtered,rowLayouts={}, {}, {}
 local pageSize,lastRefresh=9,0
-local menuBar
 local rebuild,refresh,open
 local tabs={{'character','Figur'},{'inventory','Inventar'},{'magic','Magie'},{'nearby','Begegnungen'}}
 local message='Waehle einen Eintrag. Alle Werte stammen aus deiner laufenden Welt.'
@@ -155,30 +154,6 @@ local function button(text,x,y,w,fn)
         props={position=util.vector2(x,y),size=util.vector2(w,30),text=text,textSize=17},
         events={mouseClick=async:callback(fn)}}
 end
-local function updateMenuBar()
-    local currentMode=I.UI.getMode()
-    local show=(currentMode=='Interface' or currentMode=='Dialogue') and not window
-        and not (I.HALVETH and I.HALVETH.isOpen())
-        and not (I.HALVETHKnowledge and I.HALVETHKnowledge.isOpen())
-        and not (I.HALVETHPaths and I.HALVETHPaths.isOpen())
-        and not (I.HALVETHFieldcraft and I.HALVETHFieldcraft.isOpen())
-        and not (I.HALVETHWorldlife and I.HALVETHWorldlife.isOpen())
-        and not (I.HALVETHHeart and I.HALVETHHeart.isOpen())
-        and not (I.HALVETHPerspective and I.HALVETHPerspective.isOpen())
-        and not (I.HALVETHMicrophone and I.HALVETHMicrophone.isOpen
-            and I.HALVETHMicrophone.isOpen())
-    if show and not menuBar then
-        local barWidth=math.min(420,ui.screenSize().x-24)
-        local launcher=button('[HALVETH · KONSOLE  /  F8]',16,9,barWidth-32,
-            function() I.HALVETH.open() end)
-        launcher.props.textSize=22
-        launcher.props.textColor=util.color.rgb(1,.84,.58)
-        menuBar=ui.create{type=ui.TYPE.Container,template=I.MWUI.templates.boxSolid,layer='Windows',
-            props={relativePosition=util.vector2(.5,0),position=util.vector2(0,8),anchor=util.vector2(.5,0),
-                size=util.vector2(barWidth,49)},
-            content=ui.content{launcher}}
-    elseif not show and menuBar then menuBar:destroy();menuBar=nil end
-end
 open=function(requestedTab)
     if window then close();return end
     if I.HALVETH then I.HALVETH.close() end
@@ -229,8 +204,7 @@ open=function(requestedTab)
     sortControl=button('',138,h-130,left-115,function()if tab=='inventory' then order=order=='name' and 'value' or 'name' end;rebuild()end)
     actionControl=button('',left+40,h-130,w-left-70,perform)
     content[#content+1]=sortControl;content[#content+1]=actionControl
-    content[#content+1]=button('[Wissen / F7]',18,h-37,170,function()close();I.HALVETHKnowledge.open()end)
-    content[#content+1]=button('[Gespraeche / F8]',192,h-37,200,function()close();I.HALVETH.open()end)
+    content[#content+1]=button('[Wissen / F7]',18,h-37,370,function()close();I.HALVETHKnowledge.open()end)
     content[#content+1]=button('[Pfade]',402,h-37,112,function()close();I.HALVETHPaths.open()end)
     content[#content+1]=button('[Sammeln]',520,h-37,115,function()close();I.HALVETHFieldcraft.open()end)
     content[#content+1]=button('[Weltleben]',635,h-37,130,function()close();I.HALVETHWorldlife.open()end)
@@ -249,16 +223,15 @@ local function snapshot()
 end
 return {interfaceName='HALVETHUniverse',
     interface={version=1,open=open,close=close,getState=snapshot,selectTab=selectTab,refresh=rebuild,perform=perform,
-        getLauncherState=function() return {visible=menuBar~=nil,entryCount=menuBar and 1 or 0} end,
+        getLauncherState=function() return {visible=false,entryCount=0} end,
         select=function(id)for _,entry in ipairs(filtered)do if entry.id==id then selection=id;refresh();return true end end;return false end,
         search=function(text)query=C.head(text,160);page=0;if searchLayout then searchLayout.props.text=query end;refresh()end},
-    engineHandlers={onLoad=function()close();if menuBar then menuBar:destroy();menuBar=nil end end,onKeyPress=function(key)
+    engineHandlers={onLoad=close,onKeyPress=function(key)
         if key.code==input.KEY.F6 then open()
         elseif window and key.code==input.KEY.Escape then close()
         elseif window and key.code==input.KEY.PageDown then page=page+1;refresh()
         elseif window and key.code==input.KEY.PageUp then page=math.max(0,page-1);refresh() end
     end,onFrame=function()
         if window and I.UI.getMode()~=mode then close() end
-        updateMenuBar()
         if window and core.getRealTime()-lastRefresh>2 then lastRefresh=core.getRealTime();rebuild() end
     end}}

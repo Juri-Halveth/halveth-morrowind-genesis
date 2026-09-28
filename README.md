@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 1.0.5
+# HALVETH Morrowind Genesis · 1.0.6
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -6,9 +6,13 @@ Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenM
 
 Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** startet dieselbe Welt. Das öffentliche Quellpaket liefert keine Bethesda-Spieldaten.
 
+Bei **Neue Reise** läuft die normale Morrowind-Charaktererstellung mit Name, Geschlecht, Volk, Klasse und Sternzeichen. HALVETH stellt keine zusätzliche Pulsar-, Liebes- oder Persönlichkeitsfrage. In Arrilles Handelshaus in Seyda Neen liegt neben einem vorhandenen Buch eine eigene, optionale Schriftrolle. Wer sie liest, entdeckt einen Hinweis auf die Schreibkonsole und Gespräche; bis dahin erscheinen dazu keine Startfenster oder eingeblendete Bedienleiste.
+
+**Version 1.0.6** nimmt diese Einführung und die nur auf Wunsch geöffnete Mikrofonfrage in den Quellstand auf. Ein isolierter nativer OpenMW-Test fand genau eine Schriftrolle am festen Ort, öffnete sie im normalen Schriftrollenfenster und behielt sie nach Speichern/Laden genau einmal. Der Test sprang per `coc` ins Handelshaus und prüfte daher **nicht** die manuellen Klicks der ursprünglichen Charaktererstellung. Das öffentliche Paket enthält keine Bethesda-Spieldaten und keine lokal installierten Drittanbieter-Grafikpakete; zusätzliche Grafik muss rechtmäßig aus der eigenen Installation eingebunden werden.
+
 Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/README.md): Die öffentliche Kandidatenvariante installiert die eigene Erweiterung und benötigt OpenMW 0.51; die private lokale Variante enthält zusätzlich die bereits vorhandene OpenMW-Engine. Beide binden Morrowind aus deiner lizenzierten Installation ein, lassen Originaldateien und Saves am Quellort und erzeugen einen sichtbaren Spieleinstieg. Die laufende OpenMW-Engine und ihre Ressourcen bleiben nach der Installation technisch separate Dateien; das Setup ist eine einzige EXE, keine behauptete Ein-Datei-Ausgabe des gesamten Bethesda-Spiels.
 
-- **F6** oder **HALVETH · Figur** im normalen Inventar/Dialog: Figur, Inventar, Magie und Begegnungen öffnen.
+- **F6:** Figur, Inventar, Magie und Begegnungen öffnen.
 - **F8:** eine native Textkonsole fuer JARVIS oder das gewaehlte Wesen oeffnen; Inventargegenstand/Buch markieren, einfuegen und dazu fragen. `/hilfe` zeigt die direkten Spielbefehle; `/buerger rufen`, `/buerger status` und `/buerger entfernen` steuern die zwei eigenen optionalen Bewohner.
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
 - **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.
@@ -22,7 +26,7 @@ Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/R
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
 - **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
 - **F2:** die vorhandenen Shaderregler öffnen.
-- **Mikrofon:** erst nach der Frage bei jedem Spielstart mit **Ja** lokal mithoeren; **Nein** laesst das Geraet geschlossen. `/mikrofon` zeigt die Einwilligung erneut. Die Antwort bleibt Text.
+- **Mikrofon:** zunächst aus. Wer im F8-Fenster `/mikrofon` eingibt, erhält die Einwilligungsfrage; erst **Ja** startet lokale Erkennung. **Nein** laesst das Geraet geschlossen. Die Antwort bleibt Text.
 
 Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8b`. Ist der Dienst nicht erreichbar, startet Morrowind weiter offline; Wissen, Bücher und direkte Spielwerkzeuge bleiben verfügbar. Der reguläre Einstieg öffnet weder einen Browser noch ein zusätzliches Konfigurationsfenster.
 
@@ -30,7 +34,7 @@ Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8
 
 Das neue F6-Fenster arbeitet mit den tatsächlichen Daten deiner Spielfigur. Es erklärt alle 27 Fertigkeiten, zeigt Attribute und Zustandswerte, durchsucht das aktuelle Inventar und sortiert Gegenstände wahlweise nach Name oder Wert pro Gewicht. Zwölf Gegenstandskategorien liefern passende Details, etwa Waffenschaden, Zustand, Verzauberung oder die durch Alchemie bereits erkennbaren Zutateneffekte.
 
-Unter **Magie** stehen die aktuell erlernten Zauber mit Kosten, Reichweite, Dauer und Wirkung. **Zauber auswählen** setzt die normale Morrowind-Auswahl; anschließend zauberst du wie gewohnt. Unter **Begegnungen** findest du geladene Figuren im Umkreis von 3.000 Spieleinheiten und kannst gezielt mit einer davon sprechen. Bücher öffnen ihren vorhandenen Buch- oder Schriftrollenleser. Die Schaltflächenleiste im normalen Inventar und Dialog macht F6, F7 und F8 auch per Maus erreichbar.
+Unter **Magie** stehen die aktuell erlernten Zauber mit Kosten, Reichweite, Dauer und Wirkung. **Zauber auswählen** setzt die normale Morrowind-Auswahl; anschließend zauberst du wie gewohnt. Unter **Begegnungen** findest du geladene Figuren im Umkreis von 3.000 Spieleinheiten und kannst gezielt mit einer davon sprechen. Bücher öffnen ihren vorhandenen Buch- oder Schriftrollenleser. Das F6-Fenster bietet weitere Werkzeuge; eine ständig sichtbare F8-Schaltfläche im normalen Inventar oder Dialog erscheint nicht.
 
 NPC-Gespräche erhalten Beruf, Dienste, Zugehörigkeiten, Verletzung und aktuelle Sympathie aus dem Spiel. Ein stabiler eigener Sprechstil ergänzt diese Daten und das getrennte Gesprächsgedächtnis. Die Stilauswahl ist Inszenierung; sie fügt keine erfundene Originalbiografie hinzu. Das lokale Modell kann weiterhin sprachliche und inhaltliche Fehler machen.
 
@@ -74,13 +78,13 @@ Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiter
 
 **Version 1.0.1** ergänzt einen eigenen Portal-Einstieg direkt im nativen OpenMW-Hauptmenü. „Fortsetzen“ lädt den jüngsten vorhandenen Spielstand, „Neue Reise“ startet Morrowind, und „Spielstände / Optionen“ öffnet die vorhandenen OpenMW-Einstellungen. Die neue Grafik ist ein Originalmotiv; die ältere native Schaltflächenansicht und die OpenMW-Versionszeile werden im Einstiegsbild überdeckt. [Prüfumfang und offene Wege](docs/NATIVE-VERIFICATION-1.0.1.json). Scarlet Beauty hellt dunkle Ecken mit angepasstem Innenlicht, SSAO und geringerem Vignettieren auf; persönliche Spielstände bleiben unverändert.
 
-Die **spielbare Vorschau 1.0.3** verbindet den nativen Pulsar-Ursprung mit drei eigenen Bitterküsten-Materialien und dem optionalen [Herzbrief-Pfad](docs/HEART-LETTER.md) direkt in Morrowind. [Reborn-Kartografie](docs/REBORN-CARTOGRAPHY.md) beschreibt die lokale Landzellen-Zuordnung und die noch offene Bildprüfung. Der Herzbrief startet über **F8 → Herzbrief**, verlangt einen gelesenen Text und ein Gespräch mit einer echten Spielfigur und schaltet gezielt den normalen LOVE-Heilzauber frei. Eine bereits auf 1.0.3-preview aktualisierte lokale Installation enthält diesen Pfad; ältere Installationen benötigen das Update und einen Neustart.
+Die **frühere Vorschau 1.0.3** enthielt noch eine verpflichtende Pulsar-Ursprungswahl. Diese Wahl ist im aktuellen Quellstand entfernt; alte Ursprungsdaten in vorhandenen Saves bleiben lediglich als historische Daten erhalten und steuern keine neue Begegnung. Die drei eigenen Bitterküsten-Materialien und der optionale [Herzbrief-Pfad](docs/HEART-LETTER.md) bleiben Teil derselben Morrowind-Welt. [Reborn-Kartografie](docs/REBORN-CARTOGRAPHY.md) beschreibt die lokale Landzellen-Zuordnung. Der Herzbrief verlangt erst nach bewusstem Öffnen einen gelesenen Text und ein Gespräch mit einer echten Spielfigur, bevor er den normalen LOVE-Heilzauber anbietet.
 
 Die **Vorschau 1.0.4** erweitert das Landschaftsmaterial um sieben eigene Texturen fuer Wegerde, Aschekies, roten und grauen Fels, fruchtbare Erde und Trockenland. Sie werden als gewoehnliche OpenMW-Texturpfade innerhalb des bestehenden Morrowind geladen. Mit den drei Bitterkuesten-Materialien treffen die zehn Pfade laut lokalem Basiswelt-Atlas 217.256 von 330.752 rohen Terrain-Indexpositionen. Das ist eine Strukturzaehlung, keine optische Abnahme oder Behauptung, dass bereits jedes Gebaeude und jede Region neugestaltet ist. [Materialliste und offene Bildpruefung](docs/REBORN-CARTOGRAPHY.md).
 
 Die sechs eigenen HALVETH-Buecher mit 15 Lernseiten, Fragen und Antworten sind in dieser Vorschau auf Deutsch. Die freie KI-Unterhaltung fordert auch bei englischen Lore-Quellen deutsche Antworten an. Seit 1.0.5 bleiben Antworten ausschliesslich als Text im nativen OpenMW-Dialog; die fruehere optionale Vorlesefunktion wird nicht mehr gestartet. Das ist keine vollstaendige Uebersetzung aller Bethesda-NPCs: Fuer den englischen Originalinhalt des verwendeten `Morrowind.esm` braucht man rechtmaessig bezogene deutsche Morrowind-Spieldaten. Originale und fremde Uebersetzungen sind nicht Teil dieses freien Pakets.
 
-**Vorschau 1.0.5** baut F8 zu einer groesseren, lesbaren Ein-Fenster-Konsole um. Eingabe und **[ABSCHICKEN]** bleiben der zentrale Weg. Ein echtes Objekt aus dem aktuellen Inventar, einschliesslich eines Buchs, kann mit **[Einfuegen]** an genau eine Frage gebunden werden; maximal 5.000 Byte Buchtext gehen dann als begrenzter Kontext an den lokalen Begleiter. `/heilen`, `/gold 250`, `/startpunkt` und `/zurueck` sind definierte Spielaktionen statt frei ausgefuehrter Konsolenstrings. Die Mikrofonfrage erscheint bei jedem Spielstart neu: Erst **Ja** startet die lokale deutsche Windows-Spracherkennung. Erkannter Text wird in `.local/microphone` protokolliert, keine Audiodatei geschrieben. Nur mit „Jarvis“ oder „Halveth“ angesprochene Fragen rufen das Modell auf; Antworten erscheinen schriftlich. Das **Nein** und der Sitzungswechsel stoppen beziehungsweise verhindern die Geraeteoeffnung. Die optische Ausgabe erhaelt Aurora und ein mildes Schattenlicht; ein nachgewiesener kompletter Umbau aller Regionen oder Originalfiguren ist das nicht. [Pruefumfang der Vorschau](docs/NATIVE-VERIFICATION-1.0.5.json).
+**Vorschau 1.0.5** baut F8 zu einer groesseren, lesbaren Ein-Fenster-Konsole um. Eingabe und **[ABSCHICKEN]** bleiben der zentrale Weg. Ein echtes Objekt aus dem aktuellen Inventar, einschliesslich eines Buchs, kann mit **[Einfuegen]** an genau eine Frage gebunden werden; maximal 5.000 Byte Buchtext gehen dann als begrenzter Kontext an den lokalen Begleiter. `/heilen`, `/gold 250`, `/startpunkt` und `/zurueck` sind definierte Spielaktionen statt frei ausgefuehrter Konsolenstrings. Im aktuellen Quellstand bleibt das Mikrofon beim Start aus; `/mikrofon` öffnet die Frage gezielt im Spiel. Erst **Ja** startet die lokale deutsche Windows-Spracherkennung. Erkannter Text wird in `.local/microphone` protokolliert, keine Audiodatei geschrieben. Nur mit „Jarvis“ oder „Halveth“ angesprochene Fragen rufen das Modell auf; Antworten erscheinen schriftlich. **Nein** und der Sitzungswechsel stoppen beziehungsweise verhindern die Geraeteoeffnung. Die optische Ausgabe erhaelt Aurora und ein mildes Schattenlicht; ein nachgewiesener kompletter Umbau aller Regionen oder Originalfiguren ist das nicht. [Pruefumfang der damaligen Vorschau](docs/NATIVE-VERIFICATION-1.0.5.json).
 
 Beim neuen Spielstart erscheint ein vier Sekunden langer, stummer Portalfilm aus dem eigenen Menuebild. Im Freien reagiert ein neuer nativer Weltmoment sparsam auf tatsaechlich geladenes Licht und Sturmwetter; **F6 → Weltleben → Momente aus/an** schaltet die Einblendungen fuer die aktuelle Sitzung um. Die Figurenerinnerungen und Fraktionsimpulse bleiben die zuvor vorhandene Spielsimulation; diese Momente erfinden keine NPC-Ereignisse und aendern weder Quests noch Spielstaende.
 
@@ -120,7 +124,6 @@ python tests/integration_worldlife.py
 python tests/integration_actor_life.py
 python tests/integration_art_070.py
 python tests/integration_origin.py
-python tests/integration_origin.py --fault-ui
 python tests/integration_terrain.py
 python scripts/survey_universe.py --help
 python scripts/build_release.py

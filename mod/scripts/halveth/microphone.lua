@@ -1,6 +1,6 @@
--- One per-launch, in-game consent gate for local German speech-to-text.
+-- Explicit in-game consent gate for local German speech-to-text.
 -- This Lua module never opens an audio device. The companion does so only
--- after receiving an explicit current-session Yes event.
+-- after receiving an explicit current-session Yes event from /mikrofon.
 local core = require('openmw.core')
 local self = require('openmw.self')
 local ui = require('openmw.ui')
@@ -13,7 +13,7 @@ local markup = require('openmw.markup')
 local C = require('scripts.halveth.common')
 
 local panel, addedMode, priorMode = nil, false, nil
-local state, session, showAt, lastHeartbeat, lastStatusPoll = 'undecided', nil, nil, -100, -100
+local state, session, lastHeartbeat, lastStatusPoll = 'undecided', nil, -100, -100
 
 local function currentSession()
     local id = I.HALVETH and I.HALVETH.getSessionId and I.HALVETH.getSessionId() or nil
@@ -81,7 +81,7 @@ local function open()
         ..'Es entsteht keine Audiodatei. Keine Cloud-Übertragung.\n'
         ..'Fragen an Jarvis oder Halveth erhalten Textantworten.\n'
         ..'Ohne Ja bleibt das Mikrofon geschlossen.\n'
-        ..'Bei jedem Spielstart wird neu gefragt.'
+        ..'Bei jedem Spielstart ist die Freigabe aus; /mikrofon fragt bei Bedarf.'
     local content={
         {type=ui.TYPE.Text,template=I.MWUI.templates.textHeader,
             props={position=util.vector2(24,22),size=util.vector2(w-48,42),autoSize=false,
@@ -108,7 +108,6 @@ local function reset()
     end
     close()
     state, session = 'undecided', nil
-    showAt=core.getRealTime()+2
     lastHeartbeat,lastStatusPoll=-100,-100
 end
 
@@ -137,9 +136,6 @@ local function frame()
     local now=core.getRealTime()
     local id=currentSession()
     if session and id and id~=session then reset() end
-    if state=='undecided' and showAt and now>=showAt and id and not I.UI.getMode() then
-        showAt=nil;open()
-    end
     if state=='starting' or state=='listening' then
         if id and now-lastHeartbeat>=2 then
             C.emit({type='microphone_heartbeat',sessionId=id})

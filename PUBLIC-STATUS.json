@@ -1,7 +1,7 @@
 {
   "schema": "halveth.genesis.public-status/1",
-  "version": "1.0.5-preview",
-  "scope": "Native TES III Morrowind/OpenMW extension: one F8 text console, per-launch microphone consent, original portal, bounded player viewpoint, exact NPC chronicle, optional owned citizens, live atmosphere, knowledge and exploration paths",
+  "version": "1.0.6-preview",
+  "scope": "Native TES III Morrowind/OpenMW extension: vanilla character creation, one optional in-world discovery scroll, one F8 text console, on-demand microphone consent, original portal, bounded player viewpoint, exact NPC chronicle, optional owned citizens, live atmosphere, knowledge and exploration paths",
   "publication": "SOURCE_SNAPSHOT_CONSULT_GITHUB_RELEASES",
   "licenses": {
     "ownCodeAndDocs": "MIT",
@@ -22,7 +22,10 @@
     "nativeUniverseWindow": "F6",
     "singleNativeConsoleEntry": true,
     "nativeInventoryBookAttachment": true,
-    "microphonePerLaunchOptIn": true,
+    "microphonePerLaunchOptIn": false,
+    "microphoneOnDemandOptIn": true,
+    "vanillaCharacterCreation": true,
+    "optionalInWorldConsoleDiscovery": true,
     "spokenOutput": false,
     "optionalOwnedCitizens": 2,
     "nativeInventoryCategories": 12,
@@ -65,14 +68,14 @@
     "live bridge inbox contents and companion-status state"
   ],
   "priorRelease": {
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publication": "PUBLISHED_ON_GITHUB",
-    "publicCommit": "7cc6b6367e232ad2d3260141cd8d1a6d093e29f8",
-    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v1.0.4"
+    "publicCommit": "5eaa85431ff6be360fac1ae38db9ee2cf6d4ac1e",
+    "release": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases/tag/v1.0.5"
   },
   "publicPackageTests": {
     "state": "PASSED_LOCAL_SOURCE_SUITE",
-    "count": 80,
+    "count": 98,
     "command": "python -m unittest discover -s tests -p 'test_*.py' -q",
     "platform": "Windows",
     "python": "3.14.7",
@@ -93,8 +96,8 @@
     "url": "https://github.com/Juri-Halveth/halveth-morrowind-genesis/actions"
   },
   "nativeVerification": {
-    "state": "ISOLATED_NATIVE_CONSOLE_MIC_DECLINE_CITIZENS_AND_VISUAL_MODES_OBSERVED",
-    "summary": "docs/NATIVE-VERIFICATION-1.0.5.json",
+    "state": "ISOLATED_NATIVE_MYSTERY_START_CONSOLE_MIC_DECLINE_CITIZENS_AND_VISUAL_MODES_OBSERVED",
+    "summary": "docs/NATIVE-VERIFICATION-1.0.6.json",
     "lastCompletedSummary": "docs/NATIVE-VERIFICATION-1.0.5.json"
   },
   "limitations": [
@@ -104,7 +107,7 @@
     "The public setup needs a previously configured OpenMW profile; the private local full-engine setup can instead bind the user's licensed Data Files directly",
     "The public setup is unsigned and does not discover every standard Steam, GOG or OpenMW layout automatically",
     "Free NPC text dialogue still uses an optional separately installed local Ollama service; the game remains playable offline",
-    "The microphone is closed until current-launch in-game consent; actual physical audio capture and recognition quality have not been user-tested",
+    "The microphone is closed until deliberate /mikrofon consent in F8; actual physical audio capture and recognition quality have not been user-tested",
     "Only two opt-in HALVETH-owned citizens receive new autonomous movement; original quest NPC AI is unchanged",
     "Building the setup from source requires .NET 10, Python, Pillow and the verified Python embeddable ZIP; running its self-contained EXE does not require a local compiler",
     "Native gameplay on Linux not tested",
@@ -114,6 +117,6 @@
     "No separate Unreal game, online server, crypto transaction or Steam submission",
     "No universal compatibility or frame-rate promise"
   ],
-  "recordedAt": "2026-09-27T19:10:00Z",
+  "recordedAt": "2026-09-28T11:15:00Z",
   "repository": "https://github.com/Juri-Halveth/halveth-morrowind-genesis"
 }

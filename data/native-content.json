@@ -162,7 +162,7 @@
       "isScroll": true,
       "pages": [
         {
-          "text": "Am Rand steht: Sera, dein letzter Bogen antwortet dem Kristall zu schnell. Lass einen Atemzug zwischen der zweiten Marke und dem Schlussstrich. Heute Nacht ging ich so durch die blauen Beete; die schlafenden Kristalle sangen weiter. Die Stille gehört ins Muster. – ein eiliger Stift im Regen",
+          "text": "Am Rand steht: Sera, dein letzter Bogen antwortet dem Kristall zu schnell. Lass einen Atemzug zwischen der zweiten Marke und dem Schlussstrich. Heute Nacht ging ich so durch die blauen Beete; die schlafenden Kristalle sangen weiter. Die Stille gehört ins Muster. Auf der Rückseite sind acht schmale Kerben. Wer die achte Taste F8 berührt, findet eine Schreibfläche für Fragen an die Welt. – ein eiliger Stift im Regen",
           "prompt": "Was vollendet das Muster des Stillen Schritts?",
           "answers": [
             "Ein lauter Schlussstrich",
@@ -172,7 +172,7 @@
           "correct": 3
         },
         {
-          "text": "Eine weitere Notiz um eine Motte: Richte den hellen Rand des Leuchtfeuers auf den Weg, nicht in die Augen der Reisenden. Eine Motte folgt einem sanften Rand besser als blendendem Licht. Unsere Flamme soll sagen: Am Feuer ist noch Platz.",
+          "text": "Eine weitere Notiz um eine Motte: Richte den hellen Rand des Leuchtfeuers auf den Weg, nicht in die Augen der Reisenden. Eine Motte folgt einem sanften Rand besser als blendendem Licht. Unsere Flamme soll sagen: Am Feuer ist noch Platz. Unter dem Flügel steht in kleiner Schrift: Schreibe /hilfe in das achte Fenster, um die Zeichen zu deuten. Frage JARVIS nach einem Buch oder wähle WESEN für eine Figur in deiner Nähe. Eine Antwort ist erst eine Tat, wenn die Welt sie wirklich vollzogen hat.",
           "prompt": "Was bedeutet das Leuchtfeuer hier?",
           "answers": [
             "Eine Einladung zur Rückkehr",

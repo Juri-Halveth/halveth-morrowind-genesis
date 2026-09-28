@@ -29,8 +29,9 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
 
     Schema 1: {schemaVersion: 1, dataDirectories: [path, ...], shaders: [stem, ...]}.
     shaders is an ordered complete chain; omission uses built-in bloomlinear.
-    Optional visualPlugins entries bind a basename and SHA-256. Only fully
-    validated TES3 + BODY record files may add a visual content entry.
+    Optional visualPlugins entries bind a basename and SHA-256. Validated
+    BODY and STAT visual records may add content. overrideDataDirectories
+    selects explicit members of dataDirectories that load after the app mod.
     """
     candidates = [Path(explicit).expanduser()] if explicit else [
         state / "graphics" / "install.json", project / ".local" / "graphics" / "install.json",
@@ -55,6 +56,18 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
             raise FileNotFoundError(f"Graphics data directory is unavailable: {candidate}")
         if candidate not in directories:
             directories.append(candidate)
+    override_values = data.get("overrideDataDirectories", [])
+    if not isinstance(override_values, list) or len(override_values) > 128:
+        raise ValueError("overrideDataDirectories must be a list of registered directories.")
+    overrides = []
+    for value in override_values:
+        if not isinstance(value, str) or not value.strip() or any(c in value for c in "\r\n\x00"):
+            raise ValueError("Invalid override data directory.")
+        candidate = Path(value).expanduser()
+        candidate = (candidate if candidate.is_absolute() else project / candidate).resolve()
+        if candidate not in directories or candidate in overrides:
+            raise ValueError("Each override directory must occur once and be in dataDirectories.")
+        overrides.append(candidate)
     shaders = data.get("shaders", ["bloomlinear"])
     if not isinstance(shaders, list) or len(shaders) > 32 or any(
         not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 _().-]{0,95}", name)
@@ -65,7 +78,7 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
         raise ValueError("Graphics shader chain contains duplicates.")
     plugins = data.get("visualPlugins", [])
     if not isinstance(plugins, list) or len(plugins) > 32:
-        raise ValueError("visualPlugins must be a list of at most 32 BODY-only plugins.")
+        raise ValueError("visualPlugins must be a list of at most 32 visual plugins.")
     seen = set()
     for plugin in plugins:
         if (not isinstance(plugin, dict) or not isinstance(plugin.get("file"), str)
@@ -78,11 +91,11 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
             raise ValueError("visualPlugins contains duplicate filenames.")
         seen.add(key)
     return {"path": str(path) if path else None, "sha256": hashlib.sha256(path.read_bytes()).hexdigest() if path else None,
-            "directories": directories, "shaders": shaders, "visual_plugins": plugins}
+            "directories": directories, "override_directories": overrides, "shaders": shaders, "visual_plugins": plugins}
 
 
 def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
-    """Walk every TES3 record/subrecord; the only payload record type is BODY."""
+    """Walk all bytes; BODY plus STAT name/model overrides only, no gameplay records."""
     limit = 16 * 1024 * 1024
     with path.open("rb") as source:
         raw = source.read(limit + 1)
@@ -98,13 +111,14 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
         if len(raw) - offset < 16:
             raise ValueError(f"Truncated TES3 record header: {path.name}")
         kind, size, _unknown, _flags = struct.unpack_from("<4sIII", raw, offset)
-        expected_kind = b"TES3" if offset == 0 else b"BODY"
-        if kind != expected_kind:
+        allowed_kinds = (b"TES3",) if offset == 0 else (b"BODY", b"STAT")
+        if kind not in allowed_kinds:
             raise ValueError(f"Visual plugin contains a non-visual record {kind!r}: {path.name}")
         end = offset + 16 + size
         if end > len(raw):
             raise ValueError(f"TES3 record exceeds file bounds: {path.name}")
         sub = offset + 16
+        static_fields = set()
         while sub < end:
             if end - sub < 8:
                 raise ValueError(f"Truncated TES3 subrecord header: {path.name}")
@@ -112,18 +126,30 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
             sub_end = sub + 8 + sub_size
             if sub_end > end or not re.fullmatch(rb"[A-Z0-9_]{4}", tag):
                 raise ValueError(f"Invalid TES3 subrecord bounds/tag: {path.name}")
+            if kind == b"STAT":
+                if tag not in (b"NAME", b"MODL") or tag in static_fields or sub_size < 2:
+                    raise ValueError("STAT overrides require exactly a name and model path.")
+                value = raw[sub + 8:sub_end]
+                if not value.endswith(b"\0") or b"\0" in value[:-1]:
+                    raise ValueError("Invalid STAT string encoding.")
+                if tag == b"MODL" and (b".." in value or b":" in value or value[:1] in (b"/", b"\\")):
+                    raise ValueError("STAT model must be a relative VFS path.")
+                static_fields.add(tag)
             if kind == b"TES3" and tag == b"HEDR":
                 if header_count is not None or sub_size != 300:
                     raise ValueError(f"Visual plugin needs exactly one 300-byte HEDR: {path.name}")
                 header_count = struct.unpack_from("<I", raw, sub + 8 + 296)[0]
             sub = sub_end
-        records[kind.decode("ascii")] += 1
+        if kind == b"STAT" and static_fields != {b"NAME", b"MODL"}:
+            raise ValueError("Incomplete STAT visual override.")
+        records[kind.decode("ascii")] = records.get(kind.decode("ascii"), 0) + 1
         offset = end
-    if records["TES3"] != 1 or not records["BODY"] or header_count != records["BODY"]:
-        raise ValueError(f"Visual plugin HEDR count does not match its BODY records: {path.name}")
+    visual_count = records["BODY"] + records.get("STAT", 0)
+    if records["TES3"] != 1 or not visual_count or header_count != visual_count:
+        raise ValueError(f"Visual plugin HEDR count does not match its visual records: {path.name}")
     return {"file": path.name, "path": str(path), "sha256": actual, "bytes": len(raw),
             "recordCounts": records, "headerRecordCount": header_count,
-            "validation": "Full file walked; TES3 header and BODY records only; SHA-256 matched."}
+            "validation": "Full file walked; TES3 header, BODY and name/model-only STAT records; SHA-256 matched."}
 
 
 def resolve_visual_plugins(graphics_directories: list[Path], plugins: list[dict], later_directories: list[Path] = ()) -> list[dict]:

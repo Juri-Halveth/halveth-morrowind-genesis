@@ -1,0 +1,24 @@
+{
+  "schema": "halveth.native-verification/1",
+  "version": "1.0.6-preview",
+  "date": "2026-09-28",
+  "target": "Existing TES III Morrowind through OpenMW 0.51.0",
+  "observed": [
+    "A disposable native new-game run reached Arrille's Tradehouse without any HALVETH origin modal. One loose discovery scroll was present at a fixed shop position, opened in the normal Morrowind book reader, and remained single after an actual isolated save and reload. The test used coc and did not manually complete vanilla character creation.",
+    "A separate disposable native run had no microphone prompt on startup and left the microphone off. The deliberate F8 /mikrofon route opened a consent choice; declining it did not start a microphone process.",
+    "The installed Scarlet Beauty profile has World Reforged active at 2560x1440 with five shaders, 49152 view distance and 2048 shadow maps. Two 25-second native free-world Seyda Neen runs returned 28.69 and 34.74 callbacks per second without Lua, shader or load errors. This is scene-bound, not a whole-game frame-rate guarantee."
+  ],
+  "privateEvidence": [
+    ".local/origin-integration/20260928T110601Z-09a4d4a4/result.json",
+    ".local/microphone-integration/20260928T105754Z-54b95e42/result.json",
+    "Installed local graphics profile, process logs and same-scene screenshots in the private Genesis graphics comparison workspace"
+  ],
+  "notVerified": [
+    "The vanilla name, race, class and birthsign choices were not physically clicked through in this automated run.",
+    "The user's personal save, every resolution, every quest, every original NPC and all world cells were not exercised.",
+    "Actual physical microphone capture and speech-recognition quality after Yes were not tested.",
+    "The full 2k and Vurt texture archives were not installed or compared in this game; no third-party asset is included in this release.",
+    "Source commit, installed-app patch, setup build, GitHub checks and publication are separate later states and require their own receipts."
+  ],
+  "evidenceScope": "Local isolated native OpenMW sessions and installed graphics profile checks; private saves, logs, screenshots and third-party visual files are excluded from the public package"
+}

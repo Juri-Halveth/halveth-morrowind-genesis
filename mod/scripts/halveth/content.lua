@@ -3,9 +3,11 @@
 local core = require('openmw.core')
 local world = require('openmw.world')
 local types = require('openmw.types')
+local util = require('openmw.util')
 local Catalog = require('scripts.halveth.content_catalog')
 
 local bookIds, spellIds, pending = {}, {}, {}
+local discoveryPlayer, discoveryAttempted, discoveryPlaced = nil, false, false
 
 local function escape(text)
     return text:gsub('&', '&amp;'):gsub('<', '&lt;'):gsub('>', '&gt;')
@@ -168,6 +170,32 @@ local function request(data)
 end
 
 local function update()
+    -- A single loose clue sits by the existing book shelf in Arrille's shop.
+    -- Reaching Seyda Neen does not open a panel or grant a starting spell.
+    local player = discoveryPlayer
+    if player and player:isValid() and player.cell
+        and player.cell.name == "Seyda Neen, Arrille's Tradehouse"
+        and not discoveryAttempted then
+        discoveryAttempted = true
+        local object
+        local ok, err = pcall(function()
+            local clue = Catalog.books[5]
+            assert(clue and clue.key == 'quiet-scribble', 'Discovery book identity changed')
+            local record = ensureBook(clue)
+            object = world.createObject(record.id, 1)
+            -- Beside vanilla "Lives of the Saints" (51,-20,189), observed in
+            -- this cell. Its address does not depend on the player's position.
+            object:teleport(player.cell, util.vector3(88, -20, 190))
+        end)
+        if ok then
+            discoveryPlaced = true
+            print('HALVETH_DISCOVERY_BOOK_PLACED '..tostring(object.recordId))
+        else
+            -- Retry only if no object was created; a second copy would be worse.
+            if not object then discoveryAttempted = false end
+            print('HALVETH_DISCOVERY_BOOK_ERROR '..tostring(err))
+        end
+    end
     for id, item in pairs(pending) do
         item.frames = item.frames + 1
         if item.frames >= 5 then
@@ -205,13 +233,21 @@ end
 return {
     engineHandlers = {
         onUpdate = update,
-        onSave = function() return {version = 1, bookIds = bookIds, spellIds = spellIds} end,
+        onSave = function() return {version = 2, bookIds = bookIds, spellIds = spellIds,
+            discoveryAttempted = discoveryAttempted, discoveryPlaced = discoveryPlaced} end,
         onLoad = function(data)
             pending = {}
             bookIds = data and type(data.bookIds) == 'table' and data.bookIds or {}
             spellIds = data and type(data.spellIds) == 'table' and data.spellIds or {}
+            discoveryPlayer = nil
+            discoveryAttempted = type(data)=='table' and data.version==2 and data.discoveryAttempted==true or false
+            discoveryPlaced = type(data)=='table' and data.version==2 and data.discoveryPlaced==true or false
         end,
-        onNewGame = function() bookIds = {}; spellIds = {}; pending = {} end,
+        onNewGame = function()
+            bookIds = {}; spellIds = {}; pending = {}
+            discoveryPlayer = nil; discoveryAttempted = false; discoveryPlaced = false
+        end,
+        onPlayerAdded = function(player) discoveryPlayer = player end,
     },
     eventHandlers = {HALVETH_ContentRequest = request},
 }

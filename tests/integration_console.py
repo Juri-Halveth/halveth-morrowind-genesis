@@ -42,13 +42,13 @@ return {engineHandlers={onFrame=function()
                 {player=self.object,request='library',requestId='console-books'})
         elseif phase=='launcher' and now-phaseAt>.4 then
             local launcher=I.HALVETHUniverse.getLauncherState()
-            assert(launcher.visible and launcher.entryCount==1,'single native launcher did not appear')
+            assert(not launcher.visible and launcher.entryCount==0,'intro-spoiling launcher appeared')
             I.HALVETH.open()
             assert(I.HALVETH.isOpen(),'native F8 window did not open')
             phase,phaseAt='console',now
         elseif phase=='console' and now-phaseAt>.4 then
             local launcher=I.HALVETHUniverse.getLauncherState()
-            assert(not launcher.visible,'launcher remained over F8')
+            assert(not launcher.visible,'launcher appeared over F8')
             local console=I.HALVETH
             assert(console.attachItem(bookId),'could not insert owned inventory book')
             local state=console.getConsoleState()
@@ -104,7 +104,7 @@ end},eventHandlers={
                 I.HALVETH.close()
                 assert(not I.HALVETH.isOpen(),'F8 window stayed open')
                 I.UI.removeMode('Interface')
-                finish(true,'one launcher -> F8 book context -> typed citizen spawn/dismiss/status -> close')
+                finish(true,'hidden launcher -> F8 book context -> typed citizen spawn/dismiss/status -> close')
             end
         end)
         if not ok then finish(false,tostring(err)) end
@@ -149,7 +149,7 @@ def run() -> int:
             exit_code = 'TIMEOUT'
     lines = log.read_text(encoding='utf-8', errors='replace').splitlines()
     result = {
-        'scope': 'Fresh isolated OpenMW at 1280x720: one native F8 launcher, real book context, typed citizen command routing, no personal saves or model request required.',
+        'scope': 'Fresh isolated OpenMW at 1280x720: no automatic F8 launcher; opening the native console gives real book context and typed citizen commands. No personal saves or model request required.',
         'exitCode': exit_code,
         'errors': [line for line in lines if ' E]' in line or 'Lua error' in line],
         'markers': [line for line in lines if 'HALVETH_CONSOLE_' in line],

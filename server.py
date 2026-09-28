@@ -27,7 +27,7 @@ from character_profile import profile as character_profile
 from voice_input import VoiceInput
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768
@@ -275,7 +275,6 @@ class Companion:
                 'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
                 'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
                 'spiel.viewpoint ist eine Momentaufnahme der Kameraprojektion, keine gepruefte Sichtlinie oder NPC-Erinnerung. '
-                'spiel.origin ist eine vom Spieler gewaehlte neue HALVETH-Ursprungsspur. Sie belegt weder eine bereits erschienene Gegenfigur noch eine Beziehung oder originale Morrowind-Lore. '
                 'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '
