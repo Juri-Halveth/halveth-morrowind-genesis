@@ -169,7 +169,7 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
     settings = {
         "Video": {"resolution x": "2560", "resolution y": "1440", "antialiasing": "0" if shader_aa else "4",
                   "framerate limit": "120", "vsync mode": "1"},
-        "Camera": {"viewing distance": "131072" if cinematic else "81920", "reverse z": "true"},
+        "Camera": {"viewing distance": "131072" if cinematic else "49152", "reverse z": "true"},
         "General": {"anisotropy": "16", "texture mipmap": "linear", "texture mag filter": "linear", "texture min filter": "linear"},
         "Terrain": {"distant terrain": "true", "object paging": "true", "object paging active grid": "true",
                     "vertex lod mod": "1" if cinematic else "0", "composite map resolution": "2048" if cinematic else "1024"},
