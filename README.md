@@ -1,4 +1,4 @@
-# HALVETH Morrowind Genesis · 1.0.0
+# HALVETH Morrowind Genesis · 1.0.6
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
@@ -6,21 +6,28 @@ Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenM
 
 Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** startet dieselbe Welt. Das öffentliche Quellpaket liefert keine Bethesda-Spieldaten.
 
+Bei **Neue Reise** läuft die normale Morrowind-Charaktererstellung mit Name, Geschlecht, Volk, Klasse und Sternzeichen. HALVETH stellt keine zusätzliche Pulsar-, Liebes- oder Persönlichkeitsfrage. In Arrilles Handelshaus in Seyda Neen liegt neben einem vorhandenen Buch eine eigene, optionale Schriftrolle. Wer sie liest, entdeckt einen Hinweis auf die Schreibkonsole und Gespräche; bis dahin erscheinen dazu keine Startfenster oder eingeblendete Bedienleiste.
+
+**Version 1.0.6** nimmt diese Einführung und die nur auf Wunsch geöffnete Mikrofonfrage in den Quellstand auf. Ein isolierter nativer OpenMW-Test fand genau eine Schriftrolle am festen Ort, öffnete sie im normalen Schriftrollenfenster und behielt sie nach Speichern/Laden genau einmal. Der Test sprang per `coc` ins Handelshaus und prüfte daher **nicht** die manuellen Klicks der ursprünglichen Charaktererstellung. Das öffentliche Paket enthält keine Bethesda-Spieldaten und keine lokal installierten Drittanbieter-Grafikpakete; zusätzliche Grafik muss rechtmäßig aus der eigenen Installation eingebunden werden.
+
 Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/README.md): Die öffentliche Kandidatenvariante installiert die eigene Erweiterung und benötigt OpenMW 0.51; die private lokale Variante enthält zusätzlich die bereits vorhandene OpenMW-Engine. Beide binden Morrowind aus deiner lizenzierten Installation ein, lassen Originaldateien und Saves am Quellort und erzeugen einen sichtbaren Spieleinstieg. Die laufende OpenMW-Engine und ihre Ressourcen bleiben nach der Installation technisch separate Dateien; das Setup ist eine einzige EXE, keine behauptete Ein-Datei-Ausgabe des gesamten Bethesda-Spiels.
 
-- **F6** oder **HALVETH · Figur** im normalen Inventar/Dialog: Figur, Inventar, Magie und Begegnungen öffnen.
-- **F8:** mit JARVIS oder dem gewählten NPC sprechen; Heilen, +250 Gold, Startpunkt und Zurück nutzen.
+- **F6:** Figur, Inventar, Magie und Begegnungen öffnen.
+- **F8:** eine native Textkonsole fuer JARVIS oder das gewaehlte Wesen oeffnen; Inventargegenstand/Buch markieren, einfuegen und dazu fragen. `/hilfe` zeigt die direkten Spielbefehle; `/buerger rufen`, `/buerger status` und `/buerger entfernen` steuern die zwei eigenen optionalen Bewohner.
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
+- **Leuchtende Orte:** Bei vorhandener lokaler LUCINET-Reforged-Grafik einen Kristall oder Baum ansehen und in F8 `/resonanz` schreiben. `/resonanz antworten` gibt einen Gruß zurück; ein Wiedersehen an einem späteren Spieltag vertieft die Begegnung. Kurze Lichtkreise erscheinen direkt am Ort, Erinnerungen gehören zur einzelnen Pflanze und zum Spielstand. [Spielregel und Voraussetzungen](docs/WORLD-RESONANCE.md).
 - **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.
 - **Sammeln** in der nativen Menüleiste öffnet den Sammelatlas: lose Zutaten in der geladenen Morrowind-Welt finden, ihren Ort notieren und ein Ziel im Spielbild verfolgen.
 - **Weltleben** in der nativen Menüleiste: beobachtete Figuren und regionale Fraktionsimpulse im Spiel verfolgen.
+- **Buerger + / -** im F6-Weltlebenfenster: zwei eigene Bewohner draussen rufen oder exakt diese Instanzen entfernen; ihre Wander-AI und seltenen Textzeilen sind ein optionaler Spielzusatz.
 - **Sprechen** im Weltleben-Fenster: eine noch nahe beobachtete Figur unmittelbar im nativen Gesprächsfenster ansprechen.
-- **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Morgenrot, Lebendige Welt, Nachtglas und Original umschalten.
+- **Licht** in der nativen Menüleiste: den eigenen HALVETH-Filter zwischen Scharlachlicht, Morgenrot, Lebendige Welt, Aurora, Nachtglas und Original umschalten.
 - **Sicht** im normalen Inventar- oder Dialogmenü: zwischen Ich-Sicht, Außen-Sicht und freiem Blick wechseln; Kamera drehen, Abstand ändern und zur vorherigen Ansicht zurückkehren.
 - **Bücher / B:** sechs eigene Bücher zum Inventar hinzufügen. Öffne sie im normalen Buch- oder Schriftrollenfenster.
 - **LOVE / SPARK / AEGIS / M:** drei Zauber lernen. Auswählen und mit den normalen Morrowind-Zaubertasten einsetzen.
 - **Studieren / S:** eine gelesene Notiz merken. Ein Alchemietext unterstützt die nächste erfolgreiche Trankpraxis einmalig um 5–10 Prozent.
 - **F2:** die vorhandenen Shaderregler öffnen.
+- **Mikrofon:** zunächst aus. Wer im F8-Fenster `/mikrofon` eingibt, erhält die Einwilligungsfrage; erst **Ja** startet lokale Erkennung. **Nein** laesst das Geraet geschlossen. Die Antwort bleibt Text.
 
 Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8b`. Ist der Dienst nicht erreichbar, startet Morrowind weiter offline; Wissen, Bücher und direkte Spielwerkzeuge bleiben verfügbar. Der reguläre Einstieg öffnet weder einen Browser noch ein zusätzliches Konfigurationsfenster.
 
@@ -28,7 +35,7 @@ Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8
 
 Das neue F6-Fenster arbeitet mit den tatsächlichen Daten deiner Spielfigur. Es erklärt alle 27 Fertigkeiten, zeigt Attribute und Zustandswerte, durchsucht das aktuelle Inventar und sortiert Gegenstände wahlweise nach Name oder Wert pro Gewicht. Zwölf Gegenstandskategorien liefern passende Details, etwa Waffenschaden, Zustand, Verzauberung oder die durch Alchemie bereits erkennbaren Zutateneffekte.
 
-Unter **Magie** stehen die aktuell erlernten Zauber mit Kosten, Reichweite, Dauer und Wirkung. **Zauber auswählen** setzt die normale Morrowind-Auswahl; anschließend zauberst du wie gewohnt. Unter **Begegnungen** findest du geladene Figuren im Umkreis von 3.000 Spieleinheiten und kannst gezielt mit einer davon sprechen. Bücher öffnen ihren vorhandenen Buch- oder Schriftrollenleser. Die Schaltflächenleiste im normalen Inventar und Dialog macht F6, F7 und F8 auch per Maus erreichbar.
+Unter **Magie** stehen die aktuell erlernten Zauber mit Kosten, Reichweite, Dauer und Wirkung. **Zauber auswählen** setzt die normale Morrowind-Auswahl; anschließend zauberst du wie gewohnt. Unter **Begegnungen** findest du geladene Figuren im Umkreis von 3.000 Spieleinheiten und kannst gezielt mit einer davon sprechen. Bücher öffnen ihren vorhandenen Buch- oder Schriftrollenleser. Das F6-Fenster bietet weitere Werkzeuge; eine ständig sichtbare F8-Schaltfläche im normalen Inventar oder Dialog erscheint nicht.
 
 NPC-Gespräche erhalten Beruf, Dienste, Zugehörigkeiten, Verletzung und aktuelle Sympathie aus dem Spiel. Ein stabiler eigener Sprechstil ergänzt diese Daten und das getrennte Gesprächsgedächtnis. Die Stilauswahl ist Inszenierung; sie fügt keine erfundene Originalbiografie hinzu. Das lokale Modell kann weiterhin sprachliche und inhaltliche Fehler machen.
 
@@ -62,6 +69,8 @@ Version 0.8 führt eine **native Weltleben-Chronik** ein. Sie merkt sich tatsäc
 
 Mit **Rufen** kann draußen ein eigener HALVETH-Wanderer entstehen. Er bewegt sich mit einem nativen OpenMW-Wanderpaket und kann pausiert, fortgesetzt oder gezielt entfernt werden. Die Original-NPCs bleiben unverändert. [Spielregel und Grenzen](docs/WORLDLIFE-0.8.md).
 
+**Version 1.0.5** kann zusaetzlich zwei eigene Bewohner rufen. Ihre Wiederholungs-Wanderpakete, kurzen deutschen Zeilen und exakte Entfernung einschliesslich Save/Reload sind in einer isolierten OpenMW-Zelle geprueft. Diese Erweiterung ersetzt keine Original-NPC-Pakete und simuliert keine ungesehenen Leben ausserhalb geladener Zellen. [Spielregel, Testumfang und Grenzen](docs/CITIZENS-OPENMW.md).
+
 Version 0.8.1 verbindet die Chronik direkt mit dem Gespräch: Figur auswählen, **Sprechen** anklicken, Unterhaltung beginnen. Ist die Figur nicht mehr in der geladenen Umgebung, bleibt das Weltleben-Fenster offen und meldet dies. Die sieben Aktionsknöpfe passen sich der Fensterbreite an. Der Weg wurde mit Arrille in einer isolierten OpenMW-Sitzung einschließlich Speichern/Laden geprüft.
 
 Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiterhin deiner Figur in derselben Morrowind-Welt; im Sicht-Fenster schaltest du Ich-Sicht, Außen-Sicht oder freien Blick um und drehst oder zoomst die Kamera. Das Fenster zeigt bis zu sechs geladene Figuren, deren Position in den aktuellen Bildausschnitt projiziert wird. Dieser begrenzte Blickkontext erreicht auch den lokalen Gesprächsbegleiter. Eine Projektion prüft weder Sichtlinien noch die Gedanken anderer Figuren. [Bedienung, Quellen und Grenzen](docs/PLAYER-PERSPECTIVE.md).
@@ -69,6 +78,18 @@ Version 0.9 ergänzt eine **native Spielerperspektive**. Die Kamera folgt weiter
 **Version 1.0** ist die erste fest gebundene Ausgabe dieser OpenMW-Erweiterung. Die Weltleben-Erinnerung wird nur der tatsächlich angesprochenen NPC-Instanz zugeordnet; eine zuvor im Chronikfenster markierte Figur wird nicht in ein anderes Gespräch übernommen. Ein eigener Wanderer kann nach einem Zellwechsel gezielt zum Entfernen vorgemerkt werden, ohne die Figur dauerhaft zu blockieren. [Native Prüfungen und Grenzen](docs/NATIVE-VERIFICATION-1.0.0.json). Eine vorhandene OpenMW-0.51-Installation und lizenzierte Morrowind-Daten bleiben für den öffentlichen Installer erforderlich.
 
 **Version 1.0.1** ergänzt einen eigenen Portal-Einstieg direkt im nativen OpenMW-Hauptmenü. „Fortsetzen“ lädt den jüngsten vorhandenen Spielstand, „Neue Reise“ startet Morrowind, und „Spielstände / Optionen“ öffnet die vorhandenen OpenMW-Einstellungen. Die neue Grafik ist ein Originalmotiv; die ältere native Schaltflächenansicht und die OpenMW-Versionszeile werden im Einstiegsbild überdeckt. [Prüfumfang und offene Wege](docs/NATIVE-VERIFICATION-1.0.1.json). Scarlet Beauty hellt dunkle Ecken mit angepasstem Innenlicht, SSAO und geringerem Vignettieren auf; persönliche Spielstände bleiben unverändert.
+
+Die **frühere Vorschau 1.0.3** enthielt noch eine verpflichtende Pulsar-Ursprungswahl. Diese Wahl ist im aktuellen Quellstand entfernt; alte Ursprungsdaten in vorhandenen Saves bleiben lediglich als historische Daten erhalten und steuern keine neue Begegnung. Die drei eigenen Bitterküsten-Materialien und der optionale [Herzbrief-Pfad](docs/HEART-LETTER.md) bleiben Teil derselben Morrowind-Welt. [Reborn-Kartografie](docs/REBORN-CARTOGRAPHY.md) beschreibt die lokale Landzellen-Zuordnung. Der Herzbrief verlangt erst nach bewusstem Öffnen einen gelesenen Text und ein Gespräch mit einer echten Spielfigur, bevor er den normalen LOVE-Heilzauber anbietet.
+
+Die **Vorschau 1.0.4** erweitert das Landschaftsmaterial um sieben eigene Texturen fuer Wegerde, Aschekies, roten und grauen Fels, fruchtbare Erde und Trockenland. Sie werden als gewoehnliche OpenMW-Texturpfade innerhalb des bestehenden Morrowind geladen. Mit den drei Bitterkuesten-Materialien treffen die zehn Pfade laut lokalem Basiswelt-Atlas 217.256 von 330.752 rohen Terrain-Indexpositionen. Das ist eine Strukturzaehlung, keine optische Abnahme oder Behauptung, dass bereits jedes Gebaeude und jede Region neugestaltet ist. [Materialliste und offene Bildpruefung](docs/REBORN-CARTOGRAPHY.md).
+
+Die sechs eigenen HALVETH-Buecher mit 15 Lernseiten, Fragen und Antworten sind in dieser Vorschau auf Deutsch. Die freie KI-Unterhaltung fordert auch bei englischen Lore-Quellen deutsche Antworten an. Seit 1.0.5 bleiben Antworten ausschliesslich als Text im nativen OpenMW-Dialog; die fruehere optionale Vorlesefunktion wird nicht mehr gestartet. Das ist keine vollstaendige Uebersetzung aller Bethesda-NPCs: Fuer den englischen Originalinhalt des verwendeten `Morrowind.esm` braucht man rechtmaessig bezogene deutsche Morrowind-Spieldaten. Originale und fremde Uebersetzungen sind nicht Teil dieses freien Pakets.
+
+**Vorschau 1.0.5** baut F8 zu einer groesseren, lesbaren Ein-Fenster-Konsole um. Eingabe und **[ABSCHICKEN]** bleiben der zentrale Weg. Ein echtes Objekt aus dem aktuellen Inventar, einschliesslich eines Buchs, kann mit **[Einfuegen]** an genau eine Frage gebunden werden; maximal 5.000 Byte Buchtext gehen dann als begrenzter Kontext an den lokalen Begleiter. `/heilen`, `/gold 250`, `/startpunkt` und `/zurueck` sind definierte Spielaktionen statt frei ausgefuehrter Konsolenstrings. Im aktuellen Quellstand bleibt das Mikrofon beim Start aus; `/mikrofon` öffnet die Frage gezielt im Spiel. Erst **Ja** startet die lokale deutsche Windows-Spracherkennung. Erkannter Text wird in `.local/microphone` protokolliert, keine Audiodatei geschrieben. Nur mit „Jarvis“ oder „Halveth“ angesprochene Fragen rufen das Modell auf; Antworten erscheinen schriftlich. **Nein** und der Sitzungswechsel stoppen beziehungsweise verhindern die Geraeteoeffnung. Die optische Ausgabe erhaelt Aurora und ein mildes Schattenlicht; ein nachgewiesener kompletter Umbau aller Regionen oder Originalfiguren ist das nicht. [Pruefumfang der damaligen Vorschau](docs/NATIVE-VERIFICATION-1.0.5.json).
+
+Beim neuen Spielstart erscheint ein vier Sekunden langer, stummer Portalfilm aus dem eigenen Menuebild. Im Freien reagiert ein neuer nativer Weltmoment sparsam auf tatsaechlich geladenes Licht und Sturmwetter; **F6 → Weltleben → Momente aus/an** schaltet die Einblendungen fuer die aktuelle Sitzung um. Die Figurenerinnerungen und Fraktionsimpulse bleiben die zuvor vorhandene Spielsimulation; diese Momente erfinden keine NPC-Ereignisse und aendern weder Quests noch Spielstaende.
+
+Die [Genesis-Verbindungskarte](docs/GENESIS-CONNECTIONS.md) erklärt die vier beobachteten lokalen Dienste und trennt den belegten OpenMW-Log/VFS-Spielpfad von einer erst noch zu bauenden direkten LUCINET-Anbindung.
 
 Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öffentlichen Quellpaket stehen drei ursprüngliche Projektfiguren und acht selbst formulierte Designkarten. Extrahierte Bücher, Dialoge, Spielstände und Gesprächserinnerungen werden nicht ausgeliefert. Für eine einzelne Antwort verwendet das Modell einen begrenzten Ausschnitt; erzeugter Dialog ist kein Ersatz für die vorhandene Questlogik.
 
@@ -78,7 +99,7 @@ Die Lore-Bibliothek entsteht lokal aus deiner eigenen Spielinstallation. Im öff
 
 Scarlet Beauty kann lokal installierte Kopf- und Haarmodelle, Landschaftstexturen, Sternenhimmel und Shader für Schatten, Wolken, Wasser und Nachbearbeitung verbinden. Diese Drittanbieterpakete sind nicht enthalten. Das eigene LOVE-Motiv erscheint im F8-Fenster und als optionaler Wandbehang. Version 0.7 zeigt im F8-Fenster ein neu generiertes LOVE-Astrolabium als Originalmotiv. Der Kopfadapter ändert Modelldarstellungen, keine NPC-, Quest- oder Inventardatensätze.
 
-Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels. Version 0.6 ergänzt einen **eigenen OpenMW-Nachbearbeitungsfilter**; 0.7 erweitert ihn um das deutlich kräftigere **Morgenrot**. Version 0.8 ergänzt **Lebendige Welt**: Der Filter liest im Freien Sonnenanteil und Sturmstatus aus dem Spiel und passt seine Farbgebung laufend an. Vier Modi färben die Szene; **Original** deaktiviert den eigenen Filter. Die Spielwelt-Assets und OpenMWs Renderer werden dabei nicht ersetzt. [Technik und Grenzen des Filters](docs/VISUAL-ATMOSPHERE.md).
+Version 0.5 ergänzt eine geglättete Schriftkonfiguration für das bereits mit OpenMW ausgelieferte MysticCards. Die Schriftdatei selbst wird nicht mitgeliefert. Das Menü verwendet die nativen Morrowind-Rahmen und läuft innerhalb des Spiels. Version 0.6 ergänzt einen **eigenen OpenMW-Nachbearbeitungsfilter**; 0.7 erweitert ihn um das deutlich kräftigere **Morgenrot**. Version 0.8 ergänzt **Lebendige Welt**: Der Filter liest im Freien Sonnenanteil und Sturmstatus aus dem Spiel und passt seine Farbgebung laufend an. 1.0.5 fuegt Aurora und eine dunkle Bildbereiche betonende Aufhellung hinzu. Fuenf Modi färben die Szene; **Original** deaktiviert den eigenen Filter. Die Spielwelt-Assets und OpenMWs Renderer werden dabei nicht ersetzt. [Technik und Grenzen des Filters](docs/VISUAL-ATMOSPHERE.md).
 
 Die Erweiterung nutzt ein eigenes OpenMW-Profil. Spielstandkopien sind im öffentlichen Launcher standardmäßig aus; `--copy-saves` übernimmt ausdrücklich für diesen Start fehlende Kopien, ohne vorhandene Dateien zu überschreiben. Masterdateien und ursprüngliche Saves bleiben erhalten. Bestehende Grafik-, Sound- und Eingabeeinstellungen des Profils werden beim normalen Start beibehalten. Details: [docs/GRAPHICS.md](docs/GRAPHICS.md).
 
@@ -103,6 +124,8 @@ python tests/integration_fieldcraft.py
 python tests/integration_worldlife.py
 python tests/integration_actor_life.py
 python tests/integration_art_070.py
+python tests/integration_origin.py
+python tests/integration_terrain.py
 python scripts/survey_universe.py --help
 python scripts/build_release.py
 ```

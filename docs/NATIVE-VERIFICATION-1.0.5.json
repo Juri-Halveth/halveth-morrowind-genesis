@@ -1,0 +1,30 @@
+{
+  "schema": "halveth.native-verification/1",
+  "version": "1.0.5-preview",
+  "date": "2026-09-27",
+  "target": "Existing TES III Morrowind through OpenMW 0.51.0",
+  "observed": [
+    "In a disposable 1280x720 OpenMW session, one native F8 console accepted a real inventory book attachment, carried bounded book text into one chat question and executed the typed citizen summon, status and dismiss routes without a Lua error.",
+    "The isolated native microphone dialog defaulted to off, blocked F8 until a choice and closed on No. This path started no microphone process.",
+    "Two opt-in HALVETH-owned citizens moved 28.6 and 46.8 game units, each reached a native Wander package, were dismissed after leaving the cell, and remained correctly removed across an actual save and reload. Original NPCs remained present.",
+    "Six visual modes, including Aurora and Original, activated the own atmosphere shader in isolated interior and Seyda Neen exterior runs without Lua errors.",
+    "An isolated real OpenMW and local HTTP action roundtrip executed the typed 250-gold tool in Vivec and recorded before 0 and after 250 gold.",
+    "The Windows source unit suite passed 80 tests; the public source allowlist and exact owned-art hashes passed validation."
+  ],
+  "privateEvidence": [
+    ".local/console-integration/20260927T191208Z-8f247c09/result.json",
+    ".local/microphone-integration/20260927T190014Z-8716b133/result.json",
+    ".local/citizens-integration/20260927T190933Z-7dcda512/result.json",
+    ".local/visuals-integration/20260927T190231Z-32da3af0/result.json",
+    ".local/visuals-integration/20260927T190305Z-77ff5bc8/result.json",
+    ".local/integration/result.json",
+    ".local/visual-qa/20260927T191005Z-91fe955e/console.png"
+  ],
+  "notVerified": [
+    "The user has not yet selected Yes and tested actual physical microphone capture, recognition quality or unsolicited NPC replies in their personal game.",
+    "The user's personal save, every resolution, every quest and every original NPC were not exercised in this isolated test set.",
+    "The original world geometry, all character appearances and all game text have not been redesigned or translated.",
+    "A local setup build, installed-app patch and GitHub publication are separate later states; this record alone does not establish them."
+  ],
+  "evidenceScope": "Local unit checks and isolated native OpenMW sessions; private logs and screenshots are excluded from the public package"
+}

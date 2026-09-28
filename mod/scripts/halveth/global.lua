@@ -115,11 +115,13 @@ local function update()
 end
 return {
     engineHandlers={onUpdate=update,
-        onSave=function() return {version=1,worldId=worldId} end,
+        onSave=function() return {version=3,worldId=worldId} end,
         onLoad=function(data)
             sessions={};pending={}
             worldId=(data and C.validId(data.worldId)) and data.worldId or newWorldId()
         end,
-        onNewGame=function() sessions={};pending={};worldId=newWorldId() end},
+        onNewGame=function()
+            sessions={};pending={};worldId=newWorldId()
+        end},
     eventHandlers={HALVETH_Register=register, HALVETH_Action=apply},
 }

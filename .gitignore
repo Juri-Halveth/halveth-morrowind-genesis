@@ -10,6 +10,7 @@ installer/bin/
 installer/obj/
 mod/bridge/inbox.json
 mod/bridge/companion-status.json
+mod/bridge/microphone-status.json
 mod/bridge/*.new
 *.log
 *.omwsave

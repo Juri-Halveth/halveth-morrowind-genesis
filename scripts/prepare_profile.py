@@ -133,7 +133,9 @@ def prepare(args: argparse.Namespace) -> dict:
     graphics = load_graphics_manifest(PROJECT, state, getattr(args, "graphics_manifest", None)) if args.profile != "original" else {
         "path": None, "sha256": None, "directories": [], "shaders": [], "visual_plugins": []}
     graphics_paths = [p for p in graphics["directories"] if p not in original_paths and p != mod.resolve()]
-    shader_files = resolve_shaders([install / "engine" / "resources" / "vfs", *original_paths, *graphics_paths, mod, extra_data],
+    override_paths = [p for p in graphics_paths if p in graphics.get("override_directories", [])]
+    ordinary_graphics_paths = [p for p in graphics_paths if p not in override_paths]
+    shader_files = resolve_shaders([install / "engine" / "resources" / "vfs", *original_paths, *ordinary_graphics_paths, mod, *override_paths, extra_data],
                                   graphics["shaders"])
     scenic, uniforms = recommendations(args.profile, graphics["shaders"])
     visual_plugins = resolve_visual_plugins(graphics_paths, graphics["visual_plugins"], [mod, extra_data])
@@ -152,8 +154,9 @@ def prepare(args: argparse.Namespace) -> dict:
             config_lines.append("data=" + quoted(source_path(value, source)))
         elif key not in {"config", "replace", "resources", "data-local", "user-data"}:
             config_lines.append(f"{key}={value}")
-    config_lines += ["data=" + quoted(directory) for directory in graphics_paths]
+    config_lines += ["data=" + quoted(directory) for directory in ordinary_graphics_paths]
     config_lines += ["data=" + quoted(mod)]
+    config_lines += ["data=" + quoted(directory) for directory in override_paths]
     config_lines += ["content=" + plugin["file"] for plugin in visual_plugins]
     config_lines += ["content=halveth.omwscripts"]
     settings_file = profile / "settings.cfg"

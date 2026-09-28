@@ -35,7 +35,19 @@ def background(command,log):
 def prepare(profile,copy_saves=False,reset_settings=False):
     from scripts.prepare_profile import prepare,DEFAULT_INSTALL
     selected_install=os.environ.get('HALVETH_MORROWIND_INSTALL_ROOT')
-    install_root=Path(selected_install).resolve() if selected_install else DEFAULT_INSTALL
+    if selected_install:
+        # The installed native EXE passes its recorded engine root explicitly.
+        install_root=Path(selected_install).resolve()
+    else:
+        # A private full-engine Genesis install lives one level above app/.
+        # Its own max profile must win over another configured OpenMW tree:
+        # importing that tree's already-loaded visual plugins can duplicate
+        # entries in Genesis' private graphics manifest during startup.
+        bundled=ROOT.parent
+        executable='openmw.exe' if os.name=='nt' else 'openmw'
+        install_root=(bundled.resolve() if (bundled/'engine'/executable).is_file()
+                      and (bundled/'profiles'/'max'/'openmw.cfg').is_file()
+                      else DEFAULT_INSTALL)
     args=argparse.Namespace(install_root=install_root,state_dir=STATE,
         source_profile='max',profile=profile,smoke=False,copy_saves=copy_saves,reset_settings=reset_settings)
     return prepare(args)
@@ -60,6 +72,8 @@ def companion(profile='beauty'):
     log=STATE/'game.stdout.log'
     if existing is None:
         python=Path(sys.executable)
+        # Text-only by default. The in-game opt-in can start a separate local
+        # recognizer later, but launching Morrowind never opens the microphone.
         process=background([str(python),str(ROOT/'server.py'),'--log',str(log)],'companion.log')
         (STATE/'companion.pid').write_text(str(process.pid),encoding='ascii')
         for _ in range(40):

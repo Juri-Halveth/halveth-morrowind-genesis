@@ -3,9 +3,11 @@
 local core = require('openmw.core')
 local world = require('openmw.world')
 local types = require('openmw.types')
+local util = require('openmw.util')
 local Catalog = require('scripts.halveth.content_catalog')
 
 local bookIds, spellIds, pending = {}, {}, {}
+local discoveryPlayer, discoveryAttempted, discoveryPlaced = nil, false, false
 
 local function escape(text)
     return text:gsub('&', '&amp;'):gsub('<', '&lt;'):gsub('>', '&gt;')
@@ -132,7 +134,8 @@ local function request(data)
     local player = data.player
     if not player or not player:isValid() or not types.Player.objectIsInstance(player) then return end
     if type(data.requestId) ~= 'string' or #data.requestId > 160 then return end
-    if data.request ~= 'library' and data.request ~= 'spells' and data.request ~= 'both' and data.request ~= 'inspect' then
+    if data.request ~= 'library' and data.request ~= 'spells' and data.request ~= 'both'
+        and data.request ~= 'love' and data.request ~= 'inspect' then
         reply(player, data.requestId, false, 'Unbekannter Inhaltswunsch.', data.request)
         return
     end
@@ -153,11 +156,13 @@ local function request(data)
                 if inventory:countOf(record.id) == 0 then world.createObject(record.id, 1):moveInto(inventory) end
             end
         end
-        if data.request == 'spells' or data.request == 'both' then
+        if data.request == 'spells' or data.request == 'both' or data.request == 'love' then
             local learned = types.Actor.spells(player)
             for _, spell in ipairs(Catalog.spells) do
-                local record = ensureSpell(spell)
-                if not learned[record.id] then learned:add(record.id) end
+                if data.request ~= 'love' or spell.key == 'love' then
+                    local record = ensureSpell(spell)
+                    if not learned[record.id] then learned:add(record.id) end
+                end
             end
         end
     end)
@@ -165,14 +170,47 @@ local function request(data)
 end
 
 local function update()
+    -- A single loose clue sits by the existing book shelf in Arrille's shop.
+    -- Reaching Seyda Neen does not open a panel or grant a starting spell.
+    local player = discoveryPlayer
+    if player and player:isValid() and player.cell
+        and player.cell.name == "Seyda Neen, Arrille's Tradehouse"
+        and not discoveryAttempted then
+        discoveryAttempted = true
+        local object
+        local ok, err = pcall(function()
+            local clue = Catalog.books[5]
+            assert(clue and clue.key == 'quiet-scribble', 'Discovery book identity changed')
+            local record = ensureBook(clue)
+            object = world.createObject(record.id, 1)
+            -- Beside vanilla "Lives of the Saints" (51,-20,189), observed in
+            -- this cell. Its address does not depend on the player's position.
+            object:teleport(player.cell, util.vector3(88, -20, 190))
+        end)
+        if ok then
+            discoveryPlaced = true
+            print('HALVETH_DISCOVERY_BOOK_PLACED '..tostring(object.recordId))
+        else
+            -- Retry only if no object was created; a second copy would be worse.
+            if not object then discoveryAttempted = false end
+            print('HALVETH_DISCOVERY_BOOK_ERROR '..tostring(err))
+        end
+    end
     for id, item in pairs(pending) do
         item.frames = item.frames + 1
         if item.frames >= 5 then
             pending[id] = nil
             if item.player:isValid() then
                 local current = inspect(item.player)
-                local booksOK = item.request == 'spells' or current.inventoryBooks >= #Catalog.books
-                local spellsOK = item.request == 'library' or current.knownSpells == #Catalog.spells
+                local booksOK = item.request ~= 'library' and item.request ~= 'both'
+                    or current.inventoryBooks >= #Catalog.books
+                local spellsOK = item.request == 'library' or
+                    (item.request == 'love' and (function()
+                        for _, spell in ipairs(current.spells) do
+                            if spell.key == 'love' and spell.known then return true end
+                        end
+                        return false
+                    end)()) or current.knownSpells == #Catalog.spells
                 local success = not item.error and booksOK and spellsOK
                 local message
                 if not success then
@@ -181,6 +219,8 @@ local function update()
                     message = 'Sechs eigene Buecher liegen im Inventar. Oeffne sie im normalen Morrowind-Buchfenster.'
                 elseif item.request == 'spells' then
                     message = 'LOVE, SPARK und AEGIS stehen im normalen Zaubermenue. Auswaehlen und wie gewohnt zaubern.'
+                elseif item.request == 'love' then
+                    message = 'LOVE - Heilschein steht jetzt im normalen Zaubermenue. Auswaehlen und wie gewohnt zaubern.'
                 else
                     message = 'Sechs Buecher im Inventar; LOVE, SPARK und AEGIS im Zaubermenue.'
                 end
@@ -193,13 +233,21 @@ end
 return {
     engineHandlers = {
         onUpdate = update,
-        onSave = function() return {version = 1, bookIds = bookIds, spellIds = spellIds} end,
+        onSave = function() return {version = 2, bookIds = bookIds, spellIds = spellIds,
+            discoveryAttempted = discoveryAttempted, discoveryPlaced = discoveryPlaced} end,
         onLoad = function(data)
             pending = {}
             bookIds = data and type(data.bookIds) == 'table' and data.bookIds or {}
             spellIds = data and type(data.spellIds) == 'table' and data.spellIds or {}
+            discoveryPlayer = nil
+            discoveryAttempted = type(data)=='table' and data.version==2 and data.discoveryAttempted==true or false
+            discoveryPlaced = type(data)=='table' and data.version==2 and data.discoveryPlaced==true or false
         end,
-        onNewGame = function() bookIds = {}; spellIds = {}; pending = {} end,
+        onNewGame = function()
+            bookIds = {}; spellIds = {}; pending = {}
+            discoveryPlayer = nil; discoveryAttempted = false; discoveryPlaced = false
+        end,
+        onPlayerAdded = function(player) discoveryPlayer = player end,
     },
     eventHandlers = {HALVETH_ContentRequest = request},
 }

@@ -8,13 +8,14 @@ import re
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='1.0.1'
+VERSION='1.0.6'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
 ROOT_FILES={'.gitignore','.gitattributes','README.md','LICENSE','ASSET-LICENSE.md','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md',
             'PUBLIC-STATUS.json','ASSET-PROVENANCE.json',
-            'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','START.cmd'}
+            'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py',
+            'voice_output.py','voice_input.py','START.cmd'}
 SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','installer','.github','LICENSES'}
 EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py',
@@ -25,14 +26,37 @@ EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'docs/NATIVE-VERIFICATION-0.8.1.json',
                   'docs/NATIVE-VERIFICATION-0.9.0.json',
                   'docs/NATIVE-VERIFICATION-1.0.0.json',
-                  'docs/NATIVE-VERIFICATION-1.0.1.json'}
+                  'docs/NATIVE-VERIFICATION-1.0.1.json',
+                  'docs/NATIVE-VERIFICATION-1.0.5.json',
+                  'docs/NATIVE-VERIFICATION-1.0.6.json'}
 DATA_FILES={'data/projects.json','data/project-knowledge.json','data/generation-providers.json','data/native-content.json'}
 OWNED_ASSETS={'mod/Textures/halveth/scarlet-love-banner.png',
               'mod/Textures/halveth/love-astrolabe-0.7.png',
               'mod/Textures/halveth/portal-menu-2100.png',
               'installer/love-astrolabe-icon-0.8.png',
               'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.tga',
-              'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds'}
+              'assets/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds',
+              'assets/RebornBitterCoast/tx_bc_muck-source.png',
+              'mod/Textures/tx_bc_muck.dds',
+              'assets/RebornBitterCoast/tx_bc_rock_01-source.png',
+              'mod/Textures/tx_bc_rock_01.dds',
+              'assets/RebornBitterCoast/tx_bc_grass-source.png',
+              'mod/Textures/tx_bc_grass.dds',
+              'assets/RebornWorld/tx_ai_dirtroad_01-source.png',
+              'mod/Textures/tx_ai_dirtroad_01.dds',
+              'assets/RebornWorld/tx_land_darkgravel-source.png',
+              'mod/Textures/tx_land_darkgravel.dds',
+              'assets/RebornWorld/tx_rm_redrock_01-source.png',
+              'mod/Textures/tx_rm_redrock_01.dds',
+              'assets/RebornWorld/tx_rm_rock_02-source.png',
+              'mod/Textures/tx_rm_rock_02.dds',
+              'assets/RebornWorld/tx_ac_dirt_01-source.png',
+              'mod/Textures/tx_ac_dirt_01.dds',
+              'assets/RebornWorld/tx_rm_grayrock_01-source.png',
+              'mod/Textures/tx_rm_grayrock_01.dds',
+              'assets/RebornWorld/tx_ma_crackedearth-source.png',
+              'mod/Textures/tx_ma_crackedearth.dds',
+              'mod/Video/new_game.webm'}
 # The original shader is source text. Keep its path exact: a blanket .omwfx
 # allowance could accidentally package third-party shader downloads.
 OWNED_SHADER='mod/shaders/halveth_atmosphere.omwfx'
@@ -40,7 +64,8 @@ EXCLUDED_PARTS={'.local','.git','__pycache__','.pytest_cache','.venv','venv','ob
                 'node_modules','runtime','profiles','saves','screenshots','captures',
                 'downloads','backups','work','logs','dist'}
 EXCLUDED_FILES={'data/entities.json','data/entity-sources.json','data/graphics-install.json',
-                'mod/bridge/inbox.json','mod/bridge/companion-status.json','source-manifest.json','local-config.json'}
+                'mod/bridge/inbox.json','mod/bridge/companion-status.json',
+                'mod/bridge/microphone-status.json','source-manifest.json','local-config.json'}
 SOURCE_SUFFIXES={
     'docs':{'.md'},
     'mod':{'.lua','.omwscripts','.omwfont'},
@@ -105,8 +130,13 @@ def collect_files():
         'Version 0.9 adds a native first-person, third-person and free-look camera panel, bounded viewport observations for the player dialogue context, and direct rotation and zoom controls.\n'
         'Version 1.0 binds observed NPC history to the actual conversation target and makes the owned wanderer removable after changing cells, with native save/reload verification. It is a scoped OpenMW extension for an existing licensed Morrowind installation.\n'
         'Version 1.0.1 adds an original portal main menu inside OpenMW and adjusts the Scarlet Beauty light defaults to lift dark corners. The menu was checked in an isolated native game session.\n'
+        'Version 1.0.2 candidate adds a new-game Pulsar origin, guarded native UI fallbacks and three original Bitter Coast terrain materials (peat, rock and grass). Their aesthetic and edge continuity need direct visual review.\n'
+        'Version 1.0.3 candidate adds the optional native Heart Letter scene. A real book reading and recorded NPC conversation unlock only the LOVE healing spell; the scene and reward survive a save/reload.\n'
+        'Version 1.0.4 preview adds seven original terrain materials for roads, volcanic rock, gravel, fertile soil and cracked earth. Ten selected texture paths occur in 217256 of 330752 base-world terrain index positions; this is structural coverage, not rendered-area or visual-quality proof. Own books and study questions are German; free local NPC replies request German and optional Windows speech uses installed German voices. Native world moments react sparsely to observed outdoor light and storm; an owned four-second portal film fills the OpenMW new-game movie slot.\n'
+        'Version 1.0.5 adds one larger native F8 text console with bounded real inventory/book attachment, an explicit per-game microphone consent gate, local German speech-to-text after opt-in, no spoken output, and an Aurora/shadow-light visual mode. Generated citizens are opt-in and original quest NPC AI remains unchanged.\n'
+        'Version 1.0.6 restores the ordinary Morrowind character-creation sequence: the forced Pulsar choice and automatic microphone question are retired. A loose scroll in Arrille\'s Tradehouse can reveal F8 and JARVIS through play; /mikrofon requests consent only after a deliberate command. The Scarlet Beauty profile is tuned for a measured Seyda Neen scene. Downloaded visual packs and the private World Reforged overlay are not bundled.\n'
         'The generation-provider manifest and production briefs are included; no copied source registry, Bethesda assets, extracted game text, saves, logs or model weights are included.\n'
-        'Only the 6 exact owned art asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
+        'Only the 27 exact owned art/media asset paths and the one original shader source path are allowed. No New World code, textures, models or game data is included. Other downloaded textures, shaders, meshes, binary game plugins, local graphics manifests, profiles, runtime state and document screenshots are excluded. See ASSET-PROVENANCE.json when present and docs/GENERATION-PIPELINE.md.\n'
         'Read README.md, LICENSE, ASSET-LICENSE.md and THIRD-PARTY-NOTICES.md. Python 3.11+, separately configured OpenMW 0.51 and optional local Ollama model required.\n'
         'A source archive is not a standalone installer, hosted CI pass or confirmation that publication succeeded.\n'
     ).encode('utf-8')
@@ -124,6 +154,11 @@ def validate_files(files):
               'mod/scripts/halveth/inspect.lua','mod/scripts/halveth/paths.lua',
               'mod/scripts/halveth/visuals.lua','mod/scripts/halveth/perspective.lua',
               'mod/scripts/halveth/menu_portal.lua',
+              'mod/scripts/halveth/microphone.lua','voice_input.py','scripts/speech_recognizer.ps1',
+              'mod/scripts/halveth/citizens.lua','mod/scripts/halveth/citizens_global.lua',
+              'scripts/apply_1_0_5.py','scripts/apply_1_0_6.py','tests/integration_console.py',
+              'tests/integration_microphone.py','tests/integration_citizens.py',
+              'docs/CITIZENS-OPENMW.md',
               OWNED_SHADER,'character_profile.py',
               'mod/scripts/halveth/fieldcraft.lua',
         'mod/scripts/halveth/worldlife.lua','mod/scripts/halveth/actor_life.lua',
@@ -142,6 +177,8 @@ def validate_files(files):
     required.add('docs/NATIVE-VERIFICATION-0.9.0.json')
     required.add('docs/NATIVE-VERIFICATION-1.0.0.json')
     required.add('docs/NATIVE-VERIFICATION-1.0.1.json')
+    required.add('docs/NATIVE-VERIFICATION-1.0.5.json')
+    required.add('docs/NATIVE-VERIFICATION-1.0.6.json')
     missing=required-files.keys()
     if missing:
         raise ValueError('Missing public release files: '+', '.join(sorted(missing)))
@@ -156,7 +193,7 @@ def validate_files(files):
     provenance=json.loads(files['ASSET-PROVENANCE.json'])
     records={record['path']:record for record in provenance['files']}
     if set(records)!=OWNED_ASSETS:
-        raise ValueError('Asset provenance must bind exactly the six owned art paths.')
+        raise ValueError('Asset provenance must bind exactly the 27 owned art paths.')
     for name in OWNED_ASSETS:
         raw=files[name]
         if len(raw)!=records[name]['bytes'] or hashlib.sha256(raw).hexdigest()!=records[name]['sha256']:

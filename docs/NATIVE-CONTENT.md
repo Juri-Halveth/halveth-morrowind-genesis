@@ -2,20 +2,20 @@
 
 Diese Erweiterung laeuft als Lua-Mod in TES III Morrowind mit der vorhandenen OpenMW-Engine 0.51. Sie erzeugt echte `BOOK`- und `SPEL`-Datensaetze innerhalb dieser Spielwelt. Die Buecher benutzen Morrowinds normales Inventar und Buch-/Schriftrollenfenster; die Zauber erscheinen im normalen Zaubermenue. Es wird kein zweites Spiel und kein Browserfenster geoeffnet.
 
-Im Wissen-Fenster koennen die Schaltflaechen **Eigene Buecher** und **LOVE / SPARK / AEGIS** bewusst gewaehlt werden. Es gibt keine automatische Vergabe beim Laden eines bestehenden Spielstands. Die sechs Buecher haben keinen Verkaufswert; ein erneuter Klick ergaenzt fehlende Exemplare, ohne vorhandene zu duplizieren. Bekannte Zauber werden nicht doppelt hinzugefuegt. Mit dem normalen Speichern bewahrt OpenMW die erzeugten Datensaetze und das Inventar.
+Im Wissen-Fenster koennen die Schaltflaechen **Eigene Buecher** und **LOVE / SPARK / AEGIS** bewusst gewaehlt werden. Es gibt keine automatische Vergabe an das Spielerinventar oder Zauberbuch beim Laden. Eine eigene Notizrolle liegt als loser Gegenstand an einer festen Stelle neben einem vorhandenen Buch in Arrilles Handelshaus in Seyda Neen. Sie wird bei einem Besuch einmalig erzeugt, erscheint ohne Einblendung und kann im normalen Morrowind-Lesefenster untersucht werden. Die sechs Buecher haben keinen Verkaufswert; ein erneuter Klick ergaenzt fehlende Exemplare im Inventar, ohne vorhandene zu duplizieren. Bekannte Zauber werden nicht doppelt hinzugefuegt. Mit dem normalen Speichern bewahrt OpenMW die erzeugten Datensaetze, Weltobjekte und das Inventar.
 
 ## Buecher
 
 | Eigenes Werk | Form | Thema | Eigene Abschnitte |
 | --- | --- | --- | ---: |
-| The Glassleaf Primer | Buch | Alchemie | 3 |
-| Ink Between Stars | Buch | Verzauberung | 3 |
-| A House Needs Three Supports | Buch | Handwerk | 3 |
-| A Scroll of Moonwater Accounts | Schriftrolle | Alchemie | 2 |
-| A Margin Full of Quiet Signals | Notizrolle | Verzauberung | 2 |
-| Minutes of an Unfinished Garden | Journal | Gespraech | 2 |
+| Das Glasblatt-Lehrbuch | Buch | Alchemie | 3 |
+| Tinte zwischen Sternen | Buch | Verzauberung | 3 |
+| Ein Haus braucht drei Stützen | Buch | Handwerk | 3 |
+| Schriftrolle der Mondwasserrechnung | Schriftrolle | Alchemie | 2 |
+| Stille Zeichen am Rand | Notizrolle | Verzauberung und Schreibkonsole | 2 |
+| Protokoll eines unfertigen Gartens | Journal | Gespraech | 2 |
 
-Diese fuenfzehn urspruenglich fuer HALVETH geschriebenen englischen Textabschnitte sind in `data/native-content.json` erhalten. Sie sind eigene Garten-Lore. Die dort beschriebenen Glassleaf-, Lumen- und Bau-Rezepte sind Erzaehlung; dieser Inhaltsport erzeugt noch keine entsprechenden Alchemiezutaten oder Bauobjekte in Morrowind. Die native Buchdarstellung verteilt den Text nach Fenster und Schrift selbst auf Seiten. Die Passageanzahl ist deshalb keine feste Zahl angezeigter Buchseiten.
+Diese fuenfzehn eigens fuer HALVETH verfassten deutschen Textabschnitte sind in `data/native-content.json` erhalten. Sie sind eigene Garten-Lore. Die Notizrolle deutet die F8-Schreibkonsole, `/hilfe` und ein moegliches Figurengespraech erst beim Lesen an; sie loest keine Spielaktion aus. Die dort beschriebenen Garten- und Bau-Rezepte sind Erzaehlung; dieser Inhaltsport erzeugt noch keine entsprechenden Alchemiezutaten oder Bauobjekte in Morrowind. Die native Buchdarstellung verteilt den Text nach Fenster und Schrift selbst auf Seiten. Die Passageanzahl ist deshalb keine feste Zahl angezeigter Buchseiten.
 
 Alle sechs Werke tragen den Titelpraefix `HALVETH:`. Modelle und Inventarsymbole werden aus vorhandenen geladenen Buechern referenziert. Texte, Verzauberungen, Quests oder Skripte dieser Vorlagen werden nicht uebernommen. Es gibt keinen zusaetzlichen automatischen Vanilla-Skillbuchbonus; die Zuordnung zum Wissenssystem erfolgt getrennt ueber die bereitgestellte Record-ID und das Fachgebiet.
 

@@ -24,9 +24,10 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from graphics_status import graphics_status
 from project_knowledge import ProjectKnowledge, DEFAULT_PATH as PROJECT_KNOWLEDGE_PATH, MAX_QUERY_CHARS
 from character_profile import profile as character_profile
+from voice_input import VoiceInput
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.8.0'
+VERSION = '1.0.6'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768
@@ -133,7 +134,7 @@ class Store:
 
 
 class Companion:
-    def __init__(self, state_dir, log=None, inbox=None, model=MODEL, project_knowledge_path=None):
+    def __init__(self, state_dir, log=None, inbox=None, model=MODEL, project_knowledge_path=None, voice=False):
         self.state_dir = Path(state_dir)
         self.store = Store(self.state_dir / 'universe.sqlite3')
         self.project_knowledge = ProjectKnowledge(
@@ -141,6 +142,13 @@ class Companion:
         self.log = Path(log) if log else None
         self.inbox = Path(inbox) if inbox else ROOT / 'mod' / 'bridge' / 'inbox.json'
         self.model = model
+        # The previous optional spoken output is retired. Replies stay in the
+        # native text UI. Construction never opens a microphone.
+        self.microphone_status = self.inbox.parent / 'microphone-status.json'
+        self.microphone_session = None
+        self.last_microphone_heartbeat = 0.0
+        self.microphone = VoiceInput(self.state_dir, self.on_heard, self.on_microphone_state)
+        atomic_json(self.microphone_status, {'sessionId': '', 'state': 'disabled'})
         self.csrf = secrets.token_urlsafe(32)
         self.lock = threading.RLock()
         self.chat_lock = threading.Lock()
@@ -256,6 +264,8 @@ class Companion:
             self.store.remember(entity_id,'user',message)
             system = (
                 'Du bist ein deutschsprachiger Rollenspielpartner in HALVETH Morrowind Genesis. '
+                'Antworte ausschließlich auf Deutsch, auch wenn ein Buch, NPC-Name oder Lore-Auszug Englisch ist. '
+                'Eigennamen dürfen unverändert bleiben. Übersetze englische Quellen sinngemäß, ohne neue Fakten hinzuzufügen. '
                 'Du sprichst innerhalb von Morrowind in der nativen OpenMW-Lua-Oberfläche mit F8. '
                 'Freie Texte werden vom lokalen Ollama beantwortet, Spielwerkzeuge laufen über diese Mod. '
                 'Du bist kein uneingeschränkter Konsoleninterpreter. '
@@ -265,6 +275,8 @@ class Companion:
                 'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
                 'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
                 'spiel.viewpoint ist eine Momentaufnahme der Kameraprojektion, keine gepruefte Sichtlinie oder NPC-Erinnerung. '
+                'spiel.resonance beschreibt ausgefuehrte Begegnungen mit leuchtenden Pflanzen als eigene Spielgeschichte. '
+                'Nur der dort genannte Ort und Zustand sind belegt; erfinde keine weiteren besuchten Orte oder freigeschalteten Faehigkeiten. '
                 'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '
@@ -353,6 +365,8 @@ class Companion:
                 if not isinstance(context,dict):
                     return
                 if self.session and self.session != session:
+                    self.microphone.stop()
+                    self.microphone_session = None
                     self.pending = None
                     with self.store.connect() as db:
                         db.execute("UPDATE actions SET status='expired' WHERE status IN ('offered','queued')")
@@ -362,6 +376,19 @@ class Companion:
                 npc = context.get('npc')
                 if isinstance(npc,dict) and npc.get('recordId'):
                     self.ensure_npc(npc)
+            elif kind == 'microphone' and session == self.session and type(data.get('enabled')) is bool:
+                if data['enabled']:
+                    if not self.connected():
+                        return
+                    self.microphone_session = session
+                    self.last_microphone_heartbeat = time.monotonic()
+                    if not self.microphone.start(session):
+                        self.microphone_session = None
+                elif self.microphone_session == session:
+                    self.microphone.stop()
+                    self.microphone_session = None
+            elif kind == 'microphone_heartbeat' and session == self.microphone_session:
+                self.last_microphone_heartbeat = time.monotonic()
             elif kind == 'result' and session == self.session:
                 action_id = data.get('actionId')
                 with self.store.connect() as db:
@@ -461,6 +488,11 @@ class Companion:
         while not self.stopping.wait(.25):
             try:
                 with self.lock:
+                    if self.microphone_session and (not self.connected() or
+                            time.monotonic()-self.last_microphone_heartbeat>6):
+                        self.microphone.stop()
+                        self.microphone_session = None
+                with self.lock:
                     if self.reply_queue and not self.pending and time.monotonic()-self.last_reply_sent>1:
                         reply=self.reply_queue.popleft()
                         if reply['sessionId']==self.session and self.connected():
@@ -493,6 +525,34 @@ class Companion:
     def start(self):
         self.thread=threading.Thread(target=self.tail,daemon=True)
         self.thread.start()
+
+    def on_microphone_state(self, session, state):
+        # Separate status file lets the game show actual recognizer readiness.
+        # A stale status never grants consent or starts a device.
+        atomic_json(self.microphone_status, {'sessionId': session, 'state': state})
+
+    def on_heard(self, session, text, confidence):
+        """Display recognized text; call the model only for an explicit wake word."""
+        with self.lock:
+            if session != self.microphone_session or not self.connected():
+                return
+            self.reply_queue.append({'sessionId': session, 'speaker': 'Mikrofon',
+                                     'reply': 'Erkannt: ' + text})
+            context = dict(self.context)
+        match = re.match(r'^\s*(?:jarvis|halveth)\s*[,.:]?\s+(.{2,500})$', text, re.I)
+        if match:
+            threading.Thread(target=self._answer_heard,
+                args=(session, match.group(1), context), daemon=True).start()
+
+    def _answer_heard(self, session, question, context):
+        try:
+            result = self.chat(question, 'jarvis', context, session)
+            with self.lock:
+                if session == self.microphone_session and self.connected():
+                    self.reply_queue.append({'sessionId': session, 'speaker': 'JARVIS',
+                                             'reply': result['reply']})
+        except Exception as exc:
+            print('Microphone chat:', type(exc).__name__, str(exc), flush=True)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -602,8 +662,9 @@ def main():
     parser.add_argument('--log',type=Path)
     parser.add_argument('--inbox',type=Path)
     parser.add_argument('--model',default=MODEL)
+    parser.add_argument('--voice',action='store_true',help='Deprecated; replies remain text-only.')
     args=parser.parse_args()
-    app=Companion(args.state_dir,args.log,args.inbox,args.model)
+    app=Companion(args.state_dir,args.log,args.inbox,args.model,voice=args.voice)
     app.start()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     server.app=app
@@ -613,6 +674,7 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
+        app.microphone.stop()
         app.stopping.set()
         server.server_close()
 
