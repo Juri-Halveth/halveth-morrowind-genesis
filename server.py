@@ -275,6 +275,8 @@ class Companion:
                 'Verwende charakterProfil.runtimeFacts als aktuelle Beobachtungen. Dessen roleplayDirection ist eine eigene Inszenierung, keine originale Biografie. '
                 'Reagiere auf Beruf, aktuelle Disposition, Verletzung und bereits gefuehrte Gespraeche. '
                 'spiel.viewpoint ist eine Momentaufnahme der Kameraprojektion, keine gepruefte Sichtlinie oder NPC-Erinnerung. '
+                'spiel.resonance beschreibt ausgefuehrte Begegnungen mit leuchtenden Pflanzen als eigene Spielgeschichte. '
+                'Nur der dort genannte Ort und Zustand sind belegt; erfinde keine weiteren besuchten Orte oder freigeschalteten Faehigkeiten. '
                 'Zeige Persoenlichkeit durch Wortwahl und eine passende Rueckfrage, ohne neue historische Fakten zu erfinden. '
                 'Historische/physikalische Vergleiche mit der echten Welt sind Ideen, keine belegten Tatsachen. '
                 'Bei Faktenfragen verwende nur passende Quellenauszüge oder die folgenden Grundfakten: '

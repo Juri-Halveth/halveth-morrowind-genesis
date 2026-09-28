@@ -205,6 +205,7 @@ local function context()
     local viewpoint=I.HALVETHPerspective and I.HALVETHPerspective.getState() or nil
     return {worldId=worldId,player=player,npc=npc,selectionMethod=method,nearby=actors,quests=quests,
         worldlife=worldlife,heart=heart,viewpoint=viewpoint,
+        resonance=I.HALVETHResonance and I.HALVETHResonance.getContext() or nil,
         book=lastBook,anchors={{id='session_start',label='Startpunkt dieser Sitzung'}},
         engine={apiRevision=core.API_REVISION},gameTime=core.getGameTime()}
 end
@@ -280,6 +281,7 @@ local function command(text)
             ..'Ein Inventarobjekt unten waehlen und mit [Einfuegen] beifuegen. '
             ..'Direkte Befehle: /heilen · /gold 250 · /startpunkt · /zurueck · '
             ..'/npc · /jarvis · /buch · /mikrofon. '
+            ..'Leuchtende Orte: /resonanz · /resonanz antworten · /resonanz status. '
             ..'Eigene Bewohner: /buerger rufen · /buerger entfernen · /buerger status. '
             ..'Suchen: /gegenstand NAME oder /buch NAME. '
             ..'Nur diese geprueften Spielaktionen werden ausgefuehrt.')
@@ -303,6 +305,13 @@ local function command(text)
     elseif text=='/mikrofon' then
         if I.HALVETHMicrophone then close();I.HALVETHMicrophone.open()
         else append('Die Mikrofon-Einwilligung ist in dieser Installation noch nicht vorhanden.') end
+    elseif text=='/resonanz' or text=='/resonanz antworten' or text=='/resonanz status' then
+        local resonance=I.HALVETHResonance
+        if not resonance then append('Die leuchtenden Orte sind hier noch nicht verfügbar.');return end
+        if text=='/resonanz status' then append(resonance.statusText());return end
+        local accepted,message=resonance.request(text=='/resonanz antworten' and 'answer' or 'listen')
+        append(message)
+        if accepted then close() end
     elseif citizenCommands[text] then
         citizenCommand(citizenCommands[text])
     else
@@ -531,6 +540,10 @@ end
 return {
     interfaceName='HALVETH',
     interface={version=2,open=open,close=close,isOpen=function()return window~=nil end,
+        write=function(message)
+            if type(message)~='string' or #message>2000 then return false end
+            append(message);return true
+        end,
         getArtworkPath=function()return window and artworkPath or nil end,
         requestAction=requestAction,getSessionId=function() return sessionId end,
         getContext=context,

@@ -3,6 +3,7 @@ GLOBAL: scripts/halveth/global.lua
 GLOBAL: scripts/halveth/content.lua
 GLOBAL: scripts/halveth/actor_life_global.lua
 GLOBAL: scripts/halveth/citizens_global.lua
+GLOBAL: scripts/halveth/world_resonance_global.lua
 PLAYER: scripts/halveth/player.lua
 PLAYER: scripts/halveth/microphone.lua
 PLAYER: scripts/halveth/origin.lua
@@ -15,5 +16,6 @@ PLAYER: scripts/halveth/visuals.lua
 PLAYER: scripts/halveth/perspective.lua
 PLAYER: scripts/halveth/worldlife.lua
 PLAYER: scripts/halveth/world_moments.lua
+PLAYER: scripts/halveth/world_resonance.lua
 PLAYER: scripts/halveth/actor_life.lua
 PLAYER: scripts/halveth/citizens.lua
