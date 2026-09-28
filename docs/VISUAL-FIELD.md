@@ -17,14 +17,16 @@ intervals. These diagrams illustrate deterministic branching and geometric
 reflection. They do not rewrite character meshes, represent physical roots or
 establish any relationship between hashes and biology.
 
-Controls:
+Clickable native controls above the scene switch the camera, select objects,
+orbit, change spacing, advance pages and grow the branch diagrams. The same
+operations have keyboard alternatives:
 
-- Tab: overall view or selected object; the close camera follows study actors.
+- N: overall view or selected object; the close camera follows study actors.
 - Arrow keys: select an object.
 - Q/E: orbit the selection.
-- Plus/minus: spacing.
+- Plus/minus: increase/decrease spacing.
 - Page Up/Page Down: object page.
-- F10: manually advance the branch diagram. T remains the ordinary game key.
+- G: manually advance the branch diagram. T and F10 retain their native roles.
 
 `scripts/preview_visual_field.py` takes an installed engine root and an explicit
 local graphics manifest. Its default run lasts 90 seconds and verifies all

@@ -35,7 +35,7 @@ local function position(i)
  return util.vector3(((i-1)%4-1.5)*gap,(math.floor((i-1)/4)-1.5)*gap,0)
 end
 local function clear(list)
- for _,o in ipairs(list) do if o:isValid() then o:remove() end end
+ for _,o in ipairs(list) do if o:isValid() and o.count>0 then o:remove() end end
 end
 local function names()
  local result={}
@@ -113,7 +113,8 @@ local function request(data)
   page=(page+data.delta)%math.ceil(#entries/16);populateOrStop(p.cell)
  elseif data.kind=='gap' and (data.delta==1 or data.delta==-1) then
   gap=math.max(1600,math.min(10000,gap+data.delta*400));populateOrStop(p.cell)
- elseif data.kind=='stage' then stage=(stage+1)%5;grow(p.cell);report()
+ elseif data.kind=='stage' then
+  stage=(stage+1)%5;lastStage=core.getRealTime();grow(p.cell);report()
  end
 end
 return {engineHandlers={onUpdate=function()
