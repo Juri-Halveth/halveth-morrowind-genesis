@@ -30,7 +30,7 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
     Schema 1: {schemaVersion: 1, dataDirectories: [path, ...], shaders: [stem, ...]}.
     shaders is an ordered complete chain; omission uses built-in bloomlinear.
     Optional visualPlugins entries bind a basename and SHA-256. Validated
-    BODY and STAT visual records may add content. overrideDataDirectories
+    BODY, CLOT and STAT records may add reviewed visual adapters. overrideDataDirectories
     selects explicit members of dataDirectories that load after the app mod.
     """
     candidates = [Path(explicit).expanduser()] if explicit else [
@@ -95,7 +95,12 @@ def load_graphics_manifest(project: Path, state: Path, explicit: Path | None = N
 
 
 def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
-    """Walk all bytes; BODY plus STAT name/model overrides only, no gameplay records."""
+    """Check the entire hash-bound adapter and its permitted record structure.
+
+    CLOT contains gameplay fields too. This structural check does not establish
+    their provenance: build_character_adapter separately proves that those
+    bytes match the supplied masters and only body-part bindings change.
+    """
     limit = 16 * 1024 * 1024
     with path.open("rb") as source:
         raw = source.read(limit + 1)
@@ -111,7 +116,7 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
         if len(raw) - offset < 16:
             raise ValueError(f"Truncated TES3 record header: {path.name}")
         kind, size, _unknown, _flags = struct.unpack_from("<4sIII", raw, offset)
-        allowed_kinds = (b"TES3",) if offset == 0 else (b"BODY", b"STAT")
+        allowed_kinds = (b"TES3",) if offset == 0 else (b"BODY", b"STAT", b"CLOT")
         if kind not in allowed_kinds:
             raise ValueError(f"Visual plugin contains a non-visual record {kind!r}: {path.name}")
         end = offset + 16 + size
@@ -119,6 +124,9 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
             raise ValueError(f"TES3 record exceeds file bounds: {path.name}")
         sub = offset + 16
         static_fields = set()
+        clothing_fields, clothing_slots, slot_fields = set(), set(), None
+        if kind == b"CLOT" and _flags & 0x20:
+            raise ValueError("Deleted clothing records are not visual adapters.")
         while sub < end:
             if end - sub < 8:
                 raise ValueError(f"Truncated TES3 subrecord header: {path.name}")
@@ -135,6 +143,33 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
                 if tag == b"MODL" and (b".." in value or b":" in value or value[:1] in (b"/", b"\\")):
                     raise ValueError("STAT model must be a relative VFS path.")
                 static_fields.add(tag)
+            if kind == b"CLOT":
+                value = raw[sub + 8:sub_end]
+                if tag == b"INDX":
+                    if len(value) != 1 or value[0] > 26 or value[0] in clothing_slots:
+                        raise ValueError("Invalid or repeated clothing body-part slot.")
+                    clothing_slots.add(value[0])
+                    slot_fields = set()
+                elif tag in (b"BNAM", b"CNAM"):
+                    if slot_fields is None or tag in slot_fields:
+                        raise ValueError("Clothing body reference needs a unique slot binding.")
+                    slot_fields.add(tag)
+                elif tag in (b"NAME", b"MODL", b"FNAM", b"CTDT", b"ITEX", b"SCRI", b"ENAM"):
+                    if tag in clothing_fields:
+                        raise ValueError("Repeated clothing singleton field.")
+                    clothing_fields.add(tag)
+                else:
+                    raise ValueError("Unrecognized field in clothing adapter.")
+                if tag == b"CTDT" and len(value) != 12:
+                    raise ValueError("Clothing data must be a 12-byte CTDT.")
+                if tag not in (b"INDX", b"CTDT"):
+                    # TES3 reference IDs may omit a trailing null in donor data.
+                    # Permit either representation, never embedded nulls.
+                    text = value[:-1] if value.endswith(b"\0") else value
+                    if b"\0" in text or (tag in (b"NAME", b"BNAM", b"CNAM") and not text):
+                        raise ValueError("Invalid clothing string encoding.")
+                    if tag in (b"MODL", b"ITEX") and (b".." in value or b":" in value or value[:1] in (b"/", b"\\")):
+                        raise ValueError("Clothing assets must use relative VFS paths.")
             if kind == b"TES3" and tag == b"HEDR":
                 if header_count is not None or sub_size != 300:
                     raise ValueError(f"Visual plugin needs exactly one 300-byte HEDR: {path.name}")
@@ -142,14 +177,16 @@ def validate_visual_plugin(path: Path, expected_sha256: str) -> dict:
             sub = sub_end
         if kind == b"STAT" and static_fields != {b"NAME", b"MODL"}:
             raise ValueError("Incomplete STAT visual override.")
+        if kind == b"CLOT" and not {b"NAME", b"CTDT"}.issubset(clothing_fields):
+            raise ValueError("Incomplete clothing adapter.")
         records[kind.decode("ascii")] = records.get(kind.decode("ascii"), 0) + 1
         offset = end
-    visual_count = records["BODY"] + records.get("STAT", 0)
+    visual_count = records["BODY"] + records.get("STAT", 0) + records.get("CLOT", 0)
     if records["TES3"] != 1 or not visual_count or header_count != visual_count:
         raise ValueError(f"Visual plugin HEDR count does not match its visual records: {path.name}")
     return {"file": path.name, "path": str(path), "sha256": actual, "bytes": len(raw),
             "recordCounts": records, "headerRecordCount": header_count,
-            "validation": "Full file walked; TES3 header, BODY and name/model-only STAT records; SHA-256 matched."}
+            "validation": "Full file walked; TES3/BODY, structured CLOT and name/model-only STAT; SHA-256 matched. Record structure alone does not prove gameplay-byte preservation."}
 
 
 def resolve_visual_plugins(graphics_directories: list[Path], plugins: list[dict], later_directories: list[Path] = ()) -> list[dict]:
@@ -190,6 +227,7 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
     if profile not in {"beauty", "cinematic"}:
         return {}, {}
     cinematic = profile == "cinematic"
+    storybook = "halveth_storybook" in shaders
     cloud = "clouds" in shaders
     shader_aa = any(name.casefold() in {"followeraa", "fxaa"} for name in shaders)
     settings = {
@@ -223,7 +261,8 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
     # valid YAML and avoids another Python dependency. Values match upstream
     # uniform types and declared ranges; all are editable via the F2 menu.
     uniforms = {
-        "ssao": {"cfg_samples": 48 if cinematic else 20, "cfg_intensity": 3.5, "cfg_radius": 100.0,
+        "ssao": {"cfg_samples": 48 if cinematic else 24, "cfg_intensity": 0.75 if storybook else 2.2,
+                 "cfg_radius": 18.0 if storybook else 65.0,
                  "cfg_temporal_filtering": 0.75, "cfg_blur_factor": 1.0},
         "clouds": {"sampling_quality": 1.5 if cinematic else 0.0, "cloud_detail": 3,
                    "mist_density": 0.18 if cinematic else 0.12, "interior_mist": 0.025, "point_glow_intensity": 0.2,
@@ -231,5 +270,9 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
         "bloomlinear": {"uStrength": 0.12 if cinematic else 0.08, "uThreshold": 0.5, "uRadius": 0.4},
         "hdr_linear": {"neutral_point": 0.335, "sensitivity": 0.11, "max_exposure": 1.25},
         "FollowerAA": {"uRange": 6.0 if cinematic else 5.0, "uMSAACompatibilityHack": 0.0},
+        "halveth_sculpted": {"uStrength": 0.65, "uDetail": 0.22, "uWarmth": 0.12},
+        "halveth_storybook": {"uStrength": 0.35, "uSurfaceSoftness": 0.25, "uRadius": 1.0, "uColor": 0.05},
     }
+    if storybook and "lucinet_world" in shaders:
+        uniforms["lucinet_world"] = {"uStrength": 0.15}
     return settings, {name: uniforms[name] for name in shaders if name in uniforms}

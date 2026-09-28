@@ -14,6 +14,8 @@ Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/R
 
 - **F6:** Figur, Inventar, Magie und Begegnungen öffnen.
 - **F8:** eine native Textkonsole fuer JARVIS oder das gewaehlte Wesen oeffnen; Inventargegenstand/Buch markieren, einfuegen und dazu fragen. `/hilfe` zeigt die direkten Spielbefehle; `/buerger rufen`, `/buerger status` und `/buerger entfernen` steuern die zwei eigenen optionalen Bewohner.
+- **Antwortstand:** dieselbe F8-Konsole zeigt eine gesendete Frage, eingetroffene Antwort oder Verbindungsstörung. Bei prüfenden Fragen erhält das lokale Modell eine Leitlinie zu Vermutung, anderer Erklärung und unterscheidender Beobachtung; gewöhnliche NPC-Gespräche erhalten keine Prüfliste. [Gesprächsmethode](docs/DIALOGUE-METHOD.md).
+- **Sculpted-Grafik:** optionaler eigener OpenMW-Shader für besser erkennbare Oberflächendetails, wärmere Mitteltöne und abgestimmte Kontaktschatten. Kopfmodelle werden separat über kompatible Grafikpakete ersetzt. [Einbau und geprüfter Umfang](docs/SCULPTED-VISUALS.md).
 - **F7** oder **Wissen** im F8-Fenster: Wissensjournal, Bibliothek und Alchemiehilfe.
 - **Leuchtende Orte:** Bei vorhandener lokaler LUCINET-Reforged-Grafik einen Kristall oder Baum ansehen und in F8 `/resonanz` schreiben. `/resonanz antworten` gibt einen Gruß zurück; ein Wiedersehen an einem späteren Spieltag vertieft die Begegnung. Kurze Lichtkreise erscheinen direkt am Ort, Erinnerungen gehören zur einzelnen Pflanze und zum Spielstand. [Spielregel und Voraussetzungen](docs/WORLD-RESONANCE.md).
 - **Pfade** in der nativen Menüleiste: drei zusätzliche Ziele für echte Bücher, Begegnungen und Orte; die vorhandenen Quests bleiben erhalten.

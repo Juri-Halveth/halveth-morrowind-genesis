@@ -1,0 +1,68 @@
+uniform_float uStrength {
+    default = 0.65;
+    min = 0.0; max = 1.0; step = 0.05;
+    display_name = "Plastische Oberflaechen / Staerke";
+}
+uniform_float uDetail {
+    default = 0.22;
+    min = 0.0; max = 0.5; step = 0.02;
+    display_name = "Feine Materialdetails";
+}
+uniform_float uWarmth {
+    default = 0.12;
+    min = 0.0; max = 0.3; step = 0.01;
+    display_name = "Warme Mittentoene";
+}
+fragment sculpted {
+    // Original HALVETH post-process, MIT. OpenMW 0.51 omwfx interface.
+    // Improves the rendered surface presentation; does not generate geometry.
+    omw_In vec2 omw_TexCoord;
+    float luminance(vec3 value) {
+        return dot(value, vec3(0.2126, 0.7152, 0.0722));
+    }
+    void main() {
+        vec2 uv = omw_TexCoord;
+        vec3 source = omw_GetLastShader(uv).rgb;
+        float depth = omw_GetLinearDepth(uv);
+        // Sky, the near clipping plane and underwater keep their own rendering.
+        float scene = step(0.001, depth) * (1.0-step(omw.far*0.995, depth));
+        if (omw.isUnderwater || scene < 0.5 || uStrength <= 0.0) {
+            omw_FragColor = vec4(source, 1.0);
+            return;
+        }
+        vec2 px = 1.0 / omw.resolution.xy;
+        vec3 mean = max(source, vec3(0.0));
+        float weight = 1.0;
+        // Four depth-aware neighbours add modest local detail without outlining
+        // the silhouette of a face, leaf or weapon against a distant background.
+        for (int i = 0; i < 4; ++i) {
+            vec2 offset = i == 0 ? vec2(1.0,0.0) : i == 1 ? vec2(-1.0,0.0)
+                : i == 2 ? vec2(0.0,1.0) : vec2(0.0,-1.0);
+            vec2 sampleUv = clamp(uv+offset*px*1.5, px*0.5, vec2(1.0)-px*0.5);
+            float z = omw_GetLinearDepth(sampleUv);
+            float w = 1.0-smoothstep(0.0, max(6.0,depth*0.015),abs(z-depth));
+            mean += max(omw_GetLastShader(sampleUv).rgb,vec3(0.0))*w;
+            weight += w;
+        }
+        mean /= weight;
+        vec3 color = max(source, vec3(0.0));
+        float lum = luminance(color);
+        // Preserve HDR highlights. Detail enhancement is restricted to mids;
+        // already-dark texels are not crushed and bright edges do not ring.
+        float mids = smoothstep(0.035,0.22,lum)*(1.0-smoothstep(0.7,1.3,lum));
+        color += clamp(color-mean,vec3(-0.05),vec3(0.05))*uDetail*mids;
+        float lift = 0.014*(1.0-smoothstep(0.0,0.35,lum));
+        color += vec3(lift);
+        // A small warm midtone balance complements the existing blue atmosphere.
+        color *= mix(vec3(1.0),vec3(1.12,1.018,0.95),uWarmth*mids);
+        color = mix(vec3(luminance(color)),color,1.035);
+        omw_FragColor = vec4(mix(source,max(color,vec3(0.0)),uStrength),1.0);
+    }
+}
+technique {
+    description = "HALVETH: readable surface detail and warm midtones in the existing 3D world. No replacement geometry.";
+    author = "HALVETH";
+    version = "1.0.0";
+    passes = sculpted;
+    dynamic = true;
+}

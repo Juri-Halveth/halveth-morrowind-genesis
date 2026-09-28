@@ -85,6 +85,7 @@ class SourcePackageTests(unittest.TestCase):
         allowed = {
             'project_knowledge.py',
             'character_profile.py',
+            'dialogue_method.py',
             'mod/Fonts/MysticCards.omwfont',
             'data/projects.json',
             'data/project-knowledge.json',
@@ -93,6 +94,9 @@ class SourcePackageTests(unittest.TestCase):
             'native/GenesisEntry.cs',
             'scripts/build_native_entry.py',
             'scripts/build_native_content.py',
+            'tools/visual_field/global.lua',
+            'tools/visual_field/player.lua',
+            'tools/visual_field/actor.lua',
             'mod/scripts/halveth/content_catalog.lua',
             'mod/scripts/halveth/content.lua',
             'mod/scripts/halveth/knowledge.lua',
@@ -113,6 +117,8 @@ class SourcePackageTests(unittest.TestCase):
             'installer/README.md',
             'installer/openmw-0.51.0-runtime-files.txt',
             'mod/shaders/halveth_atmosphere.omwfx',
+            'mod/shaders/halveth_sculpted.omwfx',
+            'mod/shaders/halveth_storybook.omwfx',
             'scripts/convert-banner.mjs',
             'docs/GENERATION-PIPELINE.md',
             'docs/NATIVE-VERIFICATION-0.4.0.json',
@@ -171,6 +177,8 @@ class SourcePackageTests(unittest.TestCase):
             'scripts/logs.log',
             'docs/logs/private-chat.md',
             'runtime/server.py',
+            'tools/private/downloaded.lua',
+            'tools/visual_field/capture.png',
             'assets/.local/ScarletLoveBanner/Textures/Tx_de_tapestry_02.dds',
             'BUILD-0.2.0.json',
             'BUILD-0.3.0.json',
@@ -197,7 +205,7 @@ class SourcePackageTests(unittest.TestCase):
         self.assertIn('8 original paraphrased cards', note)
         self.assertIn('original generated Scarlet Love banner', note)
         self.assertIn('no copied source registry, Bethesda assets', note)
-        self.assertIn('Only the 27 exact owned art/media asset paths and the one original shader source path', note)
+        self.assertIn('Only the 27 exact owned art/media asset paths and the three original shader source paths', note)
         self.assertIn('portal main menu inside OpenMW', note)
         self.assertIn('six original native books', note)
         self.assertIn('three native spells', note)
@@ -246,6 +254,12 @@ class PublicValidationTests(unittest.TestCase):
     def test_missing_original_shader_stops_release(self):
         files=release.collect_files()
         del files[release.OWNED_SHADER]
+        with self.assertRaisesRegex(ValueError,'Missing public release'):
+            release.validate_files(files)
+
+    def test_missing_sculpted_shader_stops_release(self):
+        files=release.collect_files()
+        del files['mod/shaders/halveth_sculpted.omwfx']
         with self.assertRaisesRegex(ValueError,'Missing public release'):
             release.validate_files(files)
 

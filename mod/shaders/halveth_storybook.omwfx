@@ -1,0 +1,76 @@
+uniform_float uStrength {
+    default = 0.85;
+    min = 0.0; max = 1.0; step = 0.05;
+    display_name = "Maerchenwelt / Staerke";
+}
+uniform_float uSurfaceSoftness {
+    default = 0.7;
+    min = 0.0; max = 1.0; step = 0.05;
+    display_name = "Ruhige Materialflaechen";
+}
+uniform_float uRadius {
+    default = 2.0;
+    min = 0.5; max = 3.0; step = 0.25;
+    display_name = "Materialpinsel / Radius";
+}
+uniform_float uColor {
+    default = 0.12;
+    min = 0.0; max = 0.3; step = 0.01;
+    display_name = "Lebendige Farben";
+}
+fragment storybook {
+    // Original HALVETH source, MIT. Spatial, depth-aware material presentation.
+    // No frame history, motion ghosts, generated geometry or UI replacement.
+    omw_In vec2 omw_TexCoord;
+    float luma(vec3 c) { return dot(c, vec3(0.2126,0.7152,0.0722)); }
+    void main() {
+        vec2 uv=omw_TexCoord;
+        vec3 original=omw_GetLastShader(uv).rgb;
+        float depth=omw_GetLinearDepth(uv);
+        if (uStrength<=0.0 || depth<=0.001 || depth>=omw.far*0.995 || omw.isUnderwater) {
+            omw_FragColor=vec4(original,1.0);
+            return;
+        }
+        vec2 pixel=1.0/omw.resolution.xy;
+        float pixelScale=clamp(omw.resolution.y/1440.0,0.5,2.0);
+        vec3 center=max(original,vec3(0.0));
+        vec3 sum=center;
+        float weights=1.0;
+        // A fixed 5x5 bilateral brush preserves silhouettes and high-contrast
+        // eyes, jewellery and weapon edges while calming small texture grain.
+        for(int y=-2;y<=2;++y) {
+            for(int x=-2;x<=2;++x) {
+                if(x==0 && y==0) continue;
+                vec2 offset=vec2(float(x),float(y));
+                vec2 p=clamp(uv+offset*pixel*uRadius*pixelScale,
+                    pixel*0.5,vec2(1.0)-pixel*0.5);
+                float z=omw_GetLinearDepth(p);
+                float sameSurface=1.0-smoothstep(0.0,max(5.0,depth*0.008),abs(z-depth));
+                vec3 sampleColor=max(omw_GetLastShader(p).rgb,vec3(0.0));
+                vec3 delta=(sampleColor-center)/(1.0+luma(center));
+                float w=exp(-dot(offset,offset)*0.22-dot(delta,delta)*20.0)*sameSurface;
+                sum+=sampleColor*w;
+                weights+=w;
+            }
+        }
+        vec3 smoothColor=sum/weights;
+        vec3 c=mix(center,smoothColor,uSurfaceSoftness);
+        float lum=luma(c);
+        float mids=smoothstep(0.025,0.16,lum)*(1.0-smoothstep(0.7,1.35,lum));
+        // Gentle warm midtones keep skin readable under the blue world light.
+        c*=mix(vec3(1.0),vec3(1.055,1.008,0.985),mids);
+        float saturation=uColor*(1.0-smoothstep(0.65,1.5,lum));
+        c=mix(vec3(luma(c)),c,1.0+saturation);
+        // Lift only deep shadows; preserve HDR highlights for the next bloom
+        // pass. This is not a second tonemapper or a hard cel-shading ramp.
+        c+=vec3(0.009,0.011,0.014)*(1.0-smoothstep(0.01,0.26,lum));
+        omw_FragColor=vec4(mix(original,max(c,vec3(0.0)),uStrength),1.0);
+    }
+}
+technique {
+    description = "HALVETH Storybook 1.666: softer materials, clear silhouettes and warm colour. Existing world geometry is retained.";
+    author = "HALVETH";
+    version = "1.0.0";
+    passes = storybook;
+    dynamic = true;
+}

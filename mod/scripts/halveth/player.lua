@@ -21,6 +21,7 @@ local inputText,transcript='','HALVETH ist da. Die Welt hoert zu.\n\nStelle eine
 local dialogueTarget,lastBook,hasAddedMode=nil,nil,false
 local entityMode='jarvis'
 local pendingChat=nil
+local responseState,consoleSpeaker='ready','JARVIS'
 local chooseMode
 local close
 local inventoryItems,inventoryIndex,inventoryFilter,attachedItemId,attachedReference={},1,'all',nil,nil
@@ -31,6 +32,24 @@ local rose=util.color.rgb(1,.58,.77)
 local violet=util.color.rgb(.76,.68,1)
 local cyan=util.color.rgb(.47,.92,.98)
 local mint=util.color.rgb(.57,1,.75)
+local responseLabels={ready='Bereit',waiting='Anfrage gesendet · Antwort ausstehend',
+    answered='Antwort eingetroffen',unavailable='Lokales Modell nicht erreichbar',
+    error='Antwort fehlgeschlagen'}
+
+local function responseLabel()
+    local speaker=pendingChat and pendingChat.speaker or consoleSpeaker
+    return speaker..' · '..responseLabels[responseState]
+end
+local function setResponseState(state)
+    responseState=state
+    if statusLayout then
+        statusLayout.props.text=responseLabel()
+        statusLayout.props.textColor=state=='waiting' and gold
+            or ((state=='unavailable' or state=='error') and rose)
+            or (state=='answered' and mint) or pearl
+        if window then window:update() end
+    end
+end
 
 local function companionOffline()
     local ok,status=pcall(function()
@@ -218,6 +237,7 @@ end
 local function startSession()
     sessionId=string.format('omw-%d-%d-%d',os.time(),math.floor(core.getRealTime()*1000)%1000000000,math.random(100000,999999))
     ready=false;worldId=nil;counter=0;lastSequence=0;seen={};received={};healed={};pendingChat=nil
+    responseState='ready';consoleSpeaker=entityMode=='jarvis' and 'JARVIS' or 'WESEN'
     lastPoll=-100;lastContext=-100;lastRegister=-100;dialogueTarget=nil;lastBook=nil
     attachedItemId=nil;attachedReference=nil;inventoryItems={};inventoryIndex=1;inventoryFilter='all'
 end
@@ -329,7 +349,7 @@ local function submit()
     if bookQuery then clearInput();insertNamedItem(bookQuery,true);return end
     if text:sub(1,1)=='/' then command(text);clearInput();return end
     if not ready then append('Die Weltverbindung wird vorbereitet. Bitte gleich erneut versuchen.');return end
-    if companionOffline() then append('Der lokale Gespraechsbegleiter ist gerade offline. Wissen, Buecher und alle direkten Spielwerkzeuge bleiben nutzbar.');return end
+    if companionOffline() then setResponseState('unavailable');append('Der lokale Gespraechsbegleiter ist gerade offline. Wissen, Buecher und alle direkten Spielwerkzeuge bleiben nutzbar.');return end
     if pendingChat then append('Deine vorige Antwort entsteht noch.');return end
     if #text>16000 or (utf8.len(text) or #text)>4000 then append('Bitte maximal 4000 Zeichen pro Nachricht.');return end
     counter=counter+1
@@ -347,7 +367,9 @@ local function submit()
     end
     if entityMode=='npc' and not c.npc then append('Im aktuellen Kontext ist kein Wesen ausgewaehlt.');return end
     local requestId='chat-'..sessionId..'-'..counter
-    pendingChat={id=requestId,startedAt=core.getRealTime()}
+    pendingChat={id=requestId,startedAt=core.getRealTime(),
+        speaker=entityMode=='npc' and ('WESEN · '..C.head(c.npc.name or 'Wesen',80)) or 'JARVIS'}
+    setResponseState('waiting')
     C.emit({type='chat',sessionId=sessionId,requestId=requestId,entityMode=entityMode,text=text,context=c})
     self:sendEvent('HALVETH_ChatSubmitted',{sessionId=sessionId,requestId=requestId,text=text,contextJson=C.json(c)})
     if entityMode=='npc' and dialogueTarget and I.HALVETHPaths then I.HALVETHPaths.noteNpc(dialogueTarget) end
@@ -370,12 +392,10 @@ local function button(label,x,y,width,fn,color)
 end
 chooseMode=function(mode)
     entityMode=mode
-    if statusLayout then
-        local ok,c=pcall(context)
-        local name=ok and c.npc and c.npc.name or 'kein Wesen in der Naehe'
-        statusLayout.props.text=mode=='jarvis' and 'JARVIS · dein lokaler Weltbegleiter' or ('WESEN · '..name)
-        if window then window:update() end
-    end
+    local ok,c=pcall(context)
+    local name=ok and c.npc and C.head(c.npc.name or 'Wesen',80) or 'kein Wesen in der Naehe'
+    consoleSpeaker=mode=='jarvis' and 'JARVIS' or ('WESEN · '..name)
+    setResponseState(responseState)
 end
 local function open()
     if window then close();return end
@@ -420,8 +440,7 @@ local function open()
             keyPress=async:callback(function(key) if key.code==input.KEY.Enter then submit() end end)}}
     statusLayout={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
         props={position=util.vector2(24,101),size=util.vector2(width-48,33),
-            text=entityMode=='jarvis' and 'JARVIS · dein lokaler Weltbegleiter'
-                or 'WESEN · Dialogziel, Fadenkreuz oder naechstes Wesen',
+            text=responseLabel(),
             textSize=26,textColor=pearl}}
     itemLayout={type=ui.TYPE.Text,template=I.MWUI.templates.textNormal,
         props={position=util.vector2(555,height-278),size=util.vector2(width-580,44),
@@ -475,7 +494,10 @@ local function open()
         props={relativePosition=util.vector2(.5,.46),anchor=util.vector2(.5,.5),size=util.vector2(width,height)},
         content=ui.content(contents)}
     refreshItemLabel()
-    if companionOffline() then append('Gespraechsbegleiter offline. Wissen mit F7 und direkte Spielwerkzeuge funktionieren weiter.') end
+    if companionOffline() and not pendingChat then
+        setResponseState('unavailable')
+        append('Gespraechsbegleiter offline. Wissen mit F7 und direkte Spielwerkzeuge funktionieren weiter.')
+    else setResponseState(responseState) end
     emitContext()
 end
 local function poll()
@@ -489,10 +511,17 @@ local function poll()
     if data.sessionId~=sessionId or not C.finite(data.sequence) or data.sequence%1~=0 or data.sequence<=lastSequence or data.sequence>2147483647 then return end
     lastSequence=data.sequence
     if type(data.reply)=='string' and #data.reply<=24000 then
-        if not data.requestId or (pendingChat and data.requestId==pendingChat.id) then
+        local matching=pendingChat and data.requestId==pendingChat.id
+        if not data.requestId or matching then
             local speaker=(type(data.speaker)=='string' and #data.speaker<=160) and data.speaker or 'HALVETH'
             append(speaker..': '..data.reply)
-            pendingChat=nil
+            -- An ambient message must not complete a different outstanding question.
+            if matching then pendingChat=nil end
+            if not pendingChat then
+                local mode=data.responseMode
+                setResponseState((mode=='OFFLINE' or mode=='MODEL_UNAVAILABLE') and 'unavailable'
+                    or (mode=='ERROR' and 'error') or 'answered')
+            end
             local receipt={type='reply_received',sessionId=sessionId,requestId=data.requestId,
                 speaker=speaker,reply=data.reply,uiOpen=window~=nil}
             C.emit(receipt)
@@ -518,7 +547,8 @@ local function frame()
     end
     if now-lastContext>5 then lastContext=now;emitContext() end
     if pendingChat and now-pendingChat.startedAt>180 then
-        pendingChat=nil;append('Die Antwortverbindung hat noch keine Antwort geliefert. Du kannst erneut schreiben.')
+        pendingChat=nil;setResponseState('error')
+        append('Die Antwortverbindung hat noch keine Antwort geliefert. Du kannst erneut schreiben.')
     end
     if window and I.UI.getMode()~=windowMode then close() end
 end
@@ -550,7 +580,9 @@ return {
         getConsoleState=function()
             local item=inventoryItems[inventoryIndex]
             return {open=window~=nil,mode=entityMode,selectedItemId=item and item.id or nil,
-                attachedItemId=attachedItemId,filter=inventoryFilter,inputText=inputText}
+                attachedItemId=attachedItemId,filter=inventoryFilter,inputText=inputText,
+                responseState=responseState,responseLabel=responseLabel(),
+                pendingRequestId=pendingChat and pendingChat.id or nil}
         end,
         attachItem=function(id)
             if not window then open() end
