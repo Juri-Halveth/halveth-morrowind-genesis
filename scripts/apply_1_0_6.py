@@ -8,6 +8,7 @@ nothing. A live patch needs the game and its installed companion to be closed.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -60,9 +61,11 @@ def is_reparse(path: Path) -> bool:
         info = path.lstat()
     except FileNotFoundError:
         return False
+    # FILE_ATTRIBUTE_REPARSE_POINT is 0x400 on every supported Windows build.
+    # Keep the literal as a fallback for Python versions without the stat name.
     return (stat.S_ISLNK(info.st_mode)
-            or bool(getattr(info, 'st_file_attributes', 0)
-                    & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0)))
+            or bool(getattr(info, 'st_file_attributes', 0) & 0x400)
+            or (hasattr(path, 'is_junction') and path.is_junction()))
 
 
 def check_components(path: Path) -> None:
@@ -121,28 +124,77 @@ def _windows_processes() -> list[dict]:
     return values
 
 
+def _windows_command_args(command: str) -> list[str]:
+    """Parse the process's Windows command line without losing quoted paths."""
+    argc = ctypes.c_int()
+    parser = ctypes.windll.shell32.CommandLineToArgvW
+    parser.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
+    parser.restype = ctypes.POINTER(ctypes.c_wchar_p)
+    argv = parser(command, ctypes.byref(argc))
+    if not argv:
+        raise RuntimeError('Windows-Prozessargumente sind nicht lesbar.')
+    try:
+        return [argv[index] for index in range(argc.value)]
+    finally:
+        free = ctypes.windll.kernel32.LocalFree
+        free.argtypes = [ctypes.c_void_p]
+        free.restype = ctypes.c_void_p
+        free(ctypes.cast(argv, ctypes.c_void_p))
+
+
+def _canonical_absolute(path: str | Path) -> Path | None:
+    """Expand existing Windows 8.3 path segments before process comparison."""
+    candidate = Path(path)
+    if not candidate.is_absolute():
+        return None
+    try:
+        return candidate.resolve(strict=False)
+    except (OSError, RuntimeError):
+        return None
+
+
+def _same_process_file(path: str, expected: Path) -> bool:
+    candidate = _canonical_absolute(path)
+    if candidate is None:
+        return False
+    try:
+        return os.path.samefile(candidate, expected)
+    except OSError:
+        return candidate == expected.resolve(strict=False)
+
+
 def ensure_game_closed(installed: Path) -> None:
     if os.name != 'nt':
         return
-    base = str(installed).casefold().replace('/', '\\')
-    server = str(installed / 'app' / 'server.py').casefold().replace('/', '\\')
-    runtime = str(installed / 'runtime').casefold().replace('/', '\\') + '\\'
-    launcher = str(installed / 'HALVETH Morrowind.exe').casefold().replace('/', '\\')
+    server = installed / 'app' / 'server.py'
+    runtime = (installed / 'runtime').resolve(strict=False)
+    launcher = installed / 'HALVETH Morrowind.exe'
     for item in _windows_processes():
         name = str(item.get('Name') or '').casefold()
-        exe = str(item.get('ExecutablePath') or '').casefold().replace('/', '\\')
-        command = str(item.get('CommandLine') or '').casefold().replace('/', '\\')
+        exe = str(item.get('ExecutablePath') or '')
+        command = str(item.get('CommandLine') or '')
+        exe_path = _canonical_absolute(exe) if exe else None
         pid = item.get('ProcessId')
         if name == 'openmw.exe':
             # An unrelated OpenMW is conservatively stopped at this point too:
             # changing native mod bytes while any world is running is unsafe.
             raise RuntimeError(f'OpenMW laeuft noch (PID {pid}); bitte normal beenden.')
-        if name == 'halveth morrowind.exe' and (exe == launcher or not exe):
+        if name == 'halveth morrowind.exe' and (not exe or _same_process_file(exe, launcher)):
             raise RuntimeError(f'Genesis-Launcher laeuft noch (PID {pid}).')
         if name in ('python.exe', 'pythonw.exe'):
-            if exe.startswith(runtime) or server in command:
+            if exe_path is not None and exe_path.is_relative_to(runtime):
                 raise RuntimeError(f'Genesis-Begleiter laeuft noch (PID {pid}); bitte normal beenden.')
-            if not exe and base in command:
+            arguments = _windows_command_args(command) if command else []
+            for argument in arguments[1:]:
+                if Path(argument).name.casefold() != 'server.py':
+                    continue
+                if _same_process_file(argument, server):
+                    raise RuntimeError(f'Genesis-Begleiter laeuft noch (PID {pid}); bitte normal beenden.')
+                if not Path(argument).is_absolute():
+                    # WMI does not expose this process's working directory;
+                    # a relative server.py might be our companion.
+                    raise RuntimeError(f'Ein Python-Serverprozess ist nicht eindeutig lesbar (PID {pid}).')
+            if not exe and not command:
                 raise RuntimeError(f'Ein Genesis-Prozess ist nicht eindeutig lesbar (PID {pid}).')
 
 

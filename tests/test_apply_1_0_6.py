@@ -181,9 +181,12 @@ class ForwardPatchTests(unittest.TestCase):
 
     def test_reparse_component_blocks_without_symlink_privilege(self):
         actual = update.is_reparse
+        marked = self.file.parent.resolve(strict=True)
 
         def mark_parent(path):
-            return path == self.file.parent or actual(path)
+            # Windows CI may create %TEMP% with an 8.3 ancestor (RUNNER~1),
+            # while preflight has canonicalized it to runneradmin.
+            return path.resolve(strict=False) == marked or actual(path)
 
         with patch.object(update, 'is_reparse', side_effect=mark_parent):
             with self.assertRaisesRegex(ValueError, 'reparse'):

@@ -120,8 +120,10 @@ class GraphicsOverlayTests(unittest.TestCase):
         self.assertLess(lines.index(ordinary), lines.index(app_mod))
         self.assertLess(lines.index(app_mod), lines.index(override))
         self.assertLess(lines.index("content=Visuals.esp"), lines.index("content=halveth.omwscripts"))
-        self.assertEqual(receipt["graphics"]["shader_files"]["fixture"],
-                         str(self.override / "Shaders" / "fixture.omwfx"))
+        # Windows runners may spell the same temp directory as RUNNER~1 or
+        # runneradmin; compare the selected file, not its path spelling.
+        self.assertTrue(Path(receipt["graphics"]["shader_files"]["fixture"]).samefile(
+            self.override / "Shaders" / "fixture.omwfx"))
         self.assertEqual(receipt["graphics"]["visual_plugins"][0]["recordCounts"]["STAT"], 1)
 
 
