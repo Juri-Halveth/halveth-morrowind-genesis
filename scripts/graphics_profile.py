@@ -223,7 +223,7 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
     # valid YAML and avoids another Python dependency. Values match upstream
     # uniform types and declared ranges; all are editable via the F2 menu.
     uniforms = {
-        "ssao": {"cfg_samples": 48 if cinematic else 20, "cfg_intensity": 3.5, "cfg_radius": 100.0,
+        "ssao": {"cfg_samples": 48 if cinematic else 24, "cfg_intensity": 2.2, "cfg_radius": 65.0,
                  "cfg_temporal_filtering": 0.75, "cfg_blur_factor": 1.0},
         "clouds": {"sampling_quality": 1.5 if cinematic else 0.0, "cloud_detail": 3,
                    "mist_density": 0.18 if cinematic else 0.12, "interior_mist": 0.025, "point_glow_intensity": 0.2,
@@ -231,5 +231,6 @@ def recommendations(profile: str, shaders: list[str]) -> tuple[dict, dict]:
         "bloomlinear": {"uStrength": 0.12 if cinematic else 0.08, "uThreshold": 0.5, "uRadius": 0.4},
         "hdr_linear": {"neutral_point": 0.335, "sensitivity": 0.11, "max_exposure": 1.25},
         "FollowerAA": {"uRange": 6.0 if cinematic else 5.0, "uMSAACompatibilityHack": 0.0},
+        "halveth_sculpted": {"uStrength": 0.65, "uDetail": 0.22, "uWarmth": 0.12},
     }
     return settings, {name: uniforms[name] for name in shaders if name in uniforms}

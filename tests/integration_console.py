@@ -45,6 +45,7 @@ return {engineHandlers={onFrame=function()
             assert(not launcher.visible and launcher.entryCount==0,'intro-spoiling launcher appeared')
             I.HALVETH.open()
             assert(I.HALVETH.isOpen(),'native F8 window did not open')
+            assert(I.HALVETH.getConsoleState().responseState=='ready','fresh console not ready')
             phase,phaseAt='console',now
         elseif phase=='console' and now-phaseAt>.4 then
             local launcher=I.HALVETHUniverse.getLauncherState()
@@ -86,6 +87,10 @@ end},eventHandlers={
             assert(item.book.text==book.text,'authored book text was not attached')
             assert(data.text=='Was ist dieses Buch?','the question changed during submission')
             assert(I.HALVETH.getConsoleState().attachedItemId==nil,'attachment not cleared after send')
+            local response=I.HALVETH.getConsoleState()
+            assert(response.responseState=='waiting' and response.pendingRequestId==data.requestId,
+                'native status not bound to the submitted request')
+            assert(response.responseLabel:find('Antwort ausstehend',1,true),'pending status not readable')
             phase='citizens_spawn'
             self:sendEvent('HALVETH_TestChat',{text='/buerger rufen'})
         end)
