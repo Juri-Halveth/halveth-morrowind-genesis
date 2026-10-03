@@ -1,0 +1,51 @@
+name: LEVIATH workshop source checks
+on:
+  push:
+    paths:
+      - 'experiments/leviath-workshop/**'
+      - '.github/workflows/leviath-workshop.yml'
+  pull_request:
+    paths:
+      - 'experiments/leviath-workshop/**'
+      - '.github/workflows/leviath-workshop.yml'
+permissions:
+  contents: read
+jobs:
+  rule-and-bash-checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: experiments/leviath-workshop
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Bash syntax
+        run: bash -n scripts/workshop.sh scripts/fetch-assets.sh scripts/check-lua.sh tools/essences.sh tests/check-essences.sh presentation/CHECK_HUD.sh
+      - name: Delivery rule model
+        run: bash scripts/workshop.sh check
+      - name: Bash controller and asset failure paths
+        run: |
+          if [[ "$RUNNER_OS" == Windows ]]; then
+            export WORKSHOP_BASH="$(cygpath -w "$(command -v bash)")"
+          fi
+          python -m unittest discover -s tests -v
+      - name: Bounded temporary work and byte snapshots
+        run: bash tests/check-essences.sh
+      - name: Own-source publication allowlist
+        run: python scripts/package.py
+      - name: Lua 5.1 declared API harness
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y lua5.1
+          VEYRA_TEST_LUA=lua5.1 bash scripts/check-lua.sh
+          VEYRA_TEST_LUA=lua5.1 bash presentation/CHECK_HUD.sh

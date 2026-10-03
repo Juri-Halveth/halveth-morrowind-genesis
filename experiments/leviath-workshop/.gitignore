@@ -1,0 +1,17 @@
+.local/
+__pycache__/
+*.py[cod]
+CHECK_RECEIPT.json
+ASSET_RECEIPT.json
+SOURCE_MANIFEST.json
+*.tga
+*.omwsave
+*.bsa
+*.esm
+*.esp
+*.dll
+*.exe
+*.log
+*.part.*
+*.download-lock/
+play.lock/

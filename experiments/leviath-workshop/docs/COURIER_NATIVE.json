@@ -1,0 +1,48 @@
+{
+  "schema": "veyra.workshop.courier.native-scope.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "startedAtUtc": "2026-10-03T01:33:08.167771+00:00",
+  "finishedAtUtc": "2026-10-03T01:33:56.857387+00:00",
+  "exitCode": 0,
+  "complete": true,
+  "checks": [
+    "ONE_DAY_STILL_DEPOT",
+    "THREE_DAYS_TEN_CELLS",
+    "MOVED_TARGET_ROUTE",
+    "FIVE_DAYS_ARRIVAL",
+    "BACKWARDS_TIME_NO_TRAVEL",
+    "REAL_DISABLED_DEPOT",
+    "GIFT_NOT_IN_PLAYER_INVENTORY",
+    "PRE_DELAY",
+    "AFTER_ONE_DAY_STILL_DEPOT",
+    "ENGINE_NPC_CREATED",
+    "NPC_APPROACHED_PLAYER",
+    "ENGINE_INVENTORY_GIFT_TRANSFER",
+    "BOTH_ITEMS_DELIVERED",
+    "DUPLICATE_CLAIM_NO_DUPLICATION"
+  ],
+  "moduleHashes": {
+    "gameplay/mod/scripts/veyra_courier/config.lua": "79e85fa08e00423721098652e116696aaf425b0f5b1f095b490bbf4c5afaeb15",
+    "gameplay/mod/scripts/veyra_courier/routes.lua": "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545",
+    "gameplay/mod/scripts/veyra_courier/global.lua": "95150dda24b32a14f720714f0b44a3f255597658aadc4c9cf400738bd71b6443",
+    "gameplay/mod/scripts/veyra_courier/player.lua": "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25",
+    "gameplay/mod/veyra-courier.omwscripts": "1b3bbefd3d6619347203fc324eaf12fc71256b064a138fffbb805524889ee8ad"
+  },
+  "localRawReceiptDigest": "9bd6f859c713edf2c01ed187654fe0832cd00b0c586d1011d3add83ffd2cb4ee",
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "networkEffects": 0,
+  "fixture": "ONE_SYNTHETIC_PARCEL_IN_ISOLATED_SINGLEPLAYER_PROFILE",
+  "inventoryScope": "PREVIOUSLY_ABSENT_GIFT_WEAPON_PLUS_UNIQUE_OWN_LETTER",
+  "unverified": [
+    "existing inventory stack merge",
+    "all navigation meshes and interiors",
+    "courier death recovery",
+    "remote guests and authentication",
+    "save and reload (separate running check)"
+  ],
+  "claimCeiling": "SYNTHETIC_SINGLEPLAYER_COURIER_FIXTURE_ONLY"
+}
