@@ -1,12 +1,13 @@
 # LEVIATH Workshop for an existing Morrowind world
 
-Workshop0.2.0 adds an owned additive Frontier, Plaza, trees and scenery, portals,
+Workshop0.2.1 retains the owned additive Frontier, Plaza, trees and scenery, portals,
 construction, three residents with measured daily travel, HUD0.1.4, and the
 shared player-panel coordinator. The new installer copies only the exact own
 modules and separately licensed CC0 materials into a new profile while keeping
 the existing game and runtime as read-only inputs. See the current
 [Git Bash world provisioning commands](docs/WORLD_PROVISIONING.md),
-[0.2.0 observations and open checks](docs/RELEASE_0.2.0.md), and
+[0.2.0 observations and open checks](docs/RELEASE_0.2.0.md),
+[0.2.1 CI and path assertion patch](docs/RELEASE_0.2.1.md), and
 [exact asset/license bindings](docs/OWN_ASSET_BINDINGS.json).
 
 The sections below retain the historical0.1.2 source baseline and its original

@@ -103,16 +103,33 @@ class WorldProvisionTests(unittest.TestCase):
         relative='scripts/veyra_portal/player.lua'
         p=self.root/'game refs'/relative;p.parent.mkdir(parents=True)
         source=world.ROOT/'gameplay/portal/mod'/relative;p.write_bytes(source.read_bytes())
-        plan=self.plan(('portal',));self.assertIn(str(p),{r['path'] for r in plan['inputs']})
+        plan=self.plan(('portal',));self.assertIn(p.resolve(),{Path(r['path']).resolve() for r in plan['inputs']})
         p.write_bytes(b'OWN_CHANGED_EXISTING_SOURCE')
         with self.assertRaisesRegex(ValueError,'bound input changed'):world.apply_plan(plan)
         self.assertFalse(self.destination.exists());self.assert_originals()
 
     def test_base_content_changed_after_plan_is_bound_without_copy(self):
         plan=self.plan(('frontier',));p=self.root/'game refs/Morrowind.esm'
-        self.assertIn(str(p),{r['path'] for r in plan['inputs']})
-        self.assertNotIn(str(p),{r['path'] for r in plan['payload']})
+        self.assertIn(p.resolve(),{Path(r['path']).resolve() for r in plan['inputs']})
+        self.assertNotIn(p.resolve(),{Path(r['path']).resolve() for r in plan['payload']})
         p.write_bytes(b'OWN_CHANGED_CONTENT_FIXTURE')
+        with self.assertRaisesRegex(ValueError,'bound input changed'):world.apply_plan(plan)
+        self.assertFalse(self.destination.exists());self.assert_originals()
+
+    def test_existing_source_alias_remains_bound_and_cannot_enter_the_payload(self):
+        relative='scripts/veyra_portal/player.lua'
+        p=self.root/'game refs'/relative;p.parent.mkdir(parents=True)
+        source=world.ROOT/'gameplay/portal/mod'/relative;p.write_bytes(source.read_bytes())
+        alias_base=self.base/'..'/self.base.name
+        alias_content=self.base/'..'/'game refs/Morrowind.esm'
+        self.assertNotEqual(str(alias_base),str(self.base))
+        self.assertTrue(os.path.samefile(alias_base,self.base))
+        plan=world.make_plan(alias_base,self.engine,self.destination,('portal',))
+        inputs={Path(r['path']).resolve() for r in plan['inputs']}
+        payload={Path(r['path']).resolve() for r in plan['payload']}
+        self.assertIn(p.resolve(),inputs);self.assertIn(alias_content.resolve(),inputs)
+        self.assertNotIn(alias_content.resolve(),payload)
+        p.write_bytes(b'OWN_CHANGED_SOURCE_AFTER_ALIAS_PLAN')
         with self.assertRaisesRegex(ValueError,'bound input changed'):world.apply_plan(plan)
         self.assertFalse(self.destination.exists());self.assert_originals()
 

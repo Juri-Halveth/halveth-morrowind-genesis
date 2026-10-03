@@ -44,6 +44,7 @@ jobs:
         run: |
           python presentation/build-assets.py
           python presentation/check-assets.py
+          python presentation/hud014/build-assets.py
           python presentation/hud014/check-assets.py
       - name: Exact current own-source and separately licensed asset allowlist
         run: python scripts/package-world.py

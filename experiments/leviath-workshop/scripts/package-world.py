@@ -26,7 +26,7 @@ NATIVE_FILES={'docs/WORLD_NATIVE.json','docs/HUD014_NATIVE.json','docs/PORTAL_NA
               'docs/COURIER024_NATIVE.json','docs/PROVISION_WORLD_NATIVE.json','docs/CORE_NATIVE.json'}
 EXTRA_FIXED={'scripts/provision-world.py','scripts/provision-world.sh','scripts/package-world.py','scripts/check-world-lua.sh',
              'tests/test_world_provision.py','tests/test_world_package.py','docs/WORLD_PROVISIONING.md',
-             'docs/OWN_ASSET_BINDINGS.json','docs/KEY_CAPABILITY.json','docs/RELEASE_0.2.0.md','docs/ENGINE_API_BINDINGS.json',
+             'docs/OWN_ASSET_BINDINGS.json','docs/KEY_CAPABILITY.json','docs/RELEASE_0.2.0.md','docs/RELEASE_0.2.1.md','docs/ENGINE_API_BINDINGS.json',
              'presentation/spatial-audio/KENNEY-LICENSE.txt','presentation/spatial-audio/ASSET_RECEIPT.json'}
 NEW_TEXT=EXTRA_FIXED|{prefix+'/'+name for prefix,names in UNITS.items() for name in names}
 ASSETS={
@@ -155,7 +155,7 @@ def collect(require_native=True):
 
 def manifest(files,accepted):
     rows=[{'path':name,'bytes':len(raw),'sha256':sha(raw)} for name,raw in sorted(files.items())]
-    return{'schema':'veyra.workshop.own-source-assets-manifest.v2','dataClass':'PUBLIC','version':'0.2.0',
+    return{'schema':'veyra.workshop.own-source-assets-manifest.v2','dataClass':'PUBLIC','version':'0.2.1',
            'scope':'EXACT_OWN_SOURCE_MIT_ASSETS_AND_SEPARATE_CC0_ALLOWLIST','files':rows,
            'filesDigest':sha(json.dumps(rows,sort_keys=True,separators=(',',':')).encode()),
            'bytes':sum(len(raw) for raw in files.values()),'ownedGeneratedAssetFiles':len(ASSETS-CC0_ASSETS),
