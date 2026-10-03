@@ -1,0 +1,2 @@
+GLOBAL: scripts/veyra_fieldwork/global.lua
+PLAYER: scripts/veyra_fieldwork/player.lua

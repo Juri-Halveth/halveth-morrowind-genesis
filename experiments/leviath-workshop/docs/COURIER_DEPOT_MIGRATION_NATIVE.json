@@ -1,0 +1,43 @@
+{
+  "schema": "veyra.workshop.courier.native-scope.v2",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "moduleVersion": "0.2.3",
+  "saveSchema": 2,
+  "runPhase": "DEPOT_SCHEMA1_TO_SCHEMA2",
+  "startedAtUtc": "2026-10-03T02:25:29.241515+00:00",
+  "finishedAtUtc": "2026-10-03T02:25:51.446534+00:00",
+  "exitCode": 0,
+  "complete": true,
+  "checks": [
+    "PRE_DISPATCH_SAVE_STATE_RESTORED",
+    "HIDDEN_DEPOT_TWO_REAL_ITEMS_RESTORED",
+    "NO_PREMATURE_COURIER_ON_RELOAD",
+    "EARLY_RELOAD_CLAIM_NOT_AWARDED"
+  ],
+  "moduleHashes": {
+    "gameplay/mod/veyra-courier.omwscripts": "1b3bbefd3d6619347203fc324eaf12fc71256b064a138fffbb805524889ee8ad",
+    "gameplay/mod/scripts/veyra_courier/config.lua": "df082e225658bf65f13403f2f90a5b09de90834683046f9a657cdbbdfe80c4b6",
+    "gameplay/mod/scripts/veyra_courier/global.lua": "16e8bd6fe003d4047f8c4c0eee462ddbf851d2bb9507403e4d5f54c682ebf904",
+    "gameplay/mod/scripts/veyra_courier/player.lua": "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25",
+    "gameplay/mod/scripts/veyra_courier/routes.lua": "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545"
+  },
+  "localRawReceiptDigest": "6ef56fa4b25a9fcbcdee28b6173bc315efbcda72d8347efec66d4011dc595f2c",
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "networkEffects": 0,
+  "fixture": "OWN_ISOLATED_SINGLEPLAYER_SINGLE_PARCEL",
+  "inventoryScope": "FULL_CONDITION_UNENCHANTED_DAEDRIC_LONGSWORD_AND_OWN_LETTER",
+  "provenance": "SAME_LOCAL_ENGINE_AND_OWN_COURIER_MODULES_CORRELATED_RUNS",
+  "unverified": [
+    "arbitrary condition, charge and soul combinations",
+    "inventory mutation by other mods during transfer",
+    "courier death recovery and interior follow",
+    "multiple simultaneous deliveries",
+    "remote guests and authentication"
+  ],
+  "legacyTransferringState": "SCHEMA1_WITHOUT_PRETRANSFER_WITNESS_RETAINS_TRANSFER_HOLD",
+  "claimCeiling": "SYNTHETIC_SINGLEPLAYER_COURIER_FIXTURE_ONLY"
+}
