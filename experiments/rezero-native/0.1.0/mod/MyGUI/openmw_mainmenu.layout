@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- New layout shell. Native 0.51 MainMenu creates and binds real ImageButtons. -->
+<MyGUI type="Layout">
+  <Widget type="Widget" layer="MainMenu" position="0 0 1 1" name="_Main">
+    <Widget type="EditBox" skin="MW_TextBoxEdit" position="-480 -70 460 55" align="Bottom Right" name="VersionText">
+      <Property key="TextAlign" value="Right"/>
+      <Property key="TextColour" value="0.57 0.65 0.66"/>
+      <Property key="TextShadow" value="true"/>
+      <Property key="TextShadowColour" value="0 0 0"/>
+      <Property key="ReadOnly" value="true"/>
+      <Property key="MultiLine" value="true"/>
+    </Widget>
+  </Widget>
+</MyGUI>

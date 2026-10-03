@@ -1,0 +1,236 @@
+[
+  {
+    "recordId": "flora_bush_01",
+    "kind": "STAT",
+    "model": "rezero/flora_bush_01.dae",
+    "modelSha256": "6f5c2a1423f0f23d6ae9f22f2696843b48d50cb99aae3c8e307a25bb63969336"
+  },
+  {
+    "recordId": "flora_ivy_01",
+    "kind": "STAT",
+    "model": "rezero/flora_ivy_01.dae",
+    "modelSha256": "302ef3fca641112aa45f3e2171a0df90760ae0889150fdb3591aa58187dc1e1a"
+  },
+  {
+    "recordId": "flora_ivy_02",
+    "kind": "STAT",
+    "model": "rezero/flora_ivy_02.dae",
+    "modelSha256": "d1fdd2259f9a9f7377fe8773a3611d83ff764dc3d6ffa2ee360af2beff607166"
+  },
+  {
+    "recordId": "furn_com_planter",
+    "kind": "STAT",
+    "model": "rezero/furn_com_planter.dae",
+    "modelSha256": "ce45e48993ea617d287c8d94361ba59bbe871bd56487860f236e40ef49a5646a"
+  },
+  {
+    "recordId": "furn_com_r_chair_01",
+    "kind": "STAT",
+    "model": "rezero/furn_com_r_chair_01.dae",
+    "modelSha256": "0b1efca0f66621fd277d1f634a8914e69c31d743be2f604521a3e78a6f39714f"
+  },
+  {
+    "recordId": "furn_com_r_table_01",
+    "kind": "STAT",
+    "model": "rezero/furn_com_r_table_01.dae",
+    "modelSha256": "d3e778f61f395a1ef95213632f9679539c5ef72de2924a9970c9758ed292d950"
+  },
+  {
+    "recordId": "furn_com_rm_bench_02",
+    "kind": "STAT",
+    "model": "rezero/furn_com_rm_bench_02.dae",
+    "modelSha256": "652ffe313ed00d389362a9444d8545309506d4703363c164b02d6657b45a6d0d"
+  },
+  {
+    "recordId": "furn_com_rm_bookshelf_02",
+    "kind": "STAT",
+    "model": "rezero/furn_com_rm_bookshelf_02.dae",
+    "modelSha256": "9c4cafa52e8e3cd7c39f8b0613ffa5ef330867bc9abcc3dc10de891fca3c22d5"
+  },
+  {
+    "recordId": "furn_com_rm_chair_03",
+    "kind": "STAT",
+    "model": "rezero/furn_com_rm_chair_03.dae",
+    "modelSha256": "b4c79f453cf84b8c141a1deb0045526ca931e042da2abf76816faf99a057fd4c"
+  },
+  {
+    "recordId": "furn_com_rm_table_04",
+    "kind": "STAT",
+    "model": "rezero/furn_com_rm_table_04.dae",
+    "modelSha256": "fd7187c219d12360541a5ad9361da2a6159dd877251119c0c41c16f27e7d422d"
+  },
+  {
+    "recordId": "furn_com_tapestry_01",
+    "kind": "STAT",
+    "model": "rezero/furn_com_tapestry_01.dae",
+    "modelSha256": "e0086573f24509f2824687d2bf50558046d2e594bc75f03c798807fd74c4cbf8"
+  },
+  {
+    "recordId": "furn_com_tapestry_02",
+    "kind": "STAT",
+    "model": "rezero/furn_com_tapestry_02.dae",
+    "modelSha256": "6c19de7255f936bbf0c8d9243369a22b243373a2ea54e592217c8d2f5b6160ae"
+  },
+  {
+    "recordId": "furn_com_tapestry_04",
+    "kind": "STAT",
+    "model": "rezero/furn_com_tapestry_04.dae",
+    "modelSha256": "3a7d8a02484426482fe7cd023c30b66492401177194bf1b90d520e58616e41c1"
+  },
+  {
+    "recordId": "furn_de_rug_big_06",
+    "kind": "STAT",
+    "model": "rezero/furn_de_rug_big_06.dae",
+    "modelSha256": "b9e81a644b6fc1fb8c0062a0807743f1838a8461ec87cd9cc6e062549894994c"
+  },
+  {
+    "recordId": "furn_de_rug_big_07",
+    "kind": "STAT",
+    "model": "rezero/furn_de_rug_big_07.dae",
+    "modelSha256": "f3478d5f511a73d29eccdaae647b1666828fa31188ad748939c7797d80de63f2"
+  },
+  {
+    "recordId": "in_impbig_4way_01",
+    "kind": "STAT",
+    "model": "rezero/in_impbig_4way_01.dae",
+    "modelSha256": "62cbbd7b3127839b7b0635f27fd67bd0caed5aa6ad3c8734802ab8f8bbdf7b58"
+  },
+  {
+    "recordId": "in_impbig_blend_01",
+    "kind": "STAT",
+    "model": "rezero/in_impbig_blend_01.dae",
+    "modelSha256": "353038916acd28d4abc6686dd9a3a2ca235e650af4deeeac0c85f7d99673586f"
+  },
+  {
+    "recordId": "in_impbig_wall_01",
+    "kind": "STAT",
+    "model": "rezero/in_impbig_wall_01.dae",
+    "modelSha256": "266b9d064a71f9a45d3f86fa425863117fea32752a64cfd2aca6144bff624262"
+  },
+  {
+    "recordId": "in_impsmall_doorjam_01",
+    "kind": "STAT",
+    "model": "rezero/in_impsmall_doorjam_01.dae",
+    "modelSha256": "d4511d0409494d82ebf7a204656a0ecfa5cd2519de607fa0498c8c9da194fa06"
+  },
+  {
+    "recordId": "light_com_candle_01_64",
+    "kind": "LIGH",
+    "model": "rezero/light_com_candle_01_64.dae",
+    "modelSha256": "569d596c2fae40e93e02be5c6a78489eefb16f53c1a833bd8a1e6fedeb91a7f3"
+  },
+  {
+    "recordId": "light_com_candle_10_64",
+    "kind": "LIGH",
+    "model": "rezero/light_com_candle_10_64.dae",
+    "modelSha256": "5b2dd9a84246f23ebc41872a92324fce8012b3da41bd334f9755704a08f56fd2"
+  },
+  {
+    "recordId": "misc_com_bottle_05",
+    "kind": "MISC",
+    "model": "rezero/misc_com_bottle_05.dae",
+    "modelSha256": "da08acc25bdacc7b2280e9f2914fd1cf49a8c431220a07cafba9a2d5bcb6074e"
+  },
+  {
+    "recordId": "misc_com_bottle_08",
+    "kind": "MISC",
+    "model": "rezero/misc_com_bottle_08.dae",
+    "modelSha256": "07d62342d29d6f024cf1d3fd93b3ce3dcd4628acfcaf8c61ad3dc6e2b66c74b3"
+  },
+  {
+    "recordId": "misc_com_bottle_10",
+    "kind": "MISC",
+    "model": "rezero/misc_com_bottle_10.dae",
+    "modelSha256": "f4ed78fbfb6b4d6572b690c94c86e611888a0f715e250279a65de05d93005a84"
+  },
+  {
+    "recordId": "misc_com_bottle_14",
+    "kind": "MISC",
+    "model": "rezero/misc_com_bottle_14.dae",
+    "modelSha256": "c745e772540ccb778930c06505c8ef135f50748c0dd1903cb00b1a69d1e84797"
+  },
+  {
+    "recordId": "misc_com_metal_goblet_01",
+    "kind": "MISC",
+    "model": "rezero/misc_com_metal_goblet_01.dae",
+    "modelSha256": "3996777e8ed1b3493e1e90eb701ee8c18544e0d709df9470b08c25bf2f3af8f3"
+  },
+  {
+    "recordId": "misc_com_metal_goblet_02",
+    "kind": "MISC",
+    "model": "rezero/misc_com_metal_goblet_02.dae",
+    "modelSha256": "9b2984aaac81ab23ac48fa306fd6490b86340af50e095c099bc37816cdf0f496"
+  },
+  {
+    "recordId": "misc_com_metal_plate_05",
+    "kind": "MISC",
+    "model": "rezero/misc_com_metal_plate_05.dae",
+    "modelSha256": "0922b4a5000f1f0a665fe944d0be604194163bc738fb7990245056f3f8bc9f24"
+  },
+  {
+    "recordId": "misc_com_pitcher_metal_01",
+    "kind": "MISC",
+    "model": "rezero/misc_com_pitcher_metal_01.dae",
+    "modelSha256": "85682c340501dfbc8b5bea578b101c7b01bf440669db401f4427794ff36a9a5f"
+  },
+  {
+    "recordId": "misc_com_redware_bowl",
+    "kind": "MISC",
+    "model": "rezero/misc_com_redware_bowl.dae",
+    "modelSha256": "410aa3ce0daf0241f4d3e8e089561514d023a56dc7d0555d8b202c0c1cbc3ddf"
+  },
+  {
+    "recordId": "misc_com_redware_cup",
+    "kind": "MISC",
+    "model": "rezero/misc_com_redware_cup.dae",
+    "modelSha256": "30498ba0f31239178466cead71cfa9c6b3d278628b1ffebaf30c9e0c670152c1"
+  },
+  {
+    "recordId": "misc_com_redware_flask",
+    "kind": "MISC",
+    "model": "rezero/misc_com_redware_flask.dae",
+    "modelSha256": "199314ed0141cc1bc1e9729b2ad59f12a5f7b1471ae97bf8ecbadf344a7d3c92"
+  },
+  {
+    "recordId": "misc_com_redware_pitcher",
+    "kind": "MISC",
+    "model": "rezero/misc_com_redware_pitcher.dae",
+    "modelSha256": "3d4d7c23fc90bc51419108da1bca06269207290a36229ee17096f94f2791d8d4"
+  },
+  {
+    "recordId": "misc_com_redware_platter",
+    "kind": "MISC",
+    "model": "rezero/misc_com_redware_platter.dae",
+    "modelSha256": "98b36000d548d3824b4a8e49e04f4889e7540af1ec8355475fd30a372fae6ed8"
+  },
+  {
+    "recordId": "misc_com_tankard_01",
+    "kind": "MISC",
+    "model": "rezero/misc_com_tankard_01.dae",
+    "modelSha256": "99678c120634f47d6def42b9e2df72dbfab431ffcb91920e840e465ae8537772"
+  },
+  {
+    "recordId": "misc_com_wood_bowl_01",
+    "kind": "MISC",
+    "model": "rezero/misc_com_wood_bowl_01.dae",
+    "modelSha256": "99488671c63d87b02287efb799769dde51794b16e406fb6c2b62031606c0bd78"
+  },
+  {
+    "recordId": "misc_imp_silverware_bowl",
+    "kind": "MISC",
+    "model": "rezero/misc_imp_silverware_bowl.dae",
+    "modelSha256": "f4a0c68a7213a4e1dbfaa267927c8e48ace41343dd45648df3cf003da8014f57"
+  },
+  {
+    "recordId": "misc_imp_silverware_cup_01",
+    "kind": "MISC",
+    "model": "rezero/misc_imp_silverware_cup_01.dae",
+    "modelSha256": "cdbbad0babf064264cd06aac17a1503ed0ce66fa1d707124c409888cde2710ae"
+  },
+  {
+    "recordId": "misc_imp_silverware_pitcher",
+    "kind": "MISC",
+    "model": "rezero/misc_imp_silverware_pitcher.dae",
+    "modelSha256": "6c11821ea3213100d9ab09569576f32ea21a89e74b2e2b43e11af4d69889fd6b"
+  }
+]
