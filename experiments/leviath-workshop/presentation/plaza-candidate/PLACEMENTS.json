@@ -1,0 +1,64 @@
+{
+  "schema": "veyra.plaza-placement.v1",
+  "version": "0.1.0",
+  "frontierPluginSha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+  "frontierEntrySha256": "e79d41749cb8084edf2fb70a91a07aec13a3869bfac52a0beef683d21d02c1f2",
+  "plugin": "LEVIATH-Plaza.esp",
+  "pluginSha256": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69",
+  "worldFloorZ": 328,
+  "worldModelOriginZ": 320,
+  "visibleGeometryBaseLocalZ": -64,
+  "placements": [
+    {
+      "id": "veyra_plaza_arrival",
+      "reference": 257,
+      "position": [
+        536576.0,
+        -512000.0,
+        320.0
+      ],
+      "rotationZ": 0.0,
+      "coordinates": [
+        65,
+        -63
+      ]
+    },
+    {
+      "id": "veyra_plaza_approach",
+      "reference": 258,
+      "position": [
+        537563.3125,
+        -511012.65625,
+        320.0
+      ],
+      "rotationZ": 0.0,
+      "coordinates": [
+        65,
+        -63
+      ]
+    },
+    {
+      "id": "veyra_plaza_arena",
+      "reference": 259,
+      "position": [
+        540672.0,
+        -507904.0,
+        320.0
+      ],
+      "rotationZ": 0.0,
+      "coordinates": [
+        66,
+        -62
+      ]
+    }
+  ],
+  "placementPositionEncoding": "TES3_FLOAT32_ROUND_TO_NEAREST_BOUND_IN_MANIFEST",
+  "materialDependency": {
+    "path": "Textures/veyra/frontier/frontier_stone.dds",
+    "sha256": "d54f2025d173e9ade36d1e011c20b0f2e4667e2afe353013a5f05cff1b0bad31",
+    "source": "OWN_TEXTURE_CANDIDATE_MIT"
+  },
+  "collision": "PENDING_ROOT_NATIVE_RAY_AND_PLAYER_WALK",
+  "automaticTeleport": false,
+  "networkEffects": 0
+}

@@ -20,3 +20,13 @@ KENNEY-LICENSE.txt
 *.download-lock/
 play.lock/
 INSTALL_RECEIPT.json
+# The current exact publication allowlist selects these own/CC0 files only.
+!presentation/frontier-candidate/mod/LEVIATH-Frontier.esp
+!presentation/plaza-candidate/mod/LEVIATH-Plaza.esp
+!presentation/crown-candidate/mod/Veyra-Dense-Crown.esp
+!presentation/frontier-scenery-candidate/mod/LEVIATH-Frontier-Scenery.esp
+!gameplay/townlife/mod/Textures/veyra_townlife/white.png
+!presentation/hud014/mod/Textures/veyra/white.png
+!presentation/spatial-audio/mod/Sound/veyra/courier_bell_mono.wav
+!presentation/spatial-audio/KENNEY-LICENSE.txt
+!presentation/spatial-audio/ASSET_RECEIPT.json

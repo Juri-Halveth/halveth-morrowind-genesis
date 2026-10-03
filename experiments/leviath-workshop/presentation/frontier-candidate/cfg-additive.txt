@@ -1,0 +1,3 @@
+# Append to a separate candidate profile after bound Foundation content.
+data="<absolute-path-to-presentation-candidate>/frontier-candidate/mod"
+content=LEVIATH-Frontier.esp

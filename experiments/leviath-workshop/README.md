@@ -1,5 +1,17 @@
 # LEVIATH Workshop for an existing Morrowind world
 
+Workshop0.2.0 adds an owned additive Frontier, Plaza, trees and scenery, portals,
+construction, three residents with measured daily travel, HUD0.1.4, and the
+shared player-panel coordinator. The new installer copies only the exact own
+modules and separately licensed CC0 materials into a new profile while keeping
+the existing game and runtime as read-only inputs. See the current
+[Git Bash world provisioning commands](docs/WORLD_PROVISIONING.md),
+[0.2.0 observations and open checks](docs/RELEASE_0.2.0.md), and
+[exact asset/license bindings](docs/OWN_ASSET_BINDINGS.json).
+
+The sections below retain the historical0.1.2 source baseline and its original
+bounded observations. They do not relabel old production receipts as new ones.
+
 Own Bash and gameplay additions for OpenMW 0.51.0. Your existing locally played
 Morrowind world is the first world. This package contains source code and tests.
 Morrowind game data, save games, downloaded asset archives and native runtimes

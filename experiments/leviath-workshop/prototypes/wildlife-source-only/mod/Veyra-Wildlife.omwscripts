@@ -1,0 +1,2 @@
+GLOBAL: scripts/veyra_wildlife/global.lua
+CUSTOM: scripts/veyra_wildlife/actor.lua

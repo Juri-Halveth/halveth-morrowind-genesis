@@ -3,3 +3,12 @@
 *.py text eol=lf
 *.lua text eol=lf
 *.omwscripts text eol=lf
+# These licensed/generated and source-bound bytes retain their exact hashes.
+*.json -text
+*.txt -text
+*.md -text
+*.esp -text
+*.dds -text
+*.dae -text
+*.wav -text
+*.png -text
