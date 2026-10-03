@@ -1,0 +1,5 @@
+# Exact raw payload bytes are bound by PAYLOAD.sha256 and world-map.json.
+mod/** -text
+art-source/** -text
+world-map.json -text
+PAYLOAD.sha256 text eol=lf
