@@ -11,6 +11,10 @@ HALVETH VERACHEL STUDIOS · Quellstand, dokumentierte Ergebnisse und SHA-256-Bel
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
+## Genesis Zero — unabhängiger Nullursprung
+
+Der neue Ordner [`genesis-zero/`](genesis-zero/README.md) enthält einen eigenständigen WebGL-2-Spielraum mit prozeduralem Wald, beweglichem Wesen, Maus-/Tastatursteuerung, zeitabhängigem 4D-Feldparameter und lokal erzeugtem Ambientklang. Er lädt keine Morrowind-Daten, alten Profile, Grafikmanifeste oder importierte Lore. Das ist ein sichtbarer unabhängiger Anfang für Grafik und Bewegung, noch kein vollständiges Spiel und kein Ersatz für den bisherigen OpenMW-Titel. Die erkannten alten Importpfade sind in [GENESIS-ZERO-INTAKE-AUDIT.md](docs/GENESIS-ZERO-INTAKE-AUDIT.md) offengelegt.
+
 ## Spielen
 
 Nach der Einrichtung startet `python launcher.py --play --profile beauty` direkt Morrowind mit dem Grafikprofil Scarlet Beauty und dem lokalen Gesprächsbegleiter im Hintergrund. Lade deinen Spielstand im normalen Hauptmenü. Die benötigte Ordnerstruktur und wählbare Installation sind in [docs/SETUP.md](docs/SETUP.md) beschrieben. Der Windows-Einstieg **Morrowind - HALVETH** startet dieselbe Welt. Das öffentliche Quellpaket liefert keine Bethesda-Spieldaten.

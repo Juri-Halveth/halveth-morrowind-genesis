@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07120f">
+  <title>GENESIS ZERO — Living Space</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="stage" aria-label="Interaktive Genesis-Zero-Welt">
+    <canvas id="world" aria-label="Prozedurale dreidimensionale Waldwelt"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="mark" href="#start" aria-label="Genesis Zero Start"><span class="mark-core"></span><span>GENESIS <b>ZERO</b></span></a>
+      <div class="status"><span class="live-dot"></span><span id="state-label">WORLD FORMING</span></div>
+      <button class="sound-toggle" id="sound" type="button" aria-pressed="false" title="Ambienten Klang aktivieren">SOUND <span>OFF</span></button>
+    </header>
+    <section class="intro" id="start">
+      <p class="kicker">A WORLD THAT LEARNS TO BREATHE</p>
+      <h1>Nothing is<br><em>only a fragment.</em></h1>
+      <p class="lead">Ein eigener Anfang: Licht, Boden und Wesen entstehen aus einer gemeinsamen, atmenden Raumzeit.</p>
+      <button class="enter" id="enter" type="button"><span class="enter-icon">↘</span><span>IN DIE WELT</span><span class="enter-line"></span></button>
+    </section>
+    <aside class="world-note" aria-live="polite">
+      <span class="note-index" id="note-index">01</span>
+      <p id="note">Ein kleiner Puls genügt, damit der Wald eine neue Möglichkeit zeigt.</p>
+    </aside>
+    <div class="world-readout" aria-hidden="true"><span id="phase">PHASE 00.00</span><span>4D FIELD / LIVE PROJECTION</span></div>
+    <div class="crosshair" aria-hidden="true"><i></i><i></i></div>
+    <div class="controls" id="controls" hidden>
+      <button class="pulse" id="pulse" type="button"><span>✳</span> PULS GEBEN</button>
+      <span class="keys">W A S D <small>BEWEGEN</small><b>Q / E</b><small>PHASENRAUM</small><b>SPACE</b><small>SPRUNG</small></span>
+    </div>
+    <div class="mobile-pad" id="mobile-pad" hidden aria-label="Bewegungssteuerung">
+      <button data-move="forward" aria-label="Vorwärts">↑</button><button data-move="left" aria-label="Links">←</button><button data-move="back" aria-label="Zurück">↓</button><button data-move="right" aria-label="Rechts">→</button>
+    </div>
+    <div class="veil" id="veil"><span>INITIALIZING FIELD</span><i></i></div>
+  </main>
+  <script src="./scene.js" defer></script>
+</body>
+</html>
