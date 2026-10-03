@@ -1,0 +1,18 @@
+{
+  "schema": "veyra.refinements.unit-source.v1",
+  "dataClass": "PUBLIC",
+  "version": "0.1.1",
+  "sourceLicense": "MIT",
+  "productionHashes": {
+    "crown-0.1.1/mod/Veyra-Crown-Refinement-011.esp": "4e7426fd965dd4054b133acc18d3c00dc774937ea89feab9f46e02c193e4ff0f",
+    "crown-0.1.1/mod/Meshes/veyra/veyra_swamp_crown_refined_011.dae": "3ce4e188aa790e2fce1b976b3e594ba3be5ef761ec882e03f7371e39341c7325",
+    "crown-0.1.1/mod/Textures/veyra/crown_leaf_refined_011.dds": "49683c4a6751b893707f81d3412ed3897dbcb5512fb2e37621b1730a0f8f0934"
+  },
+  "reviewSourceHashes": {
+    "crown-0.1.1/build-refinement.py": "c0b8eec002972627e1b062693556ab184a5d65a6b26f1e252d753f22fc67f991",
+    "crown-0.1.1/check-refinement.py": "f1c4e821099ac151a40c84072c63a093e0eb7e0517587e1e31b4394e7fb5a6b9"
+  },
+  "localSourceBindingSha256": "7149a0dada724325bb770c7781610829a19079bf7f2d78da0704fb4527b0b35b",
+  "sourceBuild": "LOCAL_PARENT_ONLY",
+  "checkerRoute": "PRIVATE_REBUILD_DEPENDENT"
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "veyra.workshop.cc0-bark-binding.v1",
+  "dataClass": "PUBLIC",
+  "author": "Rob Tuytel",
+  "asset": "Bark Brown02",
+  "license": "CC0-1.0",
+  "sourceUrl": "https://polyhaven.com/a/bark_brown_02",
+  "licenseSource": "https://polyhaven.com/license",
+  "legalCodeSource": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+  "sourceReceiptSha256": "6dc2bf2783cf42545de4a102ca5ba9a21b69daab5c2bb2741492221c1f2d8fa7",
+  "sourceBarkBinding": {
+    "author": "Rob Tuytel",
+    "asset": "Bark Brown 02",
+    "license": "CC0-1.0",
+    "source": "https://polyhaven.com/a/bark_brown_02",
+    "licenseSource": "https://polyhaven.com/license",
+    "inputDiffuseSha256": "285051e34826ace29f4ab438ad35cc1201b2aae0a6157a5f3c0bf6667bbc539e",
+    "inputNormalSha256": "26afbd479437c245adf11c37573297cc57484f64fcc22a5f9a2e51f85895f98f",
+    "outputResolution": [
+      1024,
+      1024
+    ]
+  },
+  "sourceInputMetadata": {
+    "downloadMetadataSha256": "5b09142a0882210ebe7cb7c8169dd40abafa79fc761b21c10fc4225c66a31232",
+    "boundInputs": [
+      {
+        "channel": "Diffuse",
+        "file": "Diffuse.jpg",
+        "resolution": "2k",
+        "md5MatchesLocalDownloadMetadata": "11a2a6039bb5b93f12dcf1689838545b",
+        "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/bark_brown_02/bark_brown_02_diff_2k.jpg",
+        "sha256": "285051e34826ace29f4ab438ad35cc1201b2aae0a6157a5f3c0bf6667bbc539e"
+      },
+      {
+        "channel": "nor_dx",
+        "file": "nor_dx.png",
+        "resolution": "2k",
+        "md5MatchesLocalDownloadMetadata": "10c1d0aed990a136b2c8ae64633b0374",
+        "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/bark_brown_02/bark_brown_02_nor_dx_2k.png",
+        "sha256": "26afbd479437c245adf11c37573297cc57484f64fcc22a5f9a2e51f85895f98f"
+      }
+    ]
+  },
+  "derivativeHashes": {
+    "swamp_bark.dds": "76dabf30eb286fcd2cbb4f964aa45fcd2b4a63e53a4b2a611128828c20845e2d",
+    "swamp_bark_n.dds": "33c12d7cb40671721fc22861fb45d1eb9ab8c7ab9beb8d4f659b3eedf139b722"
+  },
+  "derivativeDescription": "1024square diffuse/DirectXnormal DDS converted from bound source channels by existing own vegetation generator; original JPGs not included",
+  "licenseTextSha256": "8bdc7b952ae0a12e08ccf9463a4750f7288f4d05bf7f2124cc5805ecaabdb01c",
+  "licenseAcquisition": "Complete111-line public CC0 plaintext rendered extraction; documented Ln-prefix removal/LF joining. Direct raw HTTP fetch returned403, no access restriction bypass. Original HTTP body identity not claimed.",
+  "originalGameAssetBytes": 0
+}

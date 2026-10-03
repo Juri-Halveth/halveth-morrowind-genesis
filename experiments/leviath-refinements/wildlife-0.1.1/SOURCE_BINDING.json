@@ -1,0 +1,29 @@
+{
+  "schema": "veyra.refinements.unit-source.v1",
+  "dataClass": "PUBLIC",
+  "version": "0.1.1",
+  "sourceLicense": "MIT",
+  "productionHashes": {
+    "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.dae": "04be0c945b715fd39b5492f23fe72c7088689e6271812cd7b2099f2f86eb4bec",
+    "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.txt": "2b9c43f3a43f05152bd530159ca74882dd64fe133d20f2967bfbde253c135742",
+    "wildlife-0.1.1/mod/scripts/veyra_wildlife/actor.lua": "eace1b82dbbc06d0e74f9b0282741d53796f387caf252ff28a98c6c62a128206",
+    "wildlife-0.1.1/mod/scripts/veyra_wildlife/config.lua": "103dc4c3c20b0bb0098eb564ca1ef596cb078e3debe5a3d5f5ef369aec1167e4",
+    "wildlife-0.1.1/mod/scripts/veyra_wildlife/global.lua": "f151c64e6cf53609608f64f344b0e8901946f191ba19db5a32f7b34abcd3a0ed",
+    "wildlife-0.1.1/mod/scripts/veyra_wildlife/player.lua": "94eca85f746deb31d9d14762a73b7451f36586fd02a357cabcb4fb8c54ba37f6",
+    "wildlife-0.1.1/mod/Veyra-Wildlife.omwscripts": "dbbda99e319ea9dcceab3774d31e4286e42382412d5f004fd374db1acd16593a"
+  },
+  "reviewSourceHashes": {
+    "wildlife-0.1.1/check-control.lua": "c41a1b030aaadaf0a3d389880deef86ae5727bd82484f11a963659ffca03aa4e"
+  },
+  "localSourceBindingSha256": "137103cb0368182914621fc97f6c95660f99e84796f95e321af54f470a572184",
+  "sourceBuild": "BOUND_PUBLIC_PARENT_GENERATOR",
+  "checkerRoute": "PUBLIC_DECLARED_MODEL_CLI_ROOT_ONLY_PORT",
+  "harnessPort": {
+    "beforeSha256": "51baaac1d1495e783223aace66eae332ef8435179f595406917c781b7fd78537",
+    "afterSha256": "c41a1b030aaadaf0a3d389880deef86ae5727bd82484f11a963659ffca03aa4e",
+    "changedAssignments": 1,
+    "productionUnchanged": true
+  },
+  "physicalKeyGate": "NOT_OBSERVED",
+  "defaultEnabled": false
+}

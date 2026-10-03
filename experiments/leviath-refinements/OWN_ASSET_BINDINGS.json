@@ -1,0 +1,48 @@
+{
+  "schema": "veyra.refinements.assets.v1",
+  "dataClass": "PUBLIC",
+  "originalGameAssetBytes": 0,
+  "assets": {
+    "crown-0.1.1/mod/Veyra-Crown-Refinement-011.esp": {
+      "path": "crown-0.1.1/mod/Veyra-Crown-Refinement-011.esp",
+      "bytes": 463,
+      "sha256": "4e7426fd965dd4054b133acc18d3c00dc774937ea89feab9f46e02c193e4ff0f",
+      "license": "MIT",
+      "originalGameAssetBytes": 0,
+      "sourceGenerator": "crown-0.1.1/build-refinement.py"
+    },
+    "crown-0.1.1/mod/Meshes/veyra/veyra_swamp_crown_refined_011.dae": {
+      "path": "crown-0.1.1/mod/Meshes/veyra/veyra_swamp_crown_refined_011.dae",
+      "bytes": 6477230,
+      "sha256": "3ce4e188aa790e2fce1b976b3e594ba3be5ef761ec882e03f7371e39341c7325",
+      "license": "MIT",
+      "originalGameAssetBytes": 0,
+      "sourceGenerator": "crown-0.1.1/build-refinement.py"
+    },
+    "crown-0.1.1/mod/Textures/veyra/crown_leaf_refined_011.dds": {
+      "path": "crown-0.1.1/mod/Textures/veyra/crown_leaf_refined_011.dds",
+      "bytes": 43832,
+      "sha256": "49683c4a6751b893707f81d3412ed3897dbcb5512fb2e37621b1730a0f8f0934",
+      "license": "MIT",
+      "originalGameAssetBytes": 0,
+      "sourceGenerator": "crown-0.1.1/build-refinement.py"
+    },
+    "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.dae": {
+      "path": "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.dae",
+      "bytes": 461086,
+      "sha256": "04be0c945b715fd39b5492f23fe72c7088689e6271812cd7b2099f2f86eb4bec",
+      "license": "MIT",
+      "originalGameAssetBytes": 0,
+      "sourceGenerator": "experiments/leviath-workshop/prototypes/wildlife-source-only/build-creature.py"
+    },
+    "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.txt": {
+      "path": "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.txt",
+      "bytes": 563,
+      "sha256": "2b9c43f3a43f05152bd530159ca74882dd64fe133d20f2967bfbde253c135742",
+      "license": "MIT",
+      "originalGameAssetBytes": 0,
+      "sourceGenerator": "experiments/leviath-workshop/prototypes/wildlife-source-only/build-creature.py"
+    }
+  },
+  "newCC0DerivativeBytes": 0
+}

@@ -1,0 +1,1163 @@
+{
+  "schema": "veyra.refinements.parent.v1",
+  "dataClass": "PUBLIC",
+  "bundleVersion": "0.1.0",
+  "selectedUnits": [
+    "crown",
+    "wildlife"
+  ],
+  "parentVersion": "0.2.1",
+  "parentCommit": "166a81e8d46db310af7d2a80043502c86aea967b",
+  "parentFilesDigest": "d980cf4a36c6a696bb26577eb7381a4cc133a18a005fab9ae84128c7b75b3698",
+  "parentFiles": [
+    {
+      "path": ".gitattributes",
+      "bytes": 269,
+      "sha256": "bde444713d6e1fc81a9baf84cba21d44e6f1f0baf8a07255ebe9d9edee0170ba"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 820,
+      "sha256": "7c1add6112e2b4b092cc195f2b9089c12a5a4e22064c80b5e7840fc8d7ff35fd"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1077,
+      "sha256": "3a781e2eb64284791a6c887d8183327c2492d8dd2de112bb6de7fc47b0e6303b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8958,
+      "sha256": "382ad336bdc4c7da1f59a59b1c32f4a94d0e00aaa90a5a8ae1622bd18d87de29"
+    },
+    {
+      "path": "docs/AUDIO_NATIVE.json",
+      "bytes": 5426,
+      "sha256": "ba91a0fb1170ec7bf33fe011a6f822f90781a816d12c474cbda99256d814660e"
+    },
+    {
+      "path": "docs/CI_WORKSHOP.md",
+      "bytes": 1836,
+      "sha256": "f008d221c72796d0b69ebdee0572c9b7e30b7a6b1848e2c0540f8ea7245be6b7"
+    },
+    {
+      "path": "docs/CONSTRUCTION_NATIVE.json",
+      "bytes": 2808,
+      "sha256": "ac105613147778f46037857661630a80817c2c01d88fa8ace4d5de63a6e72056"
+    },
+    {
+      "path": "docs/CORE_NATIVE.json",
+      "bytes": 23102,
+      "sha256": "0ef1c9c856500f2a2c9787ac9d54d9ef8633b3df315211a35ab524be76ccecd5"
+    },
+    {
+      "path": "docs/COURIER024_NATIVE.json",
+      "bytes": 5478,
+      "sha256": "1f7556fc57f290fc3509c9f173b5d178f13a38eae764341dd11a3ecb69fa6b11"
+    },
+    {
+      "path": "docs/COURIER_CLAIMED_MIGRATION_NATIVE.json",
+      "bytes": 2035,
+      "sha256": "10b574f3ab73eb7a7d8cdd9fc5300719b2351ee9afce49030acee15751146230"
+    },
+    {
+      "path": "docs/COURIER_DEPOT_MIGRATION_NATIVE.json",
+      "bytes": 2025,
+      "sha256": "e89316930e8534e42033d95545df3240c340af081a3eb933e81071683561bdfb"
+    },
+    {
+      "path": "docs/COURIER_DEPOT_RELOAD_NATIVE.json",
+      "bytes": 2021,
+      "sha256": "b99c7fd47d48211cb0d3d4db74008732cc3341b80443e17001f45c52b9639141"
+    },
+    {
+      "path": "docs/COURIER_NATIVE.json",
+      "bytes": 2263,
+      "sha256": "8f29b1e8327dd951be675bc3fb3893dd6b14ef598b9a6133c2a54c426f3bb7a7"
+    },
+    {
+      "path": "docs/COURIER_RELOAD_NATIVE.json",
+      "bytes": 2031,
+      "sha256": "49e240dd5596158aac556d5cd0d929842fad28b42324679217a5b4b33a7b9a6d"
+    },
+    {
+      "path": "docs/COURIER_STACK_NATIVE.json",
+      "bytes": 2356,
+      "sha256": "0d59f315fc20713726a8172e589bd0f3ee5fed3d40f4cf651bfa21718bcb160c"
+    },
+    {
+      "path": "docs/COURIER_TRANSFER_RELOAD_NATIVE.json",
+      "bytes": 2060,
+      "sha256": "0385e28346f4fbf10c05ce5061b299eab18898e63785318063d2ead4c37c9eac"
+    },
+    {
+      "path": "docs/ENGINE_API_BINDINGS.json",
+      "bytes": 1130,
+      "sha256": "2fb238b37e66274a690b3ca85509f0a3fe526842e98e7d15c09bbefb91f70c53"
+    },
+    {
+      "path": "docs/FIELDWORK_DONE_RELOAD_NATIVE.json",
+      "bytes": 1778,
+      "sha256": "926a1aee1cc95fbfb8f07c6ceb13d34a077d599f011befe22dd07b5a35e498a9"
+    },
+    {
+      "path": "docs/FIELDWORK_NATIVE.json",
+      "bytes": 2247,
+      "sha256": "090ad8b77e1aa5508b407bd35be28cd700b0ae7cd96eade7a410dea0ec236b31"
+    },
+    {
+      "path": "docs/FIELDWORK_WORKING_RELOAD_NATIVE.json",
+      "bytes": 1822,
+      "sha256": "75f5110521ae72ad551fd3758e6cc63e1b759f5b9bba1efd7867116d44d3d9ce"
+    },
+    {
+      "path": "docs/HUD014_NATIVE.json",
+      "bytes": 3258,
+      "sha256": "54fc66f304ea6539c6cc8f2303d5de352701440e9e2a823254fb3ff618dad059"
+    },
+    {
+      "path": "docs/INTEGRATION_NATIVE.json",
+      "bytes": 5427,
+      "sha256": "15d42f334837cb763dedcc0b03bfa13772a2f864e0d2f91c514d0058133e4faf"
+    },
+    {
+      "path": "docs/KEY_CAPABILITY.json",
+      "bytes": 4779,
+      "sha256": "6753a280c0c4441729d228907cdc8a79997830f507893a8bb7b10f8353a5b8ff"
+    },
+    {
+      "path": "docs/NATIVE_SCOPE.md",
+      "bytes": 8200,
+      "sha256": "61f3c17ba4c9d469b883901fb28580a89821184cba0f0f1c86f8b66612bf8102"
+    },
+    {
+      "path": "docs/OWN_ASSET_BINDINGS.json",
+      "bytes": 25103,
+      "sha256": "7a6c2889c651e89a798113d5b8b1c87fdf145e86026477e00dd26f3eabb2a501"
+    },
+    {
+      "path": "docs/PORTAL_NATIVE.json",
+      "bytes": 2003,
+      "sha256": "97383b664de4a226ef8398aa1d3a8ba6b00fe0dee16db0f24e5c520631f5e897"
+    },
+    {
+      "path": "docs/PRESENTATION_NATIVE.json",
+      "bytes": 3270,
+      "sha256": "5ff6f6514fd34d1b35d34d51c6626b56ead55458e9466c7a2294a0eab6a3cbd8"
+    },
+    {
+      "path": "docs/PROVISIONING.md",
+      "bytes": 4698,
+      "sha256": "a65b1ced1cca5fc652aad6110c9903891e1e2dadccd9fe8c837150f91389bd94"
+    },
+    {
+      "path": "docs/PROVISION_NATIVE.json",
+      "bytes": 3506,
+      "sha256": "4739da314f5c1a97ec33a0e83a8fc76f0f3f4df7aa2183f13afb85f34eb33a63"
+    },
+    {
+      "path": "docs/PROVISION_WORLD_NATIVE.json",
+      "bytes": 14048,
+      "sha256": "e2dc9e00c1b2b3bac55df161cbd3873d46d65f309d1038e7fdb2c047a10aed9f"
+    },
+    {
+      "path": "docs/RELEASE_0.2.0.md",
+      "bytes": 4821,
+      "sha256": "ec08f48b64f6944487c9d2464a9ac1a0169e0f2b7c0311895c8ee62b94ffa600"
+    },
+    {
+      "path": "docs/RELEASE_0.2.1.md",
+      "bytes": 1983,
+      "sha256": "304daed3848543146453e399a6e9875d7df19857a50c2c79fd509ccc20de4357"
+    },
+    {
+      "path": "docs/SOURCE_BINDINGS.md",
+      "bytes": 3387,
+      "sha256": "42355953b4d3720a0d5990ecafb6c39d6bb2f236736841f46426e7515f4714be"
+    },
+    {
+      "path": "docs/TOWNLIFE_NATIVE.json",
+      "bytes": 5517,
+      "sha256": "0b8eb3d5a1d437be1c818a705c1a020cff66b78a2c161f9dcd66bb5d0373ee78"
+    },
+    {
+      "path": "docs/WORLD_NATIVE.json",
+      "bytes": 4786,
+      "sha256": "b65b32c1933ccfe7d4eccd0a7bab6c11b435a22ebfec312cc7380b7b26d1fd0d"
+    },
+    {
+      "path": "docs/WORLD_PROVISIONING.md",
+      "bytes": 6029,
+      "sha256": "b1512efc0946ae4511f153ae4bb6f441b58216ca3637268e098854e9c9c126ba"
+    },
+    {
+      "path": "gameplay/FIELDWORK.md",
+      "bytes": 4495,
+      "sha256": "277ac707cd2b9e1b3c6d90d382aabf7ee43fe4900ef6590de39d560e96429704"
+    },
+    {
+      "path": "gameplay/LICENSE",
+      "bytes": 1306,
+      "sha256": "846c81f86e681cc34ebafe3875daea940f52f529b2ca1121199b1e38125de268"
+    },
+    {
+      "path": "gameplay/README.md",
+      "bytes": 4963,
+      "sha256": "5a618808a96b2f4f11426984cb9e803c6fb13f5f7b15527462e2d0d18ef2466e"
+    },
+    {
+      "path": "gameplay/construction/LICENSE",
+      "bytes": 1344,
+      "sha256": "19f0709547a6b918f7cde816387214af6a26e409ead53b98d4b1701faaf9ce04"
+    },
+    {
+      "path": "gameplay/construction/README.md",
+      "bytes": 6379,
+      "sha256": "c323e7eac0723ff33c0147064374815d227c738f913baf588088a07d67125236"
+    },
+    {
+      "path": "gameplay/construction/mod/Meshes/veyra/construction/plantbed.dae",
+      "bytes": 16095,
+      "sha256": "9fc6217a7f2c7e24f630389fad7105387ca3cf9c682af9e38d1f9b7b03f7884a"
+    },
+    {
+      "path": "gameplay/construction/mod/scripts/veyra_construction/config.lua",
+      "bytes": 481,
+      "sha256": "e4836b8195ea78268ccc36097aaca6b0b21d550896fe3890efb3d4b624568655"
+    },
+    {
+      "path": "gameplay/construction/mod/scripts/veyra_construction/global.lua",
+      "bytes": 17780,
+      "sha256": "eb9ba5d34d8de902fea74861b5ebeb84146a99e7d2d18d4fb1bf65bee85dcab5"
+    },
+    {
+      "path": "gameplay/construction/mod/scripts/veyra_construction/player.lua",
+      "bytes": 8351,
+      "sha256": "881a648f416f6b903cf49db29c0f4adec28ba2781a771c6853694570790d6ebe"
+    },
+    {
+      "path": "gameplay/construction/mod/veyra-construction.omwscripts",
+      "bytes": 92,
+      "sha256": "bd5ae72b7e21ef15ca8b6c6f1bdfd5d48da7878c8ea54a2c57b115fc73105839"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_courier/config.lua",
+      "bytes": 981,
+      "sha256": "df082e225658bf65f13403f2f90a5b09de90834683046f9a657cdbbdfe80c4b6"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_courier/global.lua",
+      "bytes": 16674,
+      "sha256": "16e8bd6fe003d4047f8c4c0eee462ddbf851d2bb9507403e4d5f54c682ebf904"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_courier/player.lua",
+      "bytes": 2669,
+      "sha256": "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_courier/routes.lua",
+      "bytes": 1586,
+      "sha256": "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_fieldwork/config.lua",
+      "bytes": 269,
+      "sha256": "c936bf51021de3aad7a3e83a3e0a7ab8b7c7a0e9b29bc08870b1fbe89450febf"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_fieldwork/global.lua",
+      "bytes": 11482,
+      "sha256": "c13ff36581019b6a8922e704eae106f20a7c3ae2854d96238f194f3d14a8722f"
+    },
+    {
+      "path": "gameplay/mod/scripts/veyra_fieldwork/player.lua",
+      "bytes": 6666,
+      "sha256": "66698d3d32760b400542f85d1e6a09e2055a658073addd31141e124c4525e9aa"
+    },
+    {
+      "path": "gameplay/mod/veyra-courier.omwscripts",
+      "bytes": 82,
+      "sha256": "1b3bbefd3d6619347203fc324eaf12fc71256b064a138fffbb805524889ee8ad"
+    },
+    {
+      "path": "gameplay/mod/veyra-fieldwork.omwscripts",
+      "bytes": 86,
+      "sha256": "4b3459af8d2471673896756d8200ad604719d64ee7b50163a2982fee7c9b34d0"
+    },
+    {
+      "path": "gameplay/panels/LICENSE",
+      "bytes": 1306,
+      "sha256": "846c81f86e681cc34ebafe3875daea940f52f529b2ca1121199b1e38125de268"
+    },
+    {
+      "path": "gameplay/panels/README.md",
+      "bytes": 3449,
+      "sha256": "f516b6a9a6ea399d4d21ac231eaa6995d36e30df89c06663109a58bf308dc77c"
+    },
+    {
+      "path": "gameplay/panels/SOURCE_BINDINGS.json",
+      "bytes": 4711,
+      "sha256": "1a2812caafaa863ec8c23f39b4901a1a19f1f71891f7a672fd8ea70b71a29e6d"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/fieldcraft.lua",
+      "bytes": 12498,
+      "sha256": "5656f485c7b5f1d6969eb98ee6cb2b8f3e929d139e9f030473b92aaae41f1d7c"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/knowledge.lua",
+      "bytes": 26405,
+      "sha256": "e480dc35d689caaa739fd8f7d0b4089075852228b8ce9facd3fdfdc8d33d86e4"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/paths.lua",
+      "bytes": 11849,
+      "sha256": "7cff5e6bc10b1c48e1a23f313c9156be943eddbac954cc837ffbe1ea6b3bf92c"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/player.lua",
+      "bytes": 30676,
+      "sha256": "eabef8a282cc7a3f6334816964674e3f337678c612756b6c9b4b6e9b3ef17411"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/universe.lua",
+      "bytes": 13785,
+      "sha256": "ad39ad5e7b28e0b0ac1a20be838e74796dc85a807ef5258524bd1fef36fb0043"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/halveth/worldlife.lua",
+      "bytes": 20056,
+      "sha256": "a32b1ac6b04f0cee3099da8bff4e98f96f3d7dd0ca0dfa9f7d07bbac35c2204e"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_construction/player.lua",
+      "bytes": 8445,
+      "sha256": "7c0b04f35a826b26485658808fdfc537b7a82bedea405ae69aa5123c1aa259b6"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_courier/config.lua",
+      "bytes": 1010,
+      "sha256": "986d94db62dc040b442896d71e693f41d95ab296ba4586e3d276f4dddc393969"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_courier/global.lua",
+      "bytes": 16908,
+      "sha256": "121bac2c4ef3738ec1c94cf34a47fa89f11cb3d44017c89628ab9ca6af63c308"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_courier/player.lua",
+      "bytes": 2728,
+      "sha256": "0ae598828b3b8d27f428b2c440f142378c62bb39796779c6350f3d902ca75ed2"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_fieldwork/player.lua",
+      "bytes": 6753,
+      "sha256": "b276528d16d0875f11c1ba147bc75356b5a441ad6afea5db247177a9a309fbcb"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_panels/player.lua",
+      "bytes": 1746,
+      "sha256": "de8f722236b5202fe78534d7f8dcbb7b24008f884fa2e96c0140e1d1f1d7ddd5"
+    },
+    {
+      "path": "gameplay/panels/mod/scripts/veyra_portal/player.lua",
+      "bytes": 3491,
+      "sha256": "eec648ff2a02001ca9aaafdef2201585927cf9861ad05e55d0eb86bb02a70246"
+    },
+    {
+      "path": "gameplay/panels/mod/veyra-panel-coordinator.omwscripts",
+      "bytes": 40,
+      "sha256": "9bae64fc15a874f929dc87838448dbb5da800d219030a106390b5e564b562540"
+    },
+    {
+      "path": "gameplay/portal/LICENSE",
+      "bytes": 1306,
+      "sha256": "846c81f86e681cc34ebafe3875daea940f52f529b2ca1121199b1e38125de268"
+    },
+    {
+      "path": "gameplay/portal/README.md",
+      "bytes": 4827,
+      "sha256": "4d0fde4e05d3e7c58a8b1c107be599da92bed5f1abfa3fece2c4cd9e4fb35ea4"
+    },
+    {
+      "path": "gameplay/portal/mod/scripts/veyra_portal/config.lua",
+      "bytes": 654,
+      "sha256": "46e6bf243a5178394727cf3f9571adb519e8622eea40f1230b2aee195b56838d"
+    },
+    {
+      "path": "gameplay/portal/mod/scripts/veyra_portal/global.lua",
+      "bytes": 8918,
+      "sha256": "52b8c4ea68dff66690d7322ad6091dc2c31e5c2330fc54b4eb96aedfed93eb71"
+    },
+    {
+      "path": "gameplay/portal/mod/scripts/veyra_portal/player.lua",
+      "bytes": 3443,
+      "sha256": "7f2e8cbeecdfd691dd33bfbfb02a589413122198ac78ea28a256e2fe4c10d8b2"
+    },
+    {
+      "path": "gameplay/portal/mod/veyra-portal.omwscripts",
+      "bytes": 80,
+      "sha256": "719f9d85f28e5a68883f65ddaa22addcd3ec82de345dc675262aa885f35b289b"
+    },
+    {
+      "path": "gameplay/townlife/ANCHOR_PATCH_BINDING.json",
+      "bytes": 705,
+      "sha256": "b0314d95e1472fcd0b09fc8b5e4f9ab227ddb98189f9e3f27d2845b3228c3140"
+    },
+    {
+      "path": "gameplay/townlife/LICENSE",
+      "bytes": 1077,
+      "sha256": "3a781e2eb64284791a6c887d8183327c2492d8dd2de112bb6de7fc47b0e6303b"
+    },
+    {
+      "path": "gameplay/townlife/README.md",
+      "bytes": 4189,
+      "sha256": "f40cb28c2ad0a7b7ca843e71291f7ff26d228646db091733d5c060add705698f"
+    },
+    {
+      "path": "gameplay/townlife/SOURCE_BINDING.json",
+      "bytes": 5128,
+      "sha256": "f15f1334830cba711d8c2e499d77e9de382693aff4e893a4ac3d1d98612ad8fa"
+    },
+    {
+      "path": "gameplay/townlife/UI_ONLY.diff",
+      "bytes": 1629,
+      "sha256": "2d560e78745c4cb7495ea8aef909e319230896476e5ee5a3a513e5174e1b9be8"
+    },
+    {
+      "path": "gameplay/townlife/bind-frontier.py",
+      "bytes": 6397,
+      "sha256": "a0ec5bef0933e697dc2e87b0bb89c472a38bb89ab85c74f12bc85097d857f3a5"
+    },
+    {
+      "path": "gameplay/townlife/build-assets.py",
+      "bytes": 977,
+      "sha256": "1837d060eb6ba98a25459758b6523892d089a3dd10dbc90ce3fae87bcec6925a"
+    },
+    {
+      "path": "gameplay/townlife/check-townlife.lua",
+      "bytes": 16191,
+      "sha256": "312700bb17e59a63c2f8d9b3a22111d917dc7ac9e5bd8d7840a758185eddbe2f"
+    },
+    {
+      "path": "gameplay/townlife/mod/Textures/veyra_townlife/white.png",
+      "bytes": 98,
+      "sha256": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5"
+    },
+    {
+      "path": "gameplay/townlife/mod/Veyra-Townlife.omwscripts",
+      "bytes": 125,
+      "sha256": "e2c2bd764cc9f562523a3f1c5a08aa4924542794471da411d766eeb847b9477c"
+    },
+    {
+      "path": "gameplay/townlife/mod/scripts/veyra_townlife/actor.lua",
+      "bytes": 11150,
+      "sha256": "da7fa8e6e2f9fb00d0e416355e859bd910d1df3af53642fa24f5d8ccf7009642"
+    },
+    {
+      "path": "gameplay/townlife/mod/scripts/veyra_townlife/config.lua",
+      "bytes": 2085,
+      "sha256": "27e84c6696e1da6354ec0c55e973c9091a09c3eff25aff723fc99a450c66a952"
+    },
+    {
+      "path": "gameplay/townlife/mod/scripts/veyra_townlife/global.lua",
+      "bytes": 10958,
+      "sha256": "30dbdc8b3a39ec9de258564a34beda4b1af663f72ec7fdabdcf080a4b302e320"
+    },
+    {
+      "path": "gameplay/townlife/mod/scripts/veyra_townlife/player.lua",
+      "bytes": 7511,
+      "sha256": "ceb37fc401e2c05b49e63ff8c440445439e4bda93f0c0dbbc864c221d5531243"
+    },
+    {
+      "path": "presentation/CHECK_HUD.sh",
+      "bytes": 227,
+      "sha256": "ce7152db2069597bb7b7045c70563b41f04bed7f4b5b9acec87dabc8d8971138"
+    },
+    {
+      "path": "presentation/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/README.md",
+      "bytes": 5801,
+      "sha256": "652546079dead77df22c9182548555332154acfd4e0692f3cc90e063c1d7dd35"
+    },
+    {
+      "path": "presentation/bark-materials/CC0-1.0.txt",
+      "bytes": 7038,
+      "sha256": "8bdc7b952ae0a12e08ccf9463a4750f7288f4d05bf7f2124cc5805ecaabdb01c"
+    },
+    {
+      "path": "presentation/bark-materials/SOURCE_BINDING.json",
+      "bytes": 2579,
+      "sha256": "3976f8feb0e302c3ea7e65c044185acfa5453888134c27e8eb77cad30463dd17"
+    },
+    {
+      "path": "presentation/bark-materials/THIRD_PARTY_NOTICES.md",
+      "bytes": 656,
+      "sha256": "d5e51bb54d0c59b0c7073cf44d3babcb0cc693e41824ed5eb0725fa49deed160"
+    },
+    {
+      "path": "presentation/bark-materials/mod/Textures/veyra/swamp_bark.dds",
+      "bytes": 699192,
+      "sha256": "76dabf30eb286fcd2cbb4f964aa45fcd2b4a63e53a4b2a611128828c20845e2d"
+    },
+    {
+      "path": "presentation/bark-materials/mod/Textures/veyra/swamp_bark_n.dds",
+      "bytes": 1398256,
+      "sha256": "33c12d7cb40671721fc22861fb45d1eb9ab8c7ab9beb8d4f659b3eedf139b722"
+    },
+    {
+      "path": "presentation/build-assets.py",
+      "bytes": 1419,
+      "sha256": "acc242e13cc9d476fadd894662a164910918633ab38c22c31b5827ae8830f8b2"
+    },
+    {
+      "path": "presentation/check-assets.py",
+      "bytes": 1288,
+      "sha256": "0ee4e623d1882635899cdbd6f27251c99a411e5d43aa487df3a895234fb0e9c9"
+    },
+    {
+      "path": "presentation/check-hud.lua",
+      "bytes": 7068,
+      "sha256": "0ce1f738e163d9c65c362f3424f45e646854381b654d729cae418464c7a1568e"
+    },
+    {
+      "path": "presentation/crown-candidate/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/crown-candidate/PLACEMENT.json",
+      "bytes": 664,
+      "sha256": "2939202f5be2a208f5dedd59bfe78cccfd5f0c3ecb8a6c8d188d7dc2cd0b66bc"
+    },
+    {
+      "path": "presentation/crown-candidate/README.md",
+      "bytes": 4520,
+      "sha256": "909655c192e5c3984b6cb6c6c93b475aab79f34aa39677bc00bd3622e2813eaa"
+    },
+    {
+      "path": "presentation/crown-candidate/THIRD_PARTY_NOTICES.md",
+      "bytes": 1420,
+      "sha256": "841d5bc341896adafe7882d2d0066a9c663010e609f199910acef43f401da540"
+    },
+    {
+      "path": "presentation/crown-candidate/build-crown.py",
+      "bytes": 12065,
+      "sha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b"
+    },
+    {
+      "path": "presentation/crown-candidate/cfg-additive.txt",
+      "bytes": 262,
+      "sha256": "eb6faa4e99908f791bd0f8577e2bdc54daaa9a041b296396c9b177434461cec3"
+    },
+    {
+      "path": "presentation/crown-candidate/check-crown.py",
+      "bytes": 7976,
+      "sha256": "a06ef1e886f0ca70fc0fa010119ab22e2ea087551a745f7d0082295d441d2ffe"
+    },
+    {
+      "path": "presentation/crown-candidate/geometry-kernel.py",
+      "bytes": 20401,
+      "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+    },
+    {
+      "path": "presentation/crown-candidate/mod/Meshes/veyra/veyra_swamp_crown_01.dae",
+      "bytes": 6548329,
+      "sha256": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683"
+    },
+    {
+      "path": "presentation/crown-candidate/mod/Textures/veyra/crown_leaf_01.dds",
+      "bytes": 43832,
+      "sha256": "81b760ed106f75ba542f053e5a892082cf1d9f84604bf7fba711925c4b36283f"
+    },
+    {
+      "path": "presentation/crown-candidate/mod/Veyra-Dense-Crown.esp",
+      "bytes": 446,
+      "sha256": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665"
+    },
+    {
+      "path": "presentation/frontier-candidate/ENTRY.json",
+      "bytes": 643,
+      "sha256": "e79d41749cb8084edf2fb70a91a07aec13a3869bfac52a0beef683d21d02c1f2"
+    },
+    {
+      "path": "presentation/frontier-candidate/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/frontier-candidate/PARSER_BINDING.json",
+      "bytes": 419,
+      "sha256": "a0f3e4258673a5ce50a1ae05a5c17aab80fcd23ea986475fb7b7e7c9acdb8684"
+    },
+    {
+      "path": "presentation/frontier-candidate/README.md",
+      "bytes": 6513,
+      "sha256": "15c68f9f98f33e9112de5524935058e58611d69daebef60a8b5e7eecb77448e7"
+    },
+    {
+      "path": "presentation/frontier-candidate/build-frontier.py",
+      "bytes": 14028,
+      "sha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298"
+    },
+    {
+      "path": "presentation/frontier-candidate/cfg-additive.txt",
+      "bytes": 174,
+      "sha256": "2e89893cabfe6be0435e3eac86842e3ce4fa82c05dbfe124e3aba8faf24742b4"
+    },
+    {
+      "path": "presentation/frontier-candidate/check-frontier.py",
+      "bytes": 17481,
+      "sha256": "1ec2ff8d4d20142a6ea64ab067d98543c7bd014a628889d42b0434e96ed5ed98"
+    },
+    {
+      "path": "presentation/frontier-candidate/mod/LEVIATH-Frontier.esp",
+      "bytes": 486128,
+      "sha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad"
+    },
+    {
+      "path": "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_coast.dds",
+      "bytes": 174904,
+      "sha256": "a3c3c6114ce3a3016827729f003150d5972ecbbd347b22517d9282945774cda7"
+    },
+    {
+      "path": "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_ground.dds",
+      "bytes": 174904,
+      "sha256": "54d831f1c8f8df209b7aa85a402a419be0b9769379b14a0de5378f914d2bb78a"
+    },
+    {
+      "path": "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_stone.dds",
+      "bytes": 174904,
+      "sha256": "b275a2a32e41715ea11163a7e69ad30eddc255817132106679f837cab62daab3"
+    },
+    {
+      "path": "presentation/frontier-candidate/verify-frontier.py",
+      "bytes": 4771,
+      "sha256": "1e98e6514cd91a07caf3bad7070eb9a98802816ef8cdc4aa1f2e1bf1b30f443d"
+    },
+    {
+      "path": "presentation/frontier-candidate/verify-frontier.sh",
+      "bytes": 422,
+      "sha256": "82a1cdf1fd319c54be4d5a543d402867aee328db51845847a84f5cf25a3010e3"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/README.md",
+      "bytes": 5744,
+      "sha256": "8d18b8d56ee28248cc41acccb9f3c48ebb70f68673dc8d45e865188eae259a3c"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/SCENERY_MANIFEST.json",
+      "bytes": 108198,
+      "sha256": "1905af6b6144b266d64695ea6db002c4a41a46094cc48d74c574b529c4f95d30"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/THIRD_PARTY_NOTICES.md",
+      "bytes": 1500,
+      "sha256": "3c1f5e09f24040be28f7aada3b5d1e488a10964f3411b254a7cde982b46aa356"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/build-scenery.py",
+      "bytes": 19145,
+      "sha256": "fcf13dd7338b562f8c5dc0996046888aa580a73dd4018a75750a6b6bfc939159"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/cfg-additive.txt",
+      "bytes": 326,
+      "sha256": "9912bd9c7bc1d91622e2b24da75feb7aa739c6540cd1d314cca0a03d89506a2d"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/check-scenery.py",
+      "bytes": 10482,
+      "sha256": "a5aaa9be801fe4dd31e58f133fab9e670e32d94fb252954414b129c0ce4d11d8"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/geometry-kernel.py",
+      "bytes": 20401,
+      "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/mod/LEVIATH-Frontier-Scenery.esp",
+      "bytes": 6842,
+      "sha256": "7d1102dfd6f73967b9f3d31d5bf72eb2272ca6e0746836d74c984b1fa421812f"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_grass_01.dae",
+      "bytes": 60431,
+      "sha256": "7f966ea7b6ecb56d90857413df82c97b04029cd97ba1b7eb88d904e584f7a5e7"
+    },
+    {
+      "path": "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_stone_cluster_01.dae",
+      "bytes": 139543,
+      "sha256": "a54ae771db1c7c44cd44269b0c2198e81922af58d6cfa780b5e33c502543f8b8"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/README.md",
+      "bytes": 2633,
+      "sha256": "f29ca18e84e77535ee3d45a0187d7395b0427c2b0fc13c19603b7c575dc7ffea"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/build-textures.py",
+      "bytes": 7609,
+      "sha256": "0c977803b74c065bf006ecccd48b578be19999880a89a773287c87981c40be83"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/cfg-texture-only.txt",
+      "bytes": 236,
+      "sha256": "2f2c72263689f0d6442191ed3e2e8d5b0767677792523894622b6cc2adfcd17f"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/check-textures.py",
+      "bytes": 3678,
+      "sha256": "43fa1211e4846a131bc9c29fcbdf693439ee6cb4474a7a78c4941a1b09608439"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_coast.dds",
+      "bytes": 699192,
+      "sha256": "630be11afda901d57d9bcf347a7cb92464ac5b07ebae2fa88e49b5f11582403b"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_ground.dds",
+      "bytes": 699192,
+      "sha256": "6f49e5f4764af4996c71283d825e8b7d7000d5808e8ff95a433636fc38d7ca96"
+    },
+    {
+      "path": "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_stone.dds",
+      "bytes": 699192,
+      "sha256": "d54f2025d173e9ade36d1e011c20b0f2e4667e2afe353013a5f05cff1b0bad31"
+    },
+    {
+      "path": "presentation/hud014/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/hud014/README.md",
+      "bytes": 3565,
+      "sha256": "efa82b34f509ca811ed4917007cb848e57b3042d1417768c7a31177bd62911d1"
+    },
+    {
+      "path": "presentation/hud014/SOURCE_BINDING.json",
+      "bytes": 1377,
+      "sha256": "15e43c3b00ef71161c14cddffaec3e6064613ed124cbb4e089f469231a5e1008"
+    },
+    {
+      "path": "presentation/hud014/build-assets.py",
+      "bytes": 1419,
+      "sha256": "acc242e13cc9d476fadd894662a164910918633ab38c22c31b5827ae8830f8b2"
+    },
+    {
+      "path": "presentation/hud014/check-assets.py",
+      "bytes": 1288,
+      "sha256": "0ee4e623d1882635899cdbd6f27251c99a411e5d43aa487df3a895234fb0e9c9"
+    },
+    {
+      "path": "presentation/hud014/check-hud-label.lua",
+      "bytes": 10257,
+      "sha256": "881ebcc2b89f4f7955b7ddef7ef6848e4e8cdc727de57dab238f5f2368128ea6"
+    },
+    {
+      "path": "presentation/hud014/mod/Textures/veyra/white.png",
+      "bytes": 98,
+      "sha256": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5"
+    },
+    {
+      "path": "presentation/hud014/mod/Veyra-Presentation.omwscripts",
+      "bytes": 30,
+      "sha256": "fe8ad93b501e9ec10882c802bbfbb39d6373e61aac92cddb123568ef596fd7d9"
+    },
+    {
+      "path": "presentation/hud014/mod/scripts/veyra/hud.lua",
+      "bytes": 9909,
+      "sha256": "c50165a4ca14933a1d1a5a54a0980ae571d9dc068ddfb4c227214a33367c3804"
+    },
+    {
+      "path": "presentation/mod/Veyra-Presentation.omwscripts",
+      "bytes": 30,
+      "sha256": "fe8ad93b501e9ec10882c802bbfbb39d6373e61aac92cddb123568ef596fd7d9"
+    },
+    {
+      "path": "presentation/mod/scripts/veyra/hud.lua",
+      "bytes": 9052,
+      "sha256": "14846d6e1bef8f44c606c4fce548fa234ae06344c7d9985d5cec0b60d8564008"
+    },
+    {
+      "path": "presentation/plaza-candidate/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/plaza-candidate/PLACEMENTS.json",
+      "bytes": 1648,
+      "sha256": "61b1f1619f4f95e4e29a9702b2af595683be4054bdaa6ae0b9b1ace8071e6ff8"
+    },
+    {
+      "path": "presentation/plaza-candidate/README.md",
+      "bytes": 5904,
+      "sha256": "ff2f2cb74344794b0d77e891fd7fb92dfa95fcc429c481573a00359b01e32ae9"
+    },
+    {
+      "path": "presentation/plaza-candidate/build-plaza.py",
+      "bytes": 15908,
+      "sha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5"
+    },
+    {
+      "path": "presentation/plaza-candidate/cfg-additive.txt",
+      "bytes": 237,
+      "sha256": "05aa00b3c806cb2f0d82fa1acb012f9c137529393bbfb0a39581b68a191a603e"
+    },
+    {
+      "path": "presentation/plaza-candidate/check-plaza.py",
+      "bytes": 8709,
+      "sha256": "91a7dc74a526e4f1653854f07573e79cc326a2585db3f441d1970c20bfa3b34a"
+    },
+    {
+      "path": "presentation/plaza-candidate/mod/LEVIATH-Plaza.esp",
+      "bytes": 1092,
+      "sha256": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69"
+    },
+    {
+      "path": "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_approach.dae",
+      "bytes": 5459,
+      "sha256": "576d5ff67d33bc6d4b77ded2e9628ef1f001b2706cd8f8eda610f9eb28a08446"
+    },
+    {
+      "path": "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arena.dae",
+      "bytes": 3285444,
+      "sha256": "56036acfec2625d054db312690b7aa5b8549089e887e2ce9da5dd99fd6dc0e66"
+    },
+    {
+      "path": "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arrival.dae",
+      "bytes": 4028,
+      "sha256": "d324d2520099532e2556d994fba8265d79fd8b492b4219b0c54dc3d270d11aa7"
+    },
+    {
+      "path": "presentation/spatial-audio/ASSET_RECEIPT.json",
+      "bytes": 1859,
+      "sha256": "80efe9f5be790bed0109d9d40693f08c342195480e905c0f25a34d6d4090343e"
+    },
+    {
+      "path": "presentation/spatial-audio/CHECK_AUDIO.sh",
+      "bytes": 256,
+      "sha256": "e109408a4b91eb11f0535219698e1bf1ba69a47e538c80a42f937d3e53d1c62f"
+    },
+    {
+      "path": "presentation/spatial-audio/KENNEY-LICENSE.txt",
+      "bytes": 608,
+      "sha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db"
+    },
+    {
+      "path": "presentation/spatial-audio/LICENSE",
+      "bytes": 1086,
+      "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+    },
+    {
+      "path": "presentation/spatial-audio/README.md",
+      "bytes": 5356,
+      "sha256": "88a460dc94aa5727d8bdbe705f462451ecbd9886ccb3b7afaa1c73875e551c2f"
+    },
+    {
+      "path": "presentation/spatial-audio/THIRD_PARTY_NOTICES.md",
+      "bytes": 867,
+      "sha256": "05d418d2520391822403ec3c884a8e74283dfeb86cca69a085309a68e8917f17"
+    },
+    {
+      "path": "presentation/spatial-audio/build-audio.py",
+      "bytes": 4476,
+      "sha256": "8b1d9f41c8460dbee0595349785c19a9b60da9c99ddc3032f9278fe072dfdb2a"
+    },
+    {
+      "path": "presentation/spatial-audio/cfg-candidate.txt",
+      "bytes": 171,
+      "sha256": "42bd076899a5d4fafccaf3767ff911fac27ee939762b7b6b515d6586d7c7efa5"
+    },
+    {
+      "path": "presentation/spatial-audio/check-audio.lua",
+      "bytes": 5091,
+      "sha256": "c7847d6893e9c181eba9f4d5f62e3c7c2516ff370c7de194718d95c0a4c024aa"
+    },
+    {
+      "path": "presentation/spatial-audio/mod/Sound/veyra/courier_bell_mono.wav",
+      "bytes": 130630,
+      "sha256": "faa557bc6e4cd2c5c3c3b22ba8e78e9c7af35e7ab11e8cbaf5607f6ce177479c"
+    },
+    {
+      "path": "presentation/spatial-audio/mod/Veyra-Spatial-Audio.omwscripts",
+      "bytes": 40,
+      "sha256": "389257d18d3fd643d6cd4433e1d356a8cedc69d82a8fad622dc4318f6a8ca1b6"
+    },
+    {
+      "path": "presentation/spatial-audio/mod/scripts/veyra/spatial_audio.lua",
+      "bytes": 4087,
+      "sha256": "ae4bb630075f2364249d57295e66488628fd2225d6460e75bcea2dd43691b4d6"
+    },
+    {
+      "path": "presentation/vegetation/README.md",
+      "bytes": 5134,
+      "sha256": "1e341441a497361ec2369025cc0a5cdacf54ca5d425e6292bce0cd90e139d333"
+    },
+    {
+      "path": "presentation/vegetation/THIRD_PARTY_NOTICES.md",
+      "bytes": 1318,
+      "sha256": "6011f738e88a2f69e15f19534903c598e81677dc32f222951647d9a79a8e5952"
+    },
+    {
+      "path": "presentation/vegetation/build-vegetation.py",
+      "bytes": 20401,
+      "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+    },
+    {
+      "path": "presentation/vegetation/cfg-additive.txt",
+      "bytes": 239,
+      "sha256": "d5025c782cab90490012358f12dac241505e8b3b47b46bce1849efc809c573e8"
+    },
+    {
+      "path": "presentation/vegetation/cfg-tree02-override.txt",
+      "bytes": 241,
+      "sha256": "81bb81ab5fc8f0de3abd9d28bcd3ad0bdf29ac3ed223e66e23cdc3815c773115"
+    },
+    {
+      "path": "presentation/vegetation/check-vegetation.py",
+      "bytes": 5222,
+      "sha256": "cb79e0962876883cfa24ae6572328321a4024a78dbe39abfad03dfe279e097af"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/LICENSE",
+      "bytes": 1069,
+      "sha256": "7ada00677695a9472a22537717637e22a598aadff356a12476b194cd6e55b4ba"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/PUBLIC_SCOPE.md",
+      "bytes": 644,
+      "sha256": "2763dfc9b00a547e6b7047fab078b50b9aabecdbe73a39d3881600035b52f604"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/README.md",
+      "bytes": 2409,
+      "sha256": "7edcd3791ba7b391c69d1b45538e397eebb5412bb8c3d32eec3deeaaee6efa61"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/SOURCE_BINDING.json",
+      "bytes": 2119,
+      "sha256": "c603f1566da89e9704313be6a8b860e0a31bb194b9022a8b20ec5d028a424ff7"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/build-creature.py",
+      "bytes": 11572,
+      "sha256": "6041874c2517b0350c7fd881e3a98ee54a3cd1621f75a03083642e5977534dd0"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/check-creature.py",
+      "bytes": 7092,
+      "sha256": "c063d6bcd2f56630769ed5df5ee1b8bac21a7c8cc07b5dda4a4c42f5173b71ad"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/mod/Veyra-Wildlife.omwscripts",
+      "bytes": 83,
+      "sha256": "4329416179f6b39171ac52d3a944d8ca075da4567b964786fcfd35b0e84c05e3"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/mod/scripts/veyra_wildlife/actor.lua",
+      "bytes": 3908,
+      "sha256": "eace1b82dbbc06d0e74f9b0282741d53796f387caf252ff28a98c6c62a128206"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/mod/scripts/veyra_wildlife/config.lua",
+      "bytes": 293,
+      "sha256": "0bfd7083dd222d1ef644468761496007f85cd21505c4dca0ea3157bfae2c1c75"
+    },
+    {
+      "path": "prototypes/wildlife-source-only/mod/scripts/veyra_wildlife/global.lua",
+      "bytes": 4826,
+      "sha256": "245c6f675b747367de69e60ef5c0933bda7ff45c096eba1fc254436152a6022e"
+    },
+    {
+      "path": "rules/check_policy.py",
+      "bytes": 5914,
+      "sha256": "78b8649faa13d43d8c8302f861fad8220a001ec97b0e1c504b5388d979946366"
+    },
+    {
+      "path": "rules/policy.py",
+      "bytes": 6409,
+      "sha256": "d9debdd4e599a6fbb77d537251e5aedf595be314a00f54c56de897778f31533e"
+    },
+    {
+      "path": "scripts/asset-sources.tsv",
+      "bytes": 641,
+      "sha256": "07a03191fd28514c1174904d10cb92694c232ad70c210c948727c6957a491d68"
+    },
+    {
+      "path": "scripts/check-lua.sh",
+      "bytes": 589,
+      "sha256": "6ff892211b8e27d75932d2cd8e72a3fae0abbb5f603f18281df9a31e57f6dad2"
+    },
+    {
+      "path": "scripts/check-world-lua.sh",
+      "bytes": 968,
+      "sha256": "75d7781b76bd2b5bf1869baf16f02228d31090e72ec6672a3f197b57f8a466f5"
+    },
+    {
+      "path": "scripts/fetch-assets.sh",
+      "bytes": 2302,
+      "sha256": "4140179f89a7b14fb40d84051e49f7669b2d24bce6be00da6eea2dc564d60fe8"
+    },
+    {
+      "path": "scripts/package-world.py",
+      "bytes": 15262,
+      "sha256": "4aa52b48434ffa18e5d2f8df5db64e9c188ff42e30c08ec7ead51dfc5fe65dbe"
+    },
+    {
+      "path": "scripts/package.py",
+      "bytes": 7284,
+      "sha256": "0dc8ef0a9bab6a75bebce715e3e0bd7dfe26c4ec4abaca7af505c28f4d1cb09f"
+    },
+    {
+      "path": "scripts/provision-world.py",
+      "bytes": 27298,
+      "sha256": "f22bc6a894478c9f01408da3218e8a3b0c5e2cd57c7c3531f6d3f2e3372571dc"
+    },
+    {
+      "path": "scripts/provision-world.sh",
+      "bytes": 867,
+      "sha256": "db7b08aae92914011d167e46d3900a8132c37fe727cb91bf4558b0cfeea125fa"
+    },
+    {
+      "path": "scripts/provision.py",
+      "bytes": 16227,
+      "sha256": "17945de51791319e42ea4af155fdb427653a1545b0fa3267c6c79130194c6075"
+    },
+    {
+      "path": "scripts/provision.sh",
+      "bytes": 861,
+      "sha256": "b6259303c58f5f02d00bc481cc85903d3e13a4f2cae251029ee96a1f564a5b67"
+    },
+    {
+      "path": "scripts/workshop.sh",
+      "bytes": 4567,
+      "sha256": "324b0d7377811fc1ac24254ecb32029f9c221745016dd1af59c0cbd354b5771c"
+    },
+    {
+      "path": "tests/check-essences.sh",
+      "bytes": 1778,
+      "sha256": "b90e74d2b974f43a23d7b25d8b73f20bb96ecd8f02418d93b99fdaaf1d325c91"
+    },
+    {
+      "path": "tests/test_bash_tools.py",
+      "bytes": 10516,
+      "sha256": "8138981af390e6b68d4c3a3854dca7b038f4fa423fd05be2a9930c22ddf57e76"
+    },
+    {
+      "path": "tests/test_provision.py",
+      "bytes": 12424,
+      "sha256": "790257181bb4de4cf93615c7e8767c17aabace5c38803ffa7a4ddd4b0b405e0a"
+    },
+    {
+      "path": "tests/test_source_package.py",
+      "bytes": 3257,
+      "sha256": "ba854f6219a0be31d3110e864af4e8f0b51b3b0357d487d16b71bf6673dedc31"
+    },
+    {
+      "path": "tests/test_world_package.py",
+      "bytes": 6243,
+      "sha256": "466c56065fa67fda213811a1efdc545439797895df48e7eb7f494909b5e88819"
+    },
+    {
+      "path": "tests/test_world_provision.py",
+      "bytes": 12581,
+      "sha256": "83a40f5a9f8fbbf4033a2a0455c66be9a8e5e6b33c1ef43e9a39f84c99d997d1"
+    },
+    {
+      "path": "tools/essences.sh",
+      "bytes": 3387,
+      "sha256": "89c8117e8d9181c3e52020bfa10cec9c147309f9e8ee3f73ec7a4f7755fc1b1d"
+    }
+  ],
+  "publicParentDependencies": {
+    "experiments/leviath-workshop/presentation/crown-candidate/build-crown.py": {
+      "bytes": 12065,
+      "sha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b"
+    },
+    "experiments/leviath-workshop/presentation/crown-candidate/geometry-kernel.py": {
+      "bytes": 20401,
+      "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+    },
+    "experiments/leviath-workshop/presentation/crown-candidate/mod/Meshes/veyra/veyra_swamp_crown_01.dae": {
+      "bytes": 6548329,
+      "sha256": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683"
+    },
+    "experiments/leviath-workshop/presentation/crown-candidate/mod/Veyra-Dense-Crown.esp": {
+      "bytes": 446,
+      "sha256": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665"
+    },
+    "experiments/leviath-workshop/presentation/bark-materials/mod/Textures/veyra/swamp_bark.dds": {
+      "bytes": 699192,
+      "sha256": "76dabf30eb286fcd2cbb4f964aa45fcd2b4a63e53a4b2a611128828c20845e2d"
+    },
+    "experiments/leviath-workshop/presentation/bark-materials/mod/Textures/veyra/swamp_bark_n.dds": {
+      "bytes": 1398256,
+      "sha256": "33c12d7cb40671721fc22861fb45d1eb9ab8c7ab9beb8d4f659b3eedf139b722"
+    },
+    "experiments/leviath-workshop/presentation/bark-materials/CC0-1.0.txt": {
+      "bytes": 7038,
+      "sha256": "8bdc7b952ae0a12e08ccf9463a4750f7288f4d05bf7f2124cc5805ecaabdb01c"
+    },
+    "experiments/leviath-workshop/presentation/frontier-candidate/mod/LEVIATH-Frontier.esp": {
+      "bytes": 486128,
+      "sha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad"
+    },
+    "experiments/leviath-workshop/prototypes/wildlife-source-only/build-creature.py": {
+      "bytes": 11572,
+      "sha256": "6041874c2517b0350c7fd881e3a98ee54a3cd1621f75a03083642e5977534dd0"
+    },
+    "experiments/leviath-workshop/prototypes/wildlife-source-only/check-creature.py": {
+      "bytes": 7092,
+      "sha256": "c063d6bcd2f56630769ed5df5ee1b8bac21a7c8cc07b5dda4a4c42f5173b71ad"
+    },
+    "experiments/leviath-workshop/docs/ENGINE_API_BINDINGS.json": {
+      "bytes": 1130,
+      "sha256": "2fb238b37e66274a690b3ca85509f0a3fe526842e98e7d15c09bbefb91f70c53"
+    }
+  },
+  "productionHashes": {
+    "crown-0.1.1": {
+      "crown-0.1.1/mod/Veyra-Crown-Refinement-011.esp": "4e7426fd965dd4054b133acc18d3c00dc774937ea89feab9f46e02c193e4ff0f",
+      "crown-0.1.1/mod/Meshes/veyra/veyra_swamp_crown_refined_011.dae": "3ce4e188aa790e2fce1b976b3e594ba3be5ef761ec882e03f7371e39341c7325",
+      "crown-0.1.1/mod/Textures/veyra/crown_leaf_refined_011.dds": "49683c4a6751b893707f81d3412ed3897dbcb5512fb2e37621b1730a0f8f0934"
+    },
+    "wildlife-0.1.1": {
+      "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.dae": "04be0c945b715fd39b5492f23fe72c7088689e6271812cd7b2099f2f86eb4bec",
+      "wildlife-0.1.1/mod/Meshes/veyra/creature/frontier_stag.txt": "2b9c43f3a43f05152bd530159ca74882dd64fe133d20f2967bfbde253c135742",
+      "wildlife-0.1.1/mod/scripts/veyra_wildlife/actor.lua": "eace1b82dbbc06d0e74f9b0282741d53796f387caf252ff28a98c6c62a128206",
+      "wildlife-0.1.1/mod/scripts/veyra_wildlife/config.lua": "103dc4c3c20b0bb0098eb564ca1ef596cb078e3debe5a3d5f5ef369aec1167e4",
+      "wildlife-0.1.1/mod/scripts/veyra_wildlife/global.lua": "f151c64e6cf53609608f64f344b0e8901946f191ba19db5a32f7b34abcd3a0ed",
+      "wildlife-0.1.1/mod/scripts/veyra_wildlife/player.lua": "94eca85f746deb31d9d14762a73b7451f36586fd02a357cabcb4fb8c54ba37f6",
+      "wildlife-0.1.1/mod/Veyra-Wildlife.omwscripts": "dbbda99e319ea9dcceab3774d31e4286e42382412d5f004fd374db1acd16593a"
+    }
+  },
+  "provenanceCluster": "ROOT_PEERS_SHARED_ENGINE_SOURCES_NOT_INDEPENDENT_CONFIRMATION",
+  "plannedAllowlistChange": {
+    "replaced": "docs/RELEASE_0.1.0.md",
+    "with": ".gitattributes",
+    "reason": "Preserve exact native asset/animation/metadata bytes; release scope in README"
+  },
+  "sourceBuild": {
+    "crown": "LOCAL_PARENT_ONLY",
+    "crownChecker": "PRIVATE_REBUILD_DEPENDENT",
+    "wildlife": "PUBLIC_PARENT_OWN_GENERATOR_REFERENCE"
+  },
+  "nativeClaimCeiling": "EXACT_SELECTED_PRODUCTION_WITH_BOUND_OBSERVATION_SCOPE"
+}
