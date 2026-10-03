@@ -14,6 +14,7 @@ FIXED = {
     'docs/FIELDWORK_NATIVE.json', 'docs/FIELDWORK_DONE_RELOAD_NATIVE.json',
     'docs/FIELDWORK_WORKING_RELOAD_NATIVE.json',
     'docs/PRESENTATION_NATIVE.json',
+    'docs/AUDIO_NATIVE.json', 'docs/CI_WORKSHOP.md',
     'scripts/workshop.sh', 'scripts/fetch-assets.sh', 'scripts/asset-sources.tsv',
     'scripts/package.py', 'scripts/check-lua.sh', 'tools/essences.sh', 'tests/test_bash_tools.py',
     'scripts/provision.sh', 'scripts/provision.py', 'tests/test_provision.py', 'docs/PROVISIONING.md',

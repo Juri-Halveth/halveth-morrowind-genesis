@@ -71,19 +71,33 @@ class ProvisionChecks(unittest.TestCase):
         self.assertIn('replace=fallback\n', cfg)
         self.assertLess(cfg.index('fallback=Fixture_Default,1'), cfg.index('fallback=Fixture_Second,2'))
         self.assertLess(cfg.index('fallback=Fixture_Second,2'), cfg.index('fallback=Own_First,3'))
-        self.assertLess(cfg.index('fallback=Own_First,3'), cfg.index('data="' + (self.root / 'Data two').as_posix()))
+        self.assertLess(cfg.index('fallback=Own_First,3'), cfg.index('data="' + (self.root / 'Data two').resolve().as_posix()))
         self.assertLess(cfg.index('content=Extra.esp'), cfg.index('fallback=Own_Second,4'))
         self.assertEqual(cfg.count('content=veyra-courier.omwscripts'), 1)
         self.assertEqual(cfg.count('content=veyra-fieldwork.omwscripts'), 1)
-        self.assertIn((self.destination / 'profile/user').as_posix(), cfg)
-        self.assertIn((self.destination / 'profile/data').as_posix(), cfg)
-        self.assertIn('data="' + (self.base / 'existing local assets').as_posix() + '"', cfg)
-        self.assertNotIn('data-local="' + (self.base / 'existing local assets').as_posix() + '"', cfg)
+        self.assertIn((self.destination / 'profile/user').resolve().as_posix(), cfg)
+        self.assertIn((self.destination / 'profile/data').resolve().as_posix(), cfg)
+        self.assertIn('data="' + (self.base / 'existing local assets').resolve().as_posix() + '"', cfg)
+        self.assertNotIn('data-local="' + (self.base / 'existing local assets').resolve().as_posix() + '"', cfg)
         for row in plan['payload']:
             copy = self.destination / row['destination']
             self.assertEqual(provision.digest(copy.read_bytes()), row['sha256'])
             self.assertFalse(os.path.samefile(copy, row['path']))
         self.assert_originals()
+
+    def test_config_preserves_order_for_noncanonical_input_spelling(self):
+        # A real existing directory followed by '..' names the same filesystem
+        # root. On Windows, resolve() can also expand aliases in runner temp paths.
+        canonical = self.root.resolve()
+        self.root = self.root / 'base profile with spaces' / '..'
+        self.base = self.root / 'base profile with spaces'
+        self.engine = self.root / 'external runtime/openmw.exe'
+        self.destination = self.root / 'new own installation'
+        self.assertNotEqual(str(self.root), str(canonical))
+        self.assertEqual(self.root.resolve(), canonical)
+        self.test_plan_is_read_only_and_apply_copies_dependency_closed_modules()
+        cfg = (self.destination / 'profile/openmw.cfg').read_text()
+        self.assertNotIn('/../', cfg)
 
     def test_destination_existing_nested_or_aliased_is_rejected_before_writing(self):
         for forbidden in (self.base / 'nested', self.engine_root / 'nested', self.root,

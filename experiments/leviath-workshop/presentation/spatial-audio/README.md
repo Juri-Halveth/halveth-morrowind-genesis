@@ -60,8 +60,14 @@ the PCM16 clipping limits. This does not prove listening quality.
 arrival gating, actual actor attachment, once-per-courier behaviour,
 saved deduplication, a later courier, disabled/inactive defer, pause,
 optional source failures, decoder failure, detached snapshots and invalid
-save hold. They use declared engine doubles. Native integration and human
-audition remain pending the coordinated root test.
+save hold. They use declared engine doubles. The separate
+[native audio receipt](../../docs/AUDIO_NATIVE.json) binds the same production
+source to engine playback on the actual arriving courier. Eleven distinct
+assertion names produced 22 PASS log lines, including repeated HUD polls.
+It observed one request, `isSoundFilePlaying`, no repeat after playback,
+actual item claiming and the arrival-footer transition. A coordinating-agent
+image review saw the readable footer and 40/40 health. Human audition and
+native saved-arrival deduplication remain pending.
 
 ```bash
 VEYRA_TEST_LUA=/path/to/lua51 bash CHECK_AUDIO.sh

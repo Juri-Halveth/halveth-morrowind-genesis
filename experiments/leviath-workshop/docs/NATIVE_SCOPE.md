@@ -21,12 +21,15 @@ This source package records distinct finite checks:
 5. The procedural PNG checker binds complete white RGBA pixels, dimensions,
    chunk order, CRCs and the generator's exact output. A valid PNG structure
    does not itself prove successful native texture loading.
-6. Eight provisioning tests use disposable profile/runtime fixtures. They bind
+6. Nine provisioning tests use disposable profile/runtime fixtures. They bind
    ordered repeated configuration lines, preserved input bytes and hardlink
    identity, new destination guards, changed-input refusal, staged copy cleanup,
    source-only audio refusal, HUD generation in an own copy, Bash path quoting
    and distinct optional shader/key copies with private storage/log/save exclusion.
-   No real engine is launched by those tests.
+   A real noncanonical path regression preserves the same order and exact
+   source bytes after resolving equivalent input spellings. No real engine is
+   launched by those tests. The [hosted Windows oracle repair](CI_WORKSHOP.md)
+   records the earlier single-test failure and the concrete local reproduction.
 
 The separate [native profile menu run](PROVISION_NATIVE.json) starts the actual
 engine through the public Bash controller with an explicit newly provisioned
@@ -96,6 +99,15 @@ The tree was decoded and visible and had a named one-ray collision observation.
 Ground contact, world-wide overrides and additional variants remain unproven.
 The older nine-check PNG run timed out in its paused-menu fixture; it remains
 a historical partial run, distinct from the completed current source observation.
+
+The [spatial-audio native observation](AUDIO_NATIVE.json) binds the unchanged
+audio, courier and HUD source to a real arriving courier and the generated
+mono cue. It contains 22 logged PASS lines from eleven different assertion
+names, including repeated arrival-footer and HUD polls. The engine observed
+`isSoundFilePlaying` for that courier, one request, no repeat after playback,
+two actual claimed items and removal of the arrival footer. Root image review
+saw the readable footer and 40/40 health at 1920x1080. Human audition and
+native saved-arrival audio deduplication remain separate pending checks.
 
 The field workshop's [new job](FIELDWORK_NATIVE.json),
 [completed reload](FIELDWORK_DONE_RELOAD_NATIVE.json) and

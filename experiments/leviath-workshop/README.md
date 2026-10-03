@@ -11,6 +11,12 @@ the owner's position over game days, and one-time acceptance of a delivery.
 Its caller role values are declarations. Its tests do not prove authentication,
 network reception or a complete engine integration.
 
+Source 0.1.2 repairs a hosted Windows test's path-spelling assumption with a
+real equivalent-path regression, while preserving the production source bytes.
+It also records engine playback and HUD coupling for the arriving courier;
+human audition remains pending. See the [CI repair](docs/CI_WORKSHOP.md) and
+[native audio observation](docs/AUDIO_NATIVE.json).
+
 ## Git Bash commands
 
 From this directory:
