@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.lua text eol=lf
+*.omwscripts text eol=lf
+*.json -text
+*.md -text
+*.txt -text
+*.dae -text
+*.dds -text
+*.esp -text

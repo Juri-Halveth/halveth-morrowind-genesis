@@ -1,0 +1,64 @@
+name: LEVIATH refinements exact source and owned asset checks
+on:
+  push:
+    paths:
+      - 'experiments/leviath-refinements/**'
+      - '.github/workflows/leviath-refinements.yml'
+  pull_request:
+    paths:
+      - 'experiments/leviath-refinements/**'
+      - '.github/workflows/leviath-refinements.yml'
+permissions:
+  contents: read
+jobs:
+  publication-boundaries:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: experiments/leviath-refinements
+        shell: bash
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Disposable source, parent, privacy and exact archive regressions
+        run: python -m unittest discover -s tests -v
+      - name: Exact selected source, assets, licenses and native-record bindings
+        run: python scripts/package-refinements.py
+      - name: Python source syntax only, without executing local builders
+        run: python -c "import ast,pathlib; [ast.parse(p.read_text(encoding='utf8'),filename=str(p)) for p in pathlib.Path('.').rglob('*.py')]"
+      - name: Declared Lua model and production syntax
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y lua5.1
+          if [[ -f wildlife-0.1.1/check-control.lua ]]; then
+            lua5.1 wildlife-0.1.1/check-control.lua wildlife-0.1.1
+            luac5.1 -p wildlife-0.1.1/mod/scripts/veyra_wildlife/*.lua
+          fi
+      - name: Build exact own add-on archive after checks
+        if: runner.os == 'Linux'
+        run: |
+          python scripts/package-refinements.py --archive "$RUNNER_TEMP/leviath-refinements-own-source-assets.zip" > "$RUNNER_TEMP/SOURCE_MANIFEST.json"
+          cd "$RUNNER_TEMP"
+          sha256sum leviath-refinements-own-source-assets.zip SOURCE_MANIFEST.json > SOURCE_MANIFEST.sha256
+      - name: Retain own add-on archive and byte manifest
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: leviath-refinements-own-source-assets
+          path: |
+            ${{ runner.temp }}/leviath-refinements-own-source-assets.zip
+            ${{ runner.temp }}/SOURCE_MANIFEST.json
+            ${{ runner.temp }}/SOURCE_MANIFEST.sha256
+          if-no-files-found: error
+          retention-days: 14

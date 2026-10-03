@@ -1,0 +1,3 @@
+data="<absolute-addon-directory>/wildlife-0.1.1/mod"
+# Register exactly once in a new own profile copy.
+content=Veyra-Wildlife.omwscripts
