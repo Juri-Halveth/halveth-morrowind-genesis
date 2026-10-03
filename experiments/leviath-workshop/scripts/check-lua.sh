@@ -9,5 +9,5 @@ while IFS= read -r -d '' source; do
  fi
  SOURCE_TO_CHECK="$source" "$lua" -e 'assert(loadfile(os.getenv("SOURCE_TO_CHECK")))'
  count=$((count+1))
-done < <(find "$ROOT/gameplay/mod" "$ROOT/presentation/mod" -type f -name '*.lua' -print0)
+done < <(find "$ROOT/gameplay/mod" "$ROOT/presentation/mod" "$ROOT/presentation/spatial-audio/mod" -type f -name '*.lua' -print0)
 printf 'LUA_SOURCE_SYNTAX_PASS files=%s engine=NOT_STARTED\n' "$count"

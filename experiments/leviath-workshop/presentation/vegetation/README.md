@@ -86,8 +86,15 @@ OpenMW screenshot. The bark maps are 1024×1024 with mipmaps. The complete mod
 is about 5.3 MB, mostly the COLLADA text and two bark maps.
 
 **Current:** source and structure checks passed; five input hashes unchanged.
-**Pending:** native loading, texture binding, root/terrain contact, collision,
-camera comparison, repeated world instances and frame cost.
+The [combined native receipt](../../docs/PRESENTATION_NATIVE.json) binds this
+generator's exact build outputs to the real prototype mesh/plugin inputs.
+A completed same-position specimen run loaded and displayed the prototype;
+one ray identified its collision and the original tree's named collision.
+Coordinating-agent screenshots show the before/after specimen pair. Those
+observations cover one additive prototype, not a world-wide class override.
+**Pending:** root/terrain contact, arbitrary placements, repeated world
+instances, the optional class override and frame cost. Local previews and
+generated mesh/texture/plugin binaries are excluded from the source package.
 
 The requested 2027/2028 or GTA-style visual quality remains a design target.
 One candidate tree does not fulfill that whole-game target.

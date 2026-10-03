@@ -5,6 +5,10 @@ CHECK_RECEIPT.json
 ASSET_RECEIPT.json
 SOURCE_MANIFEST.json
 *.tga
+*.png
+*.wav
+*.ogg
+KENNEY-LICENSE.txt
 *.omwsave
 *.bsa
 *.esm
@@ -15,3 +19,4 @@ SOURCE_MANIFEST.json
 *.part.*
 *.download-lock/
 play.lock/
+INSTALL_RECEIPT.json

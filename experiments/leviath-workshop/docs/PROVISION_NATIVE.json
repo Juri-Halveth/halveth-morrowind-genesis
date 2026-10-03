@@ -1,0 +1,60 @@
+{
+  "schema": "veyra.workshop.provision.native-menu-scope.v1",
+  "dataClass": "PUBLIC",
+  "status": "NATIVE_MENU_START_AND_CLEAN_EXIT_PASS",
+  "engine": "OpenMW 0.51.0",
+  "startedAtUtc": "2026-10-03T02:41:50.840963+00:00",
+  "finishedAtUtc": "2026-10-03T02:42:05.941305+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "engineObserved": true,
+  "saveLoaded": false,
+  "profileSelection": "EXPLICIT_REPLACE_CONFIG_AND_NEW_OWN_PROFILE",
+  "profileConfigurationRestored": true,
+  "playLockRemoved": true,
+  "moduleHashes": {
+    "scripts/workshop.sh": "324b0d7377811fc1ac24254ecb32029f9c221745016dd1af59c0cbd354b5771c",
+    "scripts/provision.py": "17945de51791319e42ea4af155fdb427653a1545b0fa3267c6c79130194c6075",
+    "gameplay/LICENSE": "846c81f86e681cc34ebafe3875daea940f52f529b2ca1121199b1e38125de268",
+    "gameplay/mod/scripts/veyra_courier/config.lua": "df082e225658bf65f13403f2f90a5b09de90834683046f9a657cdbbdfe80c4b6",
+    "gameplay/mod/scripts/veyra_courier/global.lua": "16e8bd6fe003d4047f8c4c0eee462ddbf851d2bb9507403e4d5f54c682ebf904",
+    "gameplay/mod/scripts/veyra_courier/player.lua": "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25",
+    "gameplay/mod/scripts/veyra_courier/routes.lua": "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545",
+    "gameplay/mod/veyra-courier.omwscripts": "1b3bbefd3d6619347203fc324eaf12fc71256b064a138fffbb805524889ee8ad",
+    "gameplay/mod/scripts/veyra_fieldwork/config.lua": "c936bf51021de3aad7a3e83a3e0a7ab8b7c7a0e9b29bc08870b1fbe89450febf",
+    "gameplay/mod/scripts/veyra_fieldwork/global.lua": "c13ff36581019b6a8922e704eae106f20a7c3ae2854d96238f194f3d14a8722f",
+    "gameplay/mod/scripts/veyra_fieldwork/player.lua": "66698d3d32760b400542f85d1e6a09e2055a658073addd31141e124c4525e9aa",
+    "gameplay/mod/veyra-fieldwork.omwscripts": "4b3459af8d2471673896756d8200ad604719d64ee7b50163a2982fee7c9b34d0",
+    "presentation/build-assets.py": "acc242e13cc9d476fadd894662a164910918633ab38c22c31b5827ae8830f8b2",
+    "presentation/check-assets.py": "0ee4e623d1882635899cdbd6f27251c99a411e5d43aa487df3a895234fb0e9c9",
+    "presentation/LICENSE": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2",
+    "presentation/mod/scripts/veyra/hud.lua": "14846d6e1bef8f44c606c4fce548fa234ae06344c7d9985d5cec0b60d8564008",
+    "presentation/mod/Veyra-Presentation.omwscripts": "fe8ad93b501e9ec10882c802bbfbb39d6373e61aac92cddb123568ef596fd7d9"
+  },
+  "copiedModuleHashesUnchanged": true,
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "shaderParametersCopied": true,
+  "keyBindingsCopied": true,
+  "networkEffects": 0,
+  "localRawReceiptDigest": "41526a4b59f7df8240e97387980e4a74aeae1bff597dba8bc850e2239d4d32eb",
+  "localInstallReceiptDigest": "c41c6654a20acf01318150f94f50c14911718860d36ee9b0a5a7d5da872db93d",
+  "nativeReceiptVisualDeclaration": "PENDING_ROOT_IMAGE_REVIEW",
+  "subsequentRootImageReview": {
+    "sourceRole": "COORDINATING_AGENT_IMAGE_REVIEW",
+    "independentUserApproval": false,
+    "resolution": [
+      2560,
+      1440
+    ],
+    "observedScope": "ACTUAL_MENU_VISIBLE_IN_NATIVE_MENU_IMAGE"
+  },
+  "provenance": "SAME_LOCAL_ENGINE_AND_OWN_PROFILE_CONTROLLER_CORRELATED_OBSERVATIONS",
+  "claimCeiling": "REAL_BASH_CONTROLLER_EXPLICIT_PROFILE_MENU_START_ONLY",
+  "unverified": [
+    "integrated gameplay with all selected modules",
+    "opening a save in this provisioned profile",
+    "whole-campaign or long-run performance",
+    "audible spatial-audio acceptance"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "veyra.workshop.presentation.native-scope.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "hudVersion": "0.1.3",
+  "startedAtUtc": "2026-10-03T02:07:14.522933+00:00",
+  "finishedAtUtc": "2026-10-03T02:08:31.755472+00:00",
+  "exitCode": 0,
+  "complete": true,
+  "checks": [
+    "TWO_ENGINE_STAT_INSTANCES",
+    "BEFORE_HUD_SNAPSHOT",
+    "BEFORE_HUD_READS_ENGINE",
+    "BEFORE_HUD_VISIBILITY",
+    "SAME_SPECIMEN_POSITION",
+    "ONLY_NEW_SPECIMEN_ENABLED",
+    "STAT_CHANGED_HUD_SNAPSHOT",
+    "STAT_CHANGED_HUD_READS_ENGINE",
+    "STAT_CHANGED_HUD_VISIBILITY",
+    "MENU_HUD_SNAPSHOT",
+    "MENU_HUD_VISIBILITY",
+    "MENU_CLOSED_HUD_SNAPSHOT",
+    "MENU_CLOSED_HUD_READS_ENGINE",
+    "MENU_CLOSED_HUD_VISIBILITY",
+    "RESTORED_HUD_SNAPSHOT",
+    "RESTORED_HUD_READS_ENGINE",
+    "RESTORED_HUD_VISIBILITY"
+  ],
+  "moduleHashes": {
+    "presentation/mod/scripts/veyra/hud.lua": "14846d6e1bef8f44c606c4fce548fa234ae06344c7d9985d5cec0b60d8564008",
+    "presentation/mod/Veyra-Presentation.omwscripts": "fe8ad93b501e9ec10882c802bbfbb39d6373e61aac92cddb123568ef596fd7d9",
+    "presentation/vegetation/build-vegetation.py": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+  },
+  "generatedInputs": {
+    "Textures/veyra/white.png": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5",
+    "Meshes/veyra/swamp_tree_01.dae": "e894a81abe4d58431cd8415864a435f32524b249afae917a0d656985a060f78e",
+    "Veyra-Vegetation.esp": "403734aa56bcfda88359fd2384c32ef921bad22977d1cc29d3cabf1aa5e8dd9b"
+  },
+  "localRawReceiptDigest": "37d81ed71e62fda4c13f53ab2f98384f8705214ab79ae769480b8b38482870c4",
+  "generatorOutputBridge": {
+    "status": "EXACT_LOCAL_BUILD_OUTPUT_AND_NATIVE_INPUT_DIGEST_MATCH",
+    "localBuildReceiptDigest": "6dc2bf2783cf42545de4a102ca5ba9a21b69daab5c2bb2741492221c1f2d8fa7",
+    "generatorSha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+  },
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "networkEffects": 0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "nativeReceiptVisualDeclaration": "PENDING_IMAGE_REVIEW",
+  "subsequentRootImageReview": {
+    "sourceRole": "COORDINATING_AGENT_IMAGE_REVIEW",
+    "independentUserApproval": false,
+    "observedScope": [
+      "HUD readability and actual 39/40 health",
+      "panel hidden in native inventory menu",
+      "panel restored after menu closes",
+      "prototype tree decoded and visible"
+    ],
+    "imagesReferenced": [
+      "window-2",
+      "window-4",
+      "window-5",
+      "window-7"
+    ]
+  },
+  "treeObservation": {
+    "sameSpecimenPosition": true,
+    "rayCollisionHitIds": [
+      "flora_bc_tree_02",
+      "veyra_swamp_tree_01"
+    ],
+    "scope": "ONE_PROTOTYPE_PAIR_ONE_RAY_COLLISION_PER_SPECIMEN"
+  },
+  "provenance": "SAME_LOCAL_ENGINE_AND_OWN_COMBINED_FIXTURE_CORRELATED_OBSERVATIONS",
+  "unverified": [
+    "tree ground contact and arbitrary placements",
+    "world-wide class override and additional tree variants",
+    "2560x1440 or other screen-size visual fit",
+    "courier arrival hint in the combined scene",
+    "actual frame cost and long-run frame pacing",
+    "spatial-audio playback and audible quality"
+  ]
+}

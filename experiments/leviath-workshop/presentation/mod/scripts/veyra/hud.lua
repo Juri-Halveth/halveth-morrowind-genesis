@@ -1,4 +1,4 @@
--- Veyra Presentation 0.1.1, MIT. OpenMW 0.51.0 player script.
+-- Veyra Presentation 0.1.3, MIT. OpenMW 0.51.0 player script.
 -- Owns only a supplementary, noninteractive HUD layer. Reads engine state.
 local core = require('openmw.core')
 local self = require('openmw.self')
@@ -7,7 +7,7 @@ local ui = require('openmw.ui')
 local util = require('openmw.util')
 local I = require('openmw.interfaces')
 
-local VERSION = '0.1.1'
+local VERSION = '0.1.3'
 local LAYER = 'VeyraPresentation'
 local WIDTH, HEIGHT = 326, 180
 local PERIOD = 0.10
@@ -17,6 +17,7 @@ local location, clock, burden
 local panel, accent, courierNotice, courierHint
 local screenX, screenY, lastState = nil, nil, nil
 local readyPrinted, failurePrinted = false, false
+local lastMode, lastHudVisibility
 local texture
 local ink = util.color.rgb(0.96, 0.95, 0.91)
 local muted = util.color.rgb(0.74, 0.78, 0.80)
@@ -87,7 +88,7 @@ local function build()
     if not ui.layers.indexOf(LAYER) then
         ui.layers.insertAfter('HUD', LAYER, {interactive=false})
     end
-    texture = texture or ui.texture{path='Textures/veyra/white.tga'}
+    texture = texture or ui.texture{path='Textures/veyra/white.png'}
     location = text('location', '', 16, 34, 16, ink)
     clock = text('clock', '', WIDTH-88, 12, 14, gold, 72)
     burden = text('burden', '', 16, 151, 13, muted)
@@ -169,8 +170,12 @@ local function refresh()
 end
 
 local function onFrame(dt)
+    -- Paused frames can carry dt=0. Visibility follows UI transitions immediately.
+    local okGate, mode, hud = pcall(function() return I.UI.getMode(), I.UI.isHudVisible() end)
+    local gateChanged = okGate and (mode ~= lastMode or hud ~= lastHudVisibility)
+    if okGate then lastMode, lastHudVisibility = mode, hud end
     elapsed = elapsed + dt
-    if elapsed < PERIOD then return end
+    if elapsed < PERIOD and not gateChanged then return end
     elapsed = 0
     local ok, err = pcall(refresh)
     if not ok then
@@ -198,5 +203,6 @@ return {
         end},
     engineHandlers={onFrame=onFrame, onLoad=function()
         destroy();elapsed=PERIOD;lastState=nil;readyPrinted=false
+        lastMode, lastHudVisibility = nil, nil
     end},
 }

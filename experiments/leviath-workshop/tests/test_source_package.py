@@ -2,6 +2,8 @@
 from pathlib import Path
 import importlib.util
 import tempfile
+import hashlib
+import json
 import unittest
 
 SOURCE = Path(__file__).resolve().parents[1] / 'scripts/package.py'
@@ -22,6 +24,11 @@ class SourcePackageChecks(unittest.TestCase):
             target = self.directory / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text('MIT License\n' if relative == 'LICENSE' else 'owned source fixture\n', encoding='utf8')
+        own_source = 'gameplay/mod/scripts/veyra_courier/global.lua'
+        sha = hashlib.sha256((self.directory / own_source).read_bytes()).hexdigest()
+        for relative in package.REQUIRED:
+            if relative.startswith('docs/') and relative.endswith('_NATIVE.json'):
+                (self.directory / relative).write_text(json.dumps({'moduleHashes': {own_source: sha}}), encoding='utf8')
 
     def test_unknown_game_data_and_private_files_are_not_collected(self):
         for name in ('game.omwsave', 'Morrowind.esm', 'engine.dll', 'secrets.env'):
@@ -43,6 +50,16 @@ class SourcePackageChecks(unittest.TestCase):
     def test_binary_bytes_in_allowed_text_are_rejected(self):
         (self.directory / 'README.md').write_bytes(b'owned prefix\x00private binary')
         with self.assertRaises(ValueError):
+            package.collect()
+
+    def test_missing_registered_production_module_rejects_release(self):
+        (self.directory / 'gameplay/mod/scripts/veyra_courier/global.lua').unlink()
+        with self.assertRaisesRegex(ValueError, 'Required source missing:'):
+            package.collect()
+
+    def test_changed_production_source_requires_a_new_bound_native_receipt(self):
+        (self.directory / 'gameplay/mod/scripts/veyra_courier/global.lua').write_text('OWN_NEW_UNTESTED_SOURCE\n', encoding='utf8')
+        with self.assertRaisesRegex(ValueError, 'Native receipt/source binding differs:'):
             package.collect()
 
 

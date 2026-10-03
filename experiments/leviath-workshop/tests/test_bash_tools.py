@@ -28,7 +28,7 @@ class BashTools(unittest.TestCase):
         (self.profile / 'settings.cfg').write_text('[Video]\n', encoding='utf8')
         self.engine = self.profile / 'runtime' / 'engine-fixture.sh'
         self.engine.write_text(
-            '#!/usr/bin/env bash\nset -eu\ncat ../openmw.cfg\n'
+            '#!/usr/bin/env bash\nset -eu\ncat "$4/openmw.cfg"\n'
             'printf "ARGUMENT:%s\\n" "$@"\nexit "${ENGINE_EXIT:-0}"\n', encoding='utf8')
         self.engine.chmod(0o755)
         self.env = os.environ.copy()
@@ -110,7 +110,42 @@ class BashTools(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stdout.count('ARGUMENT:--load-savegame'), 1)
         self.assertIn('manual save.omwsave', result.stdout)
+        arguments = [line.removeprefix('ARGUMENT:') for line in result.stdout.splitlines()
+                     if line.startswith('ARGUMENT:')]
+        self.assertEqual(len(arguments), 7)
+        self.assertEqual(arguments[:3], ['--replace', 'config', '--config'])
+        self.assertIn('Profile with spaces', arguments[3])
+        self.assertEqual(arguments[4:6], ['--no-grab', '--load-savegame'])
         self.assert_restored()
+
+    def test_split_profile_external_runtime_keeps_hardlinked_inputs_unchanged(self):
+        split = self.directory / 'split root with spaces'
+        split.mkdir()
+        (self.profile / 'runtime').rename(split / 'runtime')
+        self.profile.rename(split / 'profile')
+        self.profile = split / 'profile'
+        self.engine = split / 'runtime' / 'engine-fixture.sh'
+        self.env['WORKSHOP_ENGINE'] = path(self.engine)
+        bootstrap = self.engine.parent / 'openmw.cfg'
+        original_bootstrap = b'# External read-only bootstrap\nresources=./resources\n'
+        bootstrap.write_bytes(original_bootstrap)
+        original_engine = self.engine.read_bytes()
+        linked_bootstrap = self.directory / 'base-bootstrap.cfg'
+        linked_engine = self.directory / 'base-engine.sh'
+        os.link(bootstrap, linked_bootstrap)
+        os.link(self.engine, linked_engine)
+        for exit_code in (0, 73):
+            self.env['ENGINE_EXIT'] = str(exit_code)
+            result = self.run_bash('workshop.sh', 'play', path(self.profile))
+            self.assertEqual(result.returncode, exit_code, result.stderr)
+            self.assertIn('ARGUMENT:--config', result.stdout)
+            self.assert_restored()
+            self.assertEqual(bootstrap.read_bytes(), original_bootstrap)
+            self.assertEqual(linked_bootstrap.read_bytes(), original_bootstrap)
+            self.assertEqual(self.engine.read_bytes(), original_engine)
+            self.assertEqual(linked_engine.read_bytes(), original_engine)
+            self.assertTrue(os.path.samefile(bootstrap, linked_bootstrap))
+            self.assertTrue(os.path.samefile(self.engine, linked_engine))
 
     def test_plan_is_read_only_and_missing_profile_fails(self):
         result = self.run_bash('workshop.sh', 'plan', path(self.profile))

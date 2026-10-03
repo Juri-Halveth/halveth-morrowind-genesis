@@ -10,29 +10,52 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXED = {
     '.gitattributes', '.gitignore', 'LICENSE', 'README.md',
     'docs/SOURCE_BINDINGS.md', 'docs/NATIVE_SCOPE.md', 'docs/COURIER_NATIVE.json',
+    'docs/COURIER_RELOAD_NATIVE.json', 'docs/COURIER_DEPOT_RELOAD_NATIVE.json',
+    'docs/FIELDWORK_NATIVE.json', 'docs/FIELDWORK_DONE_RELOAD_NATIVE.json',
+    'docs/FIELDWORK_WORKING_RELOAD_NATIVE.json',
+    'docs/PRESENTATION_NATIVE.json',
     'scripts/workshop.sh', 'scripts/fetch-assets.sh', 'scripts/asset-sources.tsv',
     'scripts/package.py', 'scripts/check-lua.sh', 'tools/essences.sh', 'tests/test_bash_tools.py',
+    'scripts/provision.sh', 'scripts/provision.py', 'tests/test_provision.py', 'docs/PROVISIONING.md',
+    'docs/PROVISION_NATIVE.json',
     'tests/test_source_package.py',
     'tests/check-essences.sh', 'rules/policy.py', 'rules/check_policy.py',
     'presentation/LICENSE', 'presentation/README.md', 'presentation/build-assets.py',
+    'presentation/check-assets.py',
     'presentation/check-hud.lua', 'presentation/CHECK_HUD.sh',
     'presentation/mod/Veyra-Presentation.omwscripts',
     'presentation/mod/scripts/veyra/hud.lua',
+    'presentation/spatial-audio/build-audio.py',
+    'presentation/spatial-audio/cfg-candidate.txt',
+    'presentation/spatial-audio/CHECK_AUDIO.sh',
+    'presentation/spatial-audio/check-audio.lua',
+    'presentation/spatial-audio/LICENSE',
+    'presentation/spatial-audio/README.md',
+    'presentation/spatial-audio/THIRD_PARTY_NOTICES.md',
+    'presentation/spatial-audio/mod/Veyra-Spatial-Audio.omwscripts',
+    'presentation/spatial-audio/mod/scripts/veyra/spatial_audio.lua',
     'presentation/vegetation/build-vegetation.py',
     'presentation/vegetation/check-vegetation.py',
     'presentation/vegetation/README.md',
     'presentation/vegetation/THIRD_PARTY_NOTICES.md',
     'presentation/vegetation/cfg-additive.txt',
     'presentation/vegetation/cfg-tree02-override.txt',
-    'gameplay/LICENSE', 'gameplay/README.md', 'gameplay/check-courier.lua',
-    'gameplay/CHECK_COURIER.sh', 'gameplay/mod/veyra-courier.omwscripts',
+    'gameplay/LICENSE', 'gameplay/README.md', 'gameplay/mod/veyra-courier.omwscripts',
+    'gameplay/FIELDWORK.md', 'gameplay/mod/veyra-fieldwork.omwscripts',
+    'docs/COURIER_STACK_NATIVE.json', 'docs/COURIER_TRANSFER_RELOAD_NATIVE.json',
+    'docs/COURIER_CLAIMED_MIGRATION_NATIVE.json', 'docs/COURIER_DEPOT_MIGRATION_NATIVE.json',
+    'gameplay/mod/scripts/veyra_fieldwork/config.lua',
+    'gameplay/mod/scripts/veyra_fieldwork/global.lua',
+    'gameplay/mod/scripts/veyra_fieldwork/player.lua',
     'gameplay/mod/scripts/veyra_courier/config.lua',
     'gameplay/mod/scripts/veyra_courier/routes.lua',
     'gameplay/mod/scripts/veyra_courier/global.lua',
     'gameplay/mod/scripts/veyra_courier/player.lua',
 }
-REQUIRED = {'LICENSE', 'README.md', 'scripts/workshop.sh', 'scripts/fetch-assets.sh',
-            'rules/policy.py', 'rules/check_policy.py', 'tools/essences.sh'}
+# A source release must be dependency-closed. Its production modules, registration
+# files, checkers and notices cannot silently disappear from a successful bundle.
+OPTIONAL_OBSERVATIONS = set()
+REQUIRED = FIXED - OPTIONAL_OBSERVATIONS
 LOCAL_PATH = re.compile(r'(?:[a-z]:[\\/]|/c/|/mnt/c/)Users[\\/][^\\/]+[\\/]', re.I)
 PRIVATE_KEY = re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----')
 ACCESS_TOKEN = re.compile(r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})')
@@ -59,6 +82,12 @@ def collect():
         raise ValueError('Required source missing: ' + ', '.join(sorted(missing)))
     if b'MIT License' not in files['LICENSE']:
         raise ValueError('Own source license missing')
+    for relative, raw in files.items():
+        if relative.startswith('docs/') and relative.endswith('_NATIVE.json'):
+            receipt = json.loads(raw)
+            for source, expected in receipt['moduleHashes'].items():
+                if source not in files or hashlib.sha256(files[source]).hexdigest() != expected:
+                    raise ValueError('Native receipt/source binding differs: ' + relative + ' -> ' + source)
     return files
 
 

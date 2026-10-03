@@ -1,7 +1,8 @@
 -- SPDX-License-Identifier: MIT
 -- This isolated candidate seeds ONE synthetic parcel, not a visitor connection.
 return {
-    version = 1,
+    version = 2,
+    moduleVersion = '0.2.3',
     seedId = 'SYNTHETIC_FIRST_PARCEL',
     courierName = 'Elyra, Botin zwischen den Welten',
     courierTemplate = 'eldafire',

@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Bash syntax
-        run: bash -n scripts/workshop.sh scripts/fetch-assets.sh scripts/check-lua.sh tools/essences.sh tests/check-essences.sh presentation/CHECK_HUD.sh
+        run: bash -n scripts/workshop.sh scripts/provision.sh scripts/fetch-assets.sh scripts/check-lua.sh tools/essences.sh tests/check-essences.sh presentation/CHECK_HUD.sh presentation/spatial-audio/CHECK_AUDIO.sh
       - name: Delivery rule model
         run: bash scripts/workshop.sh check
       - name: Bash controller and asset failure paths
@@ -40,6 +40,10 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Bounded temporary work and byte snapshots
         run: bash tests/check-essences.sh
+      - name: Procedural own PNG pixels and CRCs
+        run: |
+          python presentation/build-assets.py
+          python presentation/check-assets.py
       - name: Own-source publication allowlist
         run: python scripts/package.py
       - name: Lua 5.1 declared API harness
@@ -49,3 +53,21 @@ jobs:
           sudo apt-get install --no-install-recommends -y lua5.1
           VEYRA_TEST_LUA=lua5.1 bash scripts/check-lua.sh
           VEYRA_TEST_LUA=lua5.1 bash presentation/CHECK_HUD.sh
+          VEYRA_TEST_LUA=lua5.1 bash presentation/spatial-audio/CHECK_AUDIO.sh
+      - name: Build exact own-source archive after checks
+        if: runner.os == 'Linux'
+        run: |
+          python scripts/package.py --archive "$RUNNER_TEMP/leviath-workshop-source.zip" > "$RUNNER_TEMP/SOURCE_MANIFEST.json"
+          cd "$RUNNER_TEMP"
+          sha256sum leviath-workshop-source.zip SOURCE_MANIFEST.json > SOURCE_MANIFEST.sha256
+      - name: Retain source ZIP and byte receipt
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: leviath-workshop-own-source
+          path: |
+            ${{ runner.temp }}/leviath-workshop-source.zip
+            ${{ runner.temp }}/SOURCE_MANIFEST.json
+            ${{ runner.temp }}/SOURCE_MANIFEST.sha256
+          if-no-files-found: error
+          retention-days: 14

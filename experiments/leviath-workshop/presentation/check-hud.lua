@@ -15,7 +15,7 @@ local ui = {TYPE={Widget='Widget', Image='Image', Text='Text'}, elements={},
         insertAfter=function(after, name, options)
             assert(after=='HUD' and name=='VeyraPresentation' and options.interactive==false)
         end}}
-ui.texture = function(options) assert(options.path=='Textures/veyra/white.tga');return options end
+ui.texture = function(options) assert(options.path=='Textures/veyra/white.png');return options end
 ui.content = function(value) return value end
 ui.screenSize = function() return screen end
 ui.create = function(layout)
@@ -117,5 +117,16 @@ check('snapshot exposes render declaration time screen without mutable aliases',
     state.health.current=-999;state.screen.width=0
     assert(module.interface.getState().health.current==43 and module.interface.getState().screen.width==1280)
     mode='Dialogue';frame();assert(not module.interface.getState().visible);mode=nil
+end)
+check('paused dt zero UI transitions refresh visibility immediately with stable-frame throttle', function()
+    frame();assert(visible())
+    local element=ui.elements[#ui.elements]
+    local before=element.updates
+    mode='Interface';module.engineHandlers.onFrame(0)
+    assert(not visible() and not module.interface.getState().visible and element.updates==before+1)
+    module.engineHandlers.onFrame(0);assert(element.updates==before+1)
+    mode=nil;module.engineHandlers.onFrame(0);assert(visible())
+    nativeHud=false;module.engineHandlers.onFrame(0);assert(not visible())
+    nativeHud=true;module.engineHandlers.onFrame(0);assert(visible())
 end)
 print('HUD_MODEL_PASS tests='..tests..' engine=DECLARED_DOUBLES native=NOT_TESTED')

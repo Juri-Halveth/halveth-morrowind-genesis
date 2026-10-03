@@ -1,13 +1,14 @@
-# Veyra Presentation 0.1.1
+# Veyra Presentation 0.1.3
 
 A small native OpenMW 0.51.0 HUD candidate. It presents the player's actual
 health, magicka, fatigue, cell, game clock and carried weight. The panel adds
-an explicitly noninteractive layer and updates at most ten times per second.
+an explicitly noninteractive layer. Ordinary updates are throttled to ten
+times per second; UI visibility transitions refresh immediately.
 Existing weapons, spell selection, map, dialogue and inventory remain available.
 
 ## Integration into a separate profile
 
-Generate the owned 22-byte texture with `python build-assets.py`, then append
+Generate the owned 32x32 RGBA PNG texture with `python build-assets.py`, then append
 these two lines to the candidate profile's `openmw.cfg` and `play.cfg`:
 
 ```ini
@@ -21,6 +22,9 @@ is required. Do not copy these settings into the original installed profile
 until the separate native test and visual review are accepted.
 
 The panel respects `I.UI.isHudVisible()` and hides when a menu/dialogue is open.
+Version0.1.3 observes menu mode and native HUD visibility every frame and
+refreshes a change immediately, including paused frames with `dt=0`.
+Repeated unchanged zero-duration frames do not bypass the ordinary timer.
 It changes no actor stats, inventory, movement controls, game settings or
 network state. Other Lua modules can call
 `I.VeyraPresentation.setEnabled(false)` / `setEnabled(true)` if they own a
@@ -52,14 +56,19 @@ handler, saved per-character state or effect on original game files.
 VEYRA_TEST_LUA=/path/to/lua51 bash CHECK_HUD.sh
 ```
 
-Twelve checks cover modified maxima, negative fatigue, bounded bar geometry,
+Thirteen checks cover modified maxima, negative fatigue, bounded bar geometry,
 menu/HUD visibility, strict enable input, clock wrap and cell change, resize
 and load cleanup, invalid observations, an unloaded player cell, courier
 arrival transitions and absent/failed optional coupling, and detached visible
-screen/timestamp snapshots.
+screen/timestamp snapshots, and paused zero-duration UI transitions with
+stable-frame throttling.
 
-`CHECK_RECEIPT.json` records these model checks. At authoring, native rendering,
-real engine API integration, actual frame cost and visual fit are pending.
+The separately minimized [native receipt](../docs/PRESENTATION_NATIVE.json)
+binds this exact 0.1.3 source and generated PNG to seventeen completed real
+OpenMW checks: actual stat changes, snapshots, paused menu hiding and restoration.
+Coordinating-agent screenshot review observed readable 39/40 health and the
+panel hidden in the native inventory at 1920x1080. Actual frame cost, other
+screen-size visual fit and a complete campaign remain separate pending checks.
 Look for `VEYRA_HUD_READY` in the candidate OpenMW log; inspect a screenshot
 with the panel visible, then confirm dialogue/menu hiding and an actual stat
 change before calling those behaviours observed in the real engine. For the
@@ -72,6 +81,16 @@ establish fit in the current 2560 x 1440 foundation profile.
 All package source and its procedurally generated white texture use the
 included MIT license. No original Morrowind asset, external art, save,
 private local path or network endpoint is embedded in this mod.
+
+Version 0.1.2 replaces the former 22-byte TGA. The combined native probe
+`probe-20261003T014334` observed `Error loading textures/veyra/white.tga:
+code 1`; `VEYRA_HUD_READY` did not establish successful texture decoding or
+a visible rendered panel. The PNG uses only Python standard-library
+`struct` and `zlib`. `check-assets.py` verifies its chunk CRCs and complete
+unfiltered white RGBA pixels; an independent Pillow decode is also recorded.
+The current native run observed PNG decoding and a visible panel. The former
+TGA failure and first source ZIP remain historical records; local history,
+test screenshots and raw receipts are excluded from this source package.
 
 The implementation was bound to the API documentation shipped with the
 installed OpenMW 0.51.0 runtime and checked against official references:
