@@ -1,0 +1,3 @@
+GLOBAL: scripts/veyra_townlife/global.lua
+PLAYER: scripts/veyra_townlife/player.lua
+CUSTOM: scripts/veyra_townlife/actor.lua

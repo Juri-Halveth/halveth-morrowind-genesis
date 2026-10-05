@@ -1,0 +1,40 @@
+{
+  "schema": "veyra.workshop.fieldwork.native-scope.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "startedAtUtc": "2026-10-03T02:00:47.654835+00:00",
+  "finishedAtUtc": "2026-10-03T02:01:07.281028+00:00",
+  "exitCode": 0,
+  "complete": true,
+  "runPhase": "DONE_RELOAD",
+  "checks": [
+    "FIELDWORK_DONE_STATE_RESTORED",
+    "WORKSHOP_OBJECT_REFERENCES_RESTORED",
+    "WORKSHOP_CONSUMED_ESCROW_RESTORED",
+    "REAL_RATION_ITEM_RESTORED",
+    "RELOAD_HARVEST_NO_DUPLICATION"
+  ],
+  "moduleHashes": {
+    "gameplay/mod/scripts/veyra_fieldwork/config.lua": "c936bf51021de3aad7a3e83a3e0a7ab8b7c7a0e9b29bc08870b1fbe89450febf",
+    "gameplay/mod/scripts/veyra_fieldwork/global.lua": "c13ff36581019b6a8922e704eae106f20a7c3ae2854d96238f194f3d14a8722f",
+    "gameplay/mod/scripts/veyra_fieldwork/player.lua": "66698d3d32760b400542f85d1e6a09e2055a658073addd31141e124c4525e9aa",
+    "gameplay/mod/veyra-fieldwork.omwscripts": "4b3459af8d2471673896756d8200ad604719d64ee7b50163a2982fee7c9b34d0"
+  },
+  "localRawReceiptDigest": "6c4d13efe0f3711e3a0a1347cdcab7343f7d1d598f717c3a8688ad8bb3c3ae69",
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "networkEffects": 0,
+  "fixture": "OWN_ISOLATED_SINGLEPLAYER_PLOT_AND_WORKBENCH",
+  "inventoryScope": "TWO_SEED_SALTRICE_PLUS_ONE_COMBERRY_IN_SYNTHETIC_FIXTURE",
+  "provenance": "SAME_LOCAL_ENGINE_AND_OWN_FIELDWORK_MODULES_CORRELATED_RUNS",
+  "claimCeiling": "SYNTHETIC_SINGLEPLAYER_FIELDWORK_FIXTURE_ONLY",
+  "unverified": [
+    "ration consumption and active magic effect",
+    "physical F4 key input",
+    "arbitrary mod interference during inventory transitions",
+    "animated crop stages and irrigation",
+    "multiplayer and NPC workers"
+  ]
+}

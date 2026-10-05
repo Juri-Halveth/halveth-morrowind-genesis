@@ -1,0 +1,67 @@
+{
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW0.51.0/API129",
+  "exitCode": 0,
+  "loggedPassCount": 391,
+  "distinctAssertionCount": 391,
+  "selectedObservationRecordVersion": "1.2",
+  "sourcePublicObservationSha256": "52977ce1d71dcbc61c72604b40e2aed2d13cc66b0bc165f3c28d27a0a73a899f",
+  "privateRawReceiptSha256": "9c2563c235f8d8af1bed374bc3733763833192e0197bf6daec9313fe6299bb40",
+  "originalBoundSourceCount": 14,
+  "allNativeSourceInputsBeforeAfterEqual": true,
+  "stageClosure": {
+    "preStageReceiptSha256": "1dd3b346064bf0a6c0788a07b09b57099af95e0c29391344c10b9c50499fd950",
+    "postRecordedAtUtc": "2026-10-03T04:19:11.157273+00:00",
+    "sceneStagedFiles": 29,
+    "preStageHashesEqualPostRunEndpoint": true,
+    "activeVfsWinnersEqualFrozenNativeBoundSources": true,
+    "scope": "Stage receipt plus fresh post-run file observations; original runtime moduleHashes map covered base38 only.",
+    "duringExecutionFileSamples": "NOT_CONTINUOUSLY_OBSERVED"
+  },
+  "nativeInclusionGate": "EXACT_SELECTED_PRODUCTION_SOURCE_AND_STAGE_ENDPOINT_BOUND",
+  "provenance": "SAME_ROOT_ENGINE_FIXTURE_SOURCE_STAGE_ENDPOINT_AND_IMAGE_CLUSTER",
+  "normalNewProfileNativeLaunch": "OBSERVED_SEPARATE_UNMODIFIED_NORMAL_SAVE_START_RECORD",
+  "networkEffects": 0,
+  "schema": "veyra.workshop.scene-selected-native.v1",
+  "moduleHashes": {
+    "presentation/frontier-candidate/mod/LEVIATH-Frontier.esp": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_coast.dds": "630be11afda901d57d9bcf347a7cb92464ac5b07ebae2fa88e49b5f11582403b",
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_ground.dds": "6f49e5f4764af4996c71283d825e8b7d7000d5808e8ff95a433636fc38d7ca96",
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_stone.dds": "d54f2025d173e9ade36d1e011c20b0f2e4667e2afe353013a5f05cff1b0bad31",
+    "presentation/plaza-candidate/mod/LEVIATH-Plaza.esp": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69",
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_approach.dae": "576d5ff67d33bc6d4b77ded2e9628ef1f001b2706cd8f8eda610f9eb28a08446",
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arena.dae": "56036acfec2625d054db312690b7aa5b8549089e887e2ce9da5dd99fd6dc0e66",
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arrival.dae": "d324d2520099532e2556d994fba8265d79fd8b492b4219b0c54dc3d270d11aa7",
+    "presentation/crown-candidate/mod/Veyra-Dense-Crown.esp": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665",
+    "presentation/crown-candidate/mod/Textures/veyra/crown_leaf_01.dds": "81b760ed106f75ba542f053e5a892082cf1d9f84604bf7fba711925c4b36283f",
+    "presentation/crown-candidate/mod/Meshes/veyra/veyra_swamp_crown_01.dae": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683",
+    "presentation/frontier-scenery-candidate/mod/LEVIATH-Frontier-Scenery.esp": "7d1102dfd6f73967b9f3d31d5bf72eb2272ca6e0746836d74c984b1fa421812f",
+    "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_grass_01.dae": "7f966ea7b6ecb56d90857413df82c97b04029cd97ba1b7eb88d904e584f7a5e7",
+    "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_stone_cluster_01.dae": "a54ae771db1c7c44cd44269b0c2198e81922af58d6cfa780b5e33c502543f8b8"
+  },
+  "nativeObservations": {
+    "ownReferences": 68,
+    "ownCrownStemRays": 3,
+    "physicalControlPointsReached": 5,
+    "actualSampledPathGameUnits": 5100.3616576642,
+    "realSeconds": 35.882430600002,
+    "pathTimeSource": "openmw.core.getRealTime",
+    "groundedTerrainCorridorSamples": 35,
+    "displayLabel": "LEVIATH Frontier",
+    "labelSource": "REGION_RECORD_NAME"
+  },
+  "claimCeiling": "Bound own terrain/forest path, crown-stem hits and HUD region label; aggregate391 asserts includes separate excluded atmosphere unit, not391 assertions of this subset.",
+  "excludedFromCurrentPublication": [
+    "frontier-atmosphere/Veyra-Frontier-Atmosphere.omwscripts",
+    "frontier-atmosphere/Sound/veyra/frontier_theme_add1de5eae07_20s.ogg",
+    "frontier-atmosphere/scripts/veyra/frontier_atmosphere.lua",
+    "frontier-atmosphere/scripts/veyra/frontier_atmosphere_config.lua"
+  ],
+  "coverageLimits": [
+    "New layer pre-stage hashes compared to fresh post-run endpoint; not continuously observed during execution.",
+    "Original runtime module map covered38old world files, not these new scene layers.",
+    "Rendering quality/user visual acceptance and arbitrary game/profile compatibility remain separate."
+  ],
+  "normalNewProfileNativeRecord": "docs/PROVISION_WORLD_NATIVE.json"
+}

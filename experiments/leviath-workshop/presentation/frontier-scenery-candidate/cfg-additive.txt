@@ -1,0 +1,5 @@
+# Isolated own scenery only; no global config mutation.
+# Requires bound Morrowind.esm + LEVIATH-Frontier.esp + Veyra-Dense-Crown.esp.
+# Requires the own stone-texture layer and own crown leaf material before this data layer.
+data="<presentation-candidate>/frontier-scenery-candidate/mod"
+content=LEVIATH-Frontier-Scenery.esp

@@ -1,0 +1,48 @@
+{
+  "schema": "veyra.workshop.portal-native.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0 / API129",
+  "sourceVersion": "0.1.2",
+  "saveSchema": 1,
+  "moduleHashes": {
+    "gameplay/portal/mod/veyra-portal.omwscripts": "719f9d85f28e5a68883f65ddaa22addcd3ec82de345dc675262aa885f35b289b",
+    "gameplay/portal/mod/scripts/veyra_portal/config.lua": "46e6bf243a5178394727cf3f9571adb519e8622eea40f1230b2aee195b56838d",
+    "gameplay/portal/mod/scripts/veyra_portal/global.lua": "52b8c4ea68dff66690d7322ad6091dc2c31e5c2330fc54b4eb96aedfed93eb71",
+    "gameplay/portal/mod/scripts/veyra_portal/player.lua": "7f2e8cbeecdfd691dd33bfbfb02a589413122198ac78ea28a256e2fe4c10d8b2"
+  },
+  "sourceFreezeSha256": "95d66844849150bb2291e4c607f2b3d8f1e1cc776cb68193405ada5afbd8aa2a",
+  "nativeResults": [
+    {
+      "mode": "probe",
+      "receiptSha256": "22f9696197e9235f592ad7e24c2633fb455e62fd34d496a71624fc1850d08fb9",
+      "passCheckCount": 17,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "reload-frontier",
+      "receiptSha256": "47dedd83b6bc48c7b3ec493b2b820224eba016588c3dca637dad5d0b8357ef5f",
+      "passCheckCount": 5,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "reload-returned",
+      "receiptSha256": "f043701c46974d22cb52f2c11de5f3b155998ffb38d7cfbbfee6f8b213d03ee9",
+      "passCheckCount": 5,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    }
+  ],
+  "overlayScope": "Original frozen unit receipts; player-overlay hooks separately bound in INTEGRATION_NATIVE.json",
+  "physicalKeyboardActivation": "NOT_PROVEN",
+  "networkEffects": 0,
+  "claimCeiling": "TWO_OWN_LOCAL_PORTAL_REFERENCES_FRONTIER_TRAVEL_AND_SAVELOAD_ONLY"
+}
