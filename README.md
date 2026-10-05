@@ -140,6 +140,20 @@ Weitere friedliche Questverzweigungen, ein Bausystem, neue Regionen, umfassende 
 
 Die [Designübertragung aus New World und weiteren Vorbildern](docs/NEW-WORLD-DESIGN-TRANSFER.md) trennt eigene Morrowind-Funktionen von späteren Ideen und dokumentiert die aktuelle Rechteprüfung. Sie verwendet öffentliche Mechanikbeschreibungen als Anregung. New-World-Quellcode, Texturen, Modelle und Datenbankeinträge sind nicht enthalten.
 
+## Neue Experimente
+
+[REZERO native presentation](experiments/rezero-native/0.1.0/README.md) enthält
+ein neues natives Inventar, Menügrafik, 39 originale Modell-Overrides und 40
+Item-Icons. Der separate Builder bindet eigene lizenzierte Originalrecords lokal.
+Es ist ein optionaler Prototyp; der bestehende Installer bleibt erhalten.
+
+[Entity Life](experiments/entity-life/0.1.0/README.txt) trennt dauerhafte
+Objektadressen von Zustandshashes. Der lokale Katalog liest Records und
+platzierte Referenzen; eine Bash-Demo prüft Identitätsfortbestand und explizit
+definierte Storyfolgen. Native Änderungen an Figuren und Quests sind für dieses
+Modul noch nicht implementiert. Originaldaten und private Kataloge werden nicht
+mit dem Quellcode verteilt.
+
 ## Lizenz und Veröffentlichung
 
 Eigener Code und eigene Texte: **MIT**. Die ausdrücklich benannten LOVE-Grafikdateien: **CC0-1.0**, siehe [ASSET-LICENSE.md](ASSET-LICENSE.md). Spenden sind freiwillig. Originale Spieldaten, andere Mods, Engine und Sprachmodelle behalten ihre jeweiligen Bedingungen.
