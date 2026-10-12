@@ -5,6 +5,11 @@ The builder copies only a locally installed OpenMW runtime. Bethesda game data,
 saves, OpenMW binaries, and World Reforged asset packs are never part of this
 source repository. The large patch remains at its bound local source and is
 verified by the executable before it becomes part of a profile's load order.
+
+The candidate also carries the project's own HALVETH OpenMW extension source:
+Lua gameplay UI, the owned atmosphere shader, the bundled font and the two
+CC0 artwork files. It never copies Bethesda data, saves, external graphics
+packs, model weights, or a live companion mailbox into the candidate.
 """
 
 from __future__ import annotations
@@ -19,9 +24,36 @@ import subprocess
 
 
 ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = ROOT.parents[1]
 FRAMEWORK = Path("C:/Windows/Microsoft.NET/Framework64/v4.0.30319")
 EXPECTED_PLUGIN_SHA256 = "9805d32df3fe67406ddae40e4ef39929d7bc149d7fac04bd462e7a4bf4f71748"
 ENGINE_EXCLUSIONS = {"Uninstall.exe"}
+OWNED_EXTENSION_PATHS = (
+    "halveth.omwscripts",
+    "Fonts/MysticCards.omwfont",
+    "shaders/halveth_atmosphere.omwfx",
+    "Textures/halveth/love-astrolabe-0.7.png",
+    "Textures/halveth/scarlet-love-banner.png",
+    "scripts/halveth/actor_life.lua",
+    "scripts/halveth/actor_life_global.lua",
+    "scripts/halveth/common.lua",
+    "scripts/halveth/content.lua",
+    "scripts/halveth/content_catalog.lua",
+    "scripts/halveth/fieldcraft.lua",
+    "scripts/halveth/global.lua",
+    "scripts/halveth/inspect.lua",
+    "scripts/halveth/knowledge.lua",
+    "scripts/halveth/paths.lua",
+    "scripts/halveth/perspective.lua",
+    "scripts/halveth/player.lua",
+    "scripts/halveth/universe.lua",
+    "scripts/halveth/visuals.lua",
+    "scripts/halveth/worldlife.lua",
+)
+NEUTRAL_RUNTIME_FILES = {
+    "bridge/inbox.json": b'{"sequence":0,"sessionId":""}\n',
+    "bridge/companion-status.json": b'{"status":"offline"}\n',
+}
 
 
 def sha256(path: Path) -> str:
@@ -138,6 +170,35 @@ def copy_verified(source: Path, destination: Path) -> list[dict[str, object]]:
     return receipts
 
 
+def copy_owned_extension(destination: Path) -> list[dict[str, object]]:
+    """Copy the explicit, reviewable own-extension allowlist with receipts."""
+    source = local_directory(PROJECT_ROOT / "mod", "HALVETH-Erweiterungsquelle")
+    receipts: list[dict[str, object]] = []
+    for relative in OWNED_EXTENSION_PATHS:
+        item = require_file(source / relative, f"HALVETH-Erweiterungsdatei {relative}")
+        target = destination / "mod" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(item, target)
+        source_hash, target_hash = sha256(item), sha256(target)
+        if source_hash != target_hash:
+            raise ValueError(f"Kopierprüfung der HALVETH-Erweiterung fehlgeschlagen: {relative}")
+        receipts.append({
+            "path": f"mod/{relative.replace('\\', '/')}",
+            "bytes": target.stat().st_size,
+            "sha256": target_hash,
+        })
+    for relative, payload in NEUTRAL_RUNTIME_FILES.items():
+        target = destination / "mod" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(payload)
+        receipts.append({
+            "path": f"mod/{relative}",
+            "bytes": target.stat().st_size,
+            "sha256": sha256(target),
+        })
+    return receipts
+
+
 def ensure_new_output(path: Path) -> Path:
     path = path.expanduser().resolve()
     if str(path).startswith("\\\\"):
@@ -159,8 +220,15 @@ def build(output: Path, engine_source: Path, base_patch: Path, overlay: Path) ->
 
     shutil.copy2(ROOT / "LICENSE.txt", output / "LICENSE.txt")
     shutil.copy2(ROOT / "README.md", output / "README.md")
+    shutil.copy2(PROJECT_ROOT / "ASSET-LICENSE.md", output / "ASSET-LICENSE.md")
     shutil.copytree(ROOT / "presets", output / "presets")
     engine_receipts = copy_verified(engine_source, output / "engine")
+    extension_receipts = copy_owned_extension(output)
+    write_json(output / "halveth-extension.json", {
+        "schema": "halveth.morrowind.own-extension.v1",
+        "files": extension_receipts,
+        "scope": "Own Lua gameplay extension, font, owned shader and CC0 artwork plus neutral offline bridge state only; no live bridge state or third-party game assets.",
+    })
     write_json(output / "world-reforged-source.json", {
         "schema": "halveth.morrowind.world-reforged-link.v1",
         "basePatch": str(base_patch),
@@ -175,8 +243,9 @@ def build(output: Path, engine_source: Path, base_patch: Path, overlay: Path) ->
         "candidate": str(output),
         "executable": {"path": executable.name, "sha256": sha256(executable), "bytes": executable.stat().st_size},
         "engine": {"source": str(engine_source), "files": len(engine_receipts), "filesSha256": hashlib.sha256(json.dumps(engine_receipts, sort_keys=True).encode("utf-8")).hexdigest()},
+        "halvethExtension": {"files": len(extension_receipts), "manifest": "halveth-extension.json", "manifestSha256": sha256(output / "halveth-extension.json")},
         "worldReforged": binding,
-        "scope": "OpenMW runtime copy plus local source binding. No game data import, gameplay launch, installation, or overwrite occurred.",
+        "scope": "OpenMW runtime copy, own HALVETH extension and local World Reforged source binding. No game data import, gameplay launch, installation, or overwrite occurred.",
     }
     write_json(output / "evidence" / "candidate-build.json", receipt)
     return executable

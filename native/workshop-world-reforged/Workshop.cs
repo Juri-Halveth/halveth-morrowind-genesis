@@ -49,7 +49,7 @@ namespace Halveth.Morrowind {
         int x=Width-43-i*46,y=Height-30-(i%3)*18; using(var b=new SolidBrush(Color.FromArgb(32,25,26))) { g.FillRectangle(b,x,y-13,5,Height-y+13); g.FillEllipse(b,x-18,y-24,41,16); }
       }
       using(var small=new Font("Segoe UI",9,FontStyle.Bold)) using(var big=new Font("Georgia",31)) using(var sub=new Font("Segoe UI",12)) {
-        g.DrawString("HALVETH  /  WORLD REFORGED CANDIDATE 0.3.1",small,Brushes.BurlyWood,29,24);
+        g.DrawString("HALVETH  /  WORLD REFORGED CANDIDATE 0.4.1",small,Brushes.BurlyWood,29,24);
         g.DrawString("Morrowind\nWorkshop",big,Brushes.AntiqueWhite,25,49);
         g.DrawString("Eigene Laufzeit. Eigene Weltvorschau.",sub,Brushes.LightGray,29,169);
       }
@@ -65,7 +65,7 @@ namespace Halveth.Morrowind {
     TextBox inventory;
     bool busy;
     public MainForm(string root) {
-      workshop=new Workshop(root); Text="HALVETH · Morrowind Workshop · World Reforged Candidate 0.3.1"; BackColor=Color.FromArgb(19,25,29); ForeColor=ink;
+      workshop=new Workshop(root); Text="HALVETH · Morrowind Workshop · World Reforged Candidate 0.4.1"; BackColor=Color.FromArgb(19,25,29); ForeColor=ink;
       Font=new Font("Segoe UI",10); ClientSize=new Size(1220,940); MinimumSize=new Size(1090,900); StartPosition=FormStartPosition.CenterScreen;
       AutoScaleMode=AutoScaleMode.Dpi;
       var grid=new TableLayoutPanel { Dock=DockStyle.Fill, ColumnCount=1,RowCount=5,Padding=new Padding(24),BackColor=BackColor };
@@ -92,7 +92,7 @@ namespace Halveth.Morrowind {
       layout.Controls.Add(Card("KLASSIK", "OpenMW mit Originaldaten", "Kurze Sichtweite, dezente Grafik.\n\nStory, Quests und Spielregeln kommen aus deinem Datenstand. OpenMW ist eine eigene Engine; die alte EXE bleibt ein eigener historischer Stand."),0,0);
       layout.Controls.Add(Card("WEITSICHT", "Dein Startprofil", "Weites Gelände, 16× Texturfilter, 4× Kantenglättung, Wasserreflexionen und Schatten.\n\nKeine pauschalen Änderungen an Gold, NPCs oder Questbelohnungen."),1,0);
       layout.Controls.Add(Card("ULTRA", "Zum Vergleichen", "Noch mehr Sichtweite und Schattenreichweite. Eigene Einstellungen und Spielstände.\n\nHohe Last ist möglich. Die passende Stufe entscheidet sich im Spiel, besonders in Vivec."),0,1);
-      layout.Controls.Add(Card("WELT REFORGED", "Lokale Grafikvorschau", "Basispatch und Korrekturoverlay werden vor dem Start gegen ihr Manifest geprüft.\n\nEigene Laufzeit, eigene Konfiguration und eigene Spielstände. Die bestehende 0.2.0-Installation bleibt unverändert."),1,1);
+      layout.Controls.Add(Card("WELT REFORGED", "Genesis-Erweiterung geladen", "Basispatch, Korrekturoverlay und die eigene HALVETH-Spielschicht werden vor dem Start gegen ihre Manifeste geprüft.\n\nWissen, Weltleben, Perspektive, eigene Bücher und Zauber sowie der Atmosphärenfilter bleiben im getrennten Profil. Die bestehende 0.2.0-Installation bleibt unverändert."),1,1);
       var overviewActions=new FlowLayoutPanel {Dock=DockStyle.Fill,WrapContents=false,Margin=new Padding(4,0,4,0)};
       overviewActions.Controls.Add(Btn("Grafik & Mod-Ladereihenfolge",305,()=>Launch("openmw-launcher.exe")));
       overviewActions.Controls.Add(Btn("Profilordner öffnen",250,()=>OpenProfile()));
@@ -101,7 +101,7 @@ namespace Halveth.Morrowind {
       var assets=Page(tabs,"Dateien & Musik");
       inventory=new TextBox {Dock=DockStyle.Fill,Multiline=true,ReadOnly=true,ScrollBars=ScrollBars.Vertical,BackColor=panelColor,ForeColor=ink,BorderStyle=BorderStyle.None,Font=new Font("Consolas",10)}; assets.Padding=new Padding(18);assets.Controls.Add(inventory);
       var original=Page(tabs,"Original & Eigenheiten"); original.Padding=new Padding(20);
-      original.Controls.Add(new Label {Dock=DockStyle.Fill,ForeColor=ink,Text="ERHALTUNGS- UND KANDIDATENVERTRAG\n\n• Originalquellen werden als eigene Datenkopien mit SHA-256-Receipt übernommen.\n• Jedes Profil hat eigene Spielstände. Andere Installationen behalten ihre Einstellungen.\n• Welt Reforged liegt zusätzlich als gebundener lokaler Basispatch plus Korrekturoverlay vor.\n• Die beiden Quellen werden vor der Konfiguration über SHA-256 und Manifestdateien geprüft.\n• Diese Kandidatin ändert weder Gold, NPCs noch Questbelohnungen.\n• Die bestehende 0.2.0-Installation bleibt ein eigener historischer Stand.\n\nOpenMW verbessert die Laufzeit. Ein ungepatchtes Morrowind.exe und dessen Verhalten sind ein eigener Referenzstand.\nEin Text- oder Hashspiegel kann fehlende Originaldateien nicht wiederherstellen.",Font=new Font("Segoe UI",11)});
+      original.Controls.Add(new Label {Dock=DockStyle.Fill,ForeColor=ink,Text="ERHALTUNGS- UND KANDIDATENVERTRAG\n\n• Originalquellen werden als eigene Datenkopien mit SHA-256-Receipt übernommen.\n• Jedes Profil hat eigene Spielstände. Andere Installationen behalten ihre Einstellungen.\n• Welt Reforged liegt zusätzlich als gebundener lokaler Basispatch plus Korrekturoverlay vor.\n• Die eigene HALVETH-Spielschicht lädt getrennt: Wissen, Weltleben, Perspektive, Bücher, Zauber und Lichtfilter.\n• Alle drei lokalen Bindungen werden vor der Konfiguration über SHA-256 und Manifestdateien geprüft.\n• Die bestehende 0.2.0-Installation bleibt ein eigener historischer Stand.\n\nOpenMW verbessert die Laufzeit. Ein ungepatchtes Morrowind.exe und dessen Verhalten sind ein eigener Referenzstand.\nEin Text- oder Hashspiegel kann fehlende Originaldateien nicht wiederherstellen.",Font=new Font("Segoe UI",11)});
       var build=Page(tabs,"Welt bauen");build.Padding=new Padding(20);
       var info=new Label {Dock=DockStyle.Top,Height=176,Text="NATIVER WELT- UND INHALTSEDITOR\n\nOpenMW-CS ist enthalten. Damit lassen sich eigene Zellen, NPCs, Gegenstände, Dialoge und Quests anlegen.\nWähle im Editor die vorhandenen Masterdateien und erzeuge ein neues Add-on. Die Ausgaben gehören in den\nData-Ordner des aktiven Profils. Aktiviere das Add-on anschließend im OpenMW-Launcher.\n\nTamriel Rebuilt benötigt eigene vollständige Pakete plus Tribunal und Bloodmoon. MGE XE/MWSE verwenden\nden klassischen Engine-Zweig und werden hier nicht als OpenMW-Erweiterungen aktiviert."};build.Controls.Add(info);
       var builderActions=new FlowLayoutPanel {Dock=DockStyle.Bottom,Height=54};builderActions.Controls.Add(Btn("OpenMW-CS öffnen",220,()=>Launch("openmw-cs.exe")));builderActions.Controls.Add(Btn("Mod-Ordner öffnen",220,()=>OpenFolder(Path.Combine(workshop.Root,"mods"))));build.Controls.Add(builderActions);

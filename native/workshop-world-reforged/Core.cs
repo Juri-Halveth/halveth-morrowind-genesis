@@ -1,4 +1,4 @@
-// HALVETH Morrowind Workshop · World Reforged Candidate 0.3.1. GPL-3.0-or-later; see LICENSE.txt.
+// HALVETH Morrowind Workshop · World Reforged Candidate 0.4.1. GPL-3.0-or-later; see LICENSE.txt.
 // A data-preserving launcher. This code contains no Bethesda game content.
 // This candidate keeps its own profiles and validates a bound local World Reforged overlay before use.
 using System;
@@ -181,6 +181,15 @@ namespace Halveth.Morrowind {
     public string BasePluginSha256 {get;set;}
     public string OverlayManifestSha256 {get;set;}
   }
+  public class HalvethExtensionManifest {
+    public string Schema {get;set;}
+    public List<FileReceipt> Files {get;set;}
+    public string Scope {get;set;}
+  }
+  public class HalvethExtensionBinding {
+    public string DataDirectory {get;set;}
+    public string ManifestSha256 {get;set;}
+  }
   public class SceneProbePlan {
     public string ProbeId {get;set;}
     public string ProbeRoot {get;set;}
@@ -231,7 +240,17 @@ namespace Halveth.Morrowind {
     public readonly string Root;
     public State State;
     public static readonly string[] ProfileIds={"classic","max","ultra","world-reforged"};
-    public static readonly string[] ProfileNames={"Klassik · OpenMW","Weitsicht · ausgewogen","Ultra · Experiment","Welt Reforged · Vorschau"};
+    public static readonly string[] ProfileNames={"Klassik · OpenMW","Weitsicht · ausgewogen","Ultra · Experiment","Welt Reforged · Genesis"};
+    public static readonly string[] RequiredHalvethFiles={
+      "mod/halveth.omwscripts","mod/Fonts/MysticCards.omwfont","mod/shaders/halveth_atmosphere.omwfx",
+      "mod/Textures/halveth/love-astrolabe-0.7.png","mod/Textures/halveth/scarlet-love-banner.png",
+      "mod/bridge/inbox.json","mod/bridge/companion-status.json",
+      "mod/scripts/halveth/actor_life.lua","mod/scripts/halveth/actor_life_global.lua","mod/scripts/halveth/common.lua",
+      "mod/scripts/halveth/content.lua","mod/scripts/halveth/content_catalog.lua","mod/scripts/halveth/fieldcraft.lua",
+      "mod/scripts/halveth/global.lua","mod/scripts/halveth/inspect.lua","mod/scripts/halveth/knowledge.lua",
+      "mod/scripts/halveth/paths.lua","mod/scripts/halveth/perspective.lua","mod/scripts/halveth/player.lua",
+      "mod/scripts/halveth/universe.lua","mod/scripts/halveth/visuals.lua","mod/scripts/halveth/worldlife.lua"
+    };
     public Workshop(string root) {
       Root=Path.GetFullPath(root);
       foreach(string d in new[]{"library","profiles","history","evidence","mods"}) Directory.CreateDirectory(Path.Combine(Root,d));
@@ -273,6 +292,19 @@ namespace Halveth.Morrowind {
       }
       return new WorldReforgedBinding {BasePatch=basePatch,CorrectiveOverlay=overlayRoot,BasePluginSha256=expected,OverlayManifestSha256=Util.Hash(manifestFile)};
     }
+    public HalvethExtensionBinding ValidateHalvethExtension() {
+      string manifestFile=Path.Combine(Root,"halveth-extension.json"); PlainFile(manifestFile,"Das HALVETH-Erweiterungsmanifest");
+      var manifest=Util.Read<HalvethExtensionManifest>(manifestFile);
+      if(manifest==null||manifest.Schema!="halveth.morrowind.own-extension.v1"||manifest.Files==null||manifest.Files.Count!=RequiredHalvethFiles.Length) throw new InvalidDataException("Das HALVETH-Erweiterungsmanifest ist unvollständig oder hat ein unbekanntes Schema.");
+      var seen=new HashSet<string>(StringComparer.Ordinal);
+      foreach(var item in manifest.Files) {
+        if(item==null||String.IsNullOrWhiteSpace(item.Path)||item.Bytes<0||!Regex.IsMatch(item.Sha256??"","^[0-9a-fA-F]{64}$")||!RequiredHalvethFiles.Contains(item.Path,StringComparer.Ordinal)||!seen.Add(item.Path)) throw new InvalidDataException("Das HALVETH-Erweiterungsmanifest enthält einen ungültigen Dateieintrag.");
+        string file=Util.Inside(Root,item.Path); PlainFile(file,"Eine HALVETH-Erweiterungsdatei");
+        if(new FileInfo(file).Length!=item.Bytes||!String.Equals(Util.Hash(file),item.Sha256,StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("Die HALVETH-Erweiterungsdatei stimmt nicht mit ihrem Manifest überein: "+item.Path);
+      }
+      if(!RequiredHalvethFiles.All(path=>seen.Contains(path))) throw new InvalidDataException("Das HALVETH-Erweiterungsmanifest deckt nicht alle erforderlichen Spielmodule ab.");
+      return new HalvethExtensionBinding {DataDirectory=Path.Combine(Root,"mod"),ManifestSha256=Util.Hash(manifestFile)};
+    }
     public string DataRoot() {
       if(String.IsNullOrEmpty(State.ActiveImport)) return null;
       if(!Regex.IsMatch(State.ActiveImport,"^[a-zA-Z0-9-]+$")) throw new InvalidDataException("Ungültige Import-ID.");
@@ -281,7 +313,7 @@ namespace Halveth.Morrowind {
       return root;
     }
     public ImportReceipt Receipt() { string d=DataRoot(); return d==null?null:Util.Read<ImportReceipt>(Path.Combine(Directory.GetParent(d).FullName,"receipt.json")); }
-    List<string> ContentLines(string id,string data,string dataConfigPath,WorldReforgedBinding worldReforged,string extraData,string extraContent) {
+    List<string> ContentLines(string id,string data,string dataConfigPath,WorldReforgedBinding worldReforged,HalvethExtensionBinding extension,string extraData,string extraContent) {
       var lines=new List<string>();
       if(data!=null) {
         lines.Add("data="+Util.CfgPath(dataConfigPath));
@@ -297,7 +329,9 @@ namespace Halveth.Morrowind {
       if(worldReforged!=null) {
         lines.Add("data="+Util.CfgPath(worldReforged.BasePatch));
         lines.Add("data="+Util.CfgPath(Path.Combine(worldReforged.CorrectiveOverlay,"patch")));
+        lines.Add("data="+Util.CfgPath(extension.DataDirectory));
         lines.Add("content=LUCINET-World-Reforged.esp");
+        lines.Add("content=halveth.omwscripts");
       }
       if(!String.IsNullOrEmpty(extraData)) lines.Add("data="+Util.CfgPath(extraData));
       if(!String.IsNullOrEmpty(extraContent)) lines.Add("content="+extraContent);
@@ -350,6 +384,7 @@ namespace Halveth.Morrowind {
     public string PrepareProfile(string id,Action<string> progress) {
       if(!ProfileIds.Contains(id)) throw new InvalidDataException("Unbekanntes Profil.");
       WorldReforgedBinding worldReforged=id=="world-reforged"?ValidateWorldReforged():null;
+      HalvethExtensionBinding extension=id=="world-reforged"?ValidateHalvethExtension():null;
       string profile=Path.Combine(Root,"profiles",id),runtime=Path.Combine(profile,"runtime");
       string engine=Path.Combine(Root,"engine");
       PlainFile(Path.Combine(engine,"openmw.cfg"),"Die lokale OpenMW-Laufzeitkonfiguration");
@@ -373,11 +408,11 @@ namespace Halveth.Morrowind {
       Util.AtomicText(Path.Combine(runtime,"openmw.cfg"),runtimeCfg);
       string cfg=Path.Combine(profile,"openmw.cfg"),data=DataRoot();
       string bindingFile=Path.Combine(profile,"import-binding.txt");
-      string binding=(State.ActiveImport??"NONE")+(worldReforged==null?"":"|world-reforged|"+worldReforged.BasePluginSha256+"|"+worldReforged.OverlayManifestSha256);
+      string binding=(State.ActiveImport??"NONE")+(worldReforged==null?"":"|world-reforged|"+worldReforged.BasePluginSha256+"|"+worldReforged.OverlayManifestSha256+"|"+extension.ManifestSha256);
       if(!File.Exists(cfg)||!File.Exists(bindingFile)||File.ReadAllText(bindingFile)!=binding) {
         string userPath="user/"+(State.ActiveImport??"NONE"); Directory.CreateDirectory(Path.Combine(profile,userPath));
         var lines=new List<string>{"# Generated baseline; native OpenMW launcher may extend this profile.","user-data="+userPath,"data-local=data","encoding=win1252"};
-        lines.AddRange(ContentLines(id,data,"../../library/"+State.ActiveImport+"/Data Files",worldReforged,null,null));
+        lines.AddRange(ContentLines(id,data,"../../library/"+State.ActiveImport+"/Data Files",worldReforged,extension,null,null));
         Util.AtomicText(cfg,String.Join("\n",lines)+"\n");
         Util.AtomicText(bindingFile,binding);
       }
@@ -441,7 +476,7 @@ namespace Halveth.Morrowind {
       Util.AtomicText(scriptFile,SceneProbeScript());
       Util.AtomicText(globalScriptFile,SceneProbeGlobalScript());
       Util.AtomicText(manifest,"MENU: scripts/halveth_scene_probe/menu.lua\nGLOBAL: scripts/halveth_scene_probe/global.lua\n");
-      var worldReforged=ValidateWorldReforged();
+      var worldReforged=ValidateWorldReforged(); var extension=ValidateHalvethExtension();
       var lines=new List<string>{
         "# Generated isolated local scene probe. It is selected with --replace config.",
         "resources="+Util.CfgPath(Path.Combine(runtime,"resources")),
@@ -451,7 +486,7 @@ namespace Halveth.Morrowind {
         "encoding=win1252"
       };
       string importedData=DataRoot();
-      lines.AddRange(ContentLines(id,importedData,importedData,worldReforged,probeData,"halveth_scene_probe.omwscripts"));
+      lines.AddRange(ContentLines(id,importedData,importedData,worldReforged,extension,probeData,"halveth_scene_probe.omwscripts"));
       string configFile=Path.Combine(config,"openmw.cfg");Util.AtomicText(configFile,String.Join("\n",lines)+"\n");
       return new SceneProbePlan {
         ProbeId=probeId,ProbeRoot=probeRoot,ConfigDirectory=config,Runtime=runtime,EngineExecutable=Path.Combine(runtime,"openmw.exe"),

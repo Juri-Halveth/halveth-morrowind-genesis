@@ -1,4 +1,4 @@
-# HALVETH Morrowind Workshop — World Reforged Candidate 0.3.1
+# HALVETH Morrowind Workshop — World Reforged Candidate 0.4.1
 
 This is a **native Windows EXE candidate** for the actual
 Morrowind/OpenMW workshop. It is deliberately separate from the browser
@@ -12,6 +12,8 @@ The candidate creates an independent root with:
 - a local pointer to a World Reforged base patch and its corrective overlay;
 - validation of the base plugin, the world shader and every manifest-bound
   overlay file before the profile is prepared or launched.
+- the separately verified own HALVETH gameplay extension: knowledge, worldlife,
+  perspective, authored books and spells, plus the atmosphere filter.
 
 The public source tree contains **no** Bethesda game data, saves, OpenMW
 binaries, texture packs, World Reforged assets, local absolute paths or
@@ -25,7 +27,7 @@ obtaining the locally held World Reforged inputs:
 
 ```powershell
 python .\build_candidate.py `
-  --output "$env:USERPROFILE\Games\HALVETH-Morrowind-Native\candidates\0.3.1-world-reforged" `
+  --output "$env:USERPROFILE\Games\HALVETH-Morrowind-Native\candidates\0.4.1-world-reforged-genesis" `
   --engine-source "$env:ProgramFiles\OpenMW 0.51.0" `
   --world-reforged-base "<LOCAL_WORLD_REFORGED_BASE_PATCH_DIR>" `
   --world-reforged-overlay "<LOCAL_WORLD_REFORGED_CORRECTIVE_OVERLAY_DIR>"
