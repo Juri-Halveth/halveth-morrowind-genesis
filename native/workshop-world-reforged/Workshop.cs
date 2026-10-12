@@ -21,6 +21,12 @@ namespace Halveth.Morrowind {
         if(args.Length==1&&args[0]=="--verify-world-reforged") { var result=new Workshop(root).ValidateWorldReforged(); Util.Write(Path.Combine(root,"evidence","world-reforged-verified-"+Util.Stamp()+".json"),result); Console.WriteLine("World Reforged: Basispatch und Korrekturoverlay geprüft."); return 0; }
         if(args.Length==2&&args[0]=="--prepare") { new Workshop(root).PrepareProfile(args[1],s=>Console.WriteLine(s)); return 0; }
         if(args.Length==2&&args[0]=="--validate-profile") { var w=new Workshop(root); w.PrepareProfile(args[1],s=>Console.WriteLine(s)); w.ValidateLoadOrder(Path.Combine(root,"profiles",args[1],"openmw.cfg")); Util.Write(Path.Combine(root,"evidence","profile-validated-"+Util.Stamp()+".json"),new {profile=args[1],status="LOAD_ORDER_AND_BOUND_WORLD_REFORGED_VALIDATED",recordedUtc=DateTime.UtcNow.ToString("o")}); Console.WriteLine("Profil geprüft: "+args[1]); return 0; }
+        if((args.Length==2||args.Length==3)&&args[0]=="--probe-scene") {
+          int seconds=25;
+          if(args.Length==3&&!Int32.TryParse(args[2],out seconds)) throw new ArgumentException("Die Sekundenangabe der Szenenprobe ist ungültig.");
+          var result=new Workshop(root).RunSceneProbe(args[1],seconds,s=>Console.WriteLine(s));
+          Console.WriteLine("Szenenprobe: "+result.Status); return result.Status=="SCENE_TRANSITION_MARKERS_OBSERVED"||result.Status=="SCENE_TRANSITION_MARKERS_OBSERVED_CONTROLLER_CLOSED"?0:2;
+        }
         if(args.Length==2&&args[0]=="--launch") { new Workshop(root).Launch(args[1],"openmw.exe",s=>Console.WriteLine(s)); return 0; }
         if(args.Length!=0) throw new ArgumentException("Unbekannte Argumente.");
         Application.Run(new MainForm(root)); return 0;
@@ -54,7 +60,7 @@ namespace Halveth.Morrowind {
     readonly Color ink=Color.FromArgb(229,226,214),muted=Color.FromArgb(170,180,180),panelColor=Color.FromArgb(29,36,40);
     Label headline,details,log;
     ComboBox profile;
-    Button play,import;
+    Button play,import,sceneProbe;
     FlowLayoutPanel actions;
     TextBox inventory;
     bool busy;
@@ -75,6 +81,7 @@ namespace Halveth.Morrowind {
       profile=new ComboBox {DropDownStyle=ComboBoxStyle.DropDownList,Width=246,Height=38,Margin=new Padding(8,6,8,0),BackColor=panelColor,ForeColor=ink,Font=new Font("Segoe UI",11)};
       profile.Items.AddRange(Workshop.ProfileNames); profile.SelectedIndex=Array.IndexOf(Workshop.ProfileIds,workshop.State.Profile); actions.Controls.Add(profile);
       play=Btn("2  Morrowind starten",224,()=>Launch("openmw.exe")); play.BackColor=Color.FromArgb(193,146,80); play.ForeColor=Color.FromArgb(20,25,29); actions.Controls.Add(play);
+      sceneProbe=Btn("Szenenprobe · 25 s",202,()=>Probe()); sceneProbe.BackColor=Color.FromArgb(69,116,126); actions.Controls.Add(sceneProbe);
       actions.Controls.Add(Btn("Editor öffnen",172,()=>Launch("openmw-cs.exe"))); grid.Controls.Add(actions,0,2);
       var tabs=new TabControl {Dock=DockStyle.Fill,Font=new Font("Segoe UI",10),Padding=new Point(18,7)};
       grid.Controls.Add(tabs,0,3);
@@ -114,10 +121,11 @@ namespace Halveth.Morrowind {
     async void Run(Action work) { if(busy)return;busy=true;actions.Enabled=false; try {await Task.Run(work); RefreshStatus();}catch(Exception e){Progress("Aktion angehalten: "+e.Message);MessageBox.Show(this,e.Message,"Morrowind Workshop",MessageBoxButtons.OK,MessageBoxIcon.Information);}finally{actions.Enabled=true;busy=false;} }
     void Import() {using(var dialog=new OpenFileDialog {Title="Morrowind.esm aus einer vollständigen Installation auswählen",Filter="Morrowind.esm|Morrowind.esm",CheckFileExists=true}) if(dialog.ShowDialog(this)==DialogResult.OK){string file=dialog.FileName;Run(()=>workshop.Import(file,Progress));}}
     void Launch(string tool) {string id=Profile();Run(()=>workshop.Launch(id,tool,Progress));}
+    void Probe() {string id=Profile();Run(()=>workshop.RunSceneProbe(id,25,Progress));}
     void OpenFolder(string path) { Directory.CreateDirectory(path); Process.Start(new ProcessStartInfo("explorer.exe",Util.Arg(path)) {UseShellExecute=false}); }
     void OpenProfile() {OpenFolder(Path.Combine(workshop.Root,"profiles",Profile()));}
     void RefreshStatus() {
-      var r=workshop.Receipt(); play.Enabled=r!=null;
+      var r=workshop.Receipt(); play.Enabled=r!=null;sceneProbe.Enabled=r!=null;
       if(r==null) {
         headline.Text="Engine & Editor bereit · Spieldaten noch verbinden";
         details.Text="Wähle Morrowind.esm aus deinen vollständigen Data Files. Musik, Sounds und Archive werden mitkopiert.\nDie ursprüngliche Quelle bleibt erhalten.";

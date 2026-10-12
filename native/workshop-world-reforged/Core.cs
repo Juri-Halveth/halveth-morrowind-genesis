@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web.Script.Serialization;
 
 namespace Halveth.Morrowind {
@@ -60,6 +61,12 @@ namespace Halveth.Morrowind {
     public static void Start(string exe,string args,string cwd) {
       if(!File.Exists(exe)) throw new FileNotFoundException("Programm fehlt.",exe);
       Process.Start(new ProcessStartInfo(exe,args) { WorkingDirectory=cwd,UseShellExecute=false });
+    }
+    public static string Relative(string root,string file) {
+      string basePath=Path.GetFullPath(root).TrimEnd('\\','/')+Path.DirectorySeparatorChar;
+      string full=Path.GetFullPath(file);
+      if(!full.StartsWith(basePath,StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("Datei liegt außerhalb des gebundenen Ordners.");
+      return full.Substring(basePath.Length).Replace('\\','/');
     }
   }
 
@@ -174,6 +181,52 @@ namespace Halveth.Morrowind {
     public string BasePluginSha256 {get;set;}
     public string OverlayManifestSha256 {get;set;}
   }
+  public class SceneProbePlan {
+    public string ProbeId {get;set;}
+    public string ProbeRoot {get;set;}
+    public string ConfigDirectory {get;set;}
+    public string Runtime {get;set;}
+    public string EngineExecutable {get;set;}
+    public string Arguments {get;set;}
+    public string ConfigFile {get;set;}
+    public string ScriptFile {get;set;}
+    public string GlobalScriptFile {get;set;}
+    public string ProfileConfigSha256 {get;set;}
+    public int MaximumSeconds {get;set;}
+  }
+  public class SceneProbeLogReceipt {
+    public string Path {get;set;}
+    public long Bytes {get;set;}
+    public string Sha256 {get;set;}
+  }
+  public class SceneProbeReceipt {
+    public string Schema {get;set;} = "halveth.morrowind.scene-probe.v2";
+    public string ProbeId {get;set;}
+    public string Profile {get;set;}
+    public string Status {get;set;}
+    public string RecordedUtc {get;set;}
+    public string StartedUtc {get;set;}
+    public string FinishedUtc {get;set;}
+    public int MaximumSeconds {get;set;}
+    public bool ProcessStarted {get;set;}
+    public bool ProcessExited {get;set;}
+    public int? ProcessExitCode {get;set;}
+    public bool WatchdogTriggered {get;set;}
+    public int RequestedSceneDwellSeconds {get;set;}
+    public string SceneRunningObservedUtc {get;set;}
+    public string ControllerStopRequestedUtc {get;set;}
+    public bool ControllerStopAfterSceneMarker {get;set;}
+    public string StopMethod {get;set;}
+    public string ErrorKind {get;set;}
+    public string EngineSha256 {get;set;}
+    public string ProfileConfigSha256 {get;set;}
+    public List<FileReceipt> Inputs {get;set;} = new List<FileReceipt>();
+    public List<SceneProbeLogReceipt> Logs {get;set;} = new List<SceneProbeLogReceipt>();
+    public List<string> UnreadableLogs {get;set;} = new List<string>();
+    public Dictionary<string,bool> Markers {get;set;} = new Dictionary<string,bool>();
+    public string Scope {get;set;} = "Owned local candidate only; isolated probe configuration, user data, data-local files, and logs live beneath probes/<id>.";
+    public string ClaimCeiling {get;set;} = "At most a bounded menu-to-new-game-to-player-added transition witness and recorded local controller stop. It does not prove visual acceptance, FPS, collision, save correctness, or gameplay completeness.";
+  }
   public class Workshop {
     public readonly string Root;
     public State State;
@@ -228,6 +281,28 @@ namespace Halveth.Morrowind {
       return root;
     }
     public ImportReceipt Receipt() { string d=DataRoot(); return d==null?null:Util.Read<ImportReceipt>(Path.Combine(Directory.GetParent(d).FullName,"receipt.json")); }
+    List<string> ContentLines(string id,string data,string dataConfigPath,WorldReforgedBinding worldReforged,string extraData,string extraContent) {
+      var lines=new List<string>();
+      if(data!=null) {
+        lines.Add("data="+Util.CfgPath(dataConfigPath));
+        foreach(string name in new[]{"Morrowind","Tribunal","Bloodmoon"}) if(File.Exists(Path.Combine(data,name+".esm"))) {lines.Add("fallback-archive="+name+".bsa"); lines.Add("content="+name+".esm");}
+        if(id!="classic"&&id!="world-reforged") {
+          foreach(string addon in new[]{"adamantiumarmor.esp","AreaEffectArrows.esp","bcsounds.esp","EBQ_Artifact.esp","entertainers.esp","LeFemmArmor.esp","master_index.esp","Siege at Firemoth.esp"}) if(File.Exists(Path.Combine(data,addon))) lines.Add("content="+addon);
+          var bound=Receipt();
+          if(bound!=null&&bound.Files.Any(f=>f.Path.Equals("Morrowind.esm",StringComparison.OrdinalIgnoreCase)&&f.Sha256=="5c3c8c2cbd20e25901b59b3ece33d36b7ef0e3d60ad8d11828bcc61a5ead1647")) {
+            lines.Add("data=../../mods/compatibility");lines.Add("content=HALVETH-Dialogue-Compatibility.esp");
+          }
+        }
+      }
+      if(worldReforged!=null) {
+        lines.Add("data="+Util.CfgPath(worldReforged.BasePatch));
+        lines.Add("data="+Util.CfgPath(Path.Combine(worldReforged.CorrectiveOverlay,"patch")));
+        lines.Add("content=LUCINET-World-Reforged.esp");
+      }
+      if(!String.IsNullOrEmpty(extraData)) lines.Add("data="+Util.CfgPath(extraData));
+      if(!String.IsNullOrEmpty(extraContent)) lines.Add("content="+extraContent);
+      return lines;
+    }
     public ImportReceipt Import(string esm,Action<string> progress) {
       string source=Path.GetDirectoryName(Path.GetFullPath(esm));
       if(!String.Equals(Path.GetFileName(esm),"Morrowind.esm",StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("Bitte Morrowind.esm aus dem Ordner Data Files auswählen.");
@@ -302,29 +377,183 @@ namespace Halveth.Morrowind {
       if(!File.Exists(cfg)||!File.Exists(bindingFile)||File.ReadAllText(bindingFile)!=binding) {
         string userPath="user/"+(State.ActiveImport??"NONE"); Directory.CreateDirectory(Path.Combine(profile,userPath));
         var lines=new List<string>{"# Generated baseline; native OpenMW launcher may extend this profile.","user-data="+userPath,"data-local=data","encoding=win1252"};
-        if(data!=null) {
-          // Relative to profiles/<id>; each selected import has its own preserved folder.
-          lines.Add("data="+Util.CfgPath("../../library/"+State.ActiveImport+"/Data Files"));
-          foreach(string name in new[]{"Morrowind","Tribunal","Bloodmoon"}) if(File.Exists(Path.Combine(data,name+".esm"))) {lines.Add("fallback-archive="+name+".bsa"); lines.Add("content="+name+".esm");}
-          if(id!="classic"&&id!="world-reforged") {
-            foreach(string addon in new[]{"adamantiumarmor.esp","AreaEffectArrows.esp","bcsounds.esp","EBQ_Artifact.esp","entertainers.esp","LeFemmArmor.esp","master_index.esp","Siege at Firemoth.esp"}) if(File.Exists(Path.Combine(data,addon))) lines.Add("content="+addon);
-            var bound=Receipt();
-            if(bound.Files.Any(f=>f.Path.Equals("Morrowind.esm",StringComparison.OrdinalIgnoreCase)&&f.Sha256=="5c3c8c2cbd20e25901b59b3ece33d36b7ef0e3d60ad8d11828bcc61a5ead1647")) {
-              lines.Add("data=../../mods/compatibility");lines.Add("content=HALVETH-Dialogue-Compatibility.esp");
-            }
-          }
-        }
-        if(worldReforged!=null) {
-          lines.Add("data="+Util.CfgPath(worldReforged.BasePatch));
-          lines.Add("data="+Util.CfgPath(Path.Combine(worldReforged.CorrectiveOverlay,"patch")));
-          lines.Add("content=LUCINET-World-Reforged.esp");
-        }
+        lines.AddRange(ContentLines(id,data,"../../library/"+State.ActiveImport+"/Data Files",worldReforged,null,null));
         Util.AtomicText(cfg,String.Join("\n",lines)+"\n");
         Util.AtomicText(bindingFile,binding);
       }
       string settings=Path.Combine(profile,"settings.cfg");
       if(!File.Exists(settings)) File.Copy(Path.Combine(Root,"presets",id+".cfg"),settings);
       State.Profile=id; Save(); return runtime;
+    }
+    static readonly string[] SceneProbeMarkers={"MENU_INIT","NEW_GAME_REQUESTED","SCENE_RUNNING"};
+    const int SceneProbeDwellSeconds=8;
+    static string SceneProbeScript() {
+      return String.Join("\n",new[]{
+        "local menu = require('openmw.menu')",
+        "",
+        "local function mark(value)",
+        "  print('[HALVETH_SCENE_PROBE] ' .. value)",
+        "end",
+        "",
+        "return {",
+        "  engineHandlers = {",
+        "    onInit = function()",
+        "      mark('MENU_INIT')",
+        "      menu.newGame({ bypass = true })",
+        "      mark('NEW_GAME_REQUESTED')",
+        "    end",
+        "  }",
+        "}",
+        ""
+      });
+    }
+    static string SceneProbeGlobalScript() {
+      return String.Join("\n",new[]{
+        "local running = false",
+        "",
+        "local function mark(value)",
+        "  print('[HALVETH_SCENE_PROBE] ' .. value)",
+        "end",
+        "",
+        "return {",
+        "  engineHandlers = {",
+        "    onPlayerAdded = function()",
+        "      if running then return end",
+        "      running = true",
+        "      mark('SCENE_RUNNING')",
+        "    end",
+        "  }",
+        "}",
+        ""
+      });
+    }
+    public SceneProbePlan PrepareSceneProbe(string id,int maximumSeconds,Action<string> progress) {
+      if(!String.Equals(id,"world-reforged",StringComparison.Ordinal)) throw new InvalidDataException("Die Szenenprobe ist nur für das gebundene World-Reforged-Profil vorgesehen.");
+      if(maximumSeconds<10||maximumSeconds>75) throw new InvalidDataException("Die Szenenprobe muss zwischen 10 und 75 Sekunden begrenzt sein.");
+      if(DataRoot()==null) throw new InvalidDataException("Für die Szenenprobe zuerst Morrowind.esm aus einer vollständigen Datenquelle importieren.");
+      string runtime=PrepareProfile(id,progress),profileCfg=Path.Combine(Root,"profiles",id,"openmw.cfg");
+      ValidateLoadOrder(profileCfg);
+      string probeId="scene-"+Util.Stamp()+"-"+Guid.NewGuid().ToString("N").Substring(0,8);
+      string probeRoot=Util.Inside(Root,"probes/"+probeId),config=Path.Combine(probeRoot,"config"),probeData=Path.Combine(probeRoot,"data"),user=Path.Combine(probeRoot,"user"),logs=Path.Combine(probeRoot,"logs");
+      Directory.CreateDirectory(config);Directory.CreateDirectory(probeData);Directory.CreateDirectory(user);Directory.CreateDirectory(logs);
+      string scriptDir=Path.Combine(probeData,"scripts","halveth_scene_probe"),scriptFile=Path.Combine(scriptDir,"menu.lua"),globalScriptFile=Path.Combine(scriptDir,"global.lua"),manifest=Path.Combine(probeData,"halveth_scene_probe.omwscripts");
+      Directory.CreateDirectory(scriptDir);
+      Util.AtomicText(scriptFile,SceneProbeScript());
+      Util.AtomicText(globalScriptFile,SceneProbeGlobalScript());
+      Util.AtomicText(manifest,"MENU: scripts/halveth_scene_probe/menu.lua\nGLOBAL: scripts/halveth_scene_probe/global.lua\n");
+      var worldReforged=ValidateWorldReforged();
+      var lines=new List<string>{
+        "# Generated isolated local scene probe. It is selected with --replace config.",
+        "resources="+Util.CfgPath(Path.Combine(runtime,"resources")),
+        "data="+Util.CfgPath(Path.Combine(runtime,"resources","vfs-mw")),
+        "user-data="+Util.CfgPath(user),
+        "data-local="+Util.CfgPath(probeData),
+        "encoding=win1252"
+      };
+      string importedData=DataRoot();
+      lines.AddRange(ContentLines(id,importedData,importedData,worldReforged,probeData,"halveth_scene_probe.omwscripts"));
+      string configFile=Path.Combine(config,"openmw.cfg");Util.AtomicText(configFile,String.Join("\n",lines)+"\n");
+      return new SceneProbePlan {
+        ProbeId=probeId,ProbeRoot=probeRoot,ConfigDirectory=config,Runtime=runtime,EngineExecutable=Path.Combine(runtime,"openmw.exe"),
+        Arguments="--replace config --config "+Util.Arg(config),ConfigFile=configFile,ScriptFile=scriptFile,GlobalScriptFile=globalScriptFile,ProfileConfigSha256=Util.Hash(profileCfg),MaximumSeconds=maximumSeconds
+      };
+    }
+    static void CaptureLine(List<string> lines,object gate,ref int capturedBytes,ref bool truncated,ManualResetEvent sceneRunning,string channel,string line) {
+      if(line==null) return;
+      if(line.IndexOf("[HALVETH_SCENE_PROBE] SCENE_RUNNING",StringComparison.Ordinal)>=0) sceneRunning.Set();
+      lock(gate) {
+        if(truncated) return;
+        string item="["+channel+"] "+line;
+        int bytes=Encoding.UTF8.GetByteCount(item)+2;
+        if(capturedBytes+bytes>1024*1024) {truncated=true;lines.Add("[WORKSHOP] output capture limit reached");return;}
+        lines.Add(item);capturedBytes+=bytes;
+      }
+    }
+    static List<SceneProbeLogReceipt> ReadProbeLogs(string probeRoot,Dictionary<string,bool> markers,List<string> unreadable) {
+      var receipts=new List<SceneProbeLogReceipt>();
+      foreach(string file in Util.Files(probeRoot)) {
+        string ext=Path.GetExtension(file);
+        if(!String.Equals(ext,".log",StringComparison.OrdinalIgnoreCase)&&!String.Equals(ext,".txt",StringComparison.OrdinalIgnoreCase)) continue;
+        string relative=Util.Relative(probeRoot,file);
+        receipts.Add(new SceneProbeLogReceipt {Path=relative,Bytes=new FileInfo(file).Length,Sha256=Util.Hash(file)});
+        try {
+          string text=File.ReadAllText(file,Encoding.UTF8);
+          foreach(string marker in SceneProbeMarkers) if(text.IndexOf(marker,StringComparison.Ordinal)>=0) markers[marker]=true;
+        } catch(IOException) { unreadable.Add(relative); }
+          catch(UnauthorizedAccessException) { unreadable.Add(relative); }
+          catch(DecoderFallbackException) { unreadable.Add(relative); }
+      }
+      return receipts;
+    }
+    static bool AllMarkers(Dictionary<string,bool> markers) { return SceneProbeMarkers.All(marker=>markers.ContainsKey(marker)&&markers[marker]); }
+    static void StopProbeProcess(Process process,SceneProbeReceipt receipt,string requestedMethod,string forcedMethod) {
+      receipt.StopMethod=requestedMethod;
+      try { process.CloseMainWindow(); } catch(InvalidOperationException) { }
+      if(!process.WaitForExit(2500)) {
+        receipt.StopMethod=forcedMethod;
+        try { process.Kill(); } catch(InvalidOperationException) { }
+        process.WaitForExit(10000);
+      }
+    }
+    void WriteSceneProbeReceipt(SceneProbePlan plan,SceneProbeReceipt receipt) {
+      Util.Write(Path.Combine(plan.ProbeRoot,"scene-probe-receipt.json"),receipt);
+      Util.Write(Path.Combine(Root,"evidence","scene-probe-"+plan.ProbeId+".json"),receipt);
+    }
+    public SceneProbeReceipt RunSceneProbe(string id,int maximumSeconds,Action<string> progress) {
+      var plan=PrepareSceneProbe(id,maximumSeconds,progress);
+      var receipt=new SceneProbeReceipt {ProbeId=plan.ProbeId,Profile=id,RecordedUtc=DateTime.UtcNow.ToString("o"),MaximumSeconds=maximumSeconds,RequestedSceneDwellSeconds=SceneProbeDwellSeconds,EngineSha256=Util.Hash(plan.EngineExecutable),ProfileConfigSha256=plan.ProfileConfigSha256};
+      receipt.Inputs.Add(new FileReceipt {Path="config/openmw.cfg",Bytes=new FileInfo(plan.ConfigFile).Length,Sha256=Util.Hash(plan.ConfigFile)});
+      receipt.Inputs.Add(new FileReceipt {Path="data/halveth_scene_probe.omwscripts",Bytes=new FileInfo(Path.Combine(plan.ProbeRoot,"data","halveth_scene_probe.omwscripts")).Length,Sha256=Util.Hash(Path.Combine(plan.ProbeRoot,"data","halveth_scene_probe.omwscripts"))});
+      receipt.Inputs.Add(new FileReceipt {Path="data/scripts/halveth_scene_probe/menu.lua",Bytes=new FileInfo(plan.ScriptFile).Length,Sha256=Util.Hash(plan.ScriptFile)});
+      receipt.Inputs.Add(new FileReceipt {Path="data/scripts/halveth_scene_probe/global.lua",Bytes=new FileInfo(plan.GlobalScriptFile).Length,Sha256=Util.Hash(plan.GlobalScriptFile)});
+      foreach(string marker in SceneProbeMarkers) receipt.Markers.Add(marker,false);
+      var captured=new List<string>();object gate=new object();int capturedBytes=0;bool outputTruncated=false;
+      string outputFile=Path.Combine(plan.ProbeRoot,"logs","probe-observer-output.log");
+      receipt.StartedUtc=DateTime.UtcNow.ToString("o");progress("Starte isolierte Szenenprobe: "+plan.ProbeId+" …");
+      try {
+        using(var sceneRunning=new ManualResetEvent(false))
+        using(var process=new Process()) {
+          process.StartInfo=new ProcessStartInfo(plan.EngineExecutable,plan.Arguments) {WorkingDirectory=plan.ProbeRoot,UseShellExecute=false,RedirectStandardOutput=true,RedirectStandardError=true,CreateNoWindow=true};
+          process.OutputDataReceived+=(sender,args)=>CaptureLine(captured,gate,ref capturedBytes,ref outputTruncated,sceneRunning,"STDOUT",args.Data);
+          process.ErrorDataReceived+=(sender,args)=>CaptureLine(captured,gate,ref capturedBytes,ref outputTruncated,sceneRunning,"STDERR",args.Data);
+          if(!process.Start()) throw new InvalidOperationException("Die OpenMW-Szenenprobe wurde nicht gestartet.");
+          receipt.ProcessStarted=true;process.BeginOutputReadLine();process.BeginErrorReadLine();
+          DateTime deadline=DateTime.UtcNow.AddSeconds(maximumSeconds);DateTime? sceneRunningAt=null;
+          while(!process.HasExited&&DateTime.UtcNow<deadline) {
+            if(!sceneRunningAt.HasValue&&sceneRunning.WaitOne(100)) {
+              sceneRunningAt=DateTime.UtcNow;receipt.SceneRunningObservedUtc=sceneRunningAt.Value.ToString("o");
+              progress("Szenenmarker beobachtet; halte die lokale Probe "+SceneProbeDwellSeconds+" s im echten Zeitfenster offen …");
+            } else Thread.Sleep(100);
+            if(sceneRunningAt.HasValue&&DateTime.UtcNow>=sceneRunningAt.Value.AddSeconds(SceneProbeDwellSeconds)&&!process.HasExited) {
+              receipt.ControllerStopAfterSceneMarker=true;receipt.ControllerStopRequestedUtc=DateTime.UtcNow.ToString("o");
+              StopProbeProcess(process,receipt,"CONTROLLER_CLOSE_AFTER_SCENE_MARKER","CONTROLLER_KILL_AFTER_SCENE_MARKER");
+              break;
+            }
+          }
+          if(!process.HasExited&&!receipt.ControllerStopAfterSceneMarker) {
+            receipt.WatchdogTriggered=true;receipt.StopMethod="WATCHDOG_CLOSE_MAIN_WINDOW";
+            StopProbeProcess(process,receipt,"WATCHDOG_CLOSE_MAIN_WINDOW","WATCHDOG_KILL");
+          }
+          receipt.ProcessExited=process.HasExited;
+          if(receipt.ProcessExited) { process.WaitForExit(); receipt.ProcessExitCode=process.ExitCode; }
+        }
+      } catch(Exception error) { receipt.ErrorKind=error.GetType().Name; }
+      finally {
+        lock(gate) File.WriteAllLines(outputFile,captured.ToArray(),Util.Utf8);
+        receipt.Logs=ReadProbeLogs(plan.ProbeRoot,receipt.Markers,receipt.UnreadableLogs);
+        receipt.FinishedUtc=DateTime.UtcNow.ToString("o");
+        if(!receipt.ProcessStarted) receipt.Status="PROCESS_NOT_STARTED";
+        else if(receipt.WatchdogTriggered&&!receipt.ProcessExited) receipt.Status="WATCHDOG_STOP_OUTCOME_UNKNOWN";
+        else if(receipt.WatchdogTriggered) receipt.Status="WATCHDOG_STOPPED_PROCESS";
+        else if(receipt.ControllerStopAfterSceneMarker&&!receipt.ProcessExited) receipt.Status="CONTROLLER_STOP_OUTCOME_UNKNOWN";
+        else if(!receipt.ProcessExited) receipt.Status="PROCESS_OUTCOME_UNKNOWN";
+        else if(!AllMarkers(receipt.Markers)) receipt.Status="PROCESS_EXITED_MARKERS_INCOMPLETE";
+        else if(receipt.ProcessExitCode!=0) receipt.Status="SCENE_MARKERS_WITH_NONZERO_EXIT";
+        else if(receipt.ControllerStopAfterSceneMarker) receipt.Status="SCENE_TRANSITION_MARKERS_OBSERVED_CONTROLLER_CLOSED";
+        else receipt.Status="SCENE_TRANSITION_MARKERS_OBSERVED";
+        WriteSceneProbeReceipt(plan,receipt);progress("Szenenprobe: "+receipt.Status);
+      }
+      return receipt;
     }
     public void Launch(string id,string tool,Action<string> progress) {
       if(!new[]{"openmw.exe","openmw-launcher.exe","openmw-cs.exe"}.Contains(tool)) throw new InvalidDataException("Unbekanntes Werkzeug.");

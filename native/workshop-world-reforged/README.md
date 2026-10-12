@@ -51,6 +51,29 @@ that you may use. The import creates a new checked data copy in the candidate:
 `--verify-world-reforged` proves only the declared local file binding. It does
 not prove gameplay correctness, visual completeness or an FPS result.
 
+## Bounded local scene probe
+
+The optional scene probe creates a fresh folder below `probes/`, uses its own
+OpenMW configuration, user data and local data, then starts a menu script that
+requests a new game. A second global script observes player creation. After
+that runtime marker appears, the local probe controller holds the engine open
+for at least eight wall-clock seconds and asks its own child process to close. It is
+intended to produce a narrow transition record, not a game benchmark:
+
+```powershell
+.\Morrowind-Workshop-WorldReforged.exe --probe-scene world-reforged 25
+```
+
+The resulting receipt records the process outcome plus the three runtime markers
+`MENU_INIT`, `NEW_GAME_REQUESTED` and `SCENE_RUNNING`, if they were actually
+seen in local probe logs. A status ending in
+`_CONTROLLER_CLOSED` means that the controller observed `SCENE_RUNNING`, held
+the child process for the recorded at-least-eight-second dwell and then requested its
+close; it does not mean that Lua or OpenMW self-terminated. The watchdog
+records a stop as a watchdog outcome; it is never treated as a successful scene
+transition. A marker-complete record does not establish visual acceptance,
+collision, save correctness, or an FPS measurement.
+
 ## Source checks
 
 ```powershell
