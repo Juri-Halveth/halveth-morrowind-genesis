@@ -15,6 +15,10 @@ HALVETH VERACHEL STUDIOS · Quellstand, dokumentierte Ergebnisse und SHA-256-Bel
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
 
+## Eigenständiges neues Spiel: ASHBOUND
+
+Dieses Repository erweitert die vorhandene Morrowind-/OpenMW-Installation. Die neu entwickelte, eigenständige native Spielwelt liegt im Projekt [ASHBOUND](https://juri-halveth.github.io/halveth-scarlet/forschung/ashbound/); ihre [Windows-x64-Vorschau 0.4.2](https://github.com/Juri-Halveth/halveth-scarlet/releases/tag/ashbound-native-v0.4.2-portal-preview) ist ein eigener Download. ASHBOUND startet nicht über diesen OpenMW-Launcher und benötigt keine Morrowind-Spieldaten.
+
 ## Genesis Zero — unabhängiger Nullursprung
 
 Der neue Ordner [`genesis-zero/`](genesis-zero/README.md) enthält einen eigenständigen WebGL-2-Spielraum mit prozeduralem Wald, beweglichem Wesen, Maus-/Tastatursteuerung, zeitabhängigem 4D-Feldparameter und lokal erzeugtem Ambientklang. Er lädt keine Morrowind-Daten, alten Profile, Grafikmanifeste oder importierte Lore. Das ist ein sichtbarer unabhängiger Anfang für Grafik und Bewegung, noch kein vollständiges Spiel und kein Ersatz für den bisherigen OpenMW-Titel. Die erkannten alten Importpfade sind in [GENESIS-ZERO-INTAKE-AUDIT.md](docs/GENESIS-ZERO-INTAKE-AUDIT.md) offengelegt.
