@@ -2,15 +2,11 @@
 [Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 <!-- /HUB_LANGUAGES_V1 -->
 
-# HALVETH Morrowind Genesis · 1.0.0
+# Morrowind Genesis – lokale Dialoge und Werkzeuge für OpenMW
 
-<!-- HALVETH_WORK_CERTIFICATES_V1_1 -->
-## Juri Janovski / Juri Halveth – Privates HALVETH-Werkzertifikat
+Erweiterungen für Morrowind in OpenMW: lokale Figurendialoge, Gedächtnis und Spielwerkzeuge. Eigenständige Weltprototypen sind im Repository gesondert beschrieben.
 
-[Privates HALVETH-Werkzertifikat: Dokumentierte Softwareintegration, automatisierte Quellprüfungen und Installer-Build – Morrowind Genesis](https://juri-halveth.github.io/werkzertifikate/#werk-halveth-morrowind-genesis).
-
-HALVETH VERACHEL STUDIOS · Quellstand, dokumentierte Ergebnisse und SHA-256-Belege stehen im Werkzertifikat. Private, mit Codex erstellte Werkdokumentation; keine ISTQB- oder sonstige Personenzertifizierung.
-<!-- /HALVETH_WORK_CERTIFICATES_V1_1 -->
+[**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.

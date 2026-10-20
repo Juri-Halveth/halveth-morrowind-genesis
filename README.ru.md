@@ -1,6 +1,6 @@
 [Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 
-# HALVETH Morrowind Genesis
+# Morrowind Genesis – локальные диалоги и инструменты для OpenMW
 
 **Краткий путеводитель по проекту · EN / RU**
 
