@@ -1,0 +1,183 @@
+{
+  "schema": "veyra.townlife.source-binding.v1",
+  "dataClass": "PUBLIC",
+  "sourceStatus": "OWN_SOURCE_INPUTS_BOUND_NATIVE_NOT_RUN",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "ownInputHashes": {
+    "ENTRY.json": "e79d41749cb8084edf2fb70a91a07aec13a3869bfac52a0beef683d21d02c1f2",
+    "PLACEMENTS.json": "61b1f1619f4f95e4e29a9702b2af595683be4054bdaa6ae0b9b1ace8071e6ff8",
+    "LEVIATH-Frontier.esp": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+    "LEVIATH-Plaza.esp": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69"
+  },
+  "primaryApiSourceHashes": {
+    "resources/lua_api/openmw/core.lua": "94254b91c7c690c8e51c670a2097a26585dd817ccd8d693405755313619b562b",
+    "resources/lua_api/openmw/world.lua": "9988e0521fe9413c182f14b11e415c892dc2cb21c09d8654b3fb507b806846df",
+    "resources/lua_api/openmw/types.lua": "6606d04dc1ed8ab353e3cc78d5c019865e8be9f71fcab870cbc7b0e80f8b1adf",
+    "resources/lua_api/openmw/nearby.lua": "1a9e9a78eb17ee516f23c711cfe287d5848660a078d84b17cb619a3075eb20ef",
+    "resources/lua_api/openmw/self.lua": "ca74b801b380341316d067916f86aa2c895d20ec06d7ad74690aaa217ed62c7d",
+    "resources/lua_api/openmw/ui.lua": "6ac316287110594ec75c76a1fc43df4345ab27748a4109c73bde3d8cee76decc",
+    "resources/lua_api/openmw/util.lua": "f3cf90d5b5872191bf12935eaf42517e382d95e006fab4dcab272aae8b53aad9",
+    "resources/vfs/scripts/omw/ai.lua": "eae167587950ae179d12729d5638d4a48db55247140347af870b155d55e604f6",
+    "resources/vfs/scripts/omw/ui.lua": "5048a222b77477e70be031fefcfd43a5be9186c3d68e3e314e1b0cb18dbf3a45"
+  },
+  "generatedConfigSha256": "27e84c6696e1da6354ec0c55e973c9091a09c3eff25aff723fc99a450c66a952",
+  "config": {
+    "version": "0.1.0",
+    "saveSchema": 1,
+    "luaApi": 129,
+    "entry": {
+      "name": "LEVIATH Frontier Entry",
+      "x": 536576,
+      "y": -512000,
+      "radius": 2200
+    },
+    "locations": {
+      "home_garden": {
+        "x": 536676,
+        "y": -511900,
+        "z": 328
+      },
+      "home_trade": {
+        "x": 536916,
+        "y": -511900,
+        "z": 328
+      },
+      "home_watch": {
+        "x": 536676,
+        "y": -511640,
+        "z": 328
+      },
+      "water": {
+        "x": 536826,
+        "y": -511350,
+        "z": 328
+      },
+      "field": {
+        "x": 538076,
+        "y": -510500,
+        "z": 328
+      },
+      "market": {
+        "x": 537476,
+        "y": -511500,
+        "z": 328
+      },
+      "approach": {
+        "x": 537976,
+        "y": -510600,
+        "z": 328
+      },
+      "lookout": {
+        "x": 537076,
+        "y": -510300,
+        "z": 328
+      },
+      "arrival_gate": {
+        "x": 537126,
+        "y": -511750,
+        "z": 328
+      }
+    },
+    "roles": [
+      {
+        "id": "garden",
+        "name": "Kera - Garden Visitor",
+        "template": "eldafire",
+        "home": "home_garden",
+        "schedule": [
+          {
+            "at": 0,
+            "place": "home_garden"
+          },
+          {
+            "at": 6,
+            "place": "water"
+          },
+          {
+            "at": 8,
+            "place": "field"
+          },
+          {
+            "at": 12,
+            "place": "market"
+          },
+          {
+            "at": 18,
+            "place": "home_garden"
+          }
+        ]
+      },
+      {
+        "id": "trade",
+        "name": "Lio - Trade Visitor",
+        "template": "fargoth",
+        "home": "home_trade",
+        "schedule": [
+          {
+            "at": 0,
+            "place": "home_trade"
+          },
+          {
+            "at": 6,
+            "place": "water"
+          },
+          {
+            "at": 8,
+            "place": "market"
+          },
+          {
+            "at": 12,
+            "place": "approach"
+          },
+          {
+            "at": 18,
+            "place": "home_trade"
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "name": "Senn - Watch Visitor",
+        "template": "arrille",
+        "home": "home_watch",
+        "schedule": [
+          {
+            "at": 0,
+            "place": "home_watch"
+          },
+          {
+            "at": 6,
+            "place": "approach"
+          },
+          {
+            "at": 8,
+            "place": "lookout"
+          },
+          {
+            "at": 12,
+            "place": "arrival_gate"
+          },
+          {
+            "at": 18,
+            "place": "home_watch"
+          }
+        ]
+      }
+    ],
+    "arrivalTolerance": 90,
+    "minimumObservedMovement": 64,
+    "maximumSampleJump": 800,
+    "sampleSeconds": 0.5,
+    "stallSeconds": 12,
+    "maximumReplans": 2,
+    "activationRetrySeconds": 1,
+    "boundEntrySha256": "e79d41749cb8084edf2fb70a91a07aec13a3869bfac52a0beef683d21d02c1f2",
+    "boundPlazaSha256": "61b1f1619f4f95e4e29a9702b2af595683be4054bdaa6ae0b9b1ace8071e6ff8",
+    "frontierPluginSha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+    "plazaPluginSha256": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69"
+  },
+  "engineExecution": "NOT_REQUESTED",
+  "networkEffects": 0,
+  "sourceWrites": "ONLY_OWN_CONFIG_AND_BINDING_RECEIPT"
+}

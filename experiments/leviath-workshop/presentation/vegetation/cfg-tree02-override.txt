@@ -1,0 +1,4 @@
+# Optional class override. Load AFTER LUCINET-World-Reforged.esp.
+# First pass must use cfg-additive.txt and a controlled placement fixture.
+data="<absolute-path-to-presentation-candidate>/vegetation/mod"
+content=Veyra-Vegetation-Tree02.esp

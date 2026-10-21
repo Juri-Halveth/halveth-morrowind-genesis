@@ -1,0 +1,83 @@
+{
+  "schema": "veyra.workshop.overlay-bindings.v1",
+  "dataClass": "PUBLIC",
+  "version": "0.1.0",
+  "sourceFreezeSha256": "e911421387fd81fb5da83b2b89fc0a2dc2a1d4d9a14f76aeb01a3228cac0bfed",
+  "productionHashes": {
+    "scripts/halveth/fieldcraft.lua": "5656f485c7b5f1d6969eb98ee6cb2b8f3e929d139e9f030473b92aaae41f1d7c",
+    "scripts/halveth/knowledge.lua": "e480dc35d689caaa739fd8f7d0b4089075852228b8ce9facd3fdfdc8d33d86e4",
+    "scripts/halveth/paths.lua": "7cff5e6bc10b1c48e1a23f313c9156be943eddbac954cc837ffbe1ea6b3bf92c",
+    "scripts/halveth/player.lua": "eabef8a282cc7a3f6334816964674e3f337678c612756b6c9b4b6e9b3ef17411",
+    "scripts/halveth/universe.lua": "ad39ad5e7b28e0b0ac1a20be838e74796dc85a807ef5258524bd1fef36fb0043",
+    "scripts/halveth/worldlife.lua": "a32b1ac6b04f0cee3099da8bff4e98f96f3d7dd0ca0dfa9f7d07bbac35c2204e",
+    "scripts/veyra_construction/player.lua": "7c0b04f35a826b26485658808fdfc537b7a82bedea405ae69aa5123c1aa259b6",
+    "scripts/veyra_courier/config.lua": "986d94db62dc040b442896d71e693f41d95ab296ba4586e3d276f4dddc393969",
+    "scripts/veyra_courier/global.lua": "121bac2c4ef3738ec1c94cf34a47fa89f11cb3d44017c89628ab9ca6af63c308",
+    "scripts/veyra_courier/player.lua": "0ae598828b3b8d27f428b2c440f142378c62bb39796779c6350f3d902ca75ed2",
+    "scripts/veyra_fieldwork/player.lua": "b276528d16d0875f11c1ba147bc75356b5a441ad6afea5db247177a9a309fbcb",
+    "scripts/veyra_panels/player.lua": "de8f722236b5202fe78534d7f8dcbb7b24008f884fa2e96c0140e1d1f1d7ddd5",
+    "scripts/veyra_portal/player.lua": "eec648ff2a02001ca9aaafdef2201585927cf9861ad05e55d0eb86bb02a70246",
+    "veyra-panel-coordinator.omwscripts": "9bae64fc15a874f929dc87838448dbb5da800d219030a106390b5e564b562540"
+  },
+  "allowedExistingHashes": {
+    "scripts/veyra_fieldwork/player.lua": [
+      "66698d3d32760b400542f85d1e6a09e2055a658073addd31141e124c4525e9aa",
+      "b276528d16d0875f11c1ba147bc75356b5a441ad6afea5db247177a9a309fbcb"
+    ],
+    "scripts/veyra_portal/player.lua": [
+      "7f2e8cbeecdfd691dd33bfbfb02a589413122198ac78ea28a256e2fe4c10d8b2",
+      "eec648ff2a02001ca9aaafdef2201585927cf9861ad05e55d0eb86bb02a70246"
+    ],
+    "scripts/veyra_construction/player.lua": [
+      "881a648f416f6b903cf49db29c0f4adec28ba2781a771c6853694570790d6ebe",
+      "7c0b04f35a826b26485658808fdfc537b7a82bedea405ae69aa5123c1aa259b6"
+    ],
+    "scripts/halveth/fieldcraft.lua": [
+      "db191a55e249069899642a7811269fb15e646c063c2dabb069a2ba5e473d3b18",
+      "5656f485c7b5f1d6969eb98ee6cb2b8f3e929d139e9f030473b92aaae41f1d7c"
+    ],
+    "scripts/halveth/worldlife.lua": [
+      "15fc614f96711e3b62fdb992e3c422a78f9b622fb5b881724ff664e7db8d9db5",
+      "a32b1ac6b04f0cee3099da8bff4e98f96f3d7dd0ca0dfa9f7d07bbac35c2204e"
+    ],
+    "scripts/halveth/knowledge.lua": [
+      "23b74dc2f7948dc9697133e7c75b3c5c07edb120492c2976188bd56878c3f292",
+      "e480dc35d689caaa739fd8f7d0b4089075852228b8ce9facd3fdfdc8d33d86e4"
+    ],
+    "scripts/halveth/universe.lua": [
+      "3ef5be67e9bdf2d3f93ee920fe4f578b6cfcc5977402f74045d4646b67f63aea",
+      "ad39ad5e7b28e0b0ac1a20be838e74796dc85a807ef5258524bd1fef36fb0043"
+    ],
+    "scripts/halveth/paths.lua": [
+      "4148f556d5d740c8ede4e1a25371042efe48aa7a0177e06c2b5a08c30b01662f",
+      "7cff5e6bc10b1c48e1a23f313c9156be943eddbac954cc837ffbe1ea6b3bf92c"
+    ],
+    "scripts/halveth/player.lua": [
+      "c5e4f141c9af6aa584eaf9940399c88dec8344166a50e98f80e6e9fdf54dc2bf",
+      "eabef8a282cc7a3f6334816964674e3f337678c612756b6c9b4b6e9b3ef17411"
+    ],
+    "scripts/veyra_courier/config.lua": [
+      "df082e225658bf65f13403f2f90a5b09de90834683046f9a657cdbbdfe80c4b6"
+    ],
+    "scripts/veyra_courier/global.lua": [
+      "16e8bd6fe003d4047f8c4c0eee462ddbf851d2bb9507403e4d5f54c682ebf904"
+    ],
+    "scripts/veyra_courier/player.lua": [
+      "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25"
+    ],
+    "scripts/veyra_courier/routes.lua": [
+      "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545"
+    ]
+  },
+  "dependencyRule": "overlay after bound original modules and Genesis VFS; retain their registrations once; add own Coordinator registration once",
+  "moduleDependencies": [
+    "Courier0.2.3 unchanged registration/routes plus024overlay",
+    "Fieldwork frozen registration/config/global plus player overlay",
+    "Portal0.1.2 frozen registration/config/global plus player overlay and bound Frontier",
+    "Construction0.1.3 frozen registration/config/global/own mesh plus player overlay",
+    "Genesis frozen own code dependencies plus six player panel overlays",
+    "HUD0.1.4 own white texture/registration dependencies, optional native-tested read-only footer"
+  ],
+  "physicalKeyProof": "NOT_OBSERVED",
+  "networkEffects": 0
+}

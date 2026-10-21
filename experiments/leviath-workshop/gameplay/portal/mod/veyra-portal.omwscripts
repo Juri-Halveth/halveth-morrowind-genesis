@@ -1,0 +1,2 @@
+GLOBAL: scripts/veyra_portal/global.lua
+PLAYER: scripts/veyra_portal/player.lua
