@@ -1,0 +1,167 @@
+{
+  "version": "0.1.0",
+  "pathContract": "iconPath is relative to Icons/",
+  "fallback": "leviath_original_items/unknown.png",
+  "items": [
+    {
+      "recordId": "ingred_bc_ampoule_pod",
+      "iconPath": "leviath_original_items/ingred-bc-ampoule-pod.png"
+    },
+    {
+      "recordId": "pick_apprentice_01",
+      "iconPath": "leviath_original_items/pick-apprentice-01.png"
+    },
+    {
+      "recordId": "misc_com_basket_02",
+      "iconPath": "leviath_original_items/misc-com-basket-02.png"
+    },
+    {
+      "recordId": "misc_com_bottle_15",
+      "iconPath": "leviath_original_items/misc-com-bottle-15.png"
+    },
+    {
+      "recordId": "misc_com_wood_bowl_04",
+      "iconPath": "leviath_original_items/misc-com-wood-bowl-04.png"
+    },
+    {
+      "recordId": "ingred_bc_bungler's_bane",
+      "iconPath": "leviath_original_items/ingred-bc-bungler-s-bane.png"
+    },
+    {
+      "recordId": "fur_colovian_helm",
+      "iconPath": "leviath_original_items/fur-colovian-helm.png"
+    },
+    {
+      "recordId": "common_pants_01",
+      "iconPath": "leviath_original_items/common-pants-01.png"
+    },
+    {
+      "recordId": "common_shirt_01",
+      "iconPath": "leviath_original_items/common-shirt-01.png"
+    },
+    {
+      "recordId": "common_shoes_01",
+      "iconPath": "leviath_original_items/common-shoes-01.png"
+    },
+    {
+      "recordId": "ingred_corkbulb_root_01",
+      "iconPath": "leviath_original_items/ingred-corkbulb-root-01.png"
+    },
+    {
+      "recordId": "ingred_crab_meat_01",
+      "iconPath": "leviath_original_items/ingred-crab-meat-01.png"
+    },
+    {
+      "recordId": "misc_com_wood_cup_01",
+      "iconPath": "leviath_original_items/misc-com-wood-cup-01.png"
+    },
+    {
+      "recordId": "misc_com_redware_cup",
+      "iconPath": "leviath_original_items/misc-com-redware-cup.png"
+    },
+    {
+      "recordId": "bk_a1_1_directionscaiuscosades",
+      "iconPath": "leviath_original_items/bk-a1-1-directionscaiuscosades.png"
+    },
+    {
+      "recordId": "extravagant_robe_01_t",
+      "iconPath": "leviath_original_items/extravagant-robe-01-t.png"
+    },
+    {
+      "recordId": "extravagant_shoes_02",
+      "iconPath": "leviath_original_items/extravagant-shoes-02.png"
+    },
+    {
+      "recordId": "misc_com_metal_goblet_01",
+      "iconPath": "leviath_original_items/misc-com-metal-goblet-01.png"
+    },
+    {
+      "recordId": "gold_001",
+      "iconPath": "leviath_original_items/gold-001.png"
+    },
+    {
+      "recordId": "bk_guide_to_sadrithmora",
+      "iconPath": "leviath_original_items/bk-guide-to-sadrithmora.png"
+    },
+    {
+      "recordId": "ingred_heather_01",
+      "iconPath": "leviath_original_items/ingred-heather-01.png"
+    },
+    {
+      "recordId": "bk_homiliesofblessedalmalexia",
+      "iconPath": "leviath_original_items/bk-homiliesofblessedalmalexia.png"
+    },
+    {
+      "recordId": "ingred_hound_meat_01",
+      "iconPath": "leviath_original_items/ingred-hound-meat-01.png"
+    },
+    {
+      "recordId": "ingred_bc_hypha_facia",
+      "iconPath": "leviath_original_items/ingred-bc-hypha-facia.png"
+    },
+    {
+      "recordId": "chargen dagger",
+      "iconPath": "leviath_original_items/chargen-dagger.png"
+    },
+    {
+      "recordId": "iron sparksword",
+      "iconPath": "leviath_original_items/iron-sparksword.png"
+    },
+    {
+      "recordId": "bk_falljournal_unique",
+      "iconPath": "leviath_original_items/bk-falljournal-unique.png"
+    },
+    {
+      "recordId": "food_kwama_egg_02",
+      "iconPath": "leviath_original_items/food-kwama-egg-02.png"
+    },
+    {
+      "recordId": "ingred_russula_01",
+      "iconPath": "leviath_original_items/ingred-russula-01.png"
+    },
+    {
+      "recordId": "note to hrisskar",
+      "iconPath": "leviath_original_items/note-to-hrisskar.png"
+    },
+    {
+      "recordId": "sc_paper plain",
+      "iconPath": "leviath_original_items/sc-paper-plain.png"
+    },
+    {
+      "recordId": "misc_soulgem_petty",
+      "iconPath": "leviath_original_items/misc-soulgem-petty.png"
+    },
+    {
+      "recordId": "misc_com_pitcher_metal_01",
+      "iconPath": "leviath_original_items/misc-com-pitcher-metal-01.png"
+    },
+    {
+      "recordId": "misc_com_plate_01",
+      "iconPath": "leviath_original_items/misc-com-plate-01.png"
+    },
+    {
+      "recordId": "sc_icarianflight",
+      "iconPath": "leviath_original_items/sc-icarianflight.png"
+    },
+    {
+      "recordId": "misc_com_wood_spoon_02",
+      "iconPath": "leviath_original_items/misc-com-wood-spoon-02.png"
+    },
+    {
+      "recordId": "bk_consolationsofprayer",
+      "iconPath": "leviath_original_items/bk-consolationsofprayer.png"
+    },
+    {
+      "recordId": "bk_warofthefirstcouncil",
+      "iconPath": "leviath_original_items/bk-warofthefirstcouncil.png"
+    },
+    {
+      "recordId": "misc_com_redware_vase",
+      "iconPath": "leviath_original_items/misc-com-redware-vase.png"
+    },
+    {
+      "recordId": "ingred_coprinus_01",
+      "iconPath": "leviath_original_items/ingred-coprinus-01.png"
+    }
+  ]
+}
