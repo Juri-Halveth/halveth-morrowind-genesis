@@ -1,0 +1,3 @@
+# Load the courier candidate before this optional audio adapter.
+data="<absolute-path-to-presentation-candidate>/spatial-audio/mod"
+content=Veyra-Spatial-Audio.omwscripts

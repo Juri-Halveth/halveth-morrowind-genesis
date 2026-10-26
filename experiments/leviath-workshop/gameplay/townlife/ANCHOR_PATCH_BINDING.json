@@ -1,0 +1,19 @@
+{
+  "schema": "veyra.townlife.ui-patch.v2",
+  "dataClass": "PUBLIC",
+  "presentationVersion": "0.1.2",
+  "navigationVersion": "0.1.0",
+  "baseFreezeSha256": "c7a9dc25b48fab151d4793e9e0b7e1d5972fc84741b93857211bc9e5f651ede4",
+  "basePlayerSha256": "2fcb50979d6ec9c100d90a81f2e7284da4a8421600c780cf66c7819ee91aaabb",
+  "candidatePlayerSha256": "ceb37fc401e2c05b49e63ff8c440445439e4bda93f0c0dbbc864c221d5531243",
+  "candidateModelSha256": "312700bb17e59a63c2f8d9b3a22111d917dc7ac9e5bd8d7840a758185eddbe2f",
+  "position": [
+    460,
+    28
+  ],
+  "relativePosition": null,
+  "anchor": null,
+  "viewportIssue": "HOLD_WITH_BOUND_COORDINATE_CONTRACT_REOPEN",
+  "nativeStatus": "PENDING",
+  "networkEffects": 0
+}

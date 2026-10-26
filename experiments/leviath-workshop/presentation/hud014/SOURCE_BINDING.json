@@ -1,0 +1,33 @@
+{
+  "schema": "veyra.hud-label-source.v1",
+  "version": "0.1.4",
+  "baseOwnHudSha256": "14846d6e1bef8f44c606c4fce548fa234ae06344c7d9985d5cec0b60d8564008",
+  "baseVersion": "0.1.3",
+  "boundEngineApiSha256": "94254b91c7c690c8e51c670a2097a26585dd817ccd8d693405755313619b562b",
+  "engineVersion": "0.51.0",
+  "candidateHudSha256": "c50165a4ca14933a1d1a5a54a0980ae571d9dc068ddfb4c227214a33367c3804",
+  "changes": [
+    "read-only cell.displayName/name then core.regions.records[regionId].name",
+    "getState exposes regionId and labelSource separately",
+    "ARRIVED-only footer [K] matches bound Courier0.2.4"
+  ],
+  "courierKeyBinding": {
+    "version": "0.2.4",
+    "sourceSha256": "0ae598828b3b8d27f428b2c440f142378c62bb39796779c6350f3d902ca75ed2",
+    "key": "K",
+    "menuGate": "I.UI.getMode()==nil",
+    "claimFunction": "existing own claim()",
+    "nativeStatus": "PENDING_ROOT_PROBE"
+  },
+  "sourceSpans": {
+    "Cell.displayName": "core.lua:304",
+    "Cell.region": "core.lua:306",
+    "core.regions.records": "core.lua:1312-1318",
+    "RegionRecord.name": "core.lua:1324"
+  },
+  "officialDocumentation": "https://openmw.readthedocs.io/en/openmw-0.51.0/reference/lua-scripting/openmw_core.html",
+  "worldRecordsChanged": 0,
+  "newLuaScriptRegistration": false,
+  "nativeStatus": "PENDING_ROOT_PROBE",
+  "humanVisualStatus": "PENDING"
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "veyra.integration.input-capability.v1",
+  "dataClass": "PUBLIC_MINIMIZED_OWN_SOURCE",
+  "status": "BOUNDED_CAPABILITY_SNAPSHOT_ONLY",
+  "engine": "OpenMW 0.51.0",
+  "exitCode": 0,
+  "startedAtUtc": "2026-10-03T04:05:27.628399+00:00",
+  "finishedAtUtc": "2026-10-03T04:06:19.897082+00:00",
+  "nativePressEvents": 0,
+  "nativeReleaseEvents": 0,
+  "observedFrames": 2687,
+  "supportedCalls": [
+    {
+      "api": "sky.activate_window",
+      "result": "RESOLVED_WITH_REFRESH"
+    },
+    {
+      "api": "sky.press_key",
+      "key": "F3",
+      "result": "RESOLVED_WITH_REFRESH"
+    },
+    {
+      "api": "sky.press_key",
+      "key": "k",
+      "result": "RESOLVED_WITH_REFRESH"
+    }
+  ],
+  "readOnlyWindowSamples": [
+    {
+      "observedAtUtc": "2026-10-03T04:05:52.433779+00:00",
+      "windowVisible": true,
+      "windowOwnerMatchesBoundOwnEngine": true,
+      "foregroundMatchesBoundOwnWindowAndEngine": true
+    },
+    {
+      "observedAtUtc": "2026-10-03T04:06:01.846599+00:00",
+      "windowVisible": true,
+      "windowOwnerMatchesBoundOwnEngine": true,
+      "foregroundMatchesBoundOwnWindowAndEngine": true
+    },
+    {
+      "observedAtUtc": "2026-10-03T04:06:10.172777+00:00",
+      "windowVisible": true,
+      "windowOwnerMatchesBoundOwnEngine": true,
+      "foregroundMatchesBoundOwnWindowAndEngine": true
+    }
+  ],
+  "foregroundObservationMethod": "READ_ONLY_WIN32_NO_INPUT_INJECTION",
+  "privateRawReceiptSha256": "c4051d38ca9bf729e5c771024dea140f59f25c4ac6dfe300fc6b0f1bfbd23ad7",
+  "privateWindowObservationSha256": "c1c1d0c159f2ec2da1e5cbec5436352ef8970ee067b70b1af158cb60385afc3c",
+  "productionOverlayHashes": {
+    "scripts/halveth/fieldcraft.lua": "5656f485c7b5f1d6969eb98ee6cb2b8f3e929d139e9f030473b92aaae41f1d7c",
+    "scripts/halveth/knowledge.lua": "e480dc35d689caaa739fd8f7d0b4089075852228b8ce9facd3fdfdc8d33d86e4",
+    "scripts/halveth/paths.lua": "7cff5e6bc10b1c48e1a23f313c9156be943eddbac954cc837ffbe1ea6b3bf92c",
+    "scripts/halveth/player.lua": "eabef8a282cc7a3f6334816964674e3f337678c612756b6c9b4b6e9b3ef17411",
+    "scripts/halveth/universe.lua": "ad39ad5e7b28e0b0ac1a20be838e74796dc85a807ef5258524bd1fef36fb0043",
+    "scripts/halveth/worldlife.lua": "a32b1ac6b04f0cee3099da8bff4e98f96f3d7dd0ca0dfa9f7d07bbac35c2204e",
+    "scripts/veyra_construction/player.lua": "7c0b04f35a826b26485658808fdfc537b7a82bedea405ae69aa5123c1aa259b6",
+    "scripts/veyra_courier/config.lua": "986d94db62dc040b442896d71e693f41d95ab296ba4586e3d276f4dddc393969",
+    "scripts/veyra_courier/global.lua": "121bac2c4ef3738ec1c94cf34a47fa89f11cb3d44017c89628ab9ca6af63c308",
+    "scripts/veyra_courier/player.lua": "0ae598828b3b8d27f428b2c440f142378c62bb39796779c6350f3d902ca75ed2",
+    "scripts/veyra_fieldwork/player.lua": "b276528d16d0875f11c1ba147bc75356b5a441ad6afea5db247177a9a309fbcb",
+    "scripts/veyra_panels/player.lua": "de8f722236b5202fe78534d7f8dcbb7b24008f884fa2e96c0140e1d1f1d7ddd5",
+    "scripts/veyra_portal/player.lua": "eec648ff2a02001ca9aaafdef2201585927cf9861ad05e55d0eb86bb02a70246",
+    "veyra-panel-coordinator.omwscripts": "9bae64fc15a874f929dc87838448dbb5da800d219030a106390b5e564b562540"
+  },
+  "fixtureHashes": {
+    "courier_global.lua": "6aa9f90da276c2e4074451332dddcf7aa73a206056f0ea5b6b0486544225a91d",
+    "courier_player.lua": "a500f64fb73952d2205da8a7a551fc609cb62535eb7eb64ea4e9981fd4bc8fd1",
+    "empty_global.lua": "a5e7da5ff8c4fbfdc36464947303345748a63d776bb9c1ad7aa834a438c9c5f9",
+    "empty_player.lua": "4da6bb4dc9da2fb767f0bc537939f71dfdfcadbb85f9617c44f994ba34d12225",
+    "keycap_global.lua": "403a18abae7175ca01d500de3f67dcc0470e39c014c16988c4b71653459691a4",
+    "keycap_player.lua": "3dc0b3d847d2d0fe5a4618cd61305bab2116d8049da1080a1d42e6ad731cbc24",
+    "menu.lua": "0cf4444cd291840689ca4a7e4c41ff19f8dfe79d25cce2424cd0d8ea7df47cb3",
+    "ui_global.lua": "2d760aa49d556754c2e72b7d35cea2fad5400f6eba78394797551dc0c1bc1758",
+    "ui_player.lua": "2e0fc89d868ef7c11cef2f98ead3013e4478bb75de0c00df01418d1f75b2f04d",
+    "Veyra-Integration-Courier-Probe.omwscripts": "d7f45c00bf571d86ca83fcf22b871907403796a19e2c4d85893c614b59d1793f",
+    "Veyra-Integration-Empty-Probe.omwscripts": "ede3a75f921bf196c21e1bcf85f398e3fd68020717bc1b19d90aec555deba712"
+  },
+  "allBoundSourcesUnchanged": true,
+  "keyboardOutcome": "TOOL_REQUEST_TO_PLAYER_LUA_KEY_HANDLER_NOT_OBSERVED",
+  "modeSamples": "I.UI.getMode()==nil in 60-frame point samples",
+  "unobservedLayers": [
+    "raw SDL events",
+    "SDL EventPump",
+    "Windows input dispatch",
+    "core.isWorldPaused",
+    "controls override settings"
+  ],
+  "claimCeiling": "NO_NATIVE_PHYSICAL_KEY_HANDLER_PASS_NO_GENERAL_UNSUPPORTED_CAPABILITY_CLAIM",
+  "networkEffects": 0
+}
