@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- New flat native loading layout; required 0.51 source handles remain exact. -->
+<MyGUI type="Layout">
+  <Widget type="Widget" layer="LoadingScreen" position="0 0 300 300" name="_Main" align="Stretch">
+    <Widget type="ImageBox" skin="ImageBox" position="-110 212 520 80" align="Bottom HCenter" name="LoadingBox">
+      <Property key="ImageTexture" value="Textures/rezero/loading_panel.png"/>
+      <Widget type="TextBox" skin="SandText" position="24 17 472 26" align="Top HStretch" name="LoadingText">
+        <Property key="TextAlign" value="Center"/>
+        <Property key="TextColour" value="0.9 0.91 0.87"/>
+      </Widget>
+      <Widget type="ScrollBar" skin="MW_ProgressScroll_Loading" position="24 54 472 6" align="Top HStretch" name="ProgressBar"/>
+    </Widget>
+  </Widget>
+  <Widget name="Scene" layer="Scene" type="BackgroundImage" skin="ImageBox" position="0 0 300 300" align="Stretch"/>
+  <Widget name="Splash" layer="LoadingScreenBackground" type="BackgroundImage" skin="ImageBox" position="0 0 300 300" align="Stretch"/>
+</MyGUI>
