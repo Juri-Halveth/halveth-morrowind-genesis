@@ -6,6 +6,10 @@
 
 Extensions for an existing licensed Morrowind installation running in OpenMW. The source documentation describes the launcher, graphics profiles, character and inventory interfaces, local conversation support and installation requirements. Bethesda game data is supplied by the user’s licensed installation.
 
+## Separate native game: ASHBOUND
+
+This repository extends the existing Morrowind/OpenMW installation. The newly developed independent native world is [ASHBOUND](https://juri-halveth.github.io/halveth-scarlet/forschung/ashbound/), with its own published [Windows x64 preview 0.4.2](https://github.com/Juri-Halveth/halveth-scarlet/releases/tag/ashbound-native-v0.4.2-portal-preview). It does not launch through this OpenMW launcher or require Morrowind game data.
+
 Genesis Zero is a separate WebGL graphics and movement prototype. HALVETH Realms and HALVETH Portal Garden are also separate projects. Their existence does not establish that the original Morrowind world has been rebuilt or that their visual features are installed in OpenMW.
 
 This manually edited guide summarizes the audited source. The original technical documentation remains the reference for commands, build requirements, exact versions and detailed evidence.
