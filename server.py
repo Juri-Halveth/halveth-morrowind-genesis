@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import re
 import secrets
+import socket
 import sqlite3
 import threading
 import time
@@ -30,6 +31,9 @@ VERSION = '0.8.0'
 MODEL_URL = 'http://127.0.0.1:11434'
 MODEL = 'hermes3:8b'
 MAX_BODY = 32768
+POST_BODY_DEADLINE_SECONDS = 5
+REQUEST_HEADER_DEADLINE_SECONDS = 5
+MAX_ACTIVE_HTTP_REQUESTS = 32
 
 
 def atomic_json(path, value):
@@ -497,6 +501,47 @@ class Companion:
 
 class Handler(BaseHTTPRequestHandler):
     server_version='HALVETH/'+VERSION
+    timeout=5
+    body_deadline_seconds=POST_BODY_DEADLINE_SECONDS
+    header_deadline_seconds=REQUEST_HEADER_DEADLINE_SECONDS
+
+    def handle(self):
+        self._header_guard=threading.Lock()
+        self._header_finished=False
+        self._header_expired=False
+        def abort_incomplete_header():
+            with self._header_guard:
+                if self._header_finished:
+                    return
+                self._header_expired=True
+                try:
+                    self.connection.shutdown(socket.SHUT_RDWR)
+                except OSError:
+                    pass
+        timer=threading.Timer(self.header_deadline_seconds,abort_incomplete_header)
+        timer.daemon=True
+        self._header_timer=timer
+        timer.start()
+        try:
+            try:
+                super().handle()
+            except (BrokenPipeError,ConnectionAbortedError,ConnectionResetError,TimeoutError):
+                # A peer may disconnect or the header deadline may close the socket.
+                pass
+        finally:
+            with self._header_guard:
+                self._header_finished=True
+            timer.cancel()
+
+    def parse_request(self):
+        try:
+            parsed=super().parse_request()
+        finally:
+            with self._header_guard:
+                self._header_finished=True
+                expired=self._header_expired
+            self._header_timer.cancel()
+        return parsed and not expired
     def log_message(self, format, *args):
         pass
 
@@ -512,6 +557,30 @@ class Handler(BaseHTTPRequestHandler):
 
     def valid_host(self):
         return self.headers.get('Host') in {f'127.0.0.1:{self.server.server_port}',f'localhost:{self.server.server_port}'}
+
+    def read_post_body(self,length):
+        deadline=time.monotonic()+self.body_deadline_seconds
+        remaining=length
+        chunks=[]
+        original_timeout=self.connection.gettimeout()
+        try:
+            while remaining:
+                time_left=deadline-time.monotonic()
+                if time_left<=0:
+                    raise TimeoutError('Nachricht wurde nicht rechtzeitig vollständig empfangen.')
+                self.connection.settimeout(time_left)
+                chunk=self.rfile.read1(min(remaining,4096))
+                if not chunk:
+                    self.close_connection=True
+                    raise ValueError('Unvollständiger Nachrichtentext.')
+                chunks.append(chunk)
+                remaining-=len(chunk)
+            return b''.join(chunks)
+        finally:
+            try:
+                self.connection.settimeout(original_timeout)
+            except OSError:
+                self.close_connection=True
 
     def do_GET(self):
         if not self.valid_host():
@@ -577,10 +646,13 @@ class Handler(BaseHTTPRequestHandler):
         if origin and origin not in {f'http://127.0.0.1:{self.server.server_port}',f'http://localhost:{self.server.server_port}'}:
             return self.respond({'error':'Origin not local'},403)
         try:
-            length=int(self.headers.get('Content-Length','0'))
+            lengths=self.headers.get_all('Content-Length',[])
+            if len(lengths)!=1 or self.headers.get_all('Transfer-Encoding',[]):
+                raise ValueError('Eindeutige Content-Length ohne Transfer-Encoding erforderlich.')
+            length=int(lengths[0])
             if not 0<length<=MAX_BODY:
                 raise ValueError('Ungültige Nachrichtengröße.')
-            data=json.loads(self.rfile.read(length))
+            data=json.loads(self.read_post_body(length))
             if not isinstance(data,dict):
                 raise ValueError('Nachricht muss ein Objekt sein.')
             if self.path=='/api/chat':
@@ -588,11 +660,40 @@ class Handler(BaseHTTPRequestHandler):
             if self.path=='/api/action':
                 return self.respond(app.dispatch(data.get('id')))
             return self.respond({'error':'Not found'},404)
+        except TimeoutError:
+            self.close_connection=True
+            return self.respond({'error':'Nachricht wurde nicht rechtzeitig vollständig empfangen.'},408)
         except (ValueError,TypeError) as exc:
             return self.respond({'error':str(exc)},400)
         except Exception as exc:
             print(type(exc).__name__,str(exc),flush=True)
             return self.respond({'error':'Lokaler Vorgang fehlgeschlagen; siehe Companion-Log.'},500)
+
+
+class BoundedHTTPServer(ThreadingHTTPServer):
+    request_queue_size=MAX_ACTIVE_HTTP_REQUESTS
+    max_active_requests=MAX_ACTIVE_HTTP_REQUESTS
+
+    def __init__(self,*args,**kwargs):
+        self._request_slots=threading.BoundedSemaphore(self.max_active_requests)
+        super().__init__(*args,**kwargs)
+
+    def process_request(self,request,client_address):
+        if not self._request_slots.acquire(blocking=False):
+            self.shutdown_request(request)
+            return
+        try:
+            super().process_request(request,client_address)
+        except Exception:
+            self._request_slots.release()
+            self.shutdown_request(request)
+            raise
+
+    def process_request_thread(self,request,client_address):
+        try:
+            super().process_request_thread(request,client_address)
+        finally:
+            self._request_slots.release()
 
 
 def main():
@@ -605,7 +706,7 @@ def main():
     args=parser.parse_args()
     app=Companion(args.state_dir,args.log,args.inbox,args.model)
     app.start()
-    server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
+    server=BoundedHTTPServer(('127.0.0.1',args.port),Handler)
     server.app=app
     print(f'HALVETH Morrowind {VERSION} http://127.0.0.1:{args.port}',flush=True)
     try:
