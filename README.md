@@ -4,6 +4,10 @@
 
 # Morrowind Genesis – lokale Dialoge und Werkzeuge für OpenMW
 
+![HALVETH / NETZ – Morrowind Genesis: Berglandschaft und verbundene Dialogpunkte](HALVETH_NETZ_HERO.svg)
+
+**HALVETH / NETZ · Welten.** [Starship Lab öffnen](https://juri-halveth.github.io/universum/) und dort die Projektkarte „MORROWIND GENESIS“ auswählen.
+
 Erweiterungen für Morrowind in OpenMW: lokale Figurendialoge, Gedächtnis und Spielwerkzeuge. Eigenständige Weltprototypen sind im Repository gesondert beschrieben.
 
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
