@@ -2,6 +2,8 @@
 
 # Morrowind Genesis – local dialogue and tools for OpenMW
 
+**[Read the OpenMW setup and requirements](docs/SETUP.md)** to start with your own licensed Morrowind installation. [Public releases](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) provide the separately versioned packages; Bethesda game data is not included.
+
 **Concise project guide · EN / RU**
 
 Extensions for an existing licensed Morrowind installation running in OpenMW. The source documentation describes the launcher, graphics profiles, character and inventory interfaces, local conversation support and installation requirements. Bethesda game data is supplied by the user’s licensed installation.
