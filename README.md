@@ -4,13 +4,14 @@
 
 # Morrowind Genesis – lokale Dialoge und Werkzeuge für OpenMW
 
-![HALVETH / NETZ – Morrowind Genesis: Berglandschaft und verbundene Dialogpunkte](HALVETH_NETZ_HERO.svg)
-
-**HALVETH / NETZ · Welten.** [Starship Lab öffnen](https://juri-halveth.github.io/universum/) und dort die Projektkarte „MORROWIND GENESIS“ auswählen.
-
 Erweiterungen für Morrowind in OpenMW: lokale Figurendialoge, Gedächtnis und Spielwerkzeuge. Eigenständige Weltprototypen sind im Repository gesondert beschrieben.
 
-[**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
+**Direkt einrichten:** [OpenMW-Setup und Voraussetzungen lesen](docs/SETUP.md).
+Für die Spielversion werden eine eigene lizenzierte Morrowind-Installation und OpenMW benötigt; Bethesda-Spieldaten sind hier nicht enthalten.
+
+[Öffentliche Releases und Vorabfassungen](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) · [HALVETH Starship Lab (optional)](https://juri-halveth.github.io/universum/)
+
+![HALVETH / NETZ – Morrowind Genesis: Berglandschaft und verbundene Dialogpunkte](HALVETH_NETZ_HERO.svg)
 
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
