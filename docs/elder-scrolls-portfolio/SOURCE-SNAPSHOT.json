@@ -1,7 +1,7 @@
 {
   "schema": "halveth.elder-scrolls-portfolio.source-snapshot/1",
   "recordedAt": "2026-11-04T12:27:44Z",
-  "scope": "Finite, source-bound review of identified public game-related repositories and two local research lines",
+  "scope": "Finite, source-bound review of identified public game-related repositories and six local research lines",
   "publicRepositories": [
     {
       "repository": "Juri-Halveth/halveth-morrowind-genesis",
@@ -65,6 +65,34 @@
       "evidence": ["README.md", "STATUS.md", "world/atlas/GENERATION_RECEIPT.json", "world/design/WORLD_BIBLE.json"],
       "claimCeiling": "Generated world plan, technical Blender blockouts and authored offline encounter prototypes; no playable native total conversion",
       "reason": "No native world integration, no accepted art target, and source/asset provenance must be reviewed"
+    },
+    {
+      "name": "Morrowind Prestige 0.1 graphics profile",
+      "status": "LOCAL_INSTALLED_PROFILE_WITH_BOUNDED_NATIVE_RUN",
+      "publiclyTransferred": false,
+      "evidence": ["START_HIER.txt", "EXECUTION_RECEIPT.json", "FINAL_VERIFICATION.json"],
+      "claimCeiling": "Fresh-character OpenMW 0.51 run in two locations at 1600x900; no accepted before/after visual comparison or measured performance gain"
+    },
+    {
+      "name": "Entity Life 0.1 record and instance catalogue",
+      "status": "LOCAL_CATALOGUE_AND_RULE_DEMO",
+      "publiclyTransferred": false,
+      "evidence": ["entity-life-0.1.0/README.txt", "entity-life-0.1.0/ENTITY_LIFE.sh"],
+      "claimCeiling": "Bound local TES3 records and synthetic rules; not dynamic native in-game life or consciousness"
+    },
+    {
+      "name": "Human-body research model",
+      "status": "LOCAL_GEOMETRY_AND_DESIGN_CANDIDATE",
+      "publiclyTransferred": false,
+      "evidence": ["MORROWIND_2026_BASH/BUILD_NEXT.md"],
+      "claimCeiling": "Reported geometry and sampled contact checks; no native walking rig or visible game acceptance"
+    },
+    {
+      "name": "Morrowind First world-reception rules",
+      "status": "LOCAL_POLICY_PROTOTYPE",
+      "publiclyTransferred": false,
+      "evidence": ["MORROWIND_FIRST/WELTREGELN.md", "MORROWIND_FIRST/CHECK_RECEIPT.json"],
+      "claimCeiling": "Eleven reported rule cases; no network listener, visitor spawn, identity verification or game integration"
     }
   ],
   "excludedFromPublicPacket": [
