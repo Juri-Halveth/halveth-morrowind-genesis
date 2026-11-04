@@ -1,0 +1,392 @@
+{
+  "proven": [
+    "The 0.3.1 World Reforged source candidate compiled through the local Roslyn toolchain.",
+    "The isolated synthetic candidate test suite passed 29 checks and rendered a 1238x987 offscreen workshop UI image.",
+    "A separate local candidate root has recorded build, manifest verification and World Reforged load-order validation receipts."
+  ],
+  "falsified": [
+    "A deliberately corrupted overlay can pass the World Reforged verifier.",
+    "The World Reforged profile must inherit optional legacy 0.2.0 add-on entries."
+  ],
+  "deepest_unknown": [
+    "Foreground gameplay, full scene rendering, collision coverage, and target-device frame-time behavior for the World Reforged candidate."
+  ],
+  "why_unknown": [
+    "This cycle deliberately stopped after source compilation, synthetic checks, local candidate creation and static profile validation; it did not start OpenMW gameplay."
+  ],
+  "known_techniques_relevant": [
+    "SHA-256 source and overlay binding",
+    "TES3 master-order inspection",
+    "isolated OpenMW runtime and configuration roots"
+  ],
+  "historical_analogues": [
+    "The preserved Morrowind Workshop 0.2.0 source and its separate local installation record."
+  ],
+  "available_tools": [
+    "local Roslyn compiler",
+    "OpenMW 0.51.0 runtime copy",
+    "synthetic CoreTests",
+    "local SHA-256 evidence receipts"
+  ],
+  "missing_measurement_capability": [
+    "A bounded foreground World Reforged scene run with isolated log and frame-time capture."
+  ],
+  "custom_tool_needed": [
+    "Optional auto-closing in-game World Reforged scene harness with an explicit coverage contract."
+  ],
+  "counterhypothesis": [
+    "A valid source, manifest, and load order can still expose a runtime rendering or gameplay defect."
+  ],
+  "next_w_question": [
+    "Does a separately bound, auto-closing candidate scene load World Reforged content without runtime errors?"
+  ],
+  "next_recursive_level": [
+    "A new temporary OpenMW scene harness with its own config, user directory, log and stop condition."
+  ],
+  "next_safe_experiment": [
+    "After a separate run contract is bound, execute only a temporary auto-closing candidate scene and inspect its isolated log."
+  ],
+  "stop_condition": [
+    "Stop before foreground gameplay, save mutation outside the candidate root, public game-data export, default-branch merge or deployment."
+  ],
+  "critical_proof_condition": [
+    "A bounded candidate-run receipt that binds the World Reforged load order, runtime marker, temporary user folder and captured log."
+  ],
+  "boundary": [
+    "This source record covers the candidate root only. The 0.2.0 installation, saves, game data, runtime binaries and source media are not Git content."
+  ],
+  "reopen_trigger": [
+    "The user requests the separate bounded scene run or reports a World Reforged candidate runtime failure."
+  ],
+  "contract_version": "3.5.0",
+  "work_classes": [
+    "TRANSITION_WITNESS",
+    "OBSERVATION_COVERAGE",
+    "TEMPORAL_BRANCHING"
+  ],
+  "observability_cycle": {
+    "path_id": "LOCAL_NATIVE_CANDIDATE_BUILD_20261012",
+    "direction": "SOURCE_TO_ISOLATED_LOCAL_CANDIDATE",
+    "research_object": "WORLD_REFORGED_NATIVE_WORKSHOP_SOURCE_AND_LOCAL_CANDIDATE",
+    "candidate_ordering": [
+      "SOURCE_SNAPSHOT",
+      "SYNTHETIC_TEST",
+      "LOCAL_CANDIDATE_BUILD",
+      "LOCAL_PROFILE_VALIDATION"
+    ],
+    "boundary_point": "CANDIDATE_ROOT_WITH_SEPARATE_RUNTIME_AND_DATA_COPY",
+    "infrastructure_controller": "LOCAL_USER_OWNED_WORKSTATION",
+    "traffic_subjects": [
+      "NONE"
+    ],
+    "authorization_source": "USER_DIRECTIVE_2026_10_12",
+    "observation_ids": [
+      "OBS-SOURCE-TEST-29",
+      "OBS-LOCAL-CANDIDATE-BUILD",
+      "OBS-LOCAL-PROFILE-VALIDATION"
+    ],
+    "same_event_basis": "DISTINCT_TIMEBOUND_RECEIPTS_WITHOUT_EVENT_IDENTITY_FUSION",
+    "time_binding": "UTC_TIMESTAMPS_IN_LOCAL_CANDIDATE_RECEIPTS",
+    "provenance_clusters": [
+      "LOCAL_CANDIDATE_BUILD_CLUSTER"
+    ],
+    "invertibility_state": "SOURCE_BRANCH_AND_0_2_INSTALLATION_REMAIN_SEPARATE",
+    "coverage": "SOURCE_COMPILATION_SYNTHETIC_FIXTURES_AND_LOCAL_PROFILE_VALIDATION",
+    "third_party_exposure_risk": "NONE_NO_NETWORK_CAPTURE_OR_THIRD_PARTY_TRAFFIC",
+    "data_class": "INTERNAL_PSEUDONYMIZED",
+    "evidence_state": "OBSERVED",
+    "fusion_attempted": false,
+    "capture_planned": false,
+    "capture_started": false,
+    "persistent_sensor_planned": false,
+    "event_root_id_proves_same_event": false,
+    "fusion_proves_world_truth": false,
+    "first_divergence_automatically_security_bug": false,
+    "trust_discontinuity_crossed_by_fusion": false
+  },
+  "transition_cycle": {
+    "transition_id": "WR-CANDIDATE-BUILD-20261012",
+    "transition_kind": "LOCAL_CANDIDATE_BUILD",
+    "record_kind": "OBSERVED_RUN",
+    "object_or_referent": "WORLD_REFORGED_NATIVE_WORKSHOP_SOURCE",
+    "scope": "LOCAL_CANDIDATE_ONLY",
+    "target_scope": "LOCAL_CANDIDATE_ONLY",
+    "authority_source": "USER_DIRECTIVE_2026_10_12",
+    "input_state_id": "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+    "transformation_id": "WR-0.3.1-SOURCE-BUILD",
+    "witness_id": "WITNESS-LOCAL-EXE-CANDIDATE",
+    "timebase": "UTC_FROM_LOCAL_RECEIPTS",
+    "observer_position": "LOCAL_BUILD_AND_VALIDATION_PROCESS",
+    "observer_effect": "CREATES_SEPARATE_CANDIDATE_ROOT_ONLY",
+    "intent_source": "USER_REQUEST_FOR_SEPARATE_NATIVE_REBUILD",
+    "artifact_source": "SOURCE_TREE_AND_LOCAL_WORLD_REFORGED_MANIFEST",
+    "execution_source": "LOCAL_CANDIDATE_TEST_AND_BUILD_RECEIPTS",
+    "completion_predicate": "SOURCE_TEST_PASS_BUILD_RECEIPT_AND_PROFILE_VALIDATION",
+    "coverage": "SOURCE_COMPILATION_SYNTHETIC_FIXTURES_MANIFEST_AND_LOAD_ORDER",
+    "coverage_gaps": [
+      "NO_FOREGROUND_GAMEPLAY_OR_TARGET_DEVICE_FPS_COVERAGE"
+    ],
+    "capture_loss": "UNKNOWN_OUTSIDE_DECLARED_RECEIPTS",
+    "sampling_or_trigger": "EVENT_TRIGGERED_BUILD_TEST_AND_PROFILE_VALIDATION",
+    "gap_ledger": [
+      "NO_FOREGROUND_GAMEPLAY_OR_TARGET_DEVICE_FPS_COVERAGE"
+    ],
+    "transient_retention": "HASHED_SOURCE_AND_LOCAL_EVIDENCE_RECEIPTS",
+    "evidence_state": "OBSERVED",
+    "observation_started": true,
+    "all_intermediate_states_observed": false,
+    "unobserved_means_absent": false,
+    "final_state_equality_excludes_transients": false,
+    "observer_independent_by_default": false,
+    "state_observations": [
+      {
+        "state_id": "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+        "phase": "INPUT",
+        "object_or_referent": "MORROWIND_WORKSHOP_BASELINE_SOURCE",
+        "representation": "BOUND_SOURCE_BUNDLE_DIGEST",
+        "observed_at": "2026-10-12T14:11:18.922733Z",
+        "observation_id": "OBS-SOURCE-TEST-29",
+        "timebase": "UTC_FROM_LOCAL_RECEIPTS",
+        "observer_id": "WITNESS-LOCAL-EXE-CANDIDATE",
+        "scope": "LOCAL_CANDIDATE_ONLY",
+        "coverage": "CORE_SOURCE_AND_PROFILE_PRESETS_USED_BY_CANDIDATE",
+        "stability_state": "BASELINE",
+        "measurement_method": "CANONICAL_SOURCE_BUNDLE_SHA256",
+        "source": "PRESERVED_LOCAL_0_2_SOURCE",
+        "version": "0.2.0_SOURCE",
+        "provenance_cluster": "LOCAL_CANDIDATE_BUILD_CLUSTER",
+        "evidence_state": "OBSERVED"
+      },
+      {
+        "state_id": "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE",
+        "phase": "STABILIZED",
+        "object_or_referent": "WORLD_REFORGED_NATIVE_WORKSHOP_CANDIDATE",
+        "representation": "BOUND_CANDIDATE_SOURCE_BUNDLE_DIGEST",
+        "observed_at": "2026-10-12T14:17:30.013017Z",
+        "observation_id": "OBS-LOCAL-PROFILE-VALIDATION",
+        "timebase": "UTC_FROM_LOCAL_RECEIPTS",
+        "observer_id": "WITNESS-LOCAL-EXE-CANDIDATE",
+        "scope": "LOCAL_CANDIDATE_ONLY",
+        "coverage": "SOURCE_TEST_BUILD_MANIFEST_AND_WORLD_REFORGED_LOAD_ORDER",
+        "stability_state": "TERMINAL",
+        "measurement_method": "LOCAL_ROSLYN_AND_CANDIDATE_RECEIPTS",
+        "source": "LOCAL_CANDIDATE_BUILD_RECEIPTS",
+        "version": "0.3.1_CANDIDATE",
+        "provenance_cluster": "LOCAL_CANDIDATE_BUILD_CLUSTER",
+        "evidence_state": "OBSERVED"
+      }
+    ],
+    "transition_edges": [
+      {
+        "edge_id": "EDGE-WR-BUILD-01",
+        "from_state_id": "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+        "to_state_id": "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE",
+        "operator_id": "SOURCE_TO_ISOLATED_CANDIDATE_BUILD",
+        "operator_version": "0.3.1",
+        "producer": "LOCAL_BUILD_CANDIDATE_PY",
+        "controller": "LOCAL_USER_OWNED_WORKSTATION",
+        "trigger": "USER_DIRECTIVE_2026_10_12",
+        "operation": "BUILD_SEPARATE_EXE_CANDIDATE_AND_VALIDATE_PROFILE",
+        "start_time": "2026-10-12T14:11:18.922733Z",
+        "end_time": "2026-10-12T14:17:30.013017Z",
+        "timebase": "UTC_FROM_LOCAL_RECEIPTS",
+        "ordering_evidence": "SOURCE_TEST_PRECEDES_BUILD_AND_PROFILE_VALIDATION",
+        "causality_evidence": "BUILD_SCRIPT_AND_LOCAL_CANDIDATE_RECEIPTS",
+        "information_behavior": "NEW_CANDIDATE_SOURCE_AND_LOCAL_RECEIPTS_WITH_BASELINE_PRESERVED",
+        "trust_continuity": "CONTINUOUS",
+        "observation_ids": [
+          "OBS-SOURCE-TEST-29",
+          "OBS-LOCAL-PROFILE-VALIDATION"
+        ],
+        "coverage": "SOURCE_TEST_BUILD_MANIFEST_AND_LOAD_ORDER_ONLY",
+        "observer_effect": "CANDIDATE_ROOT_CREATED_NO_BASELINE_MUTATION",
+        "authority_effect": "LOCAL_CANDIDATE_FILES_ONLY",
+        "provenance_cluster": "LOCAL_CANDIDATE_BUILD_CLUSTER",
+        "source": "LOCAL_CANDIDATE_RECEIPTS",
+        "evidence_refs": [
+          "candidate-test-report.json",
+          "candidate-build.json",
+          "profile-validated-20261012T141215183Z.json"
+        ],
+        "evidence_state": "OBSERVED"
+      }
+    ],
+    "terminal_state_ids": [
+      "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE"
+    ],
+    "execution_edge_ids": [
+      "EDGE-WR-BUILD-01"
+    ],
+    "outcome_state_ids": [
+      "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE"
+    ]
+  },
+  "coverage_cycle": {
+    "coverage_id": "WR-CANDIDATE-SCENE-RUN-COVERAGE-PLAN",
+    "record_kind": "PLAN",
+    "object_or_referent": "WORLD_REFORGED_CANDIDATE_FOREGROUND_SCENE_RUN",
+    "target_scope": "SEPARATE_TEMPORARY_CANDIDATE_CONFIG_ONLY",
+    "observer_id": "WITNESS-LOCAL-EXE-CANDIDATE",
+    "authority_source": "USER_REQUEST_PLUS_FUTURE_BOUND_RUN_CONTRACT",
+    "observer_start": null,
+    "observer_stop": null,
+    "sampling": {
+      "mode": "EVENT_DRIVEN",
+      "sampling_rate_hz": null,
+      "trigger": "FUTURE_AUTO_CLOSING_SCENE_RUN",
+      "maximum_detection_gap_ms": null,
+      "evidence_state": "NOT_PROVEN"
+    },
+    "clock": {
+      "source": "TO_BE_BOUND_BY_RUN_CONTRACT",
+      "precision_ms": null,
+      "drift_ppm": null,
+      "calibration": "NOT_PERFORMED",
+      "evidence_state": "NOT_PROVEN"
+    },
+    "event_buffer": {
+      "kind": "NONE",
+      "capacity_events": null,
+      "overflow_policy": "NOT_MATERIALIZED",
+      "overflow_observed": false,
+      "event_loss_state": "UNKNOWN",
+      "dropped_events": null,
+      "evidence_state": "NOT_PROVEN"
+    },
+    "blind_intervals": [],
+    "coverage_dimensions": {
+      "temporal": {
+        "scope": "FUTURE_TEMPORAL_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      },
+      "object": {
+        "scope": "FUTURE_OBJECT_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      },
+      "layer": {
+        "scope": "FUTURE_LAYER_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      },
+      "privilege": {
+        "scope": "FUTURE_PRIVILEGE_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      },
+      "sensor": {
+        "scope": "FUTURE_SENSOR_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      },
+      "capture_reliability": {
+        "scope": "FUTURE_CAPTURE_RELIABILITY_CANDIDATE_SCENE_RUN_ONLY",
+        "method": "TO_BE_BOUND_IN_SEPARATE_RUN_CONTRACT",
+        "coverage_state": "PLANNED",
+        "evidence_state": "NOT_PROVEN"
+      }
+    },
+    "evidence_state": "NOT_PROVEN",
+    "observation_started": false,
+    "all_states_observed": false,
+    "no_event_observed_means_event_absent": false,
+    "validator_proves_model_complete": false
+  },
+  "temporal_branch_cycle": {
+    "branch_id": "WR-EXE-CANDIDATE-20261012",
+    "record_kind": "OBSERVED_RUN",
+    "object_or_referent": "WORLD_REFORGED_NATIVE_WORKSHOP_SOURCE_CANDIDATE",
+    "scope": "SOURCE_BRANCH_AND_LOCAL_CANDIDATE_ONLY",
+    "authority_source": "USER_DIRECTIVE_2026_10_12",
+    "base_state": {
+      "state_id": "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+      "content_digest": "sha256:357baeb54bdf6ce37763106d2acc6856c7b2e84056615a1758d47c3dae657526",
+      "current_digest": "sha256:357baeb54bdf6ce37763106d2acc6856c7b2e84056615a1758d47c3dae657526",
+      "captured_at": "2026-10-12T14:18:31.888479Z",
+      "immutable": true,
+      "state": "STABLE",
+      "evidence_state": "OBSERVED"
+    },
+    "becoming": {
+      "witness_id": "WITNESS-LOCAL-EXE-CANDIDATE",
+      "transition_record_id": "WR-CANDIDATE-BUILD-20261012",
+      "observation_started": true,
+      "state_ids": [
+        "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+        "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE"
+      ],
+      "edge_ids": [
+        "EDGE-WR-BUILD-01"
+      ],
+      "known_coverage_gaps": [
+        "NO_FOREGROUND_GAMEPLAY_OR_TARGET_DEVICE_FPS_COVERAGE"
+      ],
+      "claim_relevant_coverage_gaps": [],
+      "provenance_valid": true,
+      "evidence_state": "OBSERVED"
+    },
+    "candidate_state": {
+      "state_id": "WORLD-REFORGED-0.3.1-SOURCE-CANDIDATE",
+      "produced_from_base_state_id": "MWNATIVE-0.2.0-CORE-SOURCE-SNAPSHOT",
+      "content_digest": "sha256:66157af0ae224f725707d67d8e5e48f11f980a67a7daf101d53451cc33c37423",
+      "state": "CANDIDATE_PENDING_MERGE",
+      "evidence_state": "OBSERVED"
+    },
+    "acceptance_gate": {
+      "version_bound_oracle": "WORLD_REFORGED_CANDIDATE_ORACLE@0.3.1",
+      "same_oracle_used": true,
+      "expected_invariants_hold": true,
+      "forbidden_effects": [],
+      "candidate_tests_pass": true,
+      "human_intent_match": true,
+      "evidence_refs": [
+        "candidate-test-report.json",
+        "candidate-build.json",
+        "profile-validated-20261012T141215183Z.json"
+      ]
+    },
+    "forward_port": {
+      "mode": "PARTIAL",
+      "selected_units": [
+        {
+          "unit_id": "WORKSHOP_WORLD_REFORGED_SOURCE",
+          "source_digest": "sha256:66157af0ae224f725707d67d8e5e48f11f980a67a7daf101d53451cc33c37423",
+          "dependencies": [
+            "PRESERVED_0_2_SOURCE_BOUNDARY"
+          ],
+          "evidence_refs": [
+            "candidate-test-report.json",
+            "candidate-build.json",
+            "profile-validated-20261012T141215183Z.json"
+          ]
+        }
+      ],
+      "rejected_units": [
+        "DEFAULT_BRANCH_MERGE",
+        "PUBLIC_GAME_DATA_OR_BINARY_EXPORT",
+        "FOREGROUND_GAMEPLAY_CLAIM"
+      ],
+      "base_satisfied_dependencies": [
+        "PRESERVED_0_2_SOURCE_BOUNDARY"
+      ],
+      "dependency_closed": true,
+      "applied_to_fresh_base": true
+    },
+    "decision_state": "ELIGIBLE_FOR_PARTIAL_FORWARD_PORT",
+    "evidence_state": "OBSERVED",
+    "source_effects": 0,
+    "external_effects": 0,
+    "base_mutated": false,
+    "hash_proves_semantic_compatibility": false,
+    "rollback_erases_global_history": false,
+    "all_intermediate_states_observed": false,
+    "candidate_accepted_without_merge": false,
+    "validator_materialized_merge": false
+  }
+}
