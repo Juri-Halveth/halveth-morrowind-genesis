@@ -1,0 +1,77 @@
+{
+  "schema": "halveth.elder-scrolls-portfolio.source-snapshot/1",
+  "recordedAt": "2026-11-04T12:27:44Z",
+  "scope": "Finite, source-bound review of identified public game-related repositories and two local research lines",
+  "publicRepositories": [
+    {
+      "repository": "Juri-Halveth/halveth-morrowind-genesis",
+      "defaultBranch": "main",
+      "commit": "de0af9e5d334c5153a4e236150fd32ee46a73ae2",
+      "runtime": "OpenMW 0.51 Lua plus optional local Python companion",
+      "position": "primary Elder Scrolls III integration",
+      "evidence": [
+        "PUBLIC-STATUS.json",
+        "docs/NATIVE-VERIFICATION-1.0.0.json",
+        "docs/WORLDLIFE-0.8.md",
+        "docs/OPENMW-ADAPTER.md"
+      ],
+      "claimCeiling": "Versioned source and bounded isolated native tests; not a full Morrowind replacement or a Bethesda engine integration"
+    },
+    {
+      "repository": "Juri-Halveth/halveth-realms",
+      "defaultBranch": "main",
+      "commit": "22f3a706f88b0e186d9f6dc2807540e857ad2136",
+      "runtime": "Electron, Three.js, Node.js",
+      "position": "separate original procedural world prototype",
+      "evidence": ["README.md", "shared/world.mjs", "API-CONTRACT.md"],
+      "claimCeiling": "Local prototype with seeded world and bounded shared sessions; not a public MMO or native Morrowind mod"
+    },
+    {
+      "repository": "Juri-Halveth/halveth-unreal",
+      "defaultBranch": "main",
+      "commit": "5dcd5ad655bcaa73e672618f0829100989484c65",
+      "runtime": "Unreal Engine 5.8 and C++",
+      "position": "separate original native game prototype",
+      "evidence": ["README.md", "docs/NATIVE-VALIDATION-0.2.0.md", "LICENSE", "THIRD-PARTY-NOTICES.md"],
+      "claimCeiling": "Published 0.1 preview and separately validated 0.2 source/build; Epic engine rights remain separate"
+    },
+    {
+      "repository": "Juri-Halveth/halveth-scarlet",
+      "defaultBranch": "main",
+      "commit": "c36150b55fe9ed4207f185d7092b3184c353df93",
+      "runtime": "Browser JavaScript and separate Unreal native slice",
+      "position": "ASHBOUND and authored entity-state design reference",
+      "evidence": [
+        "forschung/ashbound/README.md",
+        "native/ashbound-unreal/README.md",
+        "LICENSES.md"
+      ],
+      "claimCeiling": "Separate browser and native vertical slices; rights must be reviewed by file and revision"
+    }
+  ],
+  "localHold": [
+    {
+      "name": "Morrowind World Reforged 1.3.2 terrain and render candidate",
+      "status": "BECOMING_NOT_INSTALLED_OR_VISUALLY_ACCEPTED",
+      "publiclyTransferred": false,
+      "evidence": ["STATUS.md", "evidence/LAND_GRID_COVERAGE_R4.json", "evidence/TERRAIN_MATERIAL_MAP_R4.json", "evidence/RENDER_CAMPAIGN_R5.json"],
+      "claimCeiling": "1,540 bound LAND grids, 123 runtime-matched nonzero texture paths, 117 candidate replacements, one unresolved region route; no visual acceptance or installed release",
+      "reason": "Master-derived records, mixed source assets, native visual gaps and per-file rights review remain"
+    },
+    {
+      "name": "The Meridian Wake original-world and Veyrath design candidate",
+      "status": "LOCAL_DESIGN_AND_OFFLINE_SHADOW_NOT_NATIVE_OPENMW",
+      "publiclyTransferred": false,
+      "evidence": ["README.md", "STATUS.md", "world/atlas/GENERATION_RECEIPT.json", "world/design/WORLD_BIBLE.json"],
+      "claimCeiling": "Generated world plan, technical Blender blockouts and authored offline encounter prototypes; no playable native total conversion",
+      "reason": "No native world integration, no accepted art target, and source/asset provenance must be reviewed"
+    }
+  ],
+  "excludedFromPublicPacket": [
+    "Bethesda game files and extracted lore",
+    "personal saves and conversations",
+    "private local logs and absolute machine paths",
+    "third-party engine binaries and model weights",
+    "unknown-origin or uncleared assets"
+  ]
+}

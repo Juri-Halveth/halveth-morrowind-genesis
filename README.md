@@ -4,6 +4,8 @@
 
 # Morrowind Genesis – lokale Dialoge und Werkzeuge für OpenMW
 
+**Elder Scrolls technology portfolio:** [OpenMW gameplay, persistent NPC encounters, local dialogue and original world prototypes](docs/elder-scrolls-portfolio/README.md). This is a source-bound overview for a possible one-time acquisition conversation; it does not bundle Bethesda assets or imply Bethesda endorsement.
+
 Erweiterungen für Morrowind in OpenMW: lokale Figurendialoge, Gedächtnis und Spielwerkzeuge. Eigenständige Weltprototypen sind im Repository gesondert beschrieben.
 
 **Direkt einrichten:** [OpenMW-Setup und Voraussetzungen lesen](docs/SETUP.md).
