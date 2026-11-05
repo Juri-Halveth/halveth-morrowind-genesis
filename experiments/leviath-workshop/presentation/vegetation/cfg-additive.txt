@@ -1,0 +1,4 @@
+# Append to the separate candidate openmw.cfg and play.cfg after base content.
+# Replace the placeholder with the resolved absolute Windows path.
+data="<absolute-path-to-presentation-candidate>/vegetation/mod"
+content=Veyra-Vegetation.esp

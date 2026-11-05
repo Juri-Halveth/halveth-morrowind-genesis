@@ -1,0 +1,3932 @@
+{
+  "schema": "veyra.frontier-scenery.v1",
+  "version": "0.1.0",
+  "seed": 2026100368,
+  "referenceBudget": 128,
+  "counts": {
+    "tree": 20,
+    "stone": 20,
+    "grass": 28,
+    "totalReferences": 68,
+    "ownSTAT": 2,
+    "CELL": 1
+  },
+  "plugin": "LEVIATH-Frontier-Scenery.esp",
+  "pluginSha256": "7d1102dfd6f73967b9f3d31d5bf72eb2272ca6e0746836d74c984b1fa421812f",
+  "coordinates": [
+    65,
+    -62
+  ],
+  "terrainGrid": {
+    "step": 128,
+    "heightQuantum": 8,
+    "sharedGlobalVertices": 66049,
+    "inputPluginSha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad"
+  },
+  "crownGeometryEnvelope": {
+    "lowBelowLocal400Radius": 210.938977188878,
+    "maximumHorizontalRadius": 1163.1241114527031,
+    "sourcePoints": 76445,
+    "minimumLocalZ": -67.04778
+  },
+  "references": [
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        533248.0,
+        -506112.0,
+        448.0
+      ],
+      "scale": 0.9006145000457764,
+      "rotationZ": 0.6855788826942444,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          6,
+          14
+        ],
+        "height": 448,
+        "patchHalfExtent": 256,
+        "patchMinimum": 424,
+        "patchMaximum": 456,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3489.6877116431006,
+        "entryTownlifeFullEnvelope": 3115.9141044477637,
+        "approachLowFootprint": 5838.72139393412,
+        "forestPathLowFootprint": 1317.4491956802126,
+        "northRampLowFootprint": 6756.025298518871,
+        "constructionFixtureLowFootprint": 5352.383283221328
+      },
+      "lowFootprintRadius": 189.9747014811288,
+      "fullEnvelopeRadius": 1047.526440127164,
+      "reference": 1281
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        535040.0,
+        -507520.0,
+        320.0
+      ],
+      "scale": 0.9480538964271545,
+      "rotationZ": 4.473240375518799,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          20,
+          3
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1442.3713843360792,
+        "entryTownlifeFullEnvelope": 1033.295654108893,
+        "approachLowFootprint": 3565.972876386026,
+        "forestPathLowFootprint": 443.2654441126799,
+        "northRampLowFootprint": 5105.726633847375,
+        "constructionFixtureLowFootprint": 3403.7126495847638
+      },
+      "lowFootprintRadius": 199.98151923227445,
+      "fullEnvelopeRadius": 1102.704345891107,
+      "reference": 1282
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        533120.0,
+        -504960.0,
+        464.0
+      ],
+      "scale": 0.9304898381233215,
+      "rotationZ": 0.7207428812980652,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          5,
+          23
+        ],
+        "height": 464,
+        "patchHalfExtent": 256,
+        "patchMinimum": 456,
+        "patchMaximum": 472,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3923.2686156986747,
+        "entryTownlifeFullEnvelope": 4160.271359021722,
+        "approachLowFootprint": 6737.516200595662,
+        "forestPathLowFootprint": 1466.9607618721056,
+        "northRampLowFootprint": 6877.723425261622,
+        "constructionFixtureLowFootprint": 6448.460176778969
+      },
+      "lowFootprintRadius": 196.27657473837812,
+      "fullEnvelopeRadius": 1082.275166182958,
+      "reference": 1283
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        537856.0,
+        -504704.0,
+        320.0
+      ],
+      "scale": 0.9213425517082214,
+      "rotationZ": 3.3039371967315674,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          42,
+          25
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 90.97566936956719,
+        "entryTownlifeFullEnvelope": 3735.7940468707156,
+        "approachLowFootprint": 4684.125717549016,
+        "forestPathLowFootprint": 544.5683006385397,
+        "northRampLowFootprint": 2145.4279532634223,
+        "constructionFixtureLowFootprint": 6309.995154183082
+      },
+      "lowFootprintRadius": 194.34705549792318,
+      "fullEnvelopeRadius": 1071.6357367991911,
+      "reference": 1284
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        532992.0,
+        -503808.0,
+        472.0
+      ],
+      "scale": 0.9381235837936401,
+      "rotationZ": 3.048368453979492,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          4,
+          32
+        ],
+        "height": 472,
+        "patchHalfExtent": 256,
+        "patchMinimum": 464,
+        "patchMaximum": 480,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4512.845840167197,
+        "entryTownlifeFullEnvelope": 5250.541428812562,
+        "approachLowFootprint": 7654.016753975368,
+        "forestPathLowFootprint": 2024.3029881700481,
+        "northRampLowFootprint": 7068.428246992759,
+        "constructionFixtureLowFootprint": 7563.878289727841
+      },
+      "lowFootprintRadius": 197.88682924219515,
+      "fullEnvelopeRadius": 1091.154159832803,
+      "reference": 1285
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        533248.0,
+        -501376.0,
+        496.0
+      ],
+      "scale": 0.9065409898757935,
+      "rotationZ": 4.372870922088623,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          6,
+          51
+        ],
+        "height": 496,
+        "patchHalfExtent": 256,
+        "patchMinimum": 488,
+        "patchMaximum": 504,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5731.457111355873,
+        "entryTownlifeFullEnvelope": 7478.637399056305,
+        "approachLowFootprint": 9466.175800871866,
+        "forestPathLowFootprint": 3162.6265965868342,
+        "northRampLowFootprint": 7507.997192994244,
+        "constructionFixtureLowFootprint": 9808.924260714542
+      },
+      "lowFootprintRadius": 191.22482918419288,
+      "fullEnvelopeRadius": 1054.419683344736,
+      "reference": 1286
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        534400.0,
+        -505728.0,
+        344.0
+      ],
+      "scale": 0.9783719182014465,
+      "rotationZ": 5.712116241455078,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          15,
+          17
+        ],
+        "height": 344,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 384,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2400.778901675315,
+        "entryTownlifeFullEnvelope": 2900.778901675315,
+        "approachLowFootprint": 5280.161180738909,
+        "forestPathLowFootprint": 97.59222004648052,
+        "northRampLowFootprint": 5587.623228264266,
+        "constructionFixtureLowFootprint": 5291.929469124265
+      },
+      "lowFootprintRadius": 206.37677173573374,
+      "fullEnvelopeRadius": 1137.9679680283343,
+      "reference": 1287
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        535296.0,
+        -500992.0,
+        536.0
+      ],
+      "scale": 0.8777467608451843,
+      "rotationZ": 3.936677932739258,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          22,
+          54
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4635.618843472837,
+        "entryTownlifeFullEnvelope": 7461.240319531098,
+        "approachLowFootprint": 8928.610089472184,
+        "forestPathLowFootprint": 2107.7574686651888,
+        "northRampLowFootprint": 5927.199517822087,
+        "constructionFixtureLowFootprint": 9852.171135033768
+      },
+      "lowFootprintRadius": 185.1510039635339,
+      "fullEnvelopeRadius": 1020.9284212885433,
+      "reference": 1288
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        536704.0,
+        -505344.0,
+        320.0
+      ],
+      "scale": 0.8203744292259216,
+      "rotationZ": 5.818024635314941,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          33,
+          20
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 667.9446078464407,
+        "entryTownlifeFullEnvelope": 3103.0333764083534,
+        "approachLowFootprint": 4371.3447133436,
+        "forestPathLowFootprint": 164.65839191142095,
+        "northRampLowFootprint": 3316.9510569871745,
+        "constructionFixtureLowFootprint": 5510.299918149519
+      },
+      "lowFootprintRadius": 173.0489430128255,
+      "fullEnvelopeRadius": 954.1972790519186,
+      "reference": 1289
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        534400.0,
+        -503424.0,
+        504.0
+      ],
+      "scale": 0.9070929884910583,
+      "rotationZ": 5.41984224319458,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          15,
+          35
+        ],
+        "height": 504,
+        "patchHalfExtent": 256,
+        "patchMinimum": 464,
+        "patchMaximum": 512,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3552.621713026555,
+        "entryTownlifeFullEnvelope": 5192.692339054514,
+        "approachLowFootprint": 7118.451490277322,
+        "forestPathLowFootprint": 926.700985830056,
+        "northRampLowFootprint": 5752.68208995961,
+        "constructionFixtureLowFootprint": 7551.528742120094
+      },
+      "lowFootprintRadius": 191.34126720750652,
+      "fullEnvelopeRadius": 1055.0617262436392,
+      "reference": 1290
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        535040.0,
+        -502400.0,
+        528.0
+      ],
+      "scale": 0.9228396415710449,
+      "rotationZ": 3.966616153717041,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          20,
+          43
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 504,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3701.4842305036236,
+        "entryTownlifeFullEnvelope": 6048.726437984568,
+        "approachLowFootprint": 7712.00104978366,
+        "forestPathLowFootprint": 1203.3014341533963,
+        "northRampLowFootprint": 5450.950462313779,
+        "constructionFixtureLowFootprint": 8463.680693176699
+      },
+      "lowFootprintRadius": 194.662850102347,
+      "fullEnvelopeRadius": 1073.3770381156526,
+      "reference": 1291
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        537984.0,
+        -503040.0,
+        320.0
+      ],
+      "scale": 1.0289126634597778,
+      "rotationZ": 6.075412750244141,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          43,
+          38
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1260.5699691505688,
+        "entryTownlifeFullEnvelope": 5273.200786436031,
+        "approachLowFootprint": 6303.230627191275,
+        "forestPathLowFootprint": 29.781172703690572,
+        "northRampLowFootprint": 2520.088962265889,
+        "constructionFixtureLowFootprint": 7938.89231536685
+      },
+      "lowFootprintRadius": 217.0377848468898,
+      "fullEnvelopeRadius": 1196.7531274490882,
+      "reference": 1292
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        536448.0,
+        -501376.0,
+        528.0
+      ],
+      "scale": 1.0450129508972168,
+      "rotationZ": 5.084784984588623,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          31,
+          51
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 488,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3459.9276248566766,
+        "entryTownlifeFullEnvelope": 6809.29129638804,
+        "approachLowFootprint": 8192.80213896475,
+        "forestPathLowFootprint": 1197.237027611357,
+        "northRampLowFootprint": 4741.543978120357,
+        "constructionFixtureLowFootprint": 9409.264057158327
+      },
+      "lowFootprintRadius": 220.4339630113901,
+      "fullEnvelopeRadius": 1215.4797599688925,
+      "reference": 1293
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        533504.0,
+        -507648.0,
+        392.0
+      ],
+      "scale": 1.0474045276641846,
+      "rotationZ": 3.8360698223114014,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          8,
+          2
+        ],
+        "height": 392,
+        "patchHalfExtent": 256,
+        "patchMinimum": 368,
+        "patchMaximum": 424,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2854.3085112034696,
+        "entryTownlifeFullEnvelope": 1508.7534633803689,
+        "approachLowFootprint": 4540.6223037604595,
+        "forestPathLowFootprint": 1686.7428763241892,
+        "northRampLowFootprint": 6613.062654323339,
+        "constructionFixtureLowFootprint": 3846.5185161414533
+      },
+      "lowFootprintRadius": 220.93843976848297,
+      "fullEnvelopeRadius": 1218.261460570943,
+      "reference": 1294
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        534144.0,
+        -501888.0,
+        520.0
+      ],
+      "scale": 1.0227631330490112,
+      "rotationZ": 3.518900156021118,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          13,
+          47
+        ],
+        "height": 520,
+        "patchHalfExtent": 256,
+        "patchMinimum": 512,
+        "patchMaximum": 528,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4587.732472458433,
+        "entryTownlifeFullEnvelope": 6610.744149320987,
+        "approachLowFootprint": 8550.167104212018,
+        "forestPathLowFootprint": 2160.1672458215344,
+        "northRampLowFootprint": 6455.933509255787,
+        "constructionFixtureLowFootprint": 9083.700152325251
+      },
+      "lowFootprintRadius": 215.74060919185078,
+      "fullEnvelopeRadius": 1189.600460354214,
+      "reference": 1295
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        532864.0,
+        -502656.0,
+        480.0
+      ],
+      "scale": 0.8224495649337769,
+      "rotationZ": 6.235380172729492,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          3,
+          41
+        ],
+        "height": 480,
+        "patchHalfExtent": 256,
+        "patchMinimum": 464,
+        "patchMaximum": 488,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5351.171390978374,
+        "entryTownlifeFullEnvelope": 6497.705566539345,
+        "approachLowFootprint": 8646.854097326199,
+        "forestPathLowFootprint": 2654.9789912825813,
+        "northRampLowFootprint": 7446.5851992619455,
+        "constructionFixtureLowFootprint": 8714.99309180729
+      },
+      "lowFootprintRadius": 173.48667001656858,
+      "fullEnvelopeRadius": 956.6109194282615,
+      "reference": 1296
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        534144.0,
+        -500736.0,
+        528.0
+      ],
+      "scale": 1.0031019449234009,
+      "rotationZ": 0.9291833639144897,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          13,
+          56
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 520,
+        "patchMaximum": 528,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5428.37021028603,
+        "entryTownlifeFullEnvelope": 7756.822948642488,
+        "approachLowFootprint": 9581.958045743513,
+        "forestPathLowFootprint": 3025.3300918586447,
+        "northRampLowFootprint": 7002.182049455131,
+        "constructionFixtureLowFootprint": 10220.975616886813
+      },
+      "lowFootprintRadius": 211.5932982783164,
+      "fullEnvelopeRadius": 1166.732058385509,
+      "reference": 1297
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        537472.0,
+        -500864.0,
+        504.0
+      ],
+      "scale": 0.9358426332473755,
+      "rotationZ": 0.2711279094219208,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          39,
+          55
+        ],
+        "height": 504,
+        "patchHalfExtent": 256,
+        "patchMinimum": 464,
+        "patchMaximum": 520,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3544.6482918451147,
+        "entryTownlifeFullEnvelope": 7483.486695447588,
+        "approachLowFootprint": 8539.199465663396,
+        "forestPathLowFootprint": 1663.234109401108,
+        "northRampLowFootprint": 4400.379965605823,
+        "constructionFixtureLowFootprint": 10022.793953850663
+      },
+      "lowFootprintRadius": 197.40568786694766,
+      "fullEnvelopeRadius": 1088.5011312554116,
+      "reference": 1298
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        537984.0,
+        -502016.0,
+        336.0
+      ],
+      "scale": 0.9331563711166382,
+      "rotationZ": 0.02598237618803978,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          43,
+          46
+        ],
+        "height": 336,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 376,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2287.172127441044,
+        "entryTownlifeFullEnvelope": 6397.4165887722165,
+        "approachLowFootprint": 7344.503276184871,
+        "forestPathLowFootprint": 744.0767652512495,
+        "northRampLowFootprint": 3197.923271170417,
+        "constructionFixtureLowFootprint": 8963.363309708857
+      },
+      "lowFootprintRadius": 196.8390504806287,
+      "fullEnvelopeRadius": 1085.3766750014686,
+      "reference": 1299
+    },
+    {
+      "kind": "tree",
+      "recordId": "veyra_swamp_crown_01",
+      "position": [
+        532608.0,
+        -507008.0,
+        432.0
+      ],
+      "scale": 1.053513526916504,
+      "rotationZ": 5.4412946701049805,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          1,
+          7
+        ],
+        "height": 432,
+        "patchHalfExtent": 256,
+        "patchMinimum": 424,
+        "patchMaximum": 440,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 3788.2580988729633,
+        "entryTownlifeFullEnvelope": 2551.551393127387,
+        "approachLowFootprint": 5625.449693609062,
+        "forestPathLowFootprint": 2198.1566464972893,
+        "northRampLowFootprint": 7403.754177986087,
+        "constructionFixtureLowFootprint": 4869.909505200923
+      },
+      "lowFootprintRadius": 222.22706582241483,
+      "fullEnvelopeRadius": 1225.366984898162,
+      "reference": 1300
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        535168.0,
+        -501120.0,
+        536.0
+      ],
+      "scale": 0.8097751140594482,
+      "rotationZ": 2.934448719024658,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          21,
+          53
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5396.27438477047,
+        "entryTownlifeFullEnvelope": 8131.060589680326,
+        "approachLowFootprint": 8798.468205141515,
+        "forestPathLowFootprint": 2031.4688685738279,
+        "northRampLowFootprint": 5905.46457861266,
+        "constructionFixtureLowFootprint": 9680.178413177004
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1301
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        538624.0,
+        -503040.0,
+        320.0
+      ],
+      "scale": 0.8899163007736206,
+      "rotationZ": 2.270188331604004,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          38
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1937.9081938162785,
+        "entryTownlifeFullEnvelope": 6351.410405385988,
+        "approachLowFootprint": 6258.038123857365,
+        "forestPathLowFootprint": 615.6055532628543,
+        "northRampLowFootprint": 1985.2943320018703,
+        "constructionFixtureLowFootprint": 8069.0480493586365
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1302
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        538496.0,
+        -504704.0,
+        320.0
+      ],
+      "scale": 1.0030893087387085,
+      "rotationZ": 4.128629207611084,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          47,
+          25
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 530.0844062304022,
+        "entryTownlifeFullEnvelope": 4704.7359515108565,
+        "approachLowFootprint": 4593.934261780258,
+        "forestPathLowFootprint": 935.1897926824415,
+        "northRampLowFootprint": 1460.6295752201177,
+        "constructionFixtureLowFootprint": 6439.684007271604
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1303
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        533504.0,
+        -502784.0,
+        496.0
+      ],
+      "scale": 1.0217821598052979,
+      "rotationZ": 0.9297065138816833,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          8,
+          40
+        ],
+        "height": 496,
+        "patchHalfExtent": 256,
+        "patchMinimum": 488,
+        "patchMaximum": 504,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5469.114066477323,
+        "entryTownlifeFullEnvelope": 6874.849965062935,
+        "approachLowFootprint": 8098.7533247785395,
+        "forestPathLowFootprint": 1979.1142879303352,
+        "northRampLowFootprint": 6729.521992910126,
+        "constructionFixtureLowFootprint": 8334.980349456091
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1304
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        533888.0,
+        -500992.0,
+        520.0
+      ],
+      "scale": 0.9545623660087585,
+      "rotationZ": 4.200002670288086,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          11,
+          54
+        ],
+        "height": 520,
+        "patchHalfExtent": 256,
+        "patchMinimum": 512,
+        "patchMaximum": 528,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 6345.29040129547,
+        "entryTownlifeFullEnvelope": 8491.767500624435,
+        "approachLowFootprint": 9438.03306768615,
+        "forestPathLowFootprint": 2975.9967403200762,
+        "northRampLowFootprint": 7063.978063317687,
+        "constructionFixtureLowFootprint": 9988.378593218076
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1305
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        534272.0,
+        -502400.0,
+        520.0
+      ],
+      "scale": 0.8203184008598328,
+      "rotationZ": 0.03428333252668381,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          14,
+          43
+        ],
+        "height": 520,
+        "patchHalfExtent": 256,
+        "patchMinimum": 512,
+        "patchMaximum": 528,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5101.542385050017,
+        "entryTownlifeFullEnvelope": 7032.942374541788,
+        "approachLowFootprint": 8016.051306440269,
+        "forestPathLowFootprint": 1668.5287055027943,
+        "northRampLowFootprint": 6118.94150894934,
+        "constructionFixtureLowFootprint": 8532.824180026048
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1306
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        535680.0,
+        -501248.0,
+        536.0
+      ],
+      "scale": 0.7583422660827637,
+      "rotationZ": 2.6408767700195312,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          25,
+          52
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4980.332993025673,
+        "entryTownlifeFullEnvelope": 7949.60173562357,
+        "approachLowFootprint": 8507.166727499029,
+        "forestPathLowFootprint": 1624.1354546341959,
+        "northRampLowFootprint": 5411.378595727614,
+        "constructionFixtureLowFootprint": 9520.532991166972
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1307
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        534784.0,
+        -502528.0,
+        528.0
+      ],
+      "scale": 1.035062551498413,
+      "rotationZ": 4.040533542633057,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          18,
+          42
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 512,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4633.407682253161,
+        "entryTownlifeFullEnvelope": 6800.356229512192,
+        "approachLowFootprint": 7662.66600001625,
+        "forestPathLowFootprint": 1232.706027230367,
+        "northRampLowFootprint": 5594.9172498891,
+        "constructionFixtureLowFootprint": 8323.31579129526
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1308
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        533248.0,
+        -503552.0,
+        480.0
+      ],
+      "scale": 0.9457433223724365,
+      "rotationZ": 5.276678562164307,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          6,
+          34
+        ],
+        "height": 480,
+        "patchHalfExtent": 256,
+        "patchMinimum": 472,
+        "patchMaximum": 496,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5265.893985779137,
+        "entryTownlifeFullEnvelope": 6240.216692721391,
+        "approachLowFootprint": 7640.265103718866,
+        "forestPathLowFootprint": 1852.558501300813,
+        "northRampLowFootprint": 6811.162915397408,
+        "constructionFixtureLowFootprint": 7676.756491267555
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1309
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        538624.0,
+        -503168.0,
+        320.0
+      ],
+      "scale": 0.8684132099151611,
+      "rotationZ": 3.30721378326416,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          37
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1820.1779519367442,
+        "entryTownlifeFullEnvelope": 6226.673379311642,
+        "approachLowFootprint": 6130.045305960428,
+        "forestPathLowFootprint": 589.5202007820169,
+        "northRampLowFootprint": 1903.5540825181251,
+        "constructionFixtureLowFootprint": 7945.90864183506
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1310
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        538368.0,
+        -503040.0,
+        320.0
+      ],
+      "scale": 0.9860987663269043,
+      "rotationZ": 2.4018266201019287,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          46,
+          38
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2042.4247796826044,
+        "entryTownlifeFullEnvelope": 6297.775961383944,
+        "approachLowFootprint": 6260.041641719157,
+        "forestPathLowFootprint": 368.69222616622324,
+        "northRampLowFootprint": 2184.0759175453486,
+        "constructionFixtureLowFootprint": 8002.920509516929
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1311
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        536064.0,
+        -500864.0,
+        536.0
+      ],
+      "scale": 0.921708345413208,
+      "rotationZ": 5.8674163818359375,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          28,
+          55
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 528,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5074.325148952608,
+        "entryTownlifeFullEnvelope": 8308.096894364811,
+        "approachLowFootprint": 8765.139013959351,
+        "forestPathLowFootprint": 1789.5373742785387,
+        "northRampLowFootprint": 5345.109914536146,
+        "constructionFixtureLowFootprint": 9896.391182528816
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1312
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        535040.0,
+        -501504.0,
+        536.0
+      ],
+      "scale": 0.7717978358268738,
+      "rotationZ": 1.7600982189178467,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          20,
+          50
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5185.55580536319,
+        "entryTownlifeFullEnvelope": 7768.127862837211,
+        "approachLowFootprint": 8488.502047882917,
+        "forestPathLowFootprint": 1827.9760268219748,
+        "northRampLowFootprint": 5809.92244089998,
+        "constructionFixtureLowFootprint": 9309.722359240193
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1313
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        532608.0,
+        -503424.0,
+        464.0
+      ],
+      "scale": 0.9151509404182434,
+      "rotationZ": 5.787776947021484,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          1,
+          35
+        ],
+        "height": 464,
+        "patchHalfExtent": 256,
+        "patchMinimum": 448,
+        "patchMaximum": 472,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5885.217599350026,
+        "entryTownlifeFullEnvelope": 6609.819751575049,
+        "approachLowFootprint": 8154.498932556706,
+        "forestPathLowFootprint": 2489.383616072619,
+        "northRampLowFootprint": 7463.561262668318,
+        "constructionFixtureLowFootprint": 8020.021972683684
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1314
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        533760.0,
+        -501504.0,
+        512.0
+      ],
+      "scale": 0.980762779712677,
+      "rotationZ": 3.2778003215789795,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          10,
+          50
+        ],
+        "height": 512,
+        "patchHalfExtent": 256,
+        "patchMinimum": 504,
+        "patchMaximum": 520,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 6080.298173428411,
+        "entryTownlifeFullEnvelope": 8027.5254547427285,
+        "approachLowFootprint": 9047.992150760034,
+        "forestPathLowFootprint": 2678.361740524272,
+        "northRampLowFootprint": 6941.689623970598,
+        "constructionFixtureLowFootprint": 9514.012177379278
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1315
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        534400.0,
+        -502144.0,
+        528.0
+      ],
+      "scale": 0.9683579802513123,
+      "rotationZ": 2.179649591445923,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          15,
+          45
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 520,
+        "patchMaximum": 528,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5175.94125080738,
+        "entryTownlifeFullEnvelope": 7253.6828829284295,
+        "approachLowFootprint": 8179.821526175496,
+        "forestPathLowFootprint": 1774.8269197155814,
+        "northRampLowFootprint": 6095.0845663622495,
+        "constructionFixtureLowFootprint": 8761.869674956106
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1316
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        534016.0,
+        -503424.0,
+        504.0
+      ],
+      "scale": 0.898216187953949,
+      "rotationZ": 0.32012706995010376,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          12,
+          35
+        ],
+        "height": 504,
+        "patchHalfExtent": 256,
+        "patchMinimum": 496,
+        "patchMaximum": 512,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4683.59517246366,
+        "entryTownlifeFullEnvelope": 6110.270199509303,
+        "approachLowFootprint": 7281.1250283346835,
+        "forestPathLowFootprint": 1208.3329930256727,
+        "northRampLowFootprint": 6079.886670636464,
+        "constructionFixtureLowFootprint": 7585.911274362257
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1317
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        538240.0,
+        -504448.0,
+        320.0
+      ],
+      "scale": 1.0486143827438354,
+      "rotationZ": 6.117044448852539,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          45,
+          27
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 886.2719419457821,
+        "entryTownlifeFullEnvelope": 4893.482416126199,
+        "approachLowFootprint": 4858.299701090664,
+        "forestPathLowFootprint": 573.6570991110866,
+        "northRampLowFootprint": 1740.250811017153,
+        "constructionFixtureLowFootprint": 6609.683539408476
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1318
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        533376.0,
+        -503424.0,
+        488.0
+      ],
+      "scale": 0.9226987361907959,
+      "rotationZ": 1.8201701641082764,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          7,
+          35
+        ],
+        "height": 488,
+        "patchHalfExtent": 256,
+        "patchMinimum": 480,
+        "patchMaximum": 496,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5221.992645219283,
+        "entryTownlifeFullEnvelope": 6313.899292561609,
+        "approachLowFootprint": 7660.106227029604,
+        "forestPathLowFootprint": 1787.5763467322618,
+        "northRampLowFootprint": 6707.696014454323,
+        "constructionFixtureLowFootprint": 7758.5523724362465
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1319
+    },
+    {
+      "kind": "stone",
+      "recordId": "veyra_frontier_stone_cluster_01",
+      "position": [
+        536448.0,
+        -500736.0,
+        528.0
+      ],
+      "scale": 0.8944173455238342,
+      "rotationZ": 0.26218369603157043,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          31,
+          56
+        ],
+        "height": 528,
+        "patchHalfExtent": 256,
+        "patchMinimum": 528,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 4980.332993025673,
+        "entryTownlifeFullEnvelope": 8425.060242275875,
+        "approachLowFootprint": 8796.656285673806,
+        "forestPathLowFootprint": 1795.4732355758042,
+        "northRampLowFootprint": 5146.699966536113,
+        "constructionFixtureLowFootprint": 10029.707421093986
+      },
+      "lowFootprintRadius": 239.6670069743272,
+      "fullEnvelopeRadius": 239.6670069743272,
+      "reference": 1320
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537344.0,
+        -505472.0,
+        320.0
+      ],
+      "scale": 0.8025186657905579,
+      "rotationZ": 4.018847942352295,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          38,
+          19
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 826.5192618692631,
+        "entryTownlifeFullEnvelope": 3777.622484865978,
+        "approachLowFootprint": 4027.100380103255,
+        "forestPathLowFootprint": 766.7428676977968,
+        "northRampLowFootprint": 2654.6012617144806,
+        "constructionFixtureLowFootprint": 5450.074909243301
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1321
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        535168.0,
+        -500864.0,
+        536.0
+      ],
+      "scale": 1.0092899799346924,
+      "rotationZ": 1.0778688192367554,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          21,
+          55
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5640.798215676496,
+        "entryTownlifeFullEnvelope": 8429.259831132082,
+        "approachLowFootprint": 9082.476137802945,
+        "forestPathLowFootprint": 2276.6012617144806,
+        "northRampLowFootprint": 6095.472364047572,
+        "constructionFixtureLowFootprint": 9979.533923703993
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1322
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538112.0,
+        -503296.0,
+        320.0
+      ],
+      "scale": 0.8332934379577637,
+      "rotationZ": 5.140784740447998,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          44,
+          36
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1975.9638938998255,
+        "entryTownlifeFullEnvelope": 6043.0916305501,
+        "approachLowFootprint": 6060.205055474954,
+        "forestPathLowFootprint": 108.57025349669516,
+        "northRampLowFootprint": 2297.7397640398103,
+        "constructionFixtureLowFootprint": 7738.120165259712
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1323
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537856.0,
+        -505088.0,
+        320.0
+      ],
+      "scale": 0.7968431115150452,
+      "rotationZ": 4.493539810180664,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          42,
+          22
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 687.0266533571166,
+        "entryTownlifeFullEnvelope": 4234.120733200423,
+        "approachLowFootprint": 4302.552725577751,
+        "forestPathLowFootprint": 830.521796225469,
+        "northRampLowFootprint": 2142.6012617144806,
+        "constructionFixtureLowFootprint": 5936.170513989887
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1324
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        535168.0,
+        -501632.0,
+        536.0
+      ],
+      "scale": 0.9920931458473206,
+      "rotationZ": 1.3953973054885864,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          21,
+          49
+        ],
+        "height": 536,
+        "patchHalfExtent": 256,
+        "patchMinimum": 536,
+        "patchMaximum": 536,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 5049.18034037387,
+        "entryTownlifeFullEnvelope": 7667.769424369613,
+        "approachLowFootprint": 8365.929858229707,
+        "forestPathLowFootprint": 1691.5373313490452,
+        "northRampLowFootprint": 5679.207026280703,
+        "constructionFixtureLowFootprint": 9214.406639338022
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1325
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537600.0,
+        -504704.0,
+        320.0
+      ],
+      "scale": 0.7677343487739563,
+      "rotationZ": 5.71188497543335,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          40,
+          25
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1140.4984652123262,
+        "entryTownlifeFullEnvelope": 4572.110474467459,
+        "approachLowFootprint": 4722.176347489498,
+        "forestPathLowFootprint": 373.4394751104842,
+        "northRampLowFootprint": 2400.2284349415786,
+        "constructionFixtureLowFootprint": 6253.199519104927
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1326
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537216.0,
+        -505344.0,
+        320.0
+      ],
+      "scale": 0.879574716091156,
+      "rotationZ": 5.614318370819092,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          37,
+          20
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1005.4774515158101,
+        "entryTownlifeFullEnvelope": 3891.2996996582774,
+        "approachLowFootprint": 4184.468345391009,
+        "forestPathLowFootprint": 596.6657249573373,
+        "northRampLowFootprint": 2782.6012617144806,
+        "constructionFixtureLowFootprint": 5553.511692295109
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1327
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        536960.0,
+        -504960.0,
+        320.0
+      ],
+      "scale": 0.8616753816604614,
+      "rotationZ": 3.6781883239746094,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          35,
+          23
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1442.3306756848483,
+        "entryTownlifeFullEnvelope": 4255.066210921732,
+        "approachLowFootprint": 4625.813251482146,
+        "forestPathLowFootprint": 139.58340384235248,
+        "northRampLowFootprint": 3038.6012617144806,
+        "constructionFixtureLowFootprint": 5896.935151203892
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1328
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        534784.0,
+        -506624.0,
+        320.0
+      ],
+      "scale": 0.9251397848129272,
+      "rotationZ": 4.015936851501465,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          18,
+          10
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2730.125637235669,
+        "entryTownlifeFullEnvelope": 2871.4028287362166,
+        "approachLowFootprint": 4385.142669259691,
+        "forestPathLowFootprint": 106.98138574638392,
+        "northRampLowFootprint": 5229.561874830581,
+        "constructionFixtureLowFootprint": 4339.330884740342
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1329
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        534784.0,
+        -506752.0,
+        320.0
+      ],
+      "scale": 1.0097767114639282,
+      "rotationZ": 3.9642958641052246,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          18,
+          9
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2704.2385840865595,
+        "entryTownlifeFullEnvelope": 2750.119091457705,
+        "approachLowFootprint": 4294.633001267811,
+        "forestPathLowFootprint": 164.22472597037859,
+        "northRampLowFootprint": 5240.047634177835,
+        "constructionFixtureLowFootprint": 4215.087376658313
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1330
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538368.0,
+        -503424.0,
+        320.0
+      ],
+      "scale": 0.9561044573783875,
+      "rotationZ": 1.1298335790634155,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          46,
+          35
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1742.3404371780148,
+        "entryTownlifeFullEnvelope": 5965.8249205420525,
+        "approachLowFootprint": 5920.448786844955,
+        "forestPathLowFootprint": 356.60126171448087,
+        "northRampLowFootprint": 2012.2698935452956,
+        "constructionFixtureLowFootprint": 7675.4298588636775
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1331
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537600.0,
+        -505088.0,
+        320.0
+      ],
+      "scale": 0.78439861536026,
+      "rotationZ": 1.9307353496551514,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          40,
+          22
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 871.9793343160059,
+        "entryTownlifeFullEnvelope": 4192.041422460046,
+        "approachLowFootprint": 4344.615182150437,
+        "forestPathLowFootprint": 660.4446534850097,
+        "northRampLowFootprint": 2398.6012617144806,
+        "constructionFixtureLowFootprint": 5877.489215018986
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1332
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538496.0,
+        -504960.0,
+        320.0
+      ],
+      "scale": 0.7816201448440552,
+      "rotationZ": 6.241918563842773,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          47,
+          23
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 365.4907711097044,
+        "entryTownlifeFullEnvelope": 4501.723982348964,
+        "approachLowFootprint": 4382.21672754959,
+        "forestPathLowFootprint": 1160.2902980152433,
+        "northRampLowFootprint": 1502.6012617144809,
+        "constructionFixtureLowFootprint": 6241.160681231008
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1333
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537984.0,
+        -504448.0,
+        320.0
+      ],
+      "scale": 0.7775549292564392,
+      "rotationZ": 1.5163246393203735,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          43,
+          27
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1082.8748940951714,
+        "entryTownlifeFullEnvelope": 4886.734298833793,
+        "approachLowFootprint": 4922.636228400642,
+        "forestPathLowFootprint": 437.2184036381566,
+        "northRampLowFootprint": 2038.0731867028255,
+        "constructionFixtureLowFootprint": 6588.055507741755
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1334
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537472.0,
+        -505344.0,
+        320.0
+      ],
+      "scale": 0.9236543774604797,
+      "rotationZ": 1.0935553312301636,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          39,
+          20
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 802.6007736715042,
+        "entryTownlifeFullEnvelope": 3920.6381883550725,
+        "approachLowFootprint": 4120.590225091057,
+        "forestPathLowFootprint": 766.7428676977968,
+        "northRampLowFootprint": 2526.6012617144806,
+        "constructionFixtureLowFootprint": 5600.535340264684
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1335
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537344.0,
+        -504704.0,
+        320.0
+      ],
+      "scale": 0.8611470460891724,
+      "rotationZ": 3.1251721382141113,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          38,
+          25
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1321.4815937135677,
+        "entryTownlifeFullEnvelope": 4540.910960738916,
+        "approachLowFootprint": 4773.021882602231,
+        "forestPathLowFootprint": 203.36233237002466,
+        "northRampLowFootprint": 2656.103326588446,
+        "constructionFixtureLowFootprint": 6205.895202641297
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1336
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538112.0,
+        -503552.0,
+        320.0
+      ],
+      "scale": 0.9826247692108154,
+      "rotationZ": 4.543976306915283,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          44,
+          34
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1753.7104900833824,
+        "entryTownlifeFullEnvelope": 5791.102295313673,
+        "approachLowFootprint": 5804.768654077142,
+        "forestPathLowFootprint": 108.57025349669516,
+        "northRampLowFootprint": 2176.3563389097126,
+        "constructionFixtureLowFootprint": 7488.888682107705
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1337
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538240.0,
+        -504064.0,
+        320.0
+      ],
+      "scale": 0.8019252419471741,
+      "rotationZ": 5.997989177703857,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          45,
+          30
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 1249.953173283045,
+        "entryTownlifeFullEnvelope": 5313.176475646951,
+        "approachLowFootprint": 5286.011792701963,
+        "forestPathLowFootprint": 394.441919760817,
+        "northRampLowFootprint": 1868.6917400413242,
+        "constructionFixtureLowFootprint": 7024.071804273775
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1338
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537600.0,
+        -505728.0,
+        320.0
+      ],
+      "scale": 0.965877115726471,
+      "rotationZ": 0.4928121864795685,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          40,
+          17
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 469.19420119678307,
+        "entryTownlifeFullEnvelope": 3559.643354415363,
+        "approachLowFootprint": 3717.8231311890686,
+        "forestPathLowFootprint": 745.4832248552393,
+        "northRampLowFootprint": 2398.6012617144806,
+        "constructionFixtureLowFootprint": 5253.475892221729
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1339
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537856.0,
+        -504832.0,
+        320.0
+      ],
+      "scale": 0.869644045829773,
+      "rotationZ": 4.212446212768555,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          42,
+          24
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 871.9793343160059,
+        "entryTownlifeFullEnvelope": 4485.990140218362,
+        "approachLowFootprint": 4556.177200271229,
+        "forestPathLowFootprint": 639.1850106424522,
+        "northRampLowFootprint": 2142.6012617144806,
+        "constructionFixtureLowFootprint": 6184.557901153496
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1340
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538368.0,
+        -504960.0,
+        320.0
+      ],
+      "scale": 1.0446914434432983,
+      "rotationZ": 1.7480517625808716,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          46,
+          23
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 442.99021954110094,
+        "entryTownlifeFullEnvelope": 4469.09463702979,
+        "approachLowFootprint": 4385.214685497813,
+        "forestPathLowFootprint": 1075.0076889148793,
+        "northRampLowFootprint": 1630.6012617144809,
+        "constructionFixtureLowFootprint": 6200.912774894547
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1341
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538624.0,
+        -504192.0,
+        320.0
+      ],
+      "scale": 1.0019983053207397,
+      "rotationZ": 4.8458733558654785,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          29
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 944.0880231043552,
+        "entryTownlifeFullEnvelope": 5276.724154733392,
+        "approachLowFootprint": 5150.382377197539,
+        "forestPathLowFootprint": 793.9014684343194,
+        "northRampLowFootprint": 1464.087635940057,
+        "constructionFixtureLowFootprint": 7010.418710329823
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1342
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538112.0,
+        -504960.0,
+        320.0
+      ],
+      "scale": 0.8487032651901245,
+      "rotationZ": 4.282654285430908,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          44,
+          23
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 605.9774291712929,
+        "entryTownlifeFullEnvelope": 4410.216849573717,
+        "approachLowFootprint": 4400.881940812958,
+        "forestPathLowFootprint": 904.9305461744202,
+        "northRampLowFootprint": 1886.6012617144809,
+        "constructionFixtureLowFootprint": 6126.468783050824
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1343
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538624.0,
+        -504832.0,
+        320.0
+      ],
+      "scale": 0.7853078842163086,
+      "rotationZ": 5.0193400382995605,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          24
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 396.68576778960596,
+        "entryTownlifeFullEnvelope": 4659.433788337732,
+        "approachLowFootprint": 4510.43915518116,
+        "forestPathLowFootprint": 1160.2902980152433,
+        "northRampLowFootprint": 1374.6012617144809,
+        "constructionFixtureLowFootprint": 6403.995974453121
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1344
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538624.0,
+        -502656.0,
+        320.0
+      ],
+      "scale": 0.8595221042633057,
+      "rotationZ": 3.1290996074676514,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          41
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2338.05561938882,
+        "entryTownlifeFullEnvelope": 6770.407030179571,
+        "approachLowFootprint": 6686.286343099035,
+        "forestPathLowFootprint": 793.9014684343194,
+        "northRampLowFootprint": 2294.4637922236016,
+        "constructionFixtureLowFootprint": 8483.49128071976
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1345
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        537984.0,
+        -502912.0,
+        320.0
+      ],
+      "scale": 0.8463209271430969,
+      "rotationZ": 5.973836898803711,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          43,
+          39
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2374.2933168441073,
+        "entryTownlifeFullEnvelope": 6401.0249144177415,
+        "approachLowFootprint": 6452.458052816948,
+        "forestPathLowFootprint": 108.57025349669516,
+        "northRampLowFootprint": 2613.6984613725617,
+        "constructionFixtureLowFootprint": 8085.829628692636
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1346
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538112.0,
+        -502784.0,
+        320.0
+      ],
+      "scale": 0.8149979710578918,
+      "rotationZ": 2.3718581199645996,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          44,
+          40
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 2428.935284113943,
+        "entryTownlifeFullEnvelope": 6547.724508252546,
+        "approachLowFootprint": 6571.197057417074,
+        "forestPathLowFootprint": 284.1508466177261,
+        "northRampLowFootprint": 2587.582709070476,
+        "constructionFixtureLowFootprint": 8237.670751546515
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1347
+    },
+    {
+      "kind": "grass",
+      "recordId": "veyra_frontier_grass_01",
+      "position": [
+        538624.0,
+        -505216.0,
+        320.0
+      ],
+      "scale": 0.7874093055725098,
+      "rotationZ": 0.8740420937538147,
+      "anchor": {
+        "coordinates": [
+          65,
+          -62
+        ],
+        "vertex": [
+          48,
+          21
+        ],
+        "height": 320,
+        "patchHalfExtent": 256,
+        "patchMinimum": 320,
+        "patchMaximum": 320,
+        "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+      },
+      "freeMargins": {
+        "arenaFullEnvelope": 83.89823002016692,
+        "entryTownlifeFullEnvelope": 4290.993855975683,
+        "approachLowFootprint": 4126.480474309799,
+        "forestPathLowFootprint": 1436.4216172383556,
+        "northRampLowFootprint": 1374.6012617144809,
+        "constructionFixtureLowFootprint": 6042.918193156485
+      },
+      "lowFootprintRadius": 195.3987382855191,
+      "fullEnvelopeRadius": 195.3987382855191,
+      "reference": 1348
+    }
+  ],
+  "forestPath": {
+    "halfWidth": 600,
+    "extraClearance": 128,
+    "controlPoints": [
+      [
+        536960,
+        -507392
+      ],
+      [
+        535808,
+        -506368
+      ],
+      [
+        535424,
+        -505600
+      ],
+      [
+        535936,
+        -504448
+      ],
+      [
+        537088,
+        -503424
+      ]
+    ],
+    "gridVertexSamples": [
+      {
+        "segment": 0,
+        "position": [
+          536960,
+          -507392,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            35,
+            4
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536832,
+          -507264,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            34,
+            5
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536832,
+          -507264,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            34,
+            5
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536704,
+          -507136,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            33,
+            6
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536576,
+          -507136,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            32,
+            6
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536576,
+          -507008,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            32,
+            7
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536448,
+          -506880,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            31,
+            8
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536320,
+          -506880,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            30,
+            8
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536192,
+          -506752,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            29,
+            9
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536192,
+          -506624,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            29,
+            10
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          536064,
+          -506624,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            28,
+            10
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          535936,
+          -506496,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            27,
+            11
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          535936,
+          -506496,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            27,
+            11
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 0,
+        "position": [
+          535808,
+          -506368,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            26,
+            12
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535808,
+          -506368,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            26,
+            12
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535808,
+          -506240,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            26,
+            13
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535680,
+          -506112,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            25,
+            14
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535680,
+          -505984,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            25,
+            15
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535552,
+          -505984,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            24,
+            15
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535552,
+          -505856,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            24,
+            16
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535424,
+          -505728,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            23,
+            17
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 1,
+        "position": [
+          535424,
+          -505600,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            23,
+            18
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535424,
+          -505600,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            23,
+            18
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535424,
+          -505472,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            23,
+            19
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535552,
+          -505344,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            24,
+            20
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535552,
+          -505216,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            24,
+            21
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535680,
+          -505088,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            25,
+            22
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535680,
+          -505088,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            25,
+            22
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535680,
+          -504960,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            25,
+            23
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535808,
+          -504832,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            26,
+            24
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535808,
+          -504704,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            26,
+            25
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535936,
+          -504576,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            27,
+            26
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 2,
+        "position": [
+          535936,
+          -504448,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            27,
+            27
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          535936,
+          -504448,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            27,
+            27
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536064,
+          -504320,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            28,
+            28
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536064,
+          -504320,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            28,
+            28
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536192,
+          -504192,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            29,
+            29
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536320,
+          -504192,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            30,
+            29
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536320,
+          -504064,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            30,
+            30
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536448,
+          -503936,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            31,
+            31
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536576,
+          -503936,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            32,
+            31
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536704,
+          -503808,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            33,
+            32
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536704,
+          -503680,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            33,
+            33
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536832,
+          -503680,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            34,
+            33
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536960,
+          -503552,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            35,
+            34
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          536960,
+          -503552,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            35,
+            34
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      },
+      {
+        "segment": 3,
+        "position": [
+          537088,
+          -503424,
+          320
+        ],
+        "anchor": {
+          "coordinates": [
+            65,
+            -62
+          ],
+          "vertex": [
+            36,
+            35
+          ],
+          "height": 320,
+          "patchHalfExtent": 128,
+          "patchMinimum": 320,
+          "patchMaximum": 320,
+          "vhgtSha256": "d5fd4d9bbcf14914215db643eb6369e144e22a7d11806ce6e93a841e3aa73271"
+        }
+      }
+    ],
+    "nativeWalk": "PENDING"
+  },
+  "reservations": {
+    "arenaFullCanopyRadius": 3100,
+    "entryTownlifeFullCanopyRadius": 2600,
+    "townlifeActualRadius": 2200,
+    "northRampHalfWidth": 350,
+    "constructionFixtureRadius": 1000,
+    "approachHalfWidth": 360,
+    "dynamicFutureBeds": "Not globally excluded; current reserved build zone remains free"
+  },
+  "geometry": {
+    "veyra_frontier_stone_cluster_01": {
+      "triangles": 504,
+      "vertices": 1512,
+      "sha256": "a54ae771db1c7c44cd44269b0c2198e81922af58d6cfa780b5e33c502543f8b8",
+      "bounds": [
+        [
+          -167.6406110777245,
+          -108.55970504092353,
+          -65
+        ],
+        [
+          208.3561833155198,
+          109.50021417880117,
+          95
+        ]
+      ]
+    },
+    "veyra_frontier_grass_01": {
+      "triangles": 240,
+      "vertices": 720,
+      "sha256": "7f966ea7b6ecb56d90857413df82c97b04029cd97ba1b7eb88d904e584f7a5e7",
+      "bounds": [
+        [
+          -91.77661882917934,
+          -123.54342721634882,
+          -3.0
+        ],
+        [
+          130.00900050866832,
+          119.80654360999486,
+          146.19582510915023
+        ]
+      ]
+    }
+  },
+  "sourceContent": [
+    {
+      "content": "Morrowind.esm",
+      "sha256": "5c3c8c2cbd20e25901b59b3ece33d36b7ef0e3d60ad8d11828bcc61a5ead1647",
+      "bytes": 79837557,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 1404,
+        "LAND": 1390
+      }
+    },
+    {
+      "content": "Tribunal.esm",
+      "sha256": "2ace511f23cc2a9ddd5f3aa59c7919789b9378cf4b17c8ae3375dd6b782f3f2b",
+      "bytes": 4565686,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 18,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "Bloodmoon.esm",
+      "sha256": "bd27090d0e6ad4c1bf1abc83f1a2dac56fcc82cae7bfe8263c413fb301801357",
+      "bytes": 9631798,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 173,
+        "LAND": 150
+      }
+    },
+    {
+      "content": "adamantiumarmor.esp",
+      "sha256": "1df60fa3b4b0b33474ba34ac1ed8b4ef5c088a4450cec9330a31d1cd926922dd",
+      "bytes": 6464,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 1,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "AreaEffectArrows.esp",
+      "sha256": "4ecafebe44990a7c4e67d410957f2ce263c4b23d03fbc2e2c05695818ff76780",
+      "bytes": 29635,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "bcsounds.esp",
+      "sha256": "fd354c9419a54c882c67d7677232609b6e51885c11e2fd746cb838c105c49acb",
+      "bytes": 30634,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 71,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "EBQ_Artifact.esp",
+      "sha256": "21869459b60ee8e83b0211766f7b5e9859baa3074f609e0b40f684af05c50c37",
+      "bytes": 29311,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 1,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "entertainers.esp",
+      "sha256": "41b2dc58524c60fad73704ced5d45d8bdfb3f40eecce5b5c2b552c6ab86c1c3c",
+      "bytes": 131705,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "LeFemmArmor.esp",
+      "sha256": "e887313d10268e644631132b4995f43b5c8a37f0991038bced7b57b6348404ed",
+      "bytes": 13469,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 2,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "master_index.esp",
+      "sha256": "7120c1f959c4d325922a0fae6dc03c6f43308d782fdb1c5b065d081e4330f257",
+      "bytes": 51830,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "Siege at Firemoth.esp",
+      "sha256": "bd507de8fca1d4b9e433f83707c938981ae83db96c457e3a88da1c6cb16abb35",
+      "bytes": 837873,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 28,
+        "LAND": 23
+      }
+    },
+    {
+      "content": "HALVETH-Dialogue-Compatibility.esp",
+      "sha256": "4088b4335b57822ee70a1b387b5ef2843895a0cca65a0b498456349408ea0514",
+      "bytes": 771,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "HALVETH-Character-Appearance.esp",
+      "sha256": "bcbe9c5374aa53afe953d6a95fa0269b229c1e2fb2b75b4610ad7b30bdfff1dd",
+      "bytes": 133731,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "HALVETH-Beautiful-Heads.esp",
+      "sha256": "62197a33fd383c84e6980c4edaa60dd33a699177cb4b5a017a684a038f94cd2b",
+      "bytes": 33536,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "LUCINET-World-Reforged.esp",
+      "sha256": "9805d32df3fe67406ddae40e4ef39929d7bc149d7fac04bd462e7a4bf4f71748",
+      "bytes": 6140,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    },
+    {
+      "content": "FOUNDATION-Sounds.esp",
+      "sha256": "debe0091b900b4ed3594b36c2441187920304886fe0863963f8d484e9f81caaf",
+      "bytes": 1072,
+      "collisionCount": 0,
+      "scannedCoordinateCounts": {
+        "CELL": 0,
+        "LAND": 0
+      }
+    }
+  ],
+  "ownDependencies": [
+    {
+      "role": "LEVIATH-Frontier.esp",
+      "sha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+      "bytes": 486128
+    },
+    {
+      "role": "Veyra-Dense-Crown.esp",
+      "sha256": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665",
+      "bytes": 446
+    },
+    {
+      "role": "veyra_swamp_crown_01.dae",
+      "sha256": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683",
+      "bytes": 6548329
+    },
+    {
+      "role": "PLACEMENT.json",
+      "sha256": "2939202f5be2a208f5dedd59bfe78cccfd5f0c3ecb8a6c8d188d7dc2cd0b66bc",
+      "bytes": 664
+    },
+    {
+      "role": "PLACEMENTS.json",
+      "sha256": "61b1f1619f4f95e4e29a9702b2af595683be4054bdaa6ae0b9b1ace8071e6ff8",
+      "bytes": 1648
+    },
+    {
+      "role": "SOURCE_BINDING.json",
+      "sha256": "f15f1334830cba711d8c2e499d77e9de382693aff4e893a4ac3d1d98612ad8fa",
+      "bytes": 5128
+    },
+    {
+      "role": "ENTRY_BINDING.json",
+      "sha256": "e318378f09c22e200213abe728d62c1d0cf949d2eb00c37ea44729892efceb1f",
+      "bytes": 725
+    },
+    {
+      "role": "config.lua",
+      "sha256": "e4836b8195ea78268ccc36097aaca6b0b21d550896fe3890efb3d4b624568655",
+      "bytes": 481
+    },
+    {
+      "role": "construction_global.lua",
+      "sha256": "affa1b79c8f316a047aab075fe193bb1d2eacc1f57ba1ad18ba90f22ccf7a047",
+      "bytes": 8236
+    },
+    {
+      "role": "frontier_stone.dds",
+      "sha256": "d54f2025d173e9ade36d1e011c20b0f2e4667e2afe353013a5f05cff1b0bad31",
+      "bytes": 699192
+    },
+    {
+      "role": "crown_leaf_01.dds",
+      "sha256": "81b760ed106f75ba542f053e5a892082cf1d9f84604bf7fba711925c4b36283f",
+      "bytes": 43832
+    }
+  ],
+  "newLAND": 0,
+  "originalCELLOverrides": 0,
+  "ownFrontierCELLReferenceAddition": 1,
+  "copiedOriginalMeshes": 0,
+  "downloads": 0,
+  "profileChanges": 0,
+  "networkEffects": 0,
+  "nativeRenderingCollisionFrametime": "PENDING_ROOT_PROBE"
+}

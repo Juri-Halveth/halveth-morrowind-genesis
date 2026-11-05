@@ -1,0 +1,47 @@
+{
+  "schema": "veyra.spatial-audio-asset.v1",
+  "version": "0.1.0",
+  "recordedAt": "2026-10-03T01:41:52.353464+00:00",
+  "source": {
+    "publisher": "Kenney",
+    "package": "Impact Sounds1.0",
+    "url": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0-1.0",
+    "archiveSha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+    "member": "Audio/impactBell_heavy_000.ogg",
+    "memberSha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+    "licenseMemberSha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db"
+  },
+  "transform": {
+    "operator": "equal stereo-channel mean",
+    "channelsIn": 2,
+    "channelsOut": 1,
+    "formula": "mono=0.5*left+0.5*right",
+    "filter": "pan=mono|c0=0.5*c0+0.5*c1",
+    "codec": "pcm_s16le",
+    "resamplingHz": 44100,
+    "normalization": false,
+    "ffmpegVersion": "ffmpeg version 8.1.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffmpegExecutableSha256": "ad8f211bc894755e0061c55ab280ae00e8d3d4f15a8cc4372b24cfa247b5942e"
+  },
+  "output": {
+    "path": "mod/Sound/veyra/courier_bell_mono.wav",
+    "bytes": 130630,
+    "sha256": "faa557bc6e4cd2c5c3c3b22ba8e78e9c7af35e7ab11e8cbaf5607f6ce177479c",
+    "channels": 1,
+    "sampleWidthBytes": 2,
+    "sampleRateHz": 44100,
+    "frames": 65276,
+    "durationSeconds": 1.4801814058956917,
+    "peakAmplitudeInt16": 28748,
+    "rmsNormalized": 0.04862401858190996,
+    "clippedSamples": 0
+  },
+  "buildSourceSha256": "8b1d9f41c8460dbee0595349785c19a9b60da9c99ddc3032f9278fe072dfdb2a",
+  "sourceMutation": false,
+  "networkEffects": 0,
+  "temporarySourceRemoved": true,
+  "claimCeiling": "FORMAT_AND_PCM_OBSERVATION_ONLY",
+  "humanAudition": "NOT_PERFORMED",
+  "nativeSpatialPlayback": "PENDING_ROOT_PROBE"
+}

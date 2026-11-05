@@ -1,0 +1,29 @@
+{
+  "schema": "veyra.frontier-entry.v1",
+  "version": "0.1.0",
+  "cellName": "LEVIATH Frontier Entry",
+  "cellCoordinates": [
+    65,
+    -63
+  ],
+  "position": {
+    "x": 536576,
+    "y": -512000,
+    "z": 576
+  },
+  "terrainHeight": 320,
+  "verticalMargin": 256,
+  "centralPad": {
+    "centre": {
+      "x": 540672,
+      "y": -507904,
+      "z": 320
+    },
+    "flatRadius": 6200
+  },
+  "networkEffects": 0,
+  "automaticTeleport": false,
+  "plugin": "LEVIATH-Frontier.esp",
+  "pluginSha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+  "nativeEntryObservation": "PENDING_ROOT_PROBE"
+}

@@ -1,0 +1,520 @@
+{
+  "schema": "veyra.workshop.own-assets.v1",
+  "dataClass": "PUBLIC",
+  "recordedAtUtc": "2026-10-03T04:04:27.042937+00:00",
+  "version": "0.2.0",
+  "licenseScope": "Listed authored/procedural MIT assets only; separately supplied engine and Morrowind data keep their rights.",
+  "units": {
+    "presentation/frontier-candidate": {
+      "sourceFreezeSha256": "8b68377e64ce2e697b4ae5726e65dfc9eab59bc89bec5325bd33b93d805b7805",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1086,
+          "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+        },
+        "README.md": {
+          "bytes": 6513,
+          "sha256": "15c68f9f98f33e9112de5524935058e58611d69daebef60a8b5e7eecb77448e7"
+        },
+        "build-frontier.py": {
+          "bytes": 14028,
+          "sha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298"
+        },
+        "check-frontier.py": {
+          "bytes": 17481,
+          "sha256": "1ec2ff8d4d20142a6ea64ab067d98543c7bd014a628889d42b0434e96ed5ed98"
+        },
+        "verify-frontier.py": {
+          "bytes": 4771,
+          "sha256": "1e98e6514cd91a07caf3bad7070eb9a98802816ef8cdc4aa1f2e1bf1b30f443d"
+        },
+        "verify-frontier.sh": {
+          "bytes": 422,
+          "sha256": "82a1cdf1fd319c54be4d5a543d402867aee328db51845847a84f5cf25a3010e3"
+        },
+        "cfg-additive.txt": {
+          "bytes": 174,
+          "sha256": "2e89893cabfe6be0435e3eac86842e3ce4fa82c05dbfe124e3aba8faf24742b4"
+        },
+        "ENTRY.json": {
+          "bytes": 643,
+          "sha256": "e79d41749cb8084edf2fb70a91a07aec13a3869bfac52a0beef683d21d02c1f2"
+        },
+        "PARSER_BINDING.json": {
+          "bytes": 419,
+          "sha256": "a0f3e4258673a5ce50a1ae05a5c17aab80fcd23ea986475fb7b7e7c9acdb8684"
+        }
+      }
+    },
+    "presentation/frontier-texture-candidate": {
+      "sourceFreezeSha256": "489b7195b0db2945afa1d68c9b35fb4b34005512a2185b2a35e8005de7771d43",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1086,
+          "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+        },
+        "README.md": {
+          "bytes": 2633,
+          "sha256": "f29ca18e84e77535ee3d45a0187d7395b0427c2b0fc13c19603b7c575dc7ffea"
+        },
+        "build-textures.py": {
+          "bytes": 7609,
+          "sha256": "0c977803b74c065bf006ecccd48b578be19999880a89a773287c87981c40be83"
+        },
+        "check-textures.py": {
+          "bytes": 3678,
+          "sha256": "43fa1211e4846a131bc9c29fcbdf693439ee6cb4474a7a78c4941a1b09608439"
+        },
+        "cfg-texture-only.txt": {
+          "bytes": 236,
+          "sha256": "2f2c72263689f0d6442191ed3e2e8d5b0767677792523894622b6cc2adfcd17f"
+        }
+      }
+    },
+    "presentation/plaza-candidate": {
+      "sourceFreezeSha256": "92daae8364a94b91ef0a540698c8426ba2994e7191e93c1d5a342510bc17b6f0",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1086,
+          "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+        },
+        "README.md": {
+          "bytes": 5904,
+          "sha256": "ff2f2cb74344794b0d77e891fd7fb92dfa95fcc429c481573a00359b01e32ae9"
+        },
+        "build-plaza.py": {
+          "bytes": 15908,
+          "sha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5"
+        },
+        "check-plaza.py": {
+          "bytes": 8709,
+          "sha256": "91a7dc74a526e4f1653854f07573e79cc326a2585db3f441d1970c20bfa3b34a"
+        },
+        "cfg-additive.txt": {
+          "bytes": 237,
+          "sha256": "05aa00b3c806cb2f0d82fa1acb012f9c137529393bbfb0a39581b68a191a603e"
+        },
+        "PLACEMENTS.json": {
+          "bytes": 1648,
+          "sha256": "61b1f1619f4f95e4e29a9702b2af595683be4054bdaa6ae0b9b1ace8071e6ff8"
+        }
+      }
+    },
+    "gameplay/portal": {
+      "sourceFreezeSha256": "95d66844849150bb2291e4c607f2b3d8f1e1cc776cb68193405ada5afbd8aa2a",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1306,
+          "sha256": "846c81f86e681cc34ebafe3875daea940f52f529b2ca1121199b1e38125de268"
+        },
+        "README.md": {
+          "bytes": 4827,
+          "sha256": "4d0fde4e05d3e7c58a8b1c107be599da92bed5f1abfa3fece2c4cd9e4fb35ea4"
+        },
+        "mod/veyra-portal.omwscripts": {
+          "bytes": 80,
+          "sha256": "719f9d85f28e5a68883f65ddaa22addcd3ec82de345dc675262aa885f35b289b"
+        },
+        "mod/scripts/veyra_portal/config.lua": {
+          "bytes": 654,
+          "sha256": "46e6bf243a5178394727cf3f9571adb519e8622eea40f1230b2aee195b56838d"
+        },
+        "mod/scripts/veyra_portal/global.lua": {
+          "bytes": 8918,
+          "sha256": "52b8c4ea68dff66690d7322ad6091dc2c31e5c2330fc54b4eb96aedfed93eb71"
+        },
+        "mod/scripts/veyra_portal/player.lua": {
+          "bytes": 3443,
+          "sha256": "7f2e8cbeecdfd691dd33bfbfb02a589413122198ac78ea28a256e2fe4c10d8b2"
+        }
+      }
+    },
+    "gameplay/construction": {
+      "sourceFreezeSha256": "13517e2b581fec7cc8a171107530258f7a486f14f6d63fdc1eb5999bbbe02637",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1344,
+          "sha256": "19f0709547a6b918f7cde816387214af6a26e409ead53b98d4b1701faaf9ce04"
+        },
+        "README.md": {
+          "bytes": 6379,
+          "sha256": "c323e7eac0723ff33c0147064374815d227c738f913baf588088a07d67125236"
+        },
+        "mod/veyra-construction.omwscripts": {
+          "bytes": 92,
+          "sha256": "bd5ae72b7e21ef15ca8b6c6f1bdfd5d48da7878c8ea54a2c57b115fc73105839"
+        },
+        "mod/scripts/veyra_construction/config.lua": {
+          "bytes": 481,
+          "sha256": "e4836b8195ea78268ccc36097aaca6b0b21d550896fe3890efb3d4b624568655"
+        },
+        "mod/scripts/veyra_construction/global.lua": {
+          "bytes": 17780,
+          "sha256": "eb9ba5d34d8de902fea74861b5ebeb84146a99e7d2d18d4fb1bf65bee85dcab5"
+        },
+        "mod/scripts/veyra_construction/player.lua": {
+          "bytes": 8351,
+          "sha256": "881a648f416f6b903cf49db29c0f4adec28ba2781a771c6853694570790d6ebe"
+        },
+        "mod/Meshes/veyra/construction/plantbed.dae": {
+          "bytes": 16095,
+          "sha256": "9fc6217a7f2c7e24f630389fad7105387ca3cf9c682af9e38d1f9b7b03f7884a"
+        }
+      }
+    },
+    "presentation/crown-candidate": {
+      "sourceFreezeSha256": "9957f308f9ee6220a0ad946c8395e70383b832faca8f9204dc40a293941bfe82",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1086,
+          "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+        },
+        "README.md": {
+          "bytes": 4520,
+          "sha256": "909655c192e5c3984b6cb6c6c93b475aab79f34aa39677bc00bd3622e2813eaa"
+        },
+        "THIRD_PARTY_NOTICES.md": {
+          "bytes": 1420,
+          "sha256": "841d5bc341896adafe7882d2d0066a9c663010e609f199910acef43f401da540"
+        },
+        "build-crown.py": {
+          "bytes": 12065,
+          "sha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b"
+        },
+        "check-crown.py": {
+          "bytes": 7976,
+          "sha256": "a06ef1e886f0ca70fc0fa010119ab22e2ea087551a745f7d0082295d441d2ffe"
+        },
+        "geometry-kernel.py": {
+          "bytes": 20401,
+          "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+        },
+        "cfg-additive.txt": {
+          "bytes": 262,
+          "sha256": "eb6faa4e99908f791bd0f8577e2bdc54daaa9a041b296396c9b177434461cec3"
+        },
+        "PLACEMENT.json": {
+          "bytes": 664,
+          "sha256": "2939202f5be2a208f5dedd59bfe78cccfd5f0c3ecb8a6c8d188d7dc2cd0b66bc"
+        }
+      }
+    },
+    "presentation/frontier-scenery-candidate": {
+      "sourceFreezeSha256": "b09220d3fc9e571fb814408fffba3e76db73ea4e8fcaff3dcdf923511feef566",
+      "license": "MIT",
+      "sourceFiles": {
+        "LICENSE": {
+          "bytes": 1086,
+          "sha256": "2f49b9dd3a853c844ca1f4639c3eaa3292b10a83c1fbe47ca7b46601656c87f2"
+        },
+        "README.md": {
+          "bytes": 5744,
+          "sha256": "8d18b8d56ee28248cc41acccb9f3c48ebb70f68673dc8d45e865188eae259a3c"
+        },
+        "THIRD_PARTY_NOTICES.md": {
+          "bytes": 1500,
+          "sha256": "3c1f5e09f24040be28f7aada3b5d1e488a10964f3411b254a7cde982b46aa356"
+        },
+        "build-scenery.py": {
+          "bytes": 19145,
+          "sha256": "fcf13dd7338b562f8c5dc0996046888aa580a73dd4018a75750a6b6bfc939159"
+        },
+        "check-scenery.py": {
+          "bytes": 10482,
+          "sha256": "a5aaa9be801fe4dd31e58f133fab9e670e32d94fb252954414b129c0ce4d11d8"
+        },
+        "geometry-kernel.py": {
+          "bytes": 20401,
+          "sha256": "19a1aae1b87e0555b747622dd11f3a7d6a13140623211e19b73bb964b5292c81"
+        },
+        "cfg-additive.txt": {
+          "bytes": 326,
+          "sha256": "9912bd9c7bc1d91622e2b24da75feb7aa739c6540cd1d314cca0a03d89506a2d"
+        },
+        "SCENERY_MANIFEST.json": {
+          "bytes": 108198,
+          "sha256": "1905af6b6144b266d64695ea6db002c4a41a46094cc48d74c574b529c4f95d30"
+        }
+      }
+    }
+  },
+  "assets": {
+    "presentation/frontier-candidate/mod/LEVIATH-Frontier.esp": {
+      "bytes": 486128,
+      "sha256": "7484682d663d62a22dfe59c01d3dbce862a2e1897f66e1b563b5b455cb2a75ad",
+      "kind": "ESP",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-candidate/build-frontier.py",
+      "sourceGeneratorSha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298",
+      "sourceFreezeSha256": "8b68377e64ce2e697b4ae5726e65dfc9eab59bc89bec5325bd33b93d805b7805",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_ground.dds": {
+      "bytes": 174904,
+      "sha256": "54d831f1c8f8df209b7aa85a402a419be0b9769379b14a0de5378f914d2bb78a",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-candidate/build-frontier.py",
+      "sourceGeneratorSha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298",
+      "sourceFreezeSha256": "8b68377e64ce2e697b4ae5726e65dfc9eab59bc89bec5325bd33b93d805b7805",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_stone.dds": {
+      "bytes": 174904,
+      "sha256": "b275a2a32e41715ea11163a7e69ad30eddc255817132106679f837cab62daab3",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-candidate/build-frontier.py",
+      "sourceGeneratorSha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298",
+      "sourceFreezeSha256": "8b68377e64ce2e697b4ae5726e65dfc9eab59bc89bec5325bd33b93d805b7805",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-candidate/mod/Textures/veyra/frontier/frontier_coast.dds": {
+      "bytes": 174904,
+      "sha256": "a3c3c6114ce3a3016827729f003150d5972ecbbd347b22517d9282945774cda7",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-candidate/build-frontier.py",
+      "sourceGeneratorSha256": "300202c2d19493c715effe737fc6f08443512140993697706eab0747f9eef298",
+      "sourceFreezeSha256": "8b68377e64ce2e697b4ae5726e65dfc9eab59bc89bec5325bd33b93d805b7805",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_ground.dds": {
+      "bytes": 699192,
+      "sha256": "6f49e5f4764af4996c71283d825e8b7d7000d5808e8ff95a433636fc38d7ca96",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-texture-candidate/build-textures.py",
+      "sourceGeneratorSha256": "0c977803b74c065bf006ecccd48b578be19999880a89a773287c87981c40be83",
+      "sourceFreezeSha256": "489b7195b0db2945afa1d68c9b35fb4b34005512a2185b2a35e8005de7771d43",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_stone.dds": {
+      "bytes": 699192,
+      "sha256": "d54f2025d173e9ade36d1e011c20b0f2e4667e2afe353013a5f05cff1b0bad31",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-texture-candidate/build-textures.py",
+      "sourceGeneratorSha256": "0c977803b74c065bf006ecccd48b578be19999880a89a773287c87981c40be83",
+      "sourceFreezeSha256": "489b7195b0db2945afa1d68c9b35fb4b34005512a2185b2a35e8005de7771d43",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/frontier-texture-candidate/mod/Textures/veyra/frontier/frontier_coast.dds": {
+      "bytes": 699192,
+      "sha256": "630be11afda901d57d9bcf347a7cb92464ac5b07ebae2fa88e49b5f11582403b",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-texture-candidate/build-textures.py",
+      "sourceGeneratorSha256": "0c977803b74c065bf006ecccd48b578be19999880a89a773287c87981c40be83",
+      "sourceFreezeSha256": "489b7195b0db2945afa1d68c9b35fb4b34005512a2185b2a35e8005de7771d43",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/plaza-candidate/mod/LEVIATH-Plaza.esp": {
+      "bytes": 1092,
+      "sha256": "551f8019bca4b2917caf8b2f04ce07210a25a9c105622515d301187992386d69",
+      "kind": "ESP",
+      "license": "MIT",
+      "sourceGenerator": "presentation/plaza-candidate/build-plaza.py",
+      "sourceGeneratorSha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5",
+      "sourceFreezeSha256": "92daae8364a94b91ef0a540698c8426ba2994e7191e93c1d5a342510bc17b6f0",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_approach.dae": {
+      "bytes": 5459,
+      "sha256": "576d5ff67d33bc6d4b77ded2e9628ef1f001b2706cd8f8eda610f9eb28a08446",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/plaza-candidate/build-plaza.py",
+      "sourceGeneratorSha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5",
+      "sourceFreezeSha256": "92daae8364a94b91ef0a540698c8426ba2994e7191e93c1d5a342510bc17b6f0",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arena.dae": {
+      "bytes": 3285444,
+      "sha256": "56036acfec2625d054db312690b7aa5b8549089e887e2ce9da5dd99fd6dc0e66",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/plaza-candidate/build-plaza.py",
+      "sourceGeneratorSha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5",
+      "sourceFreezeSha256": "92daae8364a94b91ef0a540698c8426ba2994e7191e93c1d5a342510bc17b6f0",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "presentation/plaza-candidate/mod/Meshes/veyra/plaza/veyra_plaza_arrival.dae": {
+      "bytes": 4028,
+      "sha256": "d324d2520099532e2556d994fba8265d79fd8b492b4219b0c54dc3d270d11aa7",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/plaza-candidate/build-plaza.py",
+      "sourceGeneratorSha256": "4443ffe023e419316e405ccdb773d600f775e21abe5bc49de4e5e0c8cd1ae0a5",
+      "sourceFreezeSha256": "92daae8364a94b91ef0a540698c8426ba2994e7191e93c1d5a342510bc17b6f0",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_GENERATED_BYTES_BOUND_TO_ROOT_APPROVED_SOURCE_UNIT"
+    },
+    "gameplay/townlife/mod/Textures/veyra_townlife/white.png": {
+      "bytes": 98,
+      "sha256": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5",
+      "kind": "PNG",
+      "license": "MIT",
+      "sourceGenerator": "gameplay/townlife/build-assets.py",
+      "sourceGeneratorSha256": "1837d060eb6ba98a25459758b6523892d089a3dd10dbc90ce3fae87bcec6925a",
+      "sourceFreezeSha256": "a59030e7d745e4fc797035682208c09f3b2bc73254cd88248191f63073f77144",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_GENERATED_RGBA_PNG_NATIVE_DECODE_AND_PANEL_OBSERVED"
+    },
+    "presentation/crown-candidate/mod/Veyra-Dense-Crown.esp": {
+      "bytes": 446,
+      "sha256": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665",
+      "kind": "ESP",
+      "license": "MIT",
+      "sourceGenerator": "presentation/crown-candidate/build-crown.py",
+      "sourceGeneratorSha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b",
+      "sourceFreezeSha256": "9957f308f9ee6220a0ad946c8395e70383b832faca8f9204dc40a293941bfe82",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/crown-candidate/mod/Meshes/veyra/veyra_swamp_crown_01.dae": {
+      "bytes": 6548329,
+      "sha256": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/crown-candidate/build-crown.py",
+      "sourceGeneratorSha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b",
+      "sourceFreezeSha256": "9957f308f9ee6220a0ad946c8395e70383b832faca8f9204dc40a293941bfe82",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/crown-candidate/mod/Textures/veyra/crown_leaf_01.dds": {
+      "bytes": 43832,
+      "sha256": "81b760ed106f75ba542f053e5a892082cf1d9f84604bf7fba711925c4b36283f",
+      "kind": "DDS",
+      "license": "MIT",
+      "sourceGenerator": "presentation/crown-candidate/build-crown.py",
+      "sourceGeneratorSha256": "60ab6ade224610cdead3761cef4f8426e95cc3fed112a42a042e3e14bfe86c3b",
+      "sourceFreezeSha256": "9957f308f9ee6220a0ad946c8395e70383b832faca8f9204dc40a293941bfe82",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/frontier-scenery-candidate/mod/LEVIATH-Frontier-Scenery.esp": {
+      "bytes": 6842,
+      "sha256": "7d1102dfd6f73967b9f3d31d5bf72eb2272ca6e0746836d74c984b1fa421812f",
+      "kind": "ESP",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-scenery-candidate/build-scenery.py",
+      "sourceGeneratorSha256": "fcf13dd7338b562f8c5dc0996046888aa580a73dd4018a75750a6b6bfc939159",
+      "sourceFreezeSha256": "b09220d3fc9e571fb814408fffba3e76db73ea4e8fcaff3dcdf923511feef566",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_grass_01.dae": {
+      "bytes": 60431,
+      "sha256": "7f966ea7b6ecb56d90857413df82c97b04029cd97ba1b7eb88d904e584f7a5e7",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-scenery-candidate/build-scenery.py",
+      "sourceGeneratorSha256": "fcf13dd7338b562f8c5dc0996046888aa580a73dd4018a75750a6b6bfc939159",
+      "sourceFreezeSha256": "b09220d3fc9e571fb814408fffba3e76db73ea4e8fcaff3dcdf923511feef566",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/frontier-scenery-candidate/mod/Meshes/veyra/frontier_scenery/veyra_frontier_stone_cluster_01.dae": {
+      "bytes": 139543,
+      "sha256": "a54ae771db1c7c44cd44269b0c2198e81922af58d6cfa780b5e33c502543f8b8",
+      "kind": "DAE",
+      "license": "MIT",
+      "sourceGenerator": "presentation/frontier-scenery-candidate/build-scenery.py",
+      "sourceGeneratorSha256": "fcf13dd7338b562f8c5dc0996046888aa580a73dd4018a75750a6b6bfc939159",
+      "sourceFreezeSha256": "b09220d3fc9e571fb814408fffba3e76db73ea4e8fcaff3dcdf923511feef566",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROC_GENERATED_FOREST_ROOT_APPROVED_UNIT"
+    },
+    "presentation/bark-materials/mod/Textures/veyra/swamp_bark.dds": {
+      "bytes": 699192,
+      "sha256": "76dabf30eb286fcd2cbb4f964aa45fcd2b4a63e53a4b2a611128828c20845e2d",
+      "kind": "DDS",
+      "license": "CC0-1.0",
+      "author": "Rob Tuytel",
+      "asset": "Bark Brown02",
+      "sourceUrl": "https://polyhaven.com/a/bark_brown_02",
+      "licenseSource": "https://polyhaven.com/license",
+      "licenseFile": "presentation/bark-materials/CC0-1.0.txt",
+      "licenseSha256": "8bdc7b952ae0a12e08ccf9463a4750f7288f4d05bf7f2124cc5805ecaabdb01c",
+      "provenanceFile": "presentation/bark-materials/SOURCE_BINDING.json",
+      "originalGameAssetBytes": 0,
+      "provenance": "EXISTING_SOURCE_VERIFIED_CC0_TEXTURE_RESIZE_REENCODE_DERIVATIVE_NO_GAME_BYTES",
+      "provenanceSha256": "3976f8feb0e302c3ea7e65c044185acfa5453888134c27e8eb77cad30463dd17"
+    },
+    "presentation/bark-materials/mod/Textures/veyra/swamp_bark_n.dds": {
+      "bytes": 1398256,
+      "sha256": "33c12d7cb40671721fc22861fb45d1eb9ab8c7ab9beb8d4f659b3eedf139b722",
+      "kind": "DDS",
+      "license": "CC0-1.0",
+      "author": "Rob Tuytel",
+      "asset": "Bark Brown02",
+      "sourceUrl": "https://polyhaven.com/a/bark_brown_02",
+      "licenseSource": "https://polyhaven.com/license",
+      "licenseFile": "presentation/bark-materials/CC0-1.0.txt",
+      "licenseSha256": "8bdc7b952ae0a12e08ccf9463a4750f7288f4d05bf7f2124cc5805ecaabdb01c",
+      "provenanceFile": "presentation/bark-materials/SOURCE_BINDING.json",
+      "originalGameAssetBytes": 0,
+      "provenance": "EXISTING_SOURCE_VERIFIED_CC0_TEXTURE_RESIZE_REENCODE_DERIVATIVE_NO_GAME_BYTES",
+      "provenanceSha256": "3976f8feb0e302c3ea7e65c044185acfa5453888134c27e8eb77cad30463dd17"
+    },
+    "presentation/hud014/mod/Textures/veyra/white.png": {
+      "bytes": 98,
+      "sha256": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5",
+      "kind": "PNG",
+      "license": "MIT",
+      "sourceGenerator": "presentation/hud014/build-assets.py",
+      "sourceGeneratorSha256": "acc242e13cc9d476fadd894662a164910918633ab38c22c31b5827ae8830f8b2",
+      "sourceFreezeSha256": "289c79b77353c08898322637ca05804f99b674c266ccb9f3c6c47344a018a18c",
+      "originalGameAssetBytes": 0,
+      "provenance": "OWN_PROCEDURAL_PNG_NATIVE_ACTIVE_VFS_STAGE_AND_SOURCE_BINDING"
+    },
+    "presentation/spatial-audio/mod/Sound/veyra/courier_bell_mono.wav": {
+      "license": "CC0-1.0",
+      "originalGameAssetBytes": 0,
+      "sha256": "faa557bc6e4cd2c5c3c3b22ba8e78e9c7af35e7ab11e8cbaf5607f6ce177479c",
+      "bytes": 130630,
+      "sourceGenerator": "presentation/spatial-audio/build-audio.py",
+      "sourceGeneratorSha256": "8b1d9f41c8460dbee0595349785c19a9b60da9c99ddc3032f9278fe072dfdb2a",
+      "licenseFile": "presentation/spatial-audio/KENNEY-LICENSE.txt",
+      "licenseSha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db",
+      "provenanceFile": "presentation/spatial-audio/ASSET_RECEIPT.json",
+      "provenanceSha256": "80efe9f5be790bed0109d9d40693f08c342195480e905c0f25a34d6d4090343e",
+      "completeLegalTextFile": "presentation/bark-materials/CC0-1.0.txt",
+      "licenseVerificationUrl": "https://kenney.nl/assets/impact-sounds",
+      "nativePlaybackBinding": "docs/AUDIO_NATIVE.json",
+      "humanAudition": "NOT_PERFORMED"
+    }
+  },
+  "bethesdaAssetBytes": 0,
+  "downloadedAssetBytes": 2097448,
+  "nativeIntegration": "INDIVIDUAL_UNITS_BOUND_NEW_PUBLIC_PROVISIONED_PROFILE_PENDING",
+  "authoredAssets": {
+    "gameplay/construction/mod/Meshes/veyra/construction/plantbed.dae": {
+      "bytes": 16095,
+      "sha256": "9fc6217a7f2c7e24f630389fad7105387ca3cf9c682af9e38d1f9b7b03f7884a",
+      "license": "MIT",
+      "kind": "DAE",
+      "originalGameAssetBytes": 0,
+      "sourceFreezeSha256": "13517e2b581fec7cc8a171107530258f7a486f14f6d63fdc1eb5999bbbe02637",
+      "provenance": "OWN_DIRECTLY_AUTHORED_GEOMETRY_144_TRIANGLES_NO_IMPORTED_ASSET_BYTES"
+    }
+  }
+}

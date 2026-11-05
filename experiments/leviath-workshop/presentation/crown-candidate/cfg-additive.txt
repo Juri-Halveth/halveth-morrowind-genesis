@@ -1,0 +1,4 @@
+# Requires unchanged bark DDS dependencies from the existing owned vegetation mod.
+data="<absolute-path-to-presentation-candidate>/crown-candidate/mod"
+content=Veyra-Dense-Crown.esp
+# New STAT only; root fixture places it at actual terrain height, with no +500.

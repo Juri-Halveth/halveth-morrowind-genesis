@@ -1,0 +1,113 @@
+{
+  "schema": "veyra.workshop.spatial-audio.native-scope.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0",
+  "luaApi": 129,
+  "audioVersion": "0.1.0",
+  "courierVersion": "0.2.3",
+  "hudVersion": "0.1.3",
+  "startedAtUtc": "2026-10-03T02:53:11.975592+00:00",
+  "finishedAtUtc": "2026-10-03T02:53:57.046052+00:00",
+  "exitCode": 0,
+  "complete": true,
+  "timedOut": false,
+  "loggedPassLines": 22,
+  "distinctAssertionNames": 11,
+  "assertionOccurrences": {
+    "REAL_DISABLED_DEPOT": 1,
+    "REAL_ACTIVE_ARRIVED_COURIER": 1,
+    "ENGINE_SOUND_FILE_PLAYING": 1,
+    "SOUND_BOUND_TO_SAME_COURIER": 1,
+    "SINGLE_SOUND_REQUEST": 1,
+    "ARRIVED_FOOTER_VISIBLE": 6,
+    "HUD_VISIBLE_WITH_COURIER": 7,
+    "PLAYING_WAS_OBSERVED": 1,
+    "NO_REPEAT_REQUEST_AFTER_PLAYBACK": 1,
+    "REAL_ITEMS_CLAIMED": 1,
+    "CLAIMED_FOOTER_REMOVED": 1
+  },
+  "coverage": [
+    "one synthetic parcel with two actual depot items",
+    "same active ARRIVED courier and single sound request",
+    "engine isSoundFilePlaying result during the cue",
+    "no repeated request after playback",
+    "arrival footer visible and removed after actual claim",
+    "HUD visible during seven repeated polls"
+  ],
+  "repeatedPollsAreIndependentChecks": false,
+  "moduleHashes": {
+    "presentation/mod/scripts/veyra/hud.lua": "14846d6e1bef8f44c606c4fce548fa234ae06344c7d9985d5cec0b60d8564008",
+    "presentation/mod/Veyra-Presentation.omwscripts": "fe8ad93b501e9ec10882c802bbfbb39d6373e61aac92cddb123568ef596fd7d9",
+    "presentation/spatial-audio/mod/scripts/veyra/spatial_audio.lua": "ae4bb630075f2364249d57295e66488628fd2225d6460e75bcea2dd43691b4d6",
+    "presentation/spatial-audio/mod/Veyra-Spatial-Audio.omwscripts": "389257d18d3fd643d6cd4433e1d356a8cedc69d82a8fad622dc4318f6a8ca1b6",
+    "gameplay/mod/veyra-courier.omwscripts": "1b3bbefd3d6619347203fc324eaf12fc71256b064a138fffbb805524889ee8ad",
+    "gameplay/mod/veyra-fieldwork.omwscripts": "4b3459af8d2471673896756d8200ad604719d64ee7b50163a2982fee7c9b34d0",
+    "gameplay/mod/scripts/veyra_courier/config.lua": "df082e225658bf65f13403f2f90a5b09de90834683046f9a657cdbbdfe80c4b6",
+    "gameplay/mod/scripts/veyra_courier/global.lua": "16e8bd6fe003d4047f8c4c0eee462ddbf851d2bb9507403e4d5f54c682ebf904",
+    "gameplay/mod/scripts/veyra_courier/player.lua": "bc8d59c659b8717e1127e72d928677408b5709c0d14b2fff48b57cde60aebc25",
+    "gameplay/mod/scripts/veyra_courier/routes.lua": "3805e1634c85204b431cb860cf54ccc92acabcca31b6fefb137d8967b5e83545",
+    "gameplay/mod/scripts/veyra_fieldwork/config.lua": "c936bf51021de3aad7a3e83a3e0a7ab8b7c7a0e9b29bc08870b1fbe89450febf",
+    "gameplay/mod/scripts/veyra_fieldwork/global.lua": "c13ff36581019b6a8922e704eae106f20a7c3ae2854d96238f194f3d14a8722f",
+    "gameplay/mod/scripts/veyra_fieldwork/player.lua": "66698d3d32760b400542f85d1e6a09e2055a658073addd31141e124c4525e9aa",
+    "presentation/spatial-audio/build-audio.py": "8b1d9f41c8460dbee0595349785c19a9b60da9c99ddc3032f9278fe072dfdb2a"
+  },
+  "localFixtureHashes": {
+    "fixture/global.lua": "3dcd8f972e2939506794e9d925c4cd38be656c8421e6c895579d548d49f28cb4",
+    "fixture/player.lua": "38f37063cd8a699ac06d97f5511fe97c422dcc66f76a45baf484c8d79886532a",
+    "fixture/menu.lua": "9b0a5fb634595eda57f3c4b0608cb4f1403a7367236eace4de7d5784c7dde214"
+  },
+  "generatedInputs": {
+    "Sound/veyra/courier_bell_mono.wav": "faa557bc6e4cd2c5c3c3b22ba8e78e9c7af35e7ab11e8cbaf5607f6ce177479c",
+    "Textures/veyra/white.png": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5"
+  },
+  "localRawReceiptDigest": "fbe6f5253409aa7498cb9102cc3532de517f5ec53a2f7b7909aadfffd4acc390",
+  "generatorOutputBridge": {
+    "status": "EXACT_LOCAL_BUILD_OUTPUT_AND_NATIVE_INPUT_DIGEST_MATCH",
+    "localBuildReceiptDigest": "80efe9f5be790bed0109d9d40693f08c342195480e905c0f25a34d6d4090343e",
+    "generatorSha256": "8b1d9f41c8460dbee0595349785c19a9b60da9c99ddc3032f9278fe072dfdb2a",
+    "source": {
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "archiveSha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "member": "Audio/impactBell_heavy_000.ogg",
+      "memberSha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+      "licenseMemberSha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db"
+    },
+    "outputFormat": {
+      "channels": 1,
+      "sampleWidthBytes": 2,
+      "sampleRateHz": 44100,
+      "frames": 65276,
+      "durationSeconds": 1.4801814058956917
+    }
+  },
+  "originalSourceHashesUnchanged": true,
+  "originalSourceFileCount": 14,
+  "allFixtureAndModuleDigestsUnchanged": true,
+  "networkEffects": 0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "nativeReceiptVisualDeclaration": "PENDING_IMAGE_REVIEW",
+  "subsequentRootImageReview": {
+    "sourceRole": "COORDINATING_AGENT_IMAGE_REVIEW",
+    "independentUserApproval": false,
+    "imagesReferenced": [
+      "window-3"
+    ],
+    "observedScope": [
+      "readable ARRIVED footer",
+      "HUD health 40/40"
+    ]
+  },
+  "humanAudition": "PENDING",
+  "provenance": "SAME_LOCAL_ENGINE_AND_OWN_AUDIO_FIXTURE_CORRELATED_OBSERVATIONS",
+  "unverified": [
+    "human audible output and positional listening quality",
+    "native saved-arrival audio deduplication across reload",
+    "arbitrary audio devices, mixes and screen sizes",
+    "long-run sound behaviour and music replacement"
+  ]
+}

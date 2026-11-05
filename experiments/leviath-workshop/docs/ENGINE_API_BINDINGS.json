@@ -1,0 +1,17 @@
+{
+  "schema": "veyra.workshop.engine-api-inputs.v1",
+  "dataClass": "PUBLIC",
+  "engine": "OpenMW0.51.0/API129",
+  "resourcesFiles": {
+    "lua_api/openmw/core.lua": "94254b91c7c690c8e51c670a2097a26585dd817ccd8d693405755313619b562b",
+    "lua_api/openmw/world.lua": "9988e0521fe9413c182f14b11e415c892dc2cb21c09d8654b3fb507b806846df",
+    "lua_api/openmw/types.lua": "6606d04dc1ed8ab353e3cc78d5c019865e8be9f71fcab870cbc7b0e80f8b1adf",
+    "lua_api/openmw/nearby.lua": "1a9e9a78eb17ee516f23c711cfe287d5848660a078d84b17cb619a3075eb20ef",
+    "lua_api/openmw/self.lua": "ca74b801b380341316d067916f86aa2c895d20ec06d7ad74690aaa217ed62c7d",
+    "lua_api/openmw/ui.lua": "6ac316287110594ec75c76a1fc43df4345ab27748a4109c73bde3d8cee76decc",
+    "lua_api/openmw/util.lua": "f3cf90d5b5872191bf12935eaf42517e382d95e006fab4dcab272aae8b53aad9",
+    "vfs/scripts/omw/ai.lua": "eae167587950ae179d12729d5638d4a48db55247140347af870b155d55e604f6",
+    "vfs/scripts/omw/ui.lua": "5048a222b77477e70be031fefcfd43a5be9186c3d68e3e314e1b0cb18dbf3a45"
+  },
+  "scope": "Read-only byte-compatible API/interface inputs; no engine-source files redistributed"
+}
