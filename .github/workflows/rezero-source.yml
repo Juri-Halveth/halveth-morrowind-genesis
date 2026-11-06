@@ -1,0 +1,32 @@
+name: REZERO source package
+on:
+  push:
+    paths:
+      - 'experiments/rezero-native/**'
+      - 'experiments/entity-life/**'
+      - '.github/workflows/rezero-source.yml'
+  pull_request:
+    paths:
+      - 'experiments/rezero-native/**'
+      - 'experiments/entity-life/**'
+      - '.github/workflows/rezero-source.yml'
+jobs:
+  source-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate own assets and source formats
+        run: python -B experiments/rezero-native/0.1.0/tools/check-source.py
+      - name: Validate Bash entry
+        run: |
+          bash -n experiments/rezero-native/0.1.0/REZERO.sh
+          bash experiments/rezero-native/0.1.0/REZERO.sh check
+      - name: Validate entity addresses and declared story propagation
+        run: |
+          bash -n experiments/entity-life/0.1.0/ENTITY_LIFE.sh
+          bash -n experiments/entity-life/0.1.0/FRAGMENT_UNIVERSE.sh
+          python -B -m unittest discover -s experiments/entity-life/0.1.0 -p 'test_*.py' -v
+          bash experiments/entity-life/0.1.0/FRAGMENT_UNIVERSE.sh

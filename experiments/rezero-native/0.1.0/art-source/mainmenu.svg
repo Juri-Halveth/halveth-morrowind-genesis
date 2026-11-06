@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="1152" viewBox="0 0 2048 1152">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#0b1119"/><stop offset=".5" stop-color="#173239"/><stop offset="1" stop-color="#071015"/></linearGradient>
+<radialGradient id="horizon"><stop stop-color="#be9d71" stop-opacity=".38"/><stop offset="1" stop-color="#303e43" stop-opacity="0"/></radialGradient>
+<linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#14292f"/><stop offset="1" stop-color="#050b10"/></linearGradient></defs>
+<rect width="2048" height="1152" fill="url(#sky)"/><ellipse cx="1320" cy="530" rx="970" ry="620" fill="url(#horizon)"/>
+<circle cx="1440" cy="180" r="51" fill="#d0c2a7" opacity=".20"/><circle cx="1458" cy="165" r="48" fill="#183137"/>
+<path d="M0 622L124 551 232 582 377 487 522 529 669 382 823 472 967 322 1050 438 1160 378 1300 505 1482 360 1682 505 1820 416 2048 564V870H0Z" fill="#17272d"/>
+<path d="M0 680L171 597 323 638 532 570 715 673 885 615 1017 687 1263 597 1452 658 1617 589 1796 652 2048 576V881H0Z" fill="#0f1d24"/>
+<path d="M0 768Q454 716 913 766T2048 747V1152H0Z" fill="url(#water)"/>
+<g stroke="#718b85" stroke-width="1" opacity=".13"><path d="M230 791H941M718 805H1648M514 840H1498M811 879H1560M209 921H918M1240 924H1980"/></g>
+<path d="M0 841L106 769 175 864 259 817 327 948 425 893 513 1011 619 1050 803 1152H0Z" fill="#050b0f"/>
+<path d="M2048 761L1941 736 1833 812 1781 790 1694 957 1666 1152H2048Z" fill="#050b0f"/>
+<g fill="none" stroke="#caa876"><path d="M868 214L1024 91 1180 214 1024 337Z" stroke-width="2" opacity=".38"/><path d="M928 214L1024 139 1120 214 1024 288Z" stroke-width="1" opacity=".7"/></g>
+<text x="1024" y="421" text-anchor="middle" fill="#e4dac5" font-family="Georgia,serif" font-size="104" letter-spacing="17">MORROWIND</text>
+<text x="1024" y="471" text-anchor="middle" fill="#a9b7b2" font-family="Segoe UI,sans-serif" font-size="22" letter-spacing="7">ASCHE · WASSER · STERNENLICHT</text>
+<path d="M744 506H1304" stroke="#b99363" opacity=".6"/>
+</svg>
