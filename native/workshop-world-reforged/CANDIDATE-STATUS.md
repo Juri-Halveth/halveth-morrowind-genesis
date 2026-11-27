@@ -1,4 +1,4 @@
-# World Reforged EXE Candidate 0.3.1 — Status
+# World Reforged EXE Candidate 0.4.1 — Status
 
 `CANDIDATE`, source branch only. This directory builds a native Windows
 WinForms/OpenMW workshop executable; it is not the browser learning world.

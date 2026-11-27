@@ -12,8 +12,10 @@ namespace Halveth.Morrowind {
   static void Rec(BinaryWriter w,string tag,byte[] data){w.Write(Encoding.ASCII.GetBytes(tag));w.Write((uint)data.Length);w.Write(0);w.Write(0);w.Write(data);}
   static void MakeEsm(string file,params string[] masters){using(var f=File.Create(file))using(var w=new BinaryWriter(f)){using(var m=new MemoryStream())using(var s=new BinaryWriter(m)){Sub(s,"HEDR",new byte[300]);foreach(string master in masters){Sub(s,"MAST",Encoding.GetEncoding(1252).GetBytes(master+"\0"));Sub(s,"DATA",new byte[8]);}Rec(w,"TES3",m.ToArray());}foreach(string t in new[]{"CELL","NPC_","LAND","GMST"})Rec(w,t,new byte[0]);}}
   static void MakeBsa(string file){byte[] name=Encoding.ASCII.GetBytes("sound/test.wav\0");using(var w=new BinaryWriter(File.Create(file))){w.Write(0x100u);w.Write((uint)(12+name.Length));w.Write(1u);w.Write(4u);w.Write(0u);w.Write(0u);w.Write(name);w.Write(0UL);w.Write(new byte[]{1,2,3,4});}}
-  static int Main(string[] args){string output=args[0];string temp=Path.Combine(Path.GetTempPath(),"hmw-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(temp);
+  static int Main(string[] args){string output=args[0];string temp=args[1];
    try{
+    Directory.CreateDirectory(temp);
+    Check(temp.Length>260,"Synthetic Workshop profile uses a long Windows path");
     Check(Util.Arg("one two")=="\"one two\"","Process arguments retain spaces");
     Check(Util.Arg("C:\\tail\\")=="\"C:\\tail\\\\\"","Trailing slash quoting is exact");
     Check(Util.CfgPath("C:\\x & y")=="\"C:/x && y\"","OpenMW ampersand escaping");

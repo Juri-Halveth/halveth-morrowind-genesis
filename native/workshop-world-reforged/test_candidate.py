@@ -10,9 +10,9 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import json
 from pathlib import Path
-import shutil
 import struct
 import subprocess
+import tempfile
 
 from build_candidate import ROOT, compile_cs, sha256
 
@@ -28,16 +28,18 @@ def png_size(path: Path) -> tuple[int, int]:
 
 def main() -> int:
     sandbox_parent = (ROOT / ".local").resolve()
-    sandbox = (sandbox_parent / "candidate-test").resolve()
-    if sandbox.parent != sandbox_parent:
-        raise RuntimeError("Der Test-Sandboxpfad liegt außerhalb des vorgesehenen .local-Ordners.")
-    if sandbox.exists():
-        shutil.rmtree(sandbox)
-    sandbox.mkdir(parents=True)
+    sandbox_parent.mkdir(parents=True, exist_ok=True)
+    sandbox = Path(tempfile.mkdtemp(prefix="candidate-test-", dir=sandbox_parent))
     core_tests = sandbox / "CoreTests.exe"
     core_receipt = sandbox / "native-core-tests.json"
     compile_cs(core_tests, ["Core.cs", "CoreTests.cs"], "Halveth.Morrowind.CoreTests")
-    subprocess.run([str(core_tests), str(core_receipt)], check=True)
+    # Local profile names, overlay paths and staging directories can exceed MAX_PATH.
+    # All Core fixtures live under this fresh directory and are removed together.
+    with tempfile.TemporaryDirectory(dir=sandbox) as scratch:
+        fixture_root = Path(scratch)
+        while len(str(fixture_root)) <= 260:
+            fixture_root /= "long-workshop-profile"
+        subprocess.run([str(core_tests), str(core_receipt), str(fixture_root)], check=True)
     result = json.loads(core_receipt.read_text(encoding="utf-8"))
     if result.get("status") != "PASS":
         raise RuntimeError("Die synthetischen Core-Tests haben keinen PASS-Status geliefert.")

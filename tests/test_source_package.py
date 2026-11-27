@@ -60,6 +60,16 @@ class SourcePackageTests(unittest.TestCase):
         for name in owned:
             self.assertEqual(packaged[name], name.encode('utf-8'))
 
+    def test_genesis_release_keeps_its_translations_and_own_native_entry(self):
+        included = {'README.en.md', 'README.ru.md', 'native/GenesisEntry.cs', 'tests/multiskill_practice.lua'}
+        separate = {'native/workshop-world-reforged/Core.cs', 'native/workshop-world-reforged/LICENSE.txt'}
+        for name in included | separate:
+            self.put(name, name.encode('utf-8'))
+        contents = release.collect_files()
+        for name in included:
+            self.assertEqual(contents[name], name.encode('utf-8'))
+        self.assertTrue(separate.isdisjoint(contents))
+
     def test_owned_data_code_and_optional_receipts_are_included(self):
         allowed = {
             'project_knowledge.py',
