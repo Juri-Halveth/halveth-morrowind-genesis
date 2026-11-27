@@ -1,6 +1,8 @@
 [Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 
-# HALVETH Morrowind Genesis
+# Morrowind Genesis – local dialogue and tools for OpenMW
+
+**[Read the OpenMW setup and requirements](docs/SETUP.md)** to start with your own licensed Morrowind installation. [Public releases](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) provide the separately versioned packages; Bethesda game data is not included.
 
 **Concise project guide · EN / RU**
 
@@ -22,7 +24,5 @@ This manually edited guide summarizes the audited source. The original technical
 - [Genesis Zero](genesis-zero/README.md)
 
 ## Rights and scope
-
-HALVETH work certificates mentioned in the original are private project documentation, not institutional personal qualifications or an ISTQB certification.
 
 Use the original rights and licence notices for the relevant files and versions. This guide grants no additional licence.
