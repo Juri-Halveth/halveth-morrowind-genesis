@@ -4,6 +4,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from server import Companion
 
@@ -23,6 +24,19 @@ class CompanionTests(unittest.TestCase):
         self.app.store.remember('other','user','Privates anderes Gespräch')
         second=Companion(Path(self.temp.name),inbox=Path(self.temp.name)/'inbox2.json')
         self.assertEqual([x['content'] for x in second.store.history('jarvis')],['Hallo'])
+
+    def test_game_reply_carries_backend_mode_for_the_current_session(self):
+        request = {'sessionId':'world-A','requestId':'chat-1','text':'Hallo'}
+        for mode in ('MODEL_LIVE','MODEL_UNAVAILABLE','OFFLINE'):
+            with self.subTest(mode=mode), patch.object(self.app,'chat',return_value={'reply':'Text','mode':mode}):
+                self.app.game_chat(request)
+                reply = self.app.reply_queue.pop()
+                self.assertEqual((reply['responseMode'],reply['requestId'],reply['reply']), (mode,'chat-1','Text'))
+                self.app.game_chat({**request,'sessionId':'old'})
+                self.assertFalse(self.app.reply_queue)
+        with patch.object(self.app,'chat',side_effect=ValueError('test fixture')):
+            self.app.game_chat(request)
+        self.assertEqual(self.app.reply_queue.pop()['responseMode'],'ERROR')
 
     def test_action_waits_for_game_receipt(self):
         action=self.app.offer('give_gold',{'amount':250},'250 Gold')
