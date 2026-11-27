@@ -1,0 +1,67 @@
+{
+  "schema": "veyra.workshop.construction-native.v1",
+  "dataClass": "PUBLIC",
+  "status": "BOUNDED_NATIVE_PASS",
+  "engine": "OpenMW 0.51.0 / API129",
+  "sourceVersion": "0.1.3",
+  "saveSchema": 2,
+  "moduleHashes": {
+    "gameplay/construction/mod/veyra-construction.omwscripts": "bd5ae72b7e21ef15ca8b6c6f1bdfd5d48da7878c8ea54a2c57b115fc73105839",
+    "gameplay/construction/mod/scripts/veyra_construction/config.lua": "e4836b8195ea78268ccc36097aaca6b0b21d550896fe3890efb3d4b624568655",
+    "gameplay/construction/mod/scripts/veyra_construction/global.lua": "eb9ba5d34d8de902fea74861b5ebeb84146a99e7d2d18d4fb1bf65bee85dcab5",
+    "gameplay/construction/mod/scripts/veyra_construction/player.lua": "881a648f416f6b903cf49db29c0f4adec28ba2781a771c6853694570790d6ebe",
+    "gameplay/construction/mod/Meshes/veyra/construction/plantbed.dae": "9fc6217a7f2c7e24f630389fad7105387ca3cf9c682af9e38d1f9b7b03f7884a"
+  },
+  "sourceFreezeSha256": "13517e2b581fec7cc8a171107530258f7a486f14f6d63fdc1eb5999bbbe02637",
+  "nativeResults": [
+    {
+      "mode": "probe",
+      "receiptSha256": "2657b4ec6413dfe9b3ca73e4b34e1406bc6ee4a7fc8b64ced079f04a63a3c5eb",
+      "passCheckCount": 24,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "reload-growing",
+      "receiptSha256": "b6f8bdb559b6b4dbd74cc5a80ac5b95d5adf3d869e0449234c4dab7a9ee8020e",
+      "passCheckCount": 5,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "reload-dismantled",
+      "receiptSha256": "00c38e7aa67c0b8ce2c623bb06fad3fe5407cfac99dfed45eb9ffa404d7645aa",
+      "passCheckCount": 4,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "cap-probe",
+      "receiptSha256": "5bc2eed29fb5004e481722756e5f9993e915c42acb7af56f332b22be1c23c226",
+      "passCheckCount": 68,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    },
+    {
+      "mode": "reload-cap",
+      "receiptSha256": "e2cd750ee394104edfe5af603830b2407d608e904f491d1997d4c5de91f674e2",
+      "passCheckCount": 5,
+      "exitCode": 0,
+      "sourceMatchesFreeze": true,
+      "originalSourceFileCount": 14,
+      "originalSourceHashesUnchanged": true
+    }
+  ],
+  "overlayScope": "Original frozen unit receipts; player-overlay hooks separately bound in INTEGRATION_NATIVE.json",
+  "physicalKeyboardActivation": "NOT_PROVEN",
+  "networkEffects": 0,
+  "claimCeiling": "OWN_FRONTIER_ONE_PLANTBED_TYPE_REAL_MATERIALS_GROWTH_HARVEST_DISMANTLE_AND_SAVELOAD"
+}

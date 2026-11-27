@@ -1,0 +1,4 @@
+# Requires frozen Frontier and own texture candidate's stone DDS.
+# Append after Frontier and texture data directories in a separate profile.
+data="<absolute-path-to-presentation-candidate>/plaza-candidate/mod"
+content=LEVIATH-Plaza.esp

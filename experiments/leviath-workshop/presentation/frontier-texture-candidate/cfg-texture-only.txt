@@ -1,0 +1,3 @@
+# Append after frozen Frontier's data directory in a separate native candidate.
+data="<absolute-path-to-presentation-candidate>/frontier-texture-candidate/mod"
+# No content line: only three already owned Frontier textures are replaced.

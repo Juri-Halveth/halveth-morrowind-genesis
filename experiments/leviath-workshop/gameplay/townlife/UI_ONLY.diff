@@ -1,0 +1,30 @@
+--- presentation0.1.1/player.lua
++++ presentation0.1.2/player.lua
+@@ -30,7 +30,7 @@
+     print('VEYRA_TOWN|kind=PREFLIGHT|roles=3|sourceDestinationsProjected=true')
+ end
+ local layer='VeyraTownlife'
+-local presentationVersion='0.1.1'
++local presentationVersion='0.1.2'
+ local cached={created=false,roles={},phase='CONNECTING'}
+ local element,layout,labels,screenX,screenY,lastMode,lastVisible
+ local elapsed,lastRequest=1,-100
+@@ -74,8 +74,7 @@
+         labels[role.id]=lines;for _,line in ipairs(lines)do content[#content+1]=line end
+     end
+     layout={name='VeyraTownPanel',type=ui.TYPE.Widget,layer=layer,
+-        props={relativePosition=util.vector2(1,0),anchor=util.vector2(1,0),
+-            position=util.vector2(-20,28),size=util.vector2(width,height),visible=false},content=ui.content(content)}
++        props={position=util.vector2(460,28),size=util.vector2(width,height),visible=false},content=ui.content(content)}
+     element=ui.create(layout)
+ end
+ local function refresh()
+@@ -119,7 +118,7 @@
+     local index=ui.layers.indexOf(layer)
+     local layerSize=index and ui.layers[index].size
+     return{visible=layout and layout.props.visible or false,roles=roles,
+-            presentationVersion=presentationVersion,panelAnchor='RIGHT_PARENT',
++            presentationVersion=presentationVersion,panelAnchor='FIXED_ADJACENT',
+             layerWidth=layerSize and layerSize.x,layerHeight=layerSize and layerSize.y,
+             gameDayIndex=cached.gameDayIndex,lastReadAtGameTime=cached.lastReadAtGameTime,
+             displayedTitle=labels and labels.title.props.text or nil,screenX=screenX,screenY=screenY,

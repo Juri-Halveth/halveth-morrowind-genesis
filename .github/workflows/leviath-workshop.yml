@@ -1,0 +1,77 @@
+name: LEVIATH workshop source and owned asset checks
+on:
+  push:
+    paths:
+      - 'experiments/leviath-workshop/**'
+      - '.github/workflows/leviath-workshop.yml'
+  pull_request:
+    paths:
+      - 'experiments/leviath-workshop/**'
+      - '.github/workflows/leviath-workshop.yml'
+permissions:
+  contents: read
+jobs:
+  rule-and-bash-checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: experiments/leviath-workshop
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Bash syntax
+        run: bash -n scripts/workshop.sh scripts/provision.sh scripts/provision-world.sh scripts/fetch-assets.sh scripts/check-lua.sh scripts/check-world-lua.sh tools/essences.sh tests/check-essences.sh presentation/CHECK_HUD.sh presentation/spatial-audio/CHECK_AUDIO.sh
+      - name: Delivery rule model
+        run: bash scripts/workshop.sh check
+      - name: Original preservation, provision closure and publication boundaries
+        run: |
+          if [[ "$RUNNER_OS" == Windows ]]; then
+            export WORKSHOP_BASH="$(cygpath -w "$(command -v bash)")"
+          fi
+          python -m unittest discover -s tests -v
+      - name: Bounded temporary work and byte snapshots
+        run: bash tests/check-essences.sh
+      - name: Procedural own PNG pixels and CRCs
+        run: |
+          python presentation/build-assets.py
+          python presentation/check-assets.py
+          python presentation/hud014/build-assets.py
+          python presentation/hud014/check-assets.py
+      - name: Exact current own-source and separately licensed asset allowlist
+        run: python scripts/package-world.py
+      - name: Lua5.1 syntax and declared API models
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y lua5.1
+          VEYRA_TEST_LUA=lua5.1 bash scripts/check-world-lua.sh
+          VEYRA_TEST_LUA=lua5.1 bash presentation/CHECK_HUD.sh
+          VEYRA_TEST_LUA=lua5.1 bash presentation/spatial-audio/CHECK_AUDIO.sh
+          lua5.1 gameplay/townlife/check-townlife.lua gameplay/townlife
+          lua5.1 presentation/hud014/check-hud-label.lua presentation/hud014/mod/scripts/veyra/hud.lua
+      - name: Build exact own-source and selected owned asset archive after checks
+        if: runner.os == 'Linux'
+        run: |
+          python scripts/package-world.py --archive "$RUNNER_TEMP/leviath-workshop-own-source-assets.zip" > "$RUNNER_TEMP/SOURCE_MANIFEST.json"
+          cd "$RUNNER_TEMP"
+          sha256sum leviath-workshop-own-source-assets.zip SOURCE_MANIFEST.json > SOURCE_MANIFEST.sha256
+      - name: Retain own-source/asset ZIP and byte receipt
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: leviath-workshop-own-source-assets
+          path: |
+            ${{ runner.temp }}/leviath-workshop-own-source-assets.zip
+            ${{ runner.temp }}/SOURCE_MANIFEST.json
+            ${{ runner.temp }}/SOURCE_MANIFEST.sha256
+          if-no-files-found: error
+          retention-days: 14

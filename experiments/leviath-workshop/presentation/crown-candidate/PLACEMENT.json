@@ -1,0 +1,17 @@
+{
+  "schema": "veyra.dense-crown-placement.v1",
+  "version": "0.1.0",
+  "recordId": "veyra_swamp_crown_01",
+  "model": "veyra/veyra_swamp_crown_01.dae",
+  "plugin": "Veyra-Dense-Crown.esp",
+  "pluginSha256": "e6aebdbcd627357cbc5fec6a2e4bc0b7d2ca90da7fd5cde9af257dd0dd1f7665",
+  "modelSha256": "8fb613ab60740892f33c4094f817a45098e1fc9d12c9c873b5ba9b596a51c683",
+  "modelOriginLocalZ": 0,
+  "suggestedWorldOrigin": "ACTUAL_TERRAIN_HEIGHT",
+  "tree500OffsetRequired": false,
+  "nominalRootCentreDepth": 64,
+  "actualGeometryMinimumLocalZ": -67.04778298240511,
+  "nativePlacement": "PENDING_ROOT_SPAWN",
+  "classOverrides": 0,
+  "cellReferences": 0
+}
