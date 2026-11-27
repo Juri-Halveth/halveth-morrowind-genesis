@@ -17,7 +17,7 @@ ROOT_FILES={'.gitignore','.gitattributes','README.md','README.en.md','README.ru.
             'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','START.cmd'}
 SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','installer','.github','LICENSES'}
 EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
-                  'native/GenesisEntry.cs','tests/multiskill_practice.lua',
+                  'native/GenesisEntry.cs','tests/multiskill_practice.lua','tests/game_reply.lua',
                   'docs/elder-scrolls-portfolio/SOURCE-SNAPSHOT.json','docs/elder-scrolls-portfolio/index.html',
                   'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py',
                   'installer/README.md','installer/openmw-0.51.0-runtime-files.txt',

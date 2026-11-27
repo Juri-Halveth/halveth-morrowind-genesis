@@ -21,6 +21,10 @@ local inputText,transcript='','HALVETH ist da. F8 oeffnet dein Begleiterfenster.
 local dialogueTarget,lastBook,hasAddedMode=nil,nil,false
 local entityMode='jarvis'
 local pendingChat=nil
+local replyLabels={
+    MODEL_LIVE='Lokales Modell', OFFLINE='Offline-Hinweis',
+    MODEL_UNAVAILABLE='Modell nicht erreichbar', ERROR='Verarbeitungsfehler',
+}
 
 local function companionOffline()
     local ok,status=pcall(function()
@@ -232,10 +236,11 @@ local function poll()
     if type(data.reply)=='string' and #data.reply<=24000 then
         if not data.requestId or (pendingChat and data.requestId==pendingChat.id) then
             local speaker=(type(data.speaker)=='string' and #data.speaker<=160) and data.speaker or 'HALVETH'
-            append(speaker..': '..data.reply)
+            local label=replyLabels[data.responseMode]
+            append(speaker..(label and ' · '..label or '')..': '..data.reply)
             pendingChat=nil
             local receipt={type='reply_received',sessionId=sessionId,requestId=data.requestId,
-                speaker=speaker,reply=data.reply,uiOpen=window~=nil}
+                speaker=speaker,reply=data.reply,uiOpen=window~=nil,responseMode=label and data.responseMode or nil}
             C.emit(receipt)
             self:sendEvent('HALVETH_ReplyReceived',receipt)
         end
