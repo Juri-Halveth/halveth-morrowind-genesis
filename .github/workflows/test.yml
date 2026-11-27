@@ -19,6 +19,9 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Unit tests without game or model
         run: python -m unittest discover -s tests -v
+      - name: Check the optional entity identity experiment
+        if: matrix.python == '3.13' && hashFiles('experiments/entity-life/0.1.0/test_registry.py') != ''
+        run: python -m unittest discover -s experiments/entity-life/0.1.0 -v
       - name: Exercise book practice callbacks without game data
         if: runner.os == 'Linux' && matrix.python == '3.13'
         run: |

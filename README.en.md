@@ -21,7 +21,8 @@ This manually edited guide summarizes the audited source. The original technical
 - [Original technical documentation](README.md)
 - [README at the audited commit](https://github.com/Juri-Halveth/halveth-morrowind-genesis/blob/6a2444064c473031337cf5b7541b8a0946894155/README.md)
 - [Setup](docs/SETUP.md)
-- [Genesis Zero](genesis-zero/README.md)
+- [Genesis Zero](https://github.com/Juri-Halveth/halveth-morrowind-genesis/blob/main/genesis-zero/README.md)
+- [Entity Life: persistent object identities](https://github.com/Juri-Halveth/halveth-morrowind-genesis/blob/main/experiments/entity-life/0.1.0/README.txt)
 
 ## Rights and scope
 

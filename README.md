@@ -24,7 +24,7 @@ Dieses Repository erweitert die vorhandene Morrowind-/OpenMW-Installation. Die n
 
 ## Genesis Zero — unabhängiger Nullursprung
 
-Der neue Ordner [`genesis-zero/`](genesis-zero/README.md) enthält einen eigenständigen WebGL-2-Spielraum mit prozeduralem Wald, beweglichem Wesen, Maus-/Tastatursteuerung, zeitabhängigem 4D-Feldparameter und lokal erzeugtem Ambientklang. Er lädt keine Morrowind-Daten, alten Profile, Grafikmanifeste oder importierte Lore. Das ist ein sichtbarer unabhängiger Anfang für Grafik und Bewegung, noch kein vollständiges Spiel und kein Ersatz für den bisherigen OpenMW-Titel. Die erkannten alten Importpfade sind in [GENESIS-ZERO-INTAKE-AUDIT.md](docs/GENESIS-ZERO-INTAKE-AUDIT.md) offengelegt.
+Der neue Ordner [`genesis-zero/`](https://github.com/Juri-Halveth/halveth-morrowind-genesis/blob/main/genesis-zero/README.md) enthält einen eigenständigen WebGL-2-Spielraum mit prozeduralem Wald, beweglichem Wesen, Maus-/Tastatursteuerung, zeitabhängigem 4D-Feldparameter und lokal erzeugtem Ambientklang. Er lädt keine Morrowind-Daten, alten Profile, Grafikmanifeste oder importierte Lore. Das ist ein sichtbarer unabhängiger Anfang für Grafik und Bewegung, noch kein vollständiges Spiel und kein Ersatz für den bisherigen OpenMW-Titel. Die erkannten alten Importpfade sind in [GENESIS-ZERO-INTAKE-AUDIT.md](docs/GENESIS-ZERO-INTAKE-AUDIT.md) offengelegt.
 
 ## Spielen
 
@@ -49,6 +49,8 @@ Für Windows gibt es [eine eigenständige Setup-EXE mit LOVE-Symbol](installer/R
 Der Begleiter benötigt das bereits installierte lokale Ollama-Modell `hermes3:8b`. Ist der Dienst nicht erreichbar, startet Morrowind weiter offline; Wissen, Bücher und direkte Spielwerkzeuge bleiben verfügbar. Der reguläre Einstieg öffnet weder einen Browser noch ein zusätzliches Konfigurationsfenster.
 
 ## Figur, Ausrüstung und Begegnungen
+
+[Entity Life](https://github.com/Juri-Halveth/halveth-morrowind-genesis/blob/main/experiments/entity-life/0.1.0/README.txt) ist ein eigenständiges Bash- und Python-Experiment. Zwei platzierte Tassen können dieselbe Vorlage haben und trotzdem getrennte IDs behalten. Die Beispieldemos laufen mit erfundenen Daten. Ein lokaler Katalog lässt sich bei Bedarf aus einer ausdrücklich gewählten OpenMW-Konfiguration erzeugen.
 
 Das neue F6-Fenster arbeitet mit den tatsächlichen Daten deiner Spielfigur. Es erklärt alle 27 Fertigkeiten, zeigt Attribute und Zustandswerte, durchsucht das aktuelle Inventar und sortiert Gegenstände wahlweise nach Name oder Wert pro Gewicht. Zwölf Gegenstandskategorien liefern passende Details, etwa Waffenschaden, Zustand, Verzauberung oder die durch Alchemie bereits erkennbaren Zutateneffekte.
 
