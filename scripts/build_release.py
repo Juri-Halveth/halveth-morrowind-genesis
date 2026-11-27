@@ -12,12 +12,13 @@ VERSION='1.0.0'
 DEST=ROOT/'dist'/f'HALVETH-Morrowind-Genesis-{VERSION}-public-source.zip'
 # Exact asset paths keep newly downloaded graphics and personal screenshots out,
 # including files placed outside the ordinary .local directory.
-ROOT_FILES={'.gitignore','.gitattributes','README.md','README.en.md','README.ru.md','LICENSE','ASSET-LICENSE.md','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md',
+ROOT_FILES={'.gitignore','.gitattributes','README.md','README.en.md','README.ru.md','HALVETH_NETZ_HERO.svg','LICENSE','ASSET-LICENSE.md','THIRD-PARTY-NOTICES.md','CONTRIBUTING.md',
             'PUBLIC-STATUS.json','ASSET-PROVENANCE.json',
             'launcher.py','server.py','graphics_status.py','project_knowledge.py','character_profile.py','START.cmd'}
 SOURCE_DIRECTORIES={'assets','data','docs','mod','native','scripts','tests','web','installer','.github','LICENSES'}
 EXACT_TEXT_FILES={'.github/workflows/test.yml','LICENSES/CC0-1.0.txt',
                   'native/GenesisEntry.cs','tests/multiskill_practice.lua',
+                  'docs/elder-scrolls-portfolio/SOURCE-SNAPSHOT.json','docs/elder-scrolls-portfolio/index.html',
                   'installer/GenesisSetup.csproj','installer/Program.cs','installer/build_installer.py',
                   'installer/README.md','installer/openmw-0.51.0-runtime-files.txt',
                   'docs/NATIVE-VERIFICATION-0.4.0.json','docs/NATIVE-VERIFICATION-0.5.0.json',
