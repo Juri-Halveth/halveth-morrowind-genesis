@@ -74,11 +74,12 @@ end
 local function percent(entry)
     return 5 + math.min(5, math.floor(entry.seconds / 24))
 end
-local function nextCredit()
+local function nextCredit(skill)
+    skill = skill or 'alchemy'
     -- A stable record-id order makes the next application reproducible.
     local ids = {}
     for id, entry in pairs(books) do
-        if entry.skill == 'alchemy' and entry.studied and not entry.spent then ids[#ids+1] = id end
+        if entry.skill == skill and entry.studied and not entry.spent then ids[#ids+1] = id end
     end
     table.sort(ids)
     local id = ids[1]
@@ -90,20 +91,24 @@ local function study(id)
     if not entry then feedback('Oeffne zuerst ein originales Buch oder eine Schriftrolle.'); return false end
     if entry.studied then feedback('Diese Notiz wurde bereits studiert. Erneutes Lesen verdoppelt ihre Wirkung nicht.'); return false end
     entry.studied = true
-    feedback(entry.skill == 'alchemy'
-        and ('Notiz vermerkt: einmalig +'..percent(entry)..'% Praxis beim naechsten gebrauten Trank. Kein Warten erforderlich.')
+    local practices={alchemy='gebrauten Trank',enchant='aufgeladenen Gegenstand',
+        armorer='reparierten Gegenstand',speechcraft='erfolgreiches Gespraech'}
+    feedback(practices[entry.skill]
+        and ('Notiz vermerkt: einmalig +'..percent(entry)..'% Praxis beim naechsten '..practices[entry.skill]..'.')
         or 'Notiz vermerkt. Dein Wissen bleibt mit diesem Spielstand erhalten; keine zusaetzliche Skillbuch-Stufe.')
     if refresh then refresh() end
     return true
 end
 local function skillUsed(skill, options)
-    if skill ~= 'alchemy' or type(options) ~= 'table'
-        or options.useType ~= I.SkillProgression.SKILL_USE_TYPES.Alchemy_CreatePotion
-        or not finite(options.skillGain) or options.skillGain <= 0 then return end
+    local uses=I.SkillProgression.SKILL_USE_TYPES
+    local eligible={alchemy=uses.Alchemy_CreatePotion,enchant=uses.Enchant_Recharge,
+        armorer=uses.Armorer_Repair,speechcraft=uses.Speechcraft_Success}
+    if eligible[skill]==nil or type(options)~='table' or options.useType~=eligible[skill]
+        or not finite(options.skillGain) or options.skillGain<=0 then return end
     -- Match vanilla's no-progression conditions before consuming the note.
-    if types.NPC.isWerewolf(self) or types.NPC.stats.skills.alchemy(self).base >= 100 then return end
+    if types.NPC.isWerewolf(self) or types.NPC.stats.skills[skill](self).base >= 100 then return end
     practiceEvents = math.min(1000000000, practiceEvents + 1)
-    local id, bonus = nextCredit()
+    local id, bonus = nextCredit(skill)
     if not id then
         lastPractice = {base=options.skillGain,final=options.skillGain,percent=0}
         return
@@ -113,8 +118,8 @@ local function skillUsed(skill, options)
     if not finite(after) then return end
     options.skillGain = after
     books[id].spent = true
-    lastPractice = {bookId=id,base=before,final=after,percent=bonus}
-    feedback(string.format('Wissen angewandt: %s, +%d%% Alchemie-Praxis. Zutaten und Trank bleiben im Originalsystem.',books[id].title,bonus))
+    lastPractice = {bookId=id,skill=skill,base=before,final=after,percent=bonus}
+    feedback(string.format('Wissen angewandt: %s, +%d%% %s-Praxis. Die Spielaktion bleibt im Originalsystem.',books[id].title,bonus,subjectName(skill)))
     print('HALVETH_KNOWLEDGE_PRACTICE '..C.json(lastPractice))
     -- Never return false: preserve the engine's normal skill progression.
 end
@@ -295,8 +300,8 @@ local function journalText()
         lines[#lines+1] = 'Gebiet: '..subjectName(entry.skill)
         lines[#lines+1] = string.format('Anzeigezeit im Buchmodus: %.1f s (max. 120 s)',entry.seconds)
         lines[#lines+1] = entry.spent and 'Praxisnotiz bereits angewandt.' or entry.studied and 'Notiz studiert und gespeichert.' or 'Notiz noch nicht studiert: S oder [Studieren].'
-        if entry.skill == 'alchemy' and not entry.spent then
-            lines[#lines+1] = string.format('Nach dem Studieren: einmalig +%d%% beim naechsten echten Alchemie-Praxisereignis.',percent(entry))
+        if (entry.skill=='alchemy' or entry.skill=='enchant' or entry.skill=='armorer' or entry.skill=='speechcraft') and not entry.spent then
+            lines[#lines+1] = string.format('Nach dem Studieren: einmalig +%d%% beim naechsten passenden %s-Praxisereignis.',percent(entry),subjectName(entry.skill))
         end
         local own = ownEntry(entry.title)
         if own and own.pages and #own.pages > 0 then

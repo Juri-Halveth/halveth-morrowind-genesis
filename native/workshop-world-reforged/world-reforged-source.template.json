@@ -1,0 +1,6 @@
+{
+  "schema": "halveth.morrowind.world-reforged-link.v1",
+  "basePatch": "C:/replace/with/MORROWIND_WORLD_REFORGED_1.2.0/patch",
+  "correctiveOverlay": "C:/replace/with/MORROWIND_WORLD_REFORGED_1.2.1_CANDIDATE",
+  "expectedPluginSha256": "9805d32df3fe67406ddae40e4ef39929d7bc149d7fac04bd462e7a4bf4f71748"
+}
