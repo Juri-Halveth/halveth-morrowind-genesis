@@ -2,18 +2,25 @@
 [Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 <!-- /HUB_LANGUAGES_V1 -->
 
-# HALVETH Morrowind Genesis · 1.0.0
+# Morrowind Genesis – lokale Dialoge und Werkzeuge für OpenMW
 
-<!-- HALVETH_WORK_CERTIFICATES_V1_1 -->
-## Juri Janovski / Juri Halveth – Privates HALVETH-Werkzertifikat
+**Elder Scrolls technology portfolio:** [OpenMW gameplay, persistent NPC encounters, local dialogue and original world prototypes](docs/elder-scrolls-portfolio/README.md). This is a source-bound overview for a possible one-time acquisition conversation; it does not bundle Bethesda assets or imply Bethesda endorsement.
 
-[Privates HALVETH-Werkzertifikat: Dokumentierte Softwareintegration, automatisierte Quellprüfungen und Installer-Build – Morrowind Genesis](https://juri-halveth.github.io/werkzertifikate/#werk-halveth-morrowind-genesis).
+Erweiterungen für Morrowind in OpenMW: lokale Figurendialoge, Gedächtnis und Spielwerkzeuge. Eigenständige Weltprototypen sind im Repository gesondert beschrieben.
 
-HALVETH VERACHEL STUDIOS · Quellstand, dokumentierte Ergebnisse und SHA-256-Belege stehen im Werkzertifikat. Private, mit Codex erstellte Werkdokumentation; keine ISTQB- oder sonstige Personenzertifizierung.
-<!-- /HALVETH_WORK_CERTIFICATES_V1_1 -->
+**Direkt einrichten:** [OpenMW-Setup und Voraussetzungen lesen](docs/SETUP.md).
+Für die Spielversion werden eine eigene lizenzierte Morrowind-Installation und OpenMW benötigt; Bethesda-Spieldaten sind hier nicht enthalten.
+
+[Öffentliche Releases und Vorabfassungen](https://github.com/Juri-Halveth/halveth-morrowind-genesis/releases) · [HALVETH Starship Lab (optional)](https://juri-halveth.github.io/universum/)
+
+![HALVETH / NETZ – Morrowind Genesis: Berglandschaft und verbundene Dialogpunkte](HALVETH_NETZ_HERO.svg)
 
 
 Erweiterungen für **The Elder Scrolls III: Morrowind** in der vorhandenen OpenMW-0.51-Installation. Morrowind, Tribunal, Bloodmoon, Vvardenfell und deine vorhandenen Figuren bleiben die Spielwelt.
+
+## Eigenständiges neues Spiel: ASHBOUND
+
+Dieses Repository erweitert die vorhandene Morrowind-/OpenMW-Installation. Die neu entwickelte, eigenständige native Spielwelt liegt im Projekt [ASHBOUND](https://juri-halveth.github.io/halveth-scarlet/forschung/ashbound/); ihre [Windows-x64-Vorschau 0.4.2](https://github.com/Juri-Halveth/halveth-scarlet/releases/tag/ashbound-native-v0.4.2-portal-preview) ist ein eigener Download. ASHBOUND startet nicht über diesen OpenMW-Launcher und benötigt keine Morrowind-Spieldaten.
 
 ## Genesis Zero — unabhängiger Nullursprung
 
