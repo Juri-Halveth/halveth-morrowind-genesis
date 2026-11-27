@@ -15,7 +15,15 @@ namespace Halveth.Morrowind {
       string root=AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
       try {
         if(args.Length==2&&args[0]=="--render-ui") {
-          using(var f=new MainForm(root)) { f.ShowInTaskbar=false; f.StartPosition=FormStartPosition.Manual; f.Location=new Point(-25000,-25000); f.Show(); Application.DoEvents(); using(var image=new Bitmap(f.Width,f.Height)) { f.DrawToBitmap(image,new Rectangle(0,0,f.Width,f.Height)); image.Save(args[1],ImageFormat.Png); } f.Close(); } return 0;
+          using(var f=new MainForm(root)) {
+            f.ShowInTaskbar=false;
+            f.StartPosition=FormStartPosition.Manual;
+            f.Location=new Point(-25000,-25000);
+            f.Show();
+            Application.DoEvents();
+            f.SaveWorkspacePreview(args[1]);
+          }
+          return 0;
         }
         if(args.Length==2&&args[0]=="--import") { var w=new Workshop(root); var result=w.Import(args[1],s=>Console.WriteLine(s)); Util.Write(Path.Combine(root,"evidence","last-import-cli.json"),result); return 0; }
         if(args.Length==1&&args[0]=="--verify-world-reforged") { var result=new Workshop(root).ValidateWorldReforged(); Util.Write(Path.Combine(root,"evidence","world-reforged-verified-"+Util.Stamp()+".json"),result); Console.WriteLine("World Reforged: Basispatch und Korrekturoverlay geprüft."); return 0; }
@@ -62,15 +70,20 @@ namespace Halveth.Morrowind {
     ComboBox profile;
     Button play,import,sceneProbe;
     FlowLayoutPanel actions;
+    readonly TableLayoutPanel grid;
     TextBox inventory;
     bool busy;
     public MainForm(string root) {
       workshop=new Workshop(root); Text="HALVETH · Morrowind Workshop · World Reforged Candidate 0.4.1"; BackColor=Color.FromArgb(19,25,29); ForeColor=ink;
-      Font=new Font("Segoe UI",10); ClientSize=new Size(1220,940); MinimumSize=new Size(1090,900); StartPosition=FormStartPosition.CenterScreen;
+      Font=new Font("Segoe UI",10); ClientSize=new Size(1220,940); MinimumSize=new Size(640,480); StartPosition=FormStartPosition.CenterScreen;
       AutoScaleMode=AutoScaleMode.Dpi;
-      var grid=new TableLayoutPanel { Dock=DockStyle.Fill, ColumnCount=1,RowCount=5,Padding=new Padding(24),BackColor=BackColor };
+      var viewport=new Panel { Dock=DockStyle.Fill, AutoScroll=true };
+      Controls.Add(viewport);
+      grid=new TableLayoutPanel { MinimumSize=new Size(1220,940), ColumnCount=1,RowCount=5,Padding=new Padding(24),BackColor=BackColor };
+      viewport.Controls.Add(grid);
+      viewport.Resize+=(sender,e)=>{ grid.Size=viewport.ClientSize; };
+      grid.Size=viewport.ClientSize;
       grid.RowStyles.Add(new RowStyle(SizeType.Absolute,218)); grid.RowStyles.Add(new RowStyle(SizeType.Absolute,114)); grid.RowStyles.Add(new RowStyle(SizeType.Absolute,62)); grid.RowStyles.Add(new RowStyle(SizeType.Percent,100)); grid.RowStyles.Add(new RowStyle(SizeType.Absolute,35));
-      Controls.Add(grid);
       grid.Controls.Add(new Hero {Dock=DockStyle.Fill,Margin=new Padding(0,0,0,12)},0,0);
       var status=new Panel {Dock=DockStyle.Fill,BackColor=panelColor,Padding=new Padding(18),Margin=new Padding(0,0,0,10)};
       headline=new Label {Location=new Point(18,12),AutoSize=true,Font=new Font("Segoe UI",14,FontStyle.Bold),ForeColor=Color.FromArgb(230,191,130)};
@@ -107,6 +120,12 @@ namespace Halveth.Morrowind {
       var builderActions=new FlowLayoutPanel {Dock=DockStyle.Bottom,Height=54};builderActions.Controls.Add(Btn("OpenMW-CS öffnen",220,()=>Launch("openmw-cs.exe")));builderActions.Controls.Add(Btn("Mod-Ordner öffnen",220,()=>OpenFolder(Path.Combine(workshop.Root,"mods"))));build.Controls.Add(builderActions);
       log=new Label {Dock=DockStyle.Fill,TextAlign=ContentAlignment.MiddleLeft,ForeColor=muted,Text="Native Windows-Anwendung · OpenMW 0.51.0 · lokale Profile"};grid.Controls.Add(log,0,4);
       RefreshStatus();
+    }
+    public void SaveWorkspacePreview(string path) {
+      using(var image=new Bitmap(grid.Width,grid.Height)) {
+        grid.DrawToBitmap(image,new Rectangle(Point.Empty,grid.Size));
+        image.Save(path,ImageFormat.Png);
+      }
     }
     TabPage Page(TabControl tabs,string title) { var page=new TabPage(title) {BackColor=panelColor,ForeColor=ink}; tabs.TabPages.Add(page);return page; }
     Panel Card(string kicker,string title,string body) {
